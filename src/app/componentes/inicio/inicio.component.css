@@ -1,0 +1,66 @@
+.inicio{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url("../../../../public/806.webp");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Shameimaru Sans;
+    align-content: center;
+    p{
+        color: var(--white);
+        font-size: xxx-large;
+        height: 41%;
+        align-content: center;
+        text-align: center;
+        @media (max-width: 920px){
+            font-size: xx-large;
+        }
+        @media (max-width: 600px){
+            font-size: x-large;
+        }
+        span{
+            font-weight: 1000;
+        }
+    }
+}
+.pill{
+    background-color: var(--amarello);
+    border-radius: 12px;
+    height: 20% !important;
+}
+.foto{
+    height: 50%;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: xxx-large;
+        @media (max-width: 920px){
+            font-size: xx-large;
+        }
+        @media (max-width: 600px){
+            font-size: x-large;
+        }
+        span{
+            font-family: Avenir;
+            font-size: x-large;
+            @media (max-width: 920px){
+                font-size: large !important;
+            }
+            @media (max-width: 600px){
+                font-size: medium !important;
+            }
+        }
+    }
+}
+.info{
+    height: 50%;
+    width: 90%;
+}
+.shadow{
+    width: 100%;
+    box-shadow: 0 0px 30px 30px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0px 30px 30px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0px 30px 30px rgba(0, 0, 0, 0.3);
+}

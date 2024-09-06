@@ -1,0 +1,19 @@
+<div class="footer" [ngClass]="{'mobile' : widthC!=undefined && cap!=undefined && widthC<cap}">
+    <div >
+        <h1>Donde encontrarnos</h1>
+        <div class="end" (click)="mapsG()"><i class="fa-solid fa-location-dot"></i> Avenida Leandro N Alem 250. Piso 1. CABA</div>
+    </div>
+    <div >
+        <h1>Contactanos</h1>
+        <div (click)="wspW()"><i class="fa-brands fa-whatsapp"></i> {{number}}</div>
+        <span class="end"><i class="fa-solid fa-envelope"></i> contacto&#64;gruppodf.com.ar</span>
+    </div>
+    <div>
+        <h1>Data fiscal</h1>
+        <div>
+            <a href="http://qr.afip.gob.ar/?qr=hbFLS3VKuV_DahACKt3hKg,,">
+                <img style="max-width: 30%;" class="datafiscal" src="http://www.afip.gob.ar/images/f960/DATAWEB.jpg">
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="navbar glass">
+    <div style="align-items: center; display: flex; height: 100%;"><div class="logo" style="cursor: pointer;" (click)="activar('')"><span>Gruppo DF</span><img src="logo.webp" alt="Gruppo DF"></div></div> 
+    <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap else mobile">
+        <div class="btnnav" [ngClass]="{'activa' : activa=='eventos'}" (click)="activar('eventos')"><span>Eventos</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='registro'}" (click)="activar('registro')"><span>¿Como registrarse?</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='nosotros'}" (click)="activar('nosotros')"><span>¿Quienes somos?</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='contacto'}" (click)="activar('contacto')"><span>Contacto</span></div>
+    </div>
+    <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap">
+        <div class="btnnav" [ngClass]="{'activa' : activa=='login'}" (click)="open2()"><span class="ingresar"><i class="fa-solid fa-user iuser"></i>Ingresar</span></div>
+    </div>
+    <ng-template #mobile>
+        <div style="display: flex;">
+            <i class="fa-solid fa-user" (click)="open2()"></i>
+            <i [ngClass]="{'fa-bars' : !menuOpen, 'fa-xmark' : menuOpen}" class="fa-solid" (click)="open()"></i>    
+        </div>
+    </ng-template>
+</div>
+<div *ngIf="widthC!=undefined && cap!=undefined && widthC<cap" class="menu glassTrue" [ngClass]="{'none' : !menuOpen}">
+    <div (click)="activar('eventos')"><span>Eventos</span></div>
+    <div (click)="activar('registro')"><span>¿Como registrarse?</span></div>
+    <div (click)="activar('nosotros')"><span>¿Quienes somos?</span></div>
+    <div (click)="activar('contacto')"><span>Contacto</span></div>
+</div>
+<div class="menu menu2 glass rounded" [ngClass]="{'none' : !menuOpen2, 'menu2mobile glassTrue' : (widthC!=undefined && cap!=undefined && widthC<cap)}">
+    <div style="bottom: 0; position: fixed;">
+        <div class="col-3">
+            <label for="emailL">Email o Usuario</label>
+        	<input class="effect-1" type="email" id="emailL" placeholder="Email o usuario">
+            <span class="focus-border"></span>
+        </div>   
+        <div class="col-3" style="margin-bottom: 0;">
+            <label for="passL">Contraseña</label>
+            <input type="password" class="effect-1" id="passL" placeholder="Contraseña">
+            <span class="focus-border"></span>
+        </div>
+        <a>Olvide mi contraseña</a>
+        <button class="border rounded boton">Ingresar</button>
+        <span class="creartitle">¿No tenes una cuenta?</span>
+        <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;">Crear cuenta</button>
+    </div>
+</div>

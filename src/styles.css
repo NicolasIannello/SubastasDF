@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Barlow:800&display=swap');
+@import url('https://fonts.cdnfonts.com/css/avenir');
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
+@import url('https://fonts.cdnfonts.com/css/shameimaru-sans');
+
+:root {
+    --amarello: rgb(48, 131, 220)/*rgb(228, 176, 16)*/;
+    --amarelloD: rgb(48, 131, 220, 0.75)/*rgba(228, 176, 16, 0.75)*/;
+    --black: rgb(20,20,20);
+    --white: #F9F9F9;
+    --blue: rgb(255, 144, 0)/*rgb(48, 131, 220)*/;
+    --blueD: rgb(255, 144, 0, 0.75)/*rgba(48, 131, 220, 0.75)*/;
+}
+body {
+    font-family: Shameimaru Sans;
+    margin: 0;
+}
+h1{
+    font-family: Avenir;
+}
+.glass {
+    background-color: var(--blue);  
+}
+.glassTrue {
+    backdrop-filter: blur(17px) saturate(179%);
+    -webkit-backdrop-filter: blur(17px) saturate(179%);
+    background-color: var(--blueD);  
+    span{
+        color: var(--white);
+    }
+}
+.svh{
+    height: 100vh;
+    justify-content: center;
+}
+.seccion{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.bgA{
+    background-image: url('../public/blurry-gradient-haikei1.webp');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.rounded{
+    border-radius: 12px;
+}
+.border{
+    border: 1px solid rgb(255, 144, 0, 0.15);
+}
+.boton{
+    font-family: Avenir;
+    &:hover{
+        background-color: var(--amarello);
+        color: var(--white);
+        cursor: pointer;
+        transition: all 250ms linear;
+    }
+}
+a{
+    font-size: small;
+    cursor: pointer;
+    color: var(--amarello);
+    &:hover{
+        text-decoration: underline;
+        color: var(--white);
+        transition: all 0.1s linear;
+    }
+}
+
+:focus{outline: none;}
+.col-3{ position: relative;}
+input{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
+.effect-1{border: 0; background: var(--white); z-index: 0;}
+.effect-1 ~ .focus-border{position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--amarello); transition: 0.4s;}
+.effect-1:focus ~ .focus-border{width: 100%; transition: 0.4s;}
