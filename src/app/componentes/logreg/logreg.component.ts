@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { DatosUserComponent } from "./datos-user/datos-user.component";
 
 @Component({
   selector: 'app-logreg',
   standalone: true,
-  imports: [],
+  imports: [DatosUserComponent],
   templateUrl: './logreg.component.html',
   styleUrl: './logreg.component.css'
 })

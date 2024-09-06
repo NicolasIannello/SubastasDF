@@ -1,0 +1,11 @@
+button{
+    height: 4rem;
+    font-size: large;
+    text-align: center;
+    width: 20%;
+    align-content: center;
+}
+i{
+    font-size: x-large;
+    margin-right: 1rem;
+}
