@@ -1,0 +1,77 @@
+<h1>Informacion de la Empresa</h1>
+<div style="display: flex; margin-bottom: 2%;">
+    <div class="col-3" style="margin-right: 2%;">
+        <label for="nomapel">Nombre Comercial </label><span class="msg">{{alertasEmp[0]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="Nombre Comercial" [(ngModel)]="camposEmp[0]">
+        <span class="focus-border"></span>
+    </div>
+    <div class="col-3">
+        <label for="cuitcuil">Razón social </label><span class="msg">{{alertasEmp[4]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" maxlength="11" type="text" placeholder="Razón social" [(ngModel)]="camposEmp[4]">
+        <span class="focus-border"></span>
+    </div>
+</div>
+<div style="display: flex; margin-bottom: 2%;">
+    <div class="col-3" style="margin-right: 2%;">
+        <label for="cuitcuil">CUIL / CUIT </label><span class="msg" style="color: black;">(sin guiones ni espacios) </span><span class="msg">{{alertasEmp[1]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" maxlength="11" type="text" placeholder="CUIL / CUIT" [(ngModel)]="camposEmp[1]">
+        <span class="focus-border"></span>
+    </div>
+    <div class="col-3">
+        <label for="cuitcuil">Persona responsable </label><span class="msg">{{alertasEmp[5]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" maxlength="11" type="text" placeholder="Persona responsable" [(ngModel)]="camposEmp[5]">
+        <span class="focus-border"></span>
+    </div>
+</div>
+<div style="display: flex; margin-bottom: 2%;">
+    <div class="col-3" style="margin-right: 2%;">
+        <label for="cel">Celular </label><span class="msg">{{alertasEmp[2]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="Celular" [(ngModel)]="camposEmp[2]">
+        <span class="focus-border"></span>
+    </div>
+    <div class="col-3">
+        <label for="actividad">Actividad </label><span class="msg">{{alertasEmp[3]}}</span>
+        <select (change)="sendDatosEmp()" class="effect-1" [(ngModel)]="camposEmp[3]">
+            <option value="" selected hidden>Seleccionar actividad</option>
+            <option value="ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO">ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO</option>
+            <option value="ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA">ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA</option>
+            <option value="AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA">AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA</option>
+            <option value="COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS">COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS</option>
+            <option value="CONSTRUCCIÓN">CONSTRUCCIÓN</option>
+            <option value="ENSEÑANZA">ENSEÑANZA</option>
+            <option value="EXPLOTACIÓN DE MINAS Y CANTERAS">EXPLOTACIÓN DE MINAS Y CANTERAS</option>
+            <option value="INDUSTRIA MANUFACTURERA">INDUSTRIA MANUFACTURERA</option>
+            <option value="INFORMACIÓN Y COMUNICACIONES">INFORMACIÓN Y COMUNICACIONES</option>
+            <option value="INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS">INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS</option>
+            <option value="SALUD HUMANA Y SERVICIOS SOCIALES">SALUD HUMANA Y SERVICIOS SOCIALES</option>
+            <option value="SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO">SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO</option>
+            <option value="SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA">SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA</option>
+            <option value="SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES">SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES</option>
+            <option value="SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO">SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO</option>
+            <option value="SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES">SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES</option>
+            <option value="SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO">SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO</option>
+            <option value="SERVICIOS INMOBILIARIOS">SERVICIOS INMOBILIARIOS</option>
+            <option value="SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS">SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS</option>
+            <option value="SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO">SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO</option>
+            <option value="SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO">SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO</option>
+            <option value="120">OTRA</option>
+        </select>
+        <span class="focus-border"></span>
+    </div>
+</div>
+<div style="display: flex; margin-bottom: 2%; margin-right: 2%;">
+    <div class="col-3">
+        <label for="como">¿Como nos encontro? </label>
+        <select (change)="sendDatosEmp()" class="effect-1" [(ngModel)]="camposEmp[6]">
+            <option value="Google" selected>Google</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Publicidad">Publicidad</option>
+            <option value="Diario">Diario</option>
+            <option value="Conocido-Amigo">Conocido/Amigo</option>
+            <option value="Otro">Otro</option>
+        </select>
+        <span class="focus-border"></span>
+    </div>
+</div>
