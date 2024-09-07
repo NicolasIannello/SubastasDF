@@ -1,0 +1,53 @@
+<div style="margin-top: 1rem; display: flex;">
+    <span [ngClass]="{'selected' : paso==1}" class="cuadro" style="cursor: pointer;" (click)="atras()">1 Datos Empresa</span><span [ngClass]="{'oculto' : paso==2}" class="triR"></span>
+    <span [ngClass]="{'oculto' : paso==1}" class="triL"></span><span [ngClass]="{'selected' : paso==2}" class="cuadro" style="cursor: pointer;" (click)="verificar1()">2 Direcion Comercial</span>
+</div>
+<!-- PASO 1 -->
+<div [ngClass]="{'oculto' : paso==2}">
+    <app-datos-emp *ngIf="tipo=='emp'" (messageEvent)="handleMessage($event,'emp')" [alertasEmp]="alertasEmp"></app-datos-emp>
+    <app-datos-user *ngIf="tipo=='user'" (messageEvent)="handleMessage($event,'user')" [alertasUser]="alertasUser"></app-datos-user>
+    <h1>Datos de acceso</h1>
+    <div style="display: flex;">
+        <div class="mitad" style="display: flex; flex-direction: column; margin-right: 1%;">
+            <div class="col-3" style="margin-bottom: 2%;">
+                <label for="mail">E-mail </label><span class="msg">{{alertasA[0]}}</span>
+                <input class="effect-1" type="text" placeholder="E-mail" [(ngModel)]="camposA[0]">
+                <span class="focus-border"></span>
+            </div>
+            <div class="col-3" style="margin-bottom: 2%;">
+                <label for="mail2">Repita el E-mail </label><span class="msg">{{alertasA[1]}}</span>
+                <input class="effect-1" type="text" placeholder="Repita el E-mail" [(ngModel)]="camposA[1]">
+                <span class="focus-border"></span>
+            </div>
+        </div>
+        <div style="border-right: 1px solid rgb(255, 144, 0, 0.2); width: 0%; margin-right: 1%;"></div>
+        <div class="mitad" style="display: flex; flex-direction: column;">
+            <div class="col-3" style="margin-bottom: 2%;">
+                <label for="password">Contraseña </label><span class="msg">{{alertasA[2]}}</span>
+                <div style="display: flex;">
+                    <input class="effect-1" style="width: 90%;" type="{{type}}" placeholder="Contraseña" [(ngModel)]="camposA[2]">
+                    <i [ngClass]="{'fa-eye-slash bgblack' : type=='password', 'fa-eye bgwhite' : type=='text'}" class="fa-solid" (click)="mostrar()"></i>
+                    <span class="focus-border"></span>
+                </div>
+            </div>
+            <div class="col-3" style="margin-bottom: 2%;">
+                <label for="password2">Repita el Contraseña </label><span class="msg">{{alertasA[3]}}</span>
+                <div style="display: flex;">
+                    <input class="effect-1" style="width: 90%;" type="{{type}}" placeholder="Repita el Contraseña" [(ngModel)]="camposA[3]">
+                    <i [ngClass]="{'fa-eye-slash bgblack' : type=='password', 'fa-eye bgwhite' : type=='text'}" class="fa-solid" (click)="mostrar()"></i>
+                    <span class="focus-border"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: end;">
+        <button class="boton border rounded botones" (click)="verificar1()">Siguente</button>
+    </div>
+</div>
+<!-- PASO 2 -->
+<div [ngClass]="{'oculto' : paso==1}">
+    <app-datos-domicilio (messageEvent)="handleMessage($event,'dom')" [alertasDom]="alertasDom"></app-datos-domicilio>
+    <div style="text-align: end;">
+        <button class="boton border rounded botones" (click)="verificar2()">Siguente</button>
+    </div>
+</div>
