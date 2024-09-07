@@ -101,3 +101,6 @@ select{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
     width: 10rem;
     font-size: larger;
 }
+.oculto{
+    display: none;
+}
