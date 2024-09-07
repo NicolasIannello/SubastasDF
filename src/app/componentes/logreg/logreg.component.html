@@ -1,7 +1,7 @@
 <div class="border margin5 rounded">
     <div>
-        <button class="boton rounded selected" style="border-top-right-radius: 0%; border-bottom-right-radius: 0%; border: none;"><i class="fa-solid fa-user"></i>Persona Individual</button>
-        <button class="boton rounded" style="border-top-left-radius: 0%; border-bottom-left-radius: 0%; border: none;"><i class="fa-solid fa-building"></i>Empresa</button>
+        <button [ngClass]="{'selected' : tipo=='user'}" class="boton rounded" style="border-top-right-radius: 0%; border-bottom-right-radius: 0%; border: none;" (click)="cambiarTipo('user')"><i class="fa-solid fa-user"></i>Persona Individual</button>
+        <button [ngClass]="{'selected' : tipo=='emp'}" class="boton rounded" style="border-top-left-radius: 0%; border-bottom-left-radius: 0%; border: none;" (click)="cambiarTipo('emp')"><i class="fa-solid fa-building"></i>Empresa</button>
     </div>
-    <app-datos-user></app-datos-user>
+    <app-datos-acceso [tipo]="tipo"></app-datos-acceso>
 </div>
