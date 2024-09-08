@@ -1,6 +1,10 @@
 <div style="margin-top: 1rem; display: flex;">
-    <span [ngClass]="{'selected' : paso==1}" class="cuadro" style="cursor: pointer;" (click)="atras()">1 Datos Empresa</span><span [ngClass]="{'oculto' : paso==2}" class="triR"></span>
-    <span [ngClass]="{'oculto' : paso==1}" class="triL"></span><span [ngClass]="{'selected' : paso==2}" class="cuadro" style="cursor: pointer;" (click)="verificar1()">2 Direcion Comercial</span>
+    <span [ngClass]="{'selected' : paso==1}" class="cuadro" style="cursor: pointer;" (click)="atras()">
+        <ng-container *ngIf="tipo=='user'">1 Datos Personales </ng-container> <ng-container *ngIf="tipo=='emp'">1 Datos Empresa</ng-container>
+    </span><span [ngClass]="{'oculto' : paso==2}" class="triR"></span>
+    <span [ngClass]="{'oculto' : paso==1}" class="triL"></span><span [ngClass]="{'selected' : paso==2}" class="cuadro" style="cursor: pointer;" (click)="verificar1()">
+        <ng-container *ngIf="tipo=='user'">2 Domicilio</ng-container> <ng-container *ngIf="tipo=='emp'">2 Dirección Comercial</ng-container>
+    </span>
 </div>
 <!-- PASO 1 -->
 <div [ngClass]="{'oculto' : paso==2}">
