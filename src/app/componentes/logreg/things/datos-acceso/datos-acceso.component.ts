@@ -7,6 +7,7 @@ import { DatosUserComponent } from "../../datos-user/datos-user.component";
 import { Countries } from '../../datos-user/paises';
 import { countries } from '../../datos-user/paises-data';
 import { ServiciosService } from '../../../../servicios/servicios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-datos-acceso',
@@ -93,9 +94,12 @@ export class DatosAccesoComponent{
     }
 
     if(this.flag2){      
+      let datos;
+      let url="";
       switch (this.tipo) {
         case 'emp':
-          let datosEmp={
+          url="Emp"
+          datos={
             'nombre_comercial': this.camposEmp[0],
             'cuil_cuit': this.camposEmp[1],
             'telefono': this.camposEmp[2],
@@ -111,20 +115,10 @@ export class DatosAccesoComponent{
             'postal': this.camposDom[3],
             'domicilio': this.camposDom[4],
           }
-
-          this.api.crearEmp(datosEmp).subscribe({
-            next(value:any) {
-                console.log(value);
-            },
-            error(err:any) {
-              console.log(err);
-            },		
-          });
-
         break;
-      
         case 'user':
-          let datosUser={
+          url="User"
+          datos={
             'nomapel': this.camposEmp[0],
             'cuilcuit': this.camposEmp[1],
             'celular': this.camposEmp[2],
@@ -139,6 +133,18 @@ export class DatosAccesoComponent{
           }
           break;
       }
+      this.api.crear(datos,url).subscribe({
+        next(value:any) {
+          if (value.ok) {
+            Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          }else{
+            Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          }
+        },
+        error(err:any) {
+          Swal.fire({title:"Ocurrio un error", text:err.error.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },		
+      });
     }
   }
 
