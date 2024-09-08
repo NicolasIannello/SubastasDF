@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatosEmpComponent } from "../../datos-emp/datos-emp.component";
 import { DatosDomicilioComponent } from "../datos-domicilio/datos-domicilio.component";
 import { DatosUserComponent } from "../../datos-user/datos-user.component";
 import { Countries } from '../../datos-user/paises';
 import { countries } from '../../datos-user/paises-data';
+import { ServiciosService } from '../../../../servicios/servicios.service';
 
 @Component({
   selector: 'app-datos-acceso',
@@ -33,6 +34,8 @@ export class DatosAccesoComponent{
   paso:number=1;
   flag1:boolean=true;
   flag2:boolean=true;
+
+  constructor(public api: ServiciosService) { }
 
   handleMessage(message: Array<any>, tipo:string) {    
     switch (tipo) {
@@ -68,10 +71,11 @@ export class DatosAccesoComponent{
       this.alertasA[2] = this.alertasA[3] = "Las contraseñas no coinciden";
     }
     
-    if(this.flag1) this.paso=2;
+    this.paso= this.flag1 ? 2 : 1;
   }
 
   verificar2(){
+    this.verificar1();
     this.flag2=true;
     if(this.camposDom[0]==1000){
       this.alertasDom[0]="Seleccione un pais";
@@ -92,22 +96,32 @@ export class DatosAccesoComponent{
       switch (this.tipo) {
         case 'emp':
           let datosEmp={
-            'nombreComercial': this.camposEmp[0],
-            'cuilcuit': this.camposEmp[1],
-            'celular': this.camposEmp[2],
+            'nombre_comercial': this.camposEmp[0],
+            'cuil_cuit': this.camposEmp[1],
+            'telefono': this.camposEmp[2],
             'actividad': this.camposEmp[3],
-            'razonSocial': this.camposEmp[4],
-            'personaResponsable': this.camposEmp[5],
+            'razon_social': this.camposEmp[4],
+            'persona_responsable': this.camposEmp[5],
+            'como_encontro': this.camposEmp[6],
             'mail': this.camposA[0],
             'pass': this.camposA[2],
             'pais': this.Paises[this.camposDom[0]].name,
-            'estado': this.Paises[this.camposDom[0]].states[this.camposDom[1]],
+            'provincia': this.Paises[this.camposDom[0]].states[this.camposDom[1]],
             'ciudad': this.camposDom[2],
-            'cPostal': this.camposDom[3],
+            'postal': this.camposDom[3],
             'domicilio': this.camposDom[4],
           }
 
-          break;
+          this.api.crearEmp(datosEmp).subscribe({
+            next(value:any) {
+                console.log(value);
+            },
+            error(err:any) {
+              console.log(err);
+            },		
+          });
+
+        break;
       
         case 'user':
           let datosUser={
