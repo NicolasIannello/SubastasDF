@@ -25,17 +25,17 @@
 <div class="menu menu2 glass rounded" [ngClass]="{'none' : !menuOpen2, 'menu2mobile glassTrue' : (widthC!=undefined && cap!=undefined && widthC<cap)}">
     <div style="bottom: 0; position: fixed;">
         <div class="col-3">
-            <label for="emailL">Email o Usuario</label>
-        	<input class="effect-1" type="email" id="emailL" placeholder="Email o usuario">
+            <label for="emailL">Email</label>
+        	<input class="effect-1" type="email" id="emailL" placeholder="Email" [(ngModel)]="mail">
             <span class="focus-border"></span>
         </div>   
         <div class="col-3" style="margin-bottom: 0;">
             <label for="passL">Contraseña</label>
-            <input type="password" class="effect-1" id="passL" placeholder="Contraseña">
+            <input type="{{type}}" class="effect-1" id="passL" placeholder="Contraseña" [(ngModel)]="pass">
             <span class="focus-border"></span>
         </div>
         <a>Olvide mi contraseña</a>
-        <button class="border rounded boton">Ingresar</button>
+        <button class="border rounded boton" (click)="login()">Ingresar</button>
         <span class="creartitle">¿No tenes una cuenta?</span>
         <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;" (click)="open2()">Crear cuenta</button>
     </div>
