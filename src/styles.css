@@ -104,3 +104,6 @@ select{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
 .oculto{
     display: none;
 }
+button{
+    font-family: Avenir;
+}
