@@ -16,7 +16,10 @@ export class ServiciosService {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
   }
 
-  crearEmp(dato:any):Observable<any>{
-    return this.http.post(base_url+'/usuarios/crearEmp', dato, {'headers':this.header})
+  crear(dato:any, url:string):Observable<any>{
+    return this.http.post(base_url+'/usuarios/crear'+url, dato, {'headers':this.header})
+  }
+  login(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/login', dato, {'headers':this.header})
   }
 }
