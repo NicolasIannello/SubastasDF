@@ -18,9 +18,7 @@ export class DatosUserComponent implements OnInit{
     this.sendDatosUser();
   }
 
-  sendDatosUser() {
-    console.log(this.camposUser);
-    
+  sendDatosUser() {    
     this.messageEvent.emit(this.camposUser);
   }
 }
