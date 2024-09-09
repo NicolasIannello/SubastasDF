@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ServiciosService } from '../../servicios/servicios.service';
 import Swal from 'sweetalert2';
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
   activa:string='inicio';
   @Input() widthC: number | undefined;
   @Input() cap: number | undefined;
@@ -23,6 +23,10 @@ export class NavbarComponent {
   type:string="password";
 
   constructor(private router: Router, public api: ServiciosService){ }
+
+  ngOnInit(): void {
+    console.log(localStorage.getItem('token'));
+  }
 
   activar(tab:string){
     this.activa=tab;
@@ -54,6 +58,7 @@ export class NavbarComponent {
         if (value.ok) {
           
         }else{
+          localStorage.setItem('token',value.token);
           if(!value.validado) {
             Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           }else if(!value.habilitado) {
