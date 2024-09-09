@@ -7,7 +7,9 @@
         <div class="btnnav" [ngClass]="{'activa' : activa=='contacto'}" (click)="activar('contacto')"><span>Contacto</span></div>
     </div>
     <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap">
-        <div class="btnnav" [ngClass]="{'activa' : activa=='login'}" (click)="open2()"><span class="ingresar"><i class="fa-solid fa-user iuser"></i>Ingresar</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='login'}" (click)="open2()">
+            <span class="ingresar"><i class="fa-solid fa-user iuser"></i><span *ngIf="User==''; else nameBlock">Ingresar</span><ng-template #nameBlock>{{User}}</ng-template></span>
+        </div>
     </div>
     <ng-template #mobile>
         <div style="display: flex;">
@@ -24,19 +26,24 @@
 </div>
 <div class="menu menu2 glass rounded" [ngClass]="{'none' : !menuOpen2, 'menu2mobile glassTrue' : (widthC!=undefined && cap!=undefined && widthC<cap)}">
     <div style="bottom: 0; position: fixed;">
-        <div class="col-3">
-            <label for="emailL">Email</label>
-        	<input class="effect-1" type="email" id="emailL" placeholder="Email" [(ngModel)]="mail">
-            <span class="focus-border"></span>
-        </div>   
-        <div class="col-3" style="margin-bottom: 0;">
-            <label for="passL">Contraseña</label>
-            <input type="{{type}}" class="effect-1" id="passL" placeholder="Contraseña" [(ngModel)]="pass">
-            <span class="focus-border"></span>
-        </div>
-        <a>Olvide mi contraseña</a>
-        <button class="border rounded boton" (click)="login()">Ingresar</button>
-        <span class="creartitle">¿No tenes una cuenta?</span>
-        <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;" (click)="open2()">Crear cuenta</button>
+        <ng-container *ngIf="User==''; else userBlock">
+            <div class="col-3">
+                <label for="emailL">Email</label>
+                <input class="effect-1" type="email" id="emailL" placeholder="Email" [(ngModel)]="mail">
+                <span class="focus-border"></span>
+            </div>   
+            <div class="col-3" style="margin-bottom: 0;">
+                <label for="passL">Contraseña</label>
+                <input type="{{type}}" class="effect-1" id="passL" placeholder="Contraseña" [(ngModel)]="pass">
+                <span class="focus-border"></span>
+            </div>
+            <a>Olvide mi contraseña</a>
+            <button class="border rounded boton" (click)="login()">Ingresar</button>
+            <span class="creartitle">¿No tenes una cuenta?</span>
+            <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;" (click)="open2()">Crear cuenta</button>
+        </ng-container>
+        <ng-template #userBlock>
+            <button class="border rounded boton" (click)="logout()">Cerrar session</button>    
+        </ng-template>
     </div>
 </div>

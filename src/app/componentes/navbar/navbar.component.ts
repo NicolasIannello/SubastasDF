@@ -21,11 +21,27 @@ export class NavbarComponent implements OnInit{
   mail:string="";
   pass:string="";
   type:string="password";
+  User:string="";
 
   constructor(private router: Router, public api: ServiciosService){ }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('token'));
+    let dato={
+      'token': localStorage.getItem('token'),
+    }
+    this.api.checkToken(dato).subscribe({
+      next: (value:any) => {
+        if (value.ok) {
+          localStorage.setItem('token',value.token);
+          this.User=value.nombre;
+        }else{
+          localStorage.removeItem('token')
+        }
+      },
+      error(err:any) {
+        localStorage.removeItem('token')
+      },		
+    });
   }
 
   activar(tab:string){
@@ -55,10 +71,10 @@ export class NavbarComponent implements OnInit{
     }
     this.api.login(datos).subscribe({
       next(value:any) {
+        localStorage.setItem('token',value.token);
         if (value.ok) {
           
         }else{
-          localStorage.setItem('token',value.token);
           if(!value.validado) {
             Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           }else if(!value.habilitado) {
@@ -70,5 +86,10 @@ export class NavbarComponent implements OnInit{
         Swal.fire({title:'Ocurrio un error',text:err.error.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       },		
     });
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    window.location.reload();
   }
 }

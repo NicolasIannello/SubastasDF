@@ -22,4 +22,7 @@ export class ServiciosService {
   login(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/login', dato, {'headers':this.header})
   }
+  checkToken(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/renew', dato, {'headers':this.header})
+  }
 }
