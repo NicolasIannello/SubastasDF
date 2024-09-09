@@ -119,24 +119,28 @@ export class DatosAccesoComponent{
         case 'user':
           url="User"
           datos={
-            'nomapel': this.camposEmp[0],
-            'cuilcuit': this.camposEmp[1],
-            'celular': this.camposEmp[2],
-            'actividad': this.camposEmp[3],
+            'nombre_apellido': this.camposUser[0],
+            'cuil_cuit': this.camposUser[1],
+            'telefono': this.camposUser[2],
+            'actividad': this.camposUser[3],
+            'como_encontro': this.camposUser[4],
             'mail': this.camposA[0],
             'pass': this.camposA[2],
             'pais': this.Paises[this.camposDom[0]].name,
-            'estado': this.Paises[this.camposDom[0]].states[this.camposDom[1]],
+            'provincia': this.Paises[this.camposDom[0]].states[this.camposDom[1]],
             'ciudad': this.camposDom[2],
-            'cPostal': this.camposDom[3],
+            'postal': this.camposDom[3],
             'domicilio': this.camposDom[4],
-          }
+          }          
           break;
       }
       this.api.crear(datos,url).subscribe({
         next(value:any) {
           if (value.ok) {
-            Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            localStorage.setItem('token', value.token)
+            Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'}).then(()=>{
+              window.location.reload();
+            });
           }else{
             Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           }

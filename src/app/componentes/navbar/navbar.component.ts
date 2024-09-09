@@ -53,8 +53,10 @@ export class NavbarComponent implements OnInit{
 
   open(){
     this.menuOpen=!this.menuOpen;
+    this.menuOpen2=false;
   }
   open2(){
+    this.menuOpen=false;
     this.menuOpen2=!this.menuOpen2;
     this.activa= this.menuOpen2? "login" : '';
     this.mail=""; this.pass="";
@@ -70,8 +72,9 @@ export class NavbarComponent implements OnInit{
       "pass":this.pass
     }
     this.api.login(datos).subscribe({
-      next(value:any) {
+      next: (value:any)=> {
         localStorage.setItem('token',value.token);
+        this.User=value.user;
         if (value.ok) {
           
         }else{

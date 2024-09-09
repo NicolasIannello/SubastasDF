@@ -105,6 +105,7 @@ i{
     height: 100%;
     position: fixed;
     color: var(--black);
+    top: 7%;
     /* background-color: var(--color1D); */
     width: 100%;
     z-index: 2;
@@ -176,4 +177,9 @@ i{
 .creartitle{
     display: flex;
     justify-content: center;
+}
+.username{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

@@ -8,7 +8,10 @@
     </div>
     <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap">
         <div class="btnnav" [ngClass]="{'activa' : activa=='login'}" (click)="open2()">
-            <span class="ingresar"><i class="fa-solid fa-user iuser"></i><span *ngIf="User==''; else nameBlock">Ingresar</span><ng-template #nameBlock>{{User}}</ng-template></span>
+            <span class="ingresar">
+                <i class="fa-solid fa-user iuser">
+                </i><ng-container *ngIf="User==''; else nameBlock">Ingresar</ng-container><ng-template #nameBlock><span class="username">{{User}}</span></ng-template>
+            </span>
         </div>
     </div>
     <ng-template #mobile>
@@ -24,7 +27,7 @@
     <div (click)="activar('nosotros')"><span>¿Quienes somos?</span></div>
     <div (click)="activar('contacto')"><span>Contacto</span></div>
 </div>
-<div class="menu menu2 glass rounded" [ngClass]="{'none' : !menuOpen2, 'menu2mobile glassTrue' : (widthC!=undefined && cap!=undefined && widthC<cap)}">
+<div class="menu menu2 glass" [ngClass]="{'none' : !menuOpen2, 'menu2mobile glassTrue' : (widthC!=undefined && cap!=undefined && widthC<cap)}">
     <div style="bottom: 0; position: fixed;">
         <ng-container *ngIf="User==''; else userBlock">
             <div class="col-3">
@@ -43,6 +46,7 @@
             <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;" (click)="open2()">Crear cuenta</button>
         </ng-container>
         <ng-template #userBlock>
+            <div><span>{{User}}</span></div>
             <button class="border rounded boton" (click)="logout()">Cerrar session</button>    
         </ng-template>
     </div>
