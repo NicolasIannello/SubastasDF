@@ -25,4 +25,7 @@ export class ServiciosService {
   checkToken(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/renew', dato, {'headers':this.header})
   }
+  validarCuenta(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/verificar', dato, {'headers':this.header})
+  }
 }
