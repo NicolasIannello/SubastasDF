@@ -33,6 +33,7 @@ h1{
 .svh{
     height: 100vh;
     justify-content: center;
+    display: flex;
 }
 .seccion{
     display: flex;
