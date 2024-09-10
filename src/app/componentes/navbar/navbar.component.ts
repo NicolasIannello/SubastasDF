@@ -26,22 +26,25 @@ export class NavbarComponent implements OnInit{
   constructor(private router: Router, public api: ServiciosService){ }
 
   ngOnInit(): void {
-    let dato={
-      'token': localStorage.getItem('token'),
-    }
-    this.api.checkToken(dato).subscribe({
-      next: (value:any) => {
-        if (value.ok) {
-          localStorage.setItem('token',value.token);
-          this.User=value.nombre;
-        }else{
+    if(localStorage.getItem('token')){
+      let dato={
+        'token': localStorage.getItem('token'),
+        'tipo': 1
+      }
+      this.api.checkToken(dato).subscribe({
+        next: (value:any) => {
+          if (value.ok) {
+            localStorage.setItem('token',value.token);
+            this.User=value.nombre;
+          }else{
+            localStorage.removeItem('token')
+          }
+        },
+        error(err:any) {
           localStorage.removeItem('token')
-        }
-      },
-      error(err:any) {
-        localStorage.removeItem('token')
-      },		
-    });
+        },		
+      });
+    }
   }
 
   activar(tab:string){
