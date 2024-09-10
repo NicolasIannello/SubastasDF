@@ -30,6 +30,17 @@ h1{
         color: var(--white);
     }
 }
+.glassAzul {
+    background-color: var(--amarello);  
+}
+.glassTrueAzul {
+    backdrop-filter: blur(17px) saturate(179%);
+    -webkit-backdrop-filter: blur(17px) saturate(179%);
+    background-color: var(--amarelloD);  
+    span{
+        color: var(--white);
+    }
+}
 .svh{
     height: 100vh;
     justify-content: center;
