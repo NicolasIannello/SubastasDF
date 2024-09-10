@@ -1,0 +1,6 @@
+<div class="svh border margin5 rounded seccion" style="height: 70vh; justify-content: center;">
+    <h1>Verificando su Email</h1>
+    <div *ngIf="verificado==null"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i></div>
+    <div *ngIf="verificado" class="center"><i class="fa-solid fa-check" style="font-size: 3rem;"></i>Cuenta verificada con exito</div>
+    <div *ngIf="verificado==false" class="center"><i class="fa-solid fa-xmark" style="font-size: 3rem;"></i>Error al verificar cuenta. Intentelo de nuevo</div>
+</div>
