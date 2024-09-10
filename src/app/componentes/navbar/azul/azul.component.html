@@ -1,0 +1,14 @@
+<div class="navbar glassAzul">
+    <div style="align-items: center; display: flex; height: 100%;"><div class="logo" style="cursor: pointer;" routerLink=''><span>Gruppo DF</span><img src="logo.webp" alt="Gruppo DF"></div></div> 
+    <div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='usuarios'}" (click)="activar('usuarios')"><span>Usuarios</span></div>
+    </div>
+    <div>
+        <div *ngIf="User!=''" class="btnnav" [ngClass]="{'activa' : activa=='login'}">
+            <span class="ingresar">
+                <i class="fa-solid fa-user iuser">
+                </i><span class="username">{{User}}</span>
+            </span>
+        </div>
+    </div>
+</div>
