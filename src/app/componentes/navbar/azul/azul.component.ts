@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { ServiciosService } from '../../../servicios/servicios.service';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './azul.component.html',
   styleUrl: '../navbar.component.css'
 })
-export class AzulComponent  implements OnInit{
+export class AzulComponent{
   activa:string='inicio';
   @Input() widthC: number | undefined;
   @Input() cap: number | undefined;
@@ -21,29 +21,7 @@ export class AzulComponent  implements OnInit{
   type:string="password";
   User:string="";
 
-  constructor(private router: Router, public api: ServiciosService){ }
-
-  ngOnInit(): void {
-    if(localStorage.getItem('token')){
-      let dato={
-        'token': localStorage.getItem('token'),
-        'tipo': 1
-      }
-      this.api.checkToken(dato).subscribe({
-        next: (value:any) => {
-          if (value.ok) {
-            localStorage.setItem('token',value.token);
-            this.User=value.nombre;
-          }else{
-            localStorage.removeItem('token')
-          }
-        },
-        error(err:any) {
-          localStorage.removeItem('token')
-        },		
-      });
-    }
-  }
+  constructor(public api: ServiciosService){ }
 
   activar(tab:string){
     this.activa=tab;
@@ -76,10 +54,5 @@ export class AzulComponent  implements OnInit{
         Swal.fire({title:'Ocurrio un error',text:err.error.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       },		
     });
-  }
-
-  logout(){
-    localStorage.removeItem('token');
-    window.location.reload();
   }
 }
