@@ -28,4 +28,10 @@ export class ServiciosService {
   validarCuenta(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/verificar', dato, {'headers':this.header})
   }
+  loginA(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/login', dato, {'headers':this.header})
+  }
+  checkTokenA(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/renew', dato, {'headers':this.header})
+  }
 }
