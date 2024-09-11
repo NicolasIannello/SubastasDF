@@ -50,3 +50,8 @@ h1{
     font-weight: lighter;
     font-family: 'avenir';
 }
+.boton2{
+    &:hover{
+        background-color: var(--blue);
+    }
+}
