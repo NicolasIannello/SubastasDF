@@ -4,6 +4,7 @@ import { LogregComponent } from './componentes/logreg/logreg.component';
 import { VerificacionComponent } from './componentes/verificacion/verificacion.component';
 import { LandingComponent } from './componentes/landing/landing.component';
 import { PanelAdminComponent } from './componentes/panel-admin/panel-admin.component';
+import { LoginComponent } from './componentes/panel-admin/login/login.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -12,6 +13,7 @@ export const routes: Routes = [
         { path: 'verificar/:token', component: VerificacionComponent },
     ]},
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
+        { path: '', component: LoginComponent },
         { path: '**',   redirectTo: '', pathMatch: 'full' },
     ]},
     { path: '**',   redirectTo: '', pathMatch: 'full' },
