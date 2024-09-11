@@ -1,10 +1,11 @@
 import { afterNextRender, Component, HostListener, inject, Injector } from '@angular/core';
 import { AzulComponent } from "../navbar/azul/azul.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-panel-admin',
   standalone: true,
-  imports: [AzulComponent],
+  imports: [AzulComponent, RouterOutlet],
   templateUrl: './panel-admin.component.html',
   styleUrl: './panel-admin.component.css'
 })
