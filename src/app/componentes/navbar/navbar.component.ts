@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit{
   pass:string="";
   type:string="password";
   User:string="";
+  mailcambio:string=""
 
   constructor(private router: Router, public api: ServiciosService){ }
 
@@ -97,5 +98,39 @@ export class NavbarComponent implements OnInit{
   logout(){
     localStorage.removeItem('token');
     window.location.reload();
+  }
+
+  cambiarPass(){
+    Swal.fire({
+      title: "Ingrese su email",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off"
+      },
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+      showLoaderOnConfirm: true,
+      preConfirm: async (mail) => {
+        this.mailcambio=mail;
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          'mail':this.mailcambio
+        }
+        this.api.sendcambiarPass(dato).subscribe({
+          next: (value:any) => {
+            if(value.ok) Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+          error(err:any) {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },		
+        });
+      }else{
+        this.mailcambio=""
+      }
+    });
   }
 }

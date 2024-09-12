@@ -7,12 +7,14 @@ import { PanelAdminComponent } from './componentes/panel-admin/panel-admin.compo
 import { LoginComponent } from './componentes/panel-admin/login/login.component';
 import { UsuariosComponent } from './componentes/panel-admin/usuarios/usuarios.component';
 import { authGuard } from './guard/auth.guard';
+import { CambiarPassComponent } from './componentes/cambiar-pass/cambiar-pass.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
         { path: '', component: InicioComponent },
         { path: 'login', component: LogregComponent },
         { path: 'verificar/:token', component: VerificacionComponent },
+        { path: 'cambio/:token', component: CambiarPassComponent },
     ]},
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
         { path: '', component: LoginComponent },

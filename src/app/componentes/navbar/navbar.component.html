@@ -40,7 +40,7 @@
                 <input type="{{type}}" class="effect-1" id="passL" placeholder="Contraseña" [(ngModel)]="pass">
                 <span class="focus-border"></span>
             </div>
-            <a>Olvide mi contraseña</a>
+            <a (click)="cambiarPass()">Olvide mi contraseña</a>
             <button class="border rounded boton" (click)="login()">Ingresar</button>
             <span class="creartitle">¿No tenes una cuenta?</span>
             <button routerLink='login' class="border rounded boton" style="margin-top: 0; margin-bottom: 0;" (click)="open2()">Crear cuenta</button>

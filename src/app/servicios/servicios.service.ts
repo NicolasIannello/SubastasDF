@@ -34,4 +34,10 @@ export class ServiciosService {
   checkTokenA(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/renew', dato, {'headers':this.header})
   }
+  cambiarPass(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/cambiarPass', dato, {'headers':this.header})
+  }
+  sendcambiarPass(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/sendCambio', dato, {'headers':this.header})
+  }
 }
