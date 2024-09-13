@@ -124,3 +124,8 @@ select{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
 button{
     font-family: Avenir;
 }
+.username{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
