@@ -7,4 +7,11 @@
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
+    <div *ngFor="let u of Usuarios" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div class="celda username" style="width: 25%;"><i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>{{u['nombre']}}</div>
+        <div class="celda username" style="width: 25%;">{{u['mail']}}</div>
+        <div class="celda username" style="width: 12%;">{{u['telefono']}}</div>
+        <div class="celda username" style="width: 12%;">{{u['cuil_cuit']}}</div>
+        <div class="celda" style="border-right: none;">botones</div>
+    </div>
 </div>

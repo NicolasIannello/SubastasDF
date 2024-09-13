@@ -1,0 +1,16 @@
+.celda{
+    border-right: 1px solid rgb(48, 131, 220, 0.2); 
+    width: 16%;
+    padding: 1%;
+    font-family: Avenir;
+    i{
+        margin-right: 2%;
+    }
+}
+.linea{
+    &:hover{
+        background-color: rgb(255, 144, 0, 0.2);
+        /* cursor: pointer; */
+    }
+    transition: all 0.5s linear;
+}
