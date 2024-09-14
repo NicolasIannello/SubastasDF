@@ -95,17 +95,15 @@ export class DatosAccesoComponent{
 
     if(this.flag2){      
       let datos;
-      let url="";
       switch (this.tipo) {
         case 'emp':
-          url="Emp"
           datos={
             'nombre_comercial': this.camposEmp[0],
             'cuil_cuit': this.camposEmp[1],
             'telefono': this.camposEmp[2],
             'actividad': this.camposEmp[3],
             'razon_social': this.camposEmp[4],
-            'persona_responsable': this.camposEmp[5],
+            'nombre_apellido': this.camposEmp[5],
             'como_encontro': this.camposEmp[6],
             'mail': this.camposA[0],
             'pass': this.camposA[2],
@@ -114,10 +112,10 @@ export class DatosAccesoComponent{
             'ciudad': this.camposDom[2],
             'postal': this.camposDom[3],
             'domicilio': this.camposDom[4],
+            'tipo': 'emp'
           }
         break;
         case 'user':
-          url="User"
           datos={
             'nombre_apellido': this.camposUser[0],
             'cuil_cuit': this.camposUser[1],
@@ -131,10 +129,11 @@ export class DatosAccesoComponent{
             'ciudad': this.camposDom[2],
             'postal': this.camposDom[3],
             'domicilio': this.camposDom[4],
+            'tipo': 'user'
           }          
           break;
       }
-      this.api.crear(datos,url).subscribe({
+      this.api.crear(datos).subscribe({
         next(value:any) {
           if (value.ok) {
             localStorage.setItem('token', value.token)
