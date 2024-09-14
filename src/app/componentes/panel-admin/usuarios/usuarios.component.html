@@ -25,7 +25,8 @@
             <i class="fa-solid fa-at ibtn" [ngClass]="{'verde':u['validado'], 'rojo':!u['validado'] }"></i>
             <i class="fa-regular fa-eye boton2 border rounded ibtn"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn"></i>
-            <i class="fa-solid fa-trash-can boton2 border rounded ibtn"></i>
+            <i *ngIf="u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['dato_empresa']['nombre_comercial'])"></i>
+            <i *ngIf="!u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre_apellido'])"></i>
         </div>
     </div>
     <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
