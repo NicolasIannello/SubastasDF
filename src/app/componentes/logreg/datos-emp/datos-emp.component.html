@@ -13,8 +13,8 @@
 </div>
 <div style="display: flex; margin-bottom: 2%;">
     <div class="col-3" style="margin-right: 2%;">
-        <label for="cuitcuil">CUIL / CUIT </label><span class="msg" style="color: black;">(sin guiones ni espacios) </span><span class="msg">{{alertasEmp[1]}}</span>
-        <input (change)="sendDatosEmp()" class="effect-1" maxlength="11" type="text" placeholder="CUIL / CUIT" [(ngModel)]="camposEmp[1]">
+        <label for="cuitcuil">CUIL / CUIT </label> <!-- <span class="msg" style="color: black;">(sin guiones ni espacios) </span>--><span class="msg">{{alertasEmp[1]}}</span>
+        <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="CUIL / CUIT" [(ngModel)]="camposEmp[1]">
         <span class="focus-border"></span>
     </div>
     <div class="col-3">
