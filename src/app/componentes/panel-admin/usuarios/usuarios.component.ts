@@ -28,6 +28,8 @@ export class UsuariosComponent implements OnInit{
         this.Usuarios = [...value.users];
         this.Total=value.total;
         this.pagU=Math.ceil(this.Total%20)
+        console.log(this.Usuarios);
+        
       },
       error: (err)=>{
         this.error=true;

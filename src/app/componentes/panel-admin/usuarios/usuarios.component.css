@@ -23,10 +23,50 @@
 .boton2{
     &:hover{
         background-color: var(--blue);
+        color: var(--white);
     }
+    transition: all 0.2s linear;
 }
 .paginacion{
     height: 2rem;
     width: 6rem;
     font-size: medium;
+}
+.ibtn{
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 2rem;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.tooltip {
+    position: relative;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    padding: 0.25em 0.5em;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 1;
+    top: -60%;
+    left: -190%;
+    transition-property: visibility;
+    transition-delay: 0s;
+    font-family: 'avenir';
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    transition-delay: 0.3s;
+}
+.rojo{
+    color:red
+}
+.verde{
+    color:green
 }
