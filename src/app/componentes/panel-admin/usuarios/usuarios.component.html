@@ -2,16 +2,29 @@
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
         <h1>Usuarios</h1>
         <div>
-            <button class="boton boton2 borderAzul rounded botones">Imprimir</button>
-            <button class="boton boton2 borderAzul rounded botones">Agregar usuario</button>
+            <button class="boton boton2 border rounded botones">Imprimir</button>
+            <button class="boton boton2 border rounded botones">Agregar usuario</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
+    <h2 class="load" *ngIf="Usuarios.length==0 && !error"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+    <h2 *ngIf="error">Error al cargar usuarios</h2>
     <div *ngFor="let u of Usuarios" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-        <div class="celda username" style="width: 25%;"><i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>{{u['nombre']}}</div>
+        <div class="celda username" style="width: 25%;">
+            <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>
+            <ng-container *ngIf="u['dato_empresa']; else userBlock">{{u['dato_empresa']['nombre_comercial']}}</ng-container><ng-template #userBlock>{{u['nombre_apellido']}}</ng-template>
+        </div>
         <div class="celda username" style="width: 25%;">{{u['mail']}}</div>
         <div class="celda username" style="width: 12%;">{{u['telefono']}}</div>
         <div class="celda username" style="width: 12%;">{{u['cuil_cuit']}}</div>
         <div class="celda" style="border-right: none;">botones</div>
+    </div>
+    <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
+        Pagina {{pagina+1}} de {{pagU}}
+        <div style="margin-right: 2%; margin-left: 2%;">
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+        </div>
+        Usuarios totales: {{Total}}
     </div>
 </div>

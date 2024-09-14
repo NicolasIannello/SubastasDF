@@ -14,3 +14,19 @@
     }
     transition: all 0.5s linear;
 }
+.load{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-around;
+}
+.boton2{
+    &:hover{
+        background-color: var(--blue);
+    }
+}
+.paginacion{
+    height: 2rem;
+    width: 6rem;
+    font-size: medium;
+}
