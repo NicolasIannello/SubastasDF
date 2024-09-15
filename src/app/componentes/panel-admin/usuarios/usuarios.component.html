@@ -24,7 +24,7 @@
             <i class="fa-solid fa-user ibtn" [ngClass]="{'verde':u['habilitado'], 'rojo':!u['habilitado'] }"></i>
             <i class="fa-solid fa-at ibtn" [ngClass]="{'verde':u['validado'], 'rojo':!u['validado'] }"></i>
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
-            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn"></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i)"></i>
             <i *ngIf="u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['dato_empresa']['nombre_comercial'])"></i>
             <i *ngIf="!u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre_apellido'])"></i>
         </div>
@@ -112,6 +112,182 @@
             </div>
             <div class="celda" style="width: 50%;">
                 <span style="font-weight: bold; text-decoration: underline;">Razon social:</span> {{datoMostrarEMP["razon_social"]}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal cambiar -->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCambio, '':mostrarCambio }">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="verCambio(-1)"></i>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
+                <span style="font-weight: bold; text-decoration: underline;">Nombre:</span> 
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["nombre_apellido"]' [(ngModel)]="datoCambio['nombre_apellido']"
+                    [ngClass]="{'changed': datoCambio['nombre_apellido']!=datoCambioCheck['nombre_apellido']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">CUIL/CUIT:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["cuil_cuit"]' [(ngModel)]="datoCambio['cuil_cuit']"
+                    [ngClass]="{'changed': datoCambio['cuil_cuit']!=datoCambioCheck['cuil_cuit']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Mail:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["mail"]' [(ngModel)]="datoCambio['mail']"
+                    [ngClass]="{'changed': datoCambio['mail']!=datoCambioCheck['mail']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Telefono:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["telefono"]' [(ngModel)]="datoCambio['telefono']"
+                    [ngClass]="{'changed': datoCambio['telefono']!=datoCambioCheck['telefono']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Pais:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["pais"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Provincia:</span> {{datoMostrar["provincia"]}}
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["ciudad"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Ciudad:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["ciudad"]' [(ngModel)]="datoCambio['ciudad']"
+                    [ngClass]="{'changed': datoCambio['ciudad']!=datoCambioCheck['ciudad']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Codigo Postal:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["postal"]' [(ngModel)]="datoCambio['postal']"
+                    [ngClass]="{'changed': datoCambio['postal']!=datoCambioCheck['postal']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Domicilio:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["domicilio"]' [(ngModel)]="datoCambio['domicilio']"
+                    [ngClass]="{'changed': datoCambio['domicilio']!=datoCambioCheck['domicilio']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Actividad:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <select class="effect-1" [value]='datoCambio["actividad"]' [(ngModel)]="datoCambio['actividad']"
+                    [ngClass]="{'changed': datoCambio['actividad']!=datoCambioCheck['actividad']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <option value="ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO">ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO</option>
+                        <option value="ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA">ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA</option>
+                        <option value="AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA">AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA</option>
+                        <option value="COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS">COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS</option>
+                        <option value="CONSTRUCCIÓN">CONSTRUCCIÓN</option>
+                        <option value="ENSEÑANZA">ENSEÑANZA</option>
+                        <option value="EXPLOTACIÓN DE MINAS Y CANTERAS">EXPLOTACIÓN DE MINAS Y CANTERAS</option>
+                        <option value="INDUSTRIA MANUFACTURERA">INDUSTRIA MANUFACTURERA</option>
+                        <option value="INFORMACIÓN Y COMUNICACIONES">INFORMACIÓN Y COMUNICACIONES</option>
+                        <option value="INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS">INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS</option>
+                        <option value="SALUD HUMANA Y SERVICIOS SOCIALES">SALUD HUMANA Y SERVICIOS SOCIALES</option>
+                        <option value="SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO">SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO</option>
+                        <option value="SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA">SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA</option>
+                        <option value="SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES">SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES</option>
+                        <option value="SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO">SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO</option>
+                        <option value="SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES">SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES</option>
+                        <option value="SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO">SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO</option>
+                        <option value="SERVICIOS INMOBILIARIOS">SERVICIOS INMOBILIARIOS</option>
+                        <option value="SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS">SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS</option>
+                        <option value="SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO">SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO</option>
+                        <option value="SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO">SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO</option>
+                        <option value="120">OTRA</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline; margin-right: 2%;">Validado: </span> {{datoCambio["validado"]? 'validado' : 'invalidado'}}
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Habilitado:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <select class="effect-1" [value]='datoCambio["habilitado"]' [(ngModel)]="datoCambio['habilitado']" (change)="checkCambio('habilitado')"
+                    [ngClass]="{'changed': datoCambio['habilitado']!=datoCambioCheck['habilitado']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <option value='true'>Habilitado</option>    
+                        <option value='false'>Deshabilitado</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Como encontro:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["como_encontro"]' [(ngModel)]="datoCambio['como_encontro']"
+                    [ngClass]="{'changed': datoCambio['como_encontro']!=datoCambioCheck['como_encontro']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Ultima conexion:</span> {{datoCambio["ultima_conexion"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Tipo de cuenta:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambio["tipo"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center;"></div>
+        </div>
+        <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Nombre comercial:</span> 
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambioEMP["nombre_comercial"]' [(ngModel)]="datoCambioEMP['nombre_comercial']"
+                    [ngClass]="{'changed': datoCambioEMP['nombre_comercial']!=datoCambioEMPCheck['nombre_comercial']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline;">Razon social:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [value]='datoCambioEMP["razon_social"]' [(ngModel)]="datoCambioEMP['razon_social']"
+                    [ngClass]="{'changed': datoCambioEMP['razon_social']!=datoCambioEMPCheck['razon_social']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
             </div>
         </div>
     </div>

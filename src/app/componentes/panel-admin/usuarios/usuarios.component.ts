@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../servicios/admin.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
@@ -19,6 +20,11 @@ export class UsuariosComponent implements OnInit{
   mostrar:boolean=false;
   datoMostrar:{ [key: string]: string } = {};
   datoMostrarEMP:{ [key: string]: string } = {};
+  mostrarCambio:boolean=false;
+  datoCambio:{ [key: string]: string } = {};
+  datoCambioEMP:{ [key: string]: string } = {};
+  datoCambioCheck:{ [key: string]: string } = {};
+  datoCambioEMPCheck:{ [key: string]: string } = {};
   
   constructor(public api: AdminService){ }
 
@@ -105,7 +111,28 @@ export class UsuariosComponent implements OnInit{
       this.datoMostrar=this.Usuarios[i];
       if(this.Usuarios[i]["dato_empresa"]) this.datoMostrarEMP=this.Usuarios[i]["dato_empresa"];
     }else{
-      this.datoMostrar={};
+      this.datoMostrar={}; this.datoMostrarEMP={};
     }
+  }
+
+  verCambio(i:number){
+    this.mostrarCambio=!this.mostrarCambio   
+    if(i>=0){
+      this.datoCambio=JSON.parse(JSON.stringify(this.Usuarios[i]));
+      this.datoCambioCheck=JSON.parse(JSON.stringify(this.Usuarios[i]));
+      if(this.Usuarios[i]["dato_empresa"]) {
+        this.datoCambioEMP=JSON.parse(JSON.stringify(this.Usuarios[i]["dato_empresa"]));
+        this.datoCambioEMPCheck=JSON.parse(JSON.stringify(this.Usuarios[i]["dato_empresa"]));
+      }
+    }else{
+      this.datoCambio={}; this.datoCambioCheck={}; this.datoCambioEMP={}; this.datoCambioEMPCheck={};
+    }    
+    console.log(this.Usuarios[i]);
+  }
+
+  checkCambio(key:string){
+    console.log('NEW '+this.datoCambio[key]);
+    console.log('OG '+this.datoCambioCheck[key]);
+    
   }
 }
