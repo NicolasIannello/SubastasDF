@@ -9,7 +9,7 @@
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
     <h2 class="load" *ngIf="Usuarios.length==0 && !error"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
     <h2 *ngIf="error">Error al cargar usuarios</h2>
-    <div *ngFor="let u of Usuarios" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+    <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda username" style="width: 25%;">
             <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>
             <ng-container *ngIf="u['dato_empresa']; else userBlock">{{u['dato_empresa']['nombre_comercial']}}</ng-container><ng-template #userBlock>{{u['nombre_apellido']}}</ng-template>
@@ -23,7 +23,7 @@
             </i>
             <i class="fa-solid fa-user ibtn" [ngClass]="{'verde':u['habilitado'], 'rojo':!u['habilitado'] }"></i>
             <i class="fa-solid fa-at ibtn" [ngClass]="{'verde':u['validado'], 'rojo':!u['validado'] }"></i>
-            <i class="fa-regular fa-eye boton2 border rounded ibtn"></i>
+            <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn"></i>
             <i *ngIf="u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['dato_empresa']['nombre_comercial'])"></i>
             <i *ngIf="!u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre_apellido'])"></i>
@@ -36,5 +36,83 @@
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
         </div>
         Usuarios totales: {{Total}}
+    </div>
+</div>
+<!-- Modal ver -->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrar, '':mostrar }">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="ver(-1)"></i>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Nombre:</span> {{datoMostrar["nombre_apellido"]}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">CUIL/CUIT:</span> {{datoMostrar["cuil_cuit"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Mail:</span> {{datoMostrar["mail"]}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Telefono:</span> {{datoMostrar["telefono"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Pais:</span> {{datoMostrar["pais"]}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Provincia:</span> {{datoMostrar["provincia"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Ciudad:</span> {{datoMostrar["ciudad"]}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Codigo Postal:</span> {{datoMostrar["postal"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Domicilio:</span> {{datoMostrar["domicilio"]}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Actividad:</span> {{datoMostrar["actividad"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Validado:</span> {{datoMostrar["validado"]? 'validado' : 'invalidado'}}
+            </div>
+            <div class="celda" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline;">Habilitado:</span> {{datoMostrar["habilitado"]? 'habilitado' : 'deshabilitado' }}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Como encontro:</span> {{datoMostrar["como_encontro"]}}
+            </div>
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Ultima conexion:</span> {{datoMostrar["ultima_conexion"]}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Tipo de cuenta:</span> {{datoMostrar["tipo"]}}
+            </div>
+            <div class="celda" style="width: 50%;"></div>
+        </div>
+        <div style="display: flex;" *ngIf="datoMostrar['tipo']=='emp'">
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Nombre comercial:</span> {{datoMostrarEMP["nombre_comercial"]}}
+            </div>
+            <div class="celda" style="width: 50%;">
+                <span style="font-weight: bold; text-decoration: underline;">Razon social:</span> {{datoMostrarEMP["razon_social"]}}
+            </div>
+        </div>
     </div>
 </div>

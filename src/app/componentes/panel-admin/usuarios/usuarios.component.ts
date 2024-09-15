@@ -16,6 +16,9 @@ export class UsuariosComponent implements OnInit{
   pagina:number=0;
   pagU:number=0;
   error:boolean=false;
+  mostrar:boolean=false;
+  datoMostrar:{ [key: string]: string } = {};
+  datoMostrarEMP:{ [key: string]: string } = {};
   
   constructor(public api: AdminService){ }
 
@@ -68,8 +71,6 @@ export class UsuariosComponent implements OnInit{
   }
 
   eliminar(id:string,nom:string){
-    console.log(id);
-    console.log(nom);
     Swal.fire({
       title: "Esta por borrar una cuenta",
       text: "¿Desea borrar la cuenta "+nom+" ?",
@@ -98,4 +99,13 @@ export class UsuariosComponent implements OnInit{
     });
   }
 
+  ver(i:number){
+    this.mostrar=!this.mostrar    
+    if(i>=0){
+      this.datoMostrar=this.Usuarios[i];
+      if(this.Usuarios[i]["dato_empresa"]) this.datoMostrarEMP=this.Usuarios[i]["dato_empresa"];
+    }else{
+      this.datoMostrar={};
+    }
+  }
 }
