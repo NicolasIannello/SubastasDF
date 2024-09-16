@@ -23,13 +23,14 @@ export class UsuariosComponent implements OnInit{
   datoMostrar:{ [key: string]: string } = {};
   datoMostrarEMP:{ [key: string]: string } = {};
   mostrarCambio:boolean=false;
-  datoCambio:{ [key: string]: string } = {};
+  datoCambio:{ [key: string]: any } = {};
   datoCambioEMP:{ [key: string]: string } = {};
   datoCambioCheck:{ [key: string]: string } = {};
   datoCambioEMPCheck:{ [key: string]: string } = {};
   Paises:Countries[]=countries;
   paisI:number=1;
-  flagH:boolean=false
+  flagH:boolean=false;
+  idCambio:string="";
   
   constructor(public api: AdminService){ }
 
@@ -120,8 +121,10 @@ export class UsuariosComponent implements OnInit{
     }
   }
 
-  verCambio(i:number){
+  verCambio(i:number,id:string){
+    this.flagH=false
     this.mostrarCambio=!this.mostrarCambio   
+    this.idCambio=id;
     if(i>=0){
       this.datoCambio=JSON.parse(JSON.stringify(this.Usuarios[i]));
       this.datoCambioCheck=JSON.parse(JSON.stringify(this.Usuarios[i]));
@@ -130,7 +133,7 @@ export class UsuariosComponent implements OnInit{
         this.datoCambioEMPCheck=JSON.parse(JSON.stringify(this.Usuarios[i]["dato_empresa"]));
       }
     }else{
-      this.datoCambio={}; this.datoCambioCheck={}; this.datoCambioEMP={}; this.datoCambioEMPCheck={};
+      this.datoCambio={}; this.datoCambioCheck={}; this.datoCambioEMP={}; this.datoCambioEMPCheck={}; this.idCambio='';
     }    
     this.getPais(false)
   }
@@ -144,5 +147,84 @@ export class UsuariosComponent implements OnInit{
     for (let i = 0; i < this.Paises.length; i++) {
       if(this.Paises[i].name==this.datoCambio['pais']) this.paisI=i;
     }
+  }
+
+  actualizar(){
+    let datos, tipo='user';
+    switch (this.datoCambio['tipo']) {
+      case 'emp':
+        datos={
+          'nombre_comercial': this.datoCambioEMP['nombre_comercial'],
+          'cuil_cuit': this.datoCambio['cuil_cuit'],
+          'telefono': this.datoCambio['telefono'],
+          'actividad': this.datoCambio['actividad'],
+          'razon_social': this.datoCambioEMP['razon_social'],
+          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'como_encontro': this.datoCambio['como_encontro'],
+          'mail': this.datoCambio['mail'],
+          'pais': this.datoCambio['pais'],
+          'provincia': this.datoCambio['provincia'],
+          'ciudad': this.datoCambio['ciudad'],
+          'postal': this.datoCambio['postal'],
+          'domicilio': this.datoCambio['domicilio'],
+          'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'tipo': 'emp'
+        }
+        break; 
+      case 'viejo':
+        tipo=this.datoCambio['tipo'];
+        datos={
+          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'cuil_cuit': this.datoCambio['cuil_cuit'],
+          'telefono': this.datoCambio['telefono'],
+          'actividad': this.datoCambio['actividad'],
+          'como_encontro': this.datoCambio['como_encontro'],
+          'mail': this.datoCambio['mail'],
+          'pais': this.datoCambio['pais'],
+          'provincia': this.datoCambio['provincia'],
+          'ciudad': this.datoCambio['ciudad'],
+          'postal': this.datoCambio['postal'],
+          'domicilio': this.datoCambio['domicilio'],
+          'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'tipo': tipo
+        }
+        break;
+      case 'user': 
+        tipo=this.datoCambio['tipo'];
+        datos={
+          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'cuil_cuit': this.datoCambio['cuil_cuit'],
+          'telefono': this.datoCambio['telefono'],
+          'actividad': this.datoCambio['actividad'],
+          'como_encontro': this.datoCambio['como_encontro'],
+          'mail': this.datoCambio['mail'],
+          'pais': this.datoCambio['pais'],
+          'provincia': this.datoCambio['provincia'],
+          'ciudad': this.datoCambio['ciudad'],
+          'postal': this.datoCambio['postal'],
+          'domicilio': this.datoCambio['domicilio'],
+          'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'tipo': tipo
+        }
+        break;
+    }
+    
+    let dato={
+      'token':localStorage.getItem('token'),
+      "campos":datos,
+      'tipo':1,
+      'id':this.idCambio
+    }
+    this.api.actualizarUser(dato).subscribe({
+      next: (value:any) => {
+        Swal.fire({title:'Usuario actualizado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        this.recargar(); 
+        this.verCambio(-1,'')
+      },
+      error(err:any) {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+      },		
+    });
+
   }
 }

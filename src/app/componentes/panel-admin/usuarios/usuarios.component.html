@@ -28,7 +28,7 @@
                 <span class="tooltiptext glassTrue rounded border">{{u['validado'] ? 'Validado' : 'Invalidado'}}</span>
             </i>
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
-            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i)"></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i,u['_id'])"></i>
             <i *ngIf="u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['dato_empresa']['nombre_comercial'])"></i>
             <i *ngIf="!u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre_apellido'])"></i>
         </div>
@@ -124,7 +124,7 @@
 <div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCambio, '':mostrarCambio }">
     <div class="modal-content">
         <div style="display: flex; justify-content: flex-end; font-size: x-large;">
-            <i class="fa-solid fa-xmark icerrar" (click)="verCambio(-1)"></i>
+            <i class="fa-solid fa-xmark icerrar" (click)="verCambio(-1,'')"></i>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
@@ -277,7 +277,7 @@
             </div>
         </div>
         <div style="display: flex;">
-            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Tipo de usuario:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <select class="effect-1" [value]='datoCambio["tipo"]' [(ngModel)]="datoCambio['tipo']"
@@ -288,10 +288,10 @@
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;"></div>
+            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;"></div>
         </div>
         <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
-            <div class="celda" style="width: 50%; display:flex; align-items:center;">
+            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre comercial:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["nombre_comercial"]' [(ngModel)]="datoCambioEMP['nombre_comercial']"
@@ -299,13 +299,19 @@
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["razon_social"]' [(ngModel)]="datoCambioEMP['razon_social']"
                     [ngClass]="{'changed': datoCambioEMP['razon_social']!=datoCambioEMPCheck['razon_social']}" style="width: 100%; height: 2rem; background: #ececec;">
                     <span class="focus-border2"></span>
                 </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center;border-right: none;"></div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; justify-content: flex-end;">
+                <button class="boton boton2 border rounded botones" (click)="actualizar()">Actualizar</button>
             </div>
         </div>
     </div>
