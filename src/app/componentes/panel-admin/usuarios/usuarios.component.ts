@@ -3,6 +3,8 @@ import { AdminService } from '../../../servicios/admin.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { Countries } from '../../logreg/datos-user/paises';
+import { countries } from '../../logreg/datos-user/paises-data';
 
 @Component({
   selector: 'app-usuarios',
@@ -25,6 +27,9 @@ export class UsuariosComponent implements OnInit{
   datoCambioEMP:{ [key: string]: string } = {};
   datoCambioCheck:{ [key: string]: string } = {};
   datoCambioEMPCheck:{ [key: string]: string } = {};
+  Paises:Countries[]=countries;
+  paisI:number=1;
+  flagH:boolean=false
   
   constructor(public api: AdminService){ }
 
@@ -127,12 +132,17 @@ export class UsuariosComponent implements OnInit{
     }else{
       this.datoCambio={}; this.datoCambioCheck={}; this.datoCambioEMP={}; this.datoCambioEMPCheck={};
     }    
-    console.log(this.Usuarios[i]);
+    this.getPais(false)
   }
 
   checkCambio(key:string){
-    console.log('NEW '+this.datoCambio[key]);
-    console.log('OG '+this.datoCambioCheck[key]);
-    
+    this.flagH=this.datoCambio[key].toString()!=this.datoCambioCheck[key].toString();
+  }
+
+  getPais(flag:boolean){
+    if(flag) this.datoCambio['provincia']=''
+    for (let i = 0; i < this.Paises.length; i++) {
+      if(this.Paises[i].name==this.datoCambio['pais']) this.paisI=i;
+    }
   }
 }

@@ -46,72 +46,72 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Nombre:</span> {{datoMostrar["nombre_apellido"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> {{datoMostrar["nombre_apellido"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">CUIL/CUIT:</span> {{datoMostrar["cuil_cuit"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">CUIL/CUIT:</span> {{datoMostrar["cuil_cuit"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Mail:</span> {{datoMostrar["mail"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Mail:</span> {{datoMostrar["mail"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Telefono:</span> {{datoMostrar["telefono"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Telefono:</span> {{datoMostrar["telefono"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Pais:</span> {{datoMostrar["pais"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Pais:</span> {{datoMostrar["pais"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Provincia:</span> {{datoMostrar["provincia"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Provincia:</span> {{datoMostrar["provincia"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Ciudad:</span> {{datoMostrar["ciudad"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ciudad:</span> {{datoMostrar["ciudad"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Codigo Postal:</span> {{datoMostrar["postal"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Codigo Postal:</span> {{datoMostrar["postal"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Domicilio:</span> {{datoMostrar["domicilio"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Domicilio:</span> {{datoMostrar["domicilio"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Actividad:</span> {{datoMostrar["actividad"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Actividad:</span> {{datoMostrar["actividad"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Validado:</span> {{datoMostrar["validado"]? 'validado' : 'invalidado'}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Validado:</span> {{datoMostrar["validado"]? 'validado' : 'invalidado'}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Habilitado:</span> {{datoMostrar["habilitado"]? 'habilitado' : 'deshabilitado' }}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Habilitado:</span> {{datoMostrar["habilitado"]? 'habilitado' : 'deshabilitado' }}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Como encontro:</span> {{datoMostrar["como_encontro"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span> {{datoMostrar["como_encontro"]}}
             </div>
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Ultima conexion:</span> {{datoMostrar["ultima_conexion"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ultima conexion:</span> {{datoMostrar["ultima_conexion"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Tipo de cuenta:</span> {{datoMostrar["tipo"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Tipo de cuenta:</span> {{datoMostrar["tipo"]}}
             </div>
             <div class="celda" style="width: 50%;"></div>
         </div>
         <div style="display: flex;" *ngIf="datoMostrar['tipo']=='emp'">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Nombre comercial:</span> {{datoMostrarEMP["nombre_comercial"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre comercial:</span> {{datoMostrarEMP["nombre_comercial"]}}
             </div>
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline;">Razon social:</span> {{datoMostrarEMP["razon_social"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span> {{datoMostrarEMP["razon_social"]}}
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
-                <span style="font-weight: bold; text-decoration: underline;">Nombre:</span> 
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["nombre_apellido"]' [(ngModel)]="datoCambio['nombre_apellido']"
                     [ngClass]="{'changed': datoCambio['nombre_apellido']!=datoCambioCheck['nombre_apellido']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">CUIL/CUIT:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">CUIL/CUIT:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["cuil_cuit"]' [(ngModel)]="datoCambio['cuil_cuit']"
                     [ngClass]="{'changed': datoCambio['cuil_cuit']!=datoCambioCheck['cuil_cuit']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -142,7 +142,7 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Mail:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Mail:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["mail"]' [(ngModel)]="datoCambio['mail']"
                     [ngClass]="{'changed': datoCambio['mail']!=datoCambioCheck['mail']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Telefono:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Telefono:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["telefono"]' [(ngModel)]="datoCambio['telefono']"
                     [ngClass]="{'changed': datoCambio['telefono']!=datoCambioCheck['telefono']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -160,23 +160,33 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Pais:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Pais:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
-                    <input type="text" class="effect-1" [value]='datoCambio["pais"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <select class="effect-1" [value]='datoCambio["pais"]' [(ngModel)]="datoCambio['pais']" (change)="getPais(true)"
+                    [ngClass]="{'changed': datoCambio['pais']!=datoCambioCheck['pais']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <ng-container *ngFor="let p of Paises, index as i">
+                            <option value="{{p.name}}" selected>{{p.name}}</option>
+                        </ng-container>
+                    </select>
                     <span class="focus-border2"></span>
                 </div>
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Provincia:</span> {{datoMostrar["provincia"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Provincia:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
-                    <input type="text" class="effect-1" [value]='datoCambio["ciudad"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <select class="effect-1" [value]='datoCambio["provincia"]' [(ngModel)]='datoCambio["provincia"]'
+                    [ngClass]="{'changed': datoCambio['provincia']!=datoCambioCheck['provincia']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <ng-container *ngFor="let p of Paises[paisI].states, index as i">
+                            <option value="{{Paises[paisI].states[i]}}" selected>{{Paises[paisI].states[i]}}</option>
+                        </ng-container>
+                    </select>
                     <span class="focus-border2"></span>
                 </div>
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Ciudad:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ciudad:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["ciudad"]' [(ngModel)]="datoCambio['ciudad']"
                     [ngClass]="{'changed': datoCambio['ciudad']!=datoCambioCheck['ciudad']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -184,7 +194,7 @@
                 </div>
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Codigo Postal:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Codigo Postal:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["postal"]' [(ngModel)]="datoCambio['postal']"
                     [ngClass]="{'changed': datoCambio['postal']!=datoCambioCheck['postal']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -194,7 +204,7 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Domicilio:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Domicilio:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["domicilio"]' [(ngModel)]="datoCambio['domicilio']"
                     [ngClass]="{'changed': datoCambio['domicilio']!=datoCambioCheck['domicilio']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -202,7 +212,7 @@
                 </div>
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Actividad:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Actividad:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <select class="effect-1" [value]='datoCambio["actividad"]' [(ngModel)]="datoCambio['actividad']"
                     [ngClass]="{'changed': datoCambio['actividad']!=datoCambioCheck['actividad']}" style="width: 100%; height: 2rem; background: #ececec;">
@@ -235,13 +245,13 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline; margin-right: 2%;">Validado: </span> {{datoCambio["validado"]? 'validado' : 'invalidado'}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">Validado: </span> {{datoCambio["validado"]? 'validado' : 'invalidado'}}
             </div>
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <span style="font-weight: bold; text-decoration: underline;">Habilitado:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Habilitado:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <select class="effect-1" [value]='datoCambio["habilitado"]' [(ngModel)]="datoCambio['habilitado']" (change)="checkCambio('habilitado')"
-                    [ngClass]="{'changed': datoCambio['habilitado']!=datoCambioCheck['habilitado']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    [ngClass]="{'changed': flagH}" style="width: 100%; height: 2rem; background: #ececec;">
                         <option value='true'>Habilitado</option>    
                         <option value='false'>Deshabilitado</option>
                     </select>
@@ -251,38 +261,42 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Como encontro:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambio["como_encontro"]' [(ngModel)]="datoCambio['como_encontro']"
                     [ngClass]="{'changed': datoCambio['como_encontro']!=datoCambioCheck['como_encontro']}" style="width: 100%; height: 2rem; background: #ececec;">
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Ultima conexion:</span> {{datoCambio["ultima_conexion"]}}
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ultima conexion:</span> {{datoCambio["ultima_conexion"]}}
             </div>
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Tipo de cuenta:</span>
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Tipo de usuario:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
-                    <input type="text" class="effect-1" [value]='datoCambio["tipo"]' style="width: 100%; height: 2rem; background: #ececec;">
+                    <select class="effect-1" [value]='datoCambio["tipo"]' [(ngModel)]="datoCambio['tipo']"
+                    [ngClass]="{'changed': datoCambio['tipo']!=datoCambioCheck['tipo']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <option value='user'>Usuario</option>    
+                        <option value='emp'>Empresa</option>
+                    </select>
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda" style="width: 50%; display:flex; align-items:center;"></div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;"></div>
         </div>
         <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
             <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Nombre comercial:</span> 
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre comercial:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["nombre_comercial"]' [(ngModel)]="datoCambioEMP['nombre_comercial']"
                     [ngClass]="{'changed': datoCambioEMP['nombre_comercial']!=datoCambioEMPCheck['nombre_comercial']}" style="width: 100%; height: 2rem; background: #ececec;">
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda" style="width: 50%; display:flex; align-items:center;">
-                <span style="font-weight: bold; text-decoration: underline;">Razon social:</span>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["razon_social"]' [(ngModel)]="datoCambioEMP['razon_social']"
                     [ngClass]="{'changed': datoCambioEMP['razon_social']!=datoCambioEMPCheck['razon_social']}" style="width: 100%; height: 2rem; background: #ececec;">
