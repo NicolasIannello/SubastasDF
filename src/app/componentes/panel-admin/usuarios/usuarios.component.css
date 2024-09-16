@@ -54,7 +54,7 @@
     position: absolute;
     z-index: 1;
     top: -60%;
-    left: -190%;
+    left: -30%;
     transition-property: visibility;
     transition-delay: 0s;
     font-family: 'avenir';
@@ -100,4 +100,8 @@
 .changed{
     background-color: var(--amarello) !important;
     color: var(--white) !important;
+}
+
+.borderAbajo{
+    border-bottom: 1px solid rgb(48, 131, 220, 0.2); 
 }
