@@ -98,12 +98,12 @@ export class DatosAccesoComponent{
       switch (this.tipo) {
         case 'emp':
           datos={
-            'nombre_comercial': this.camposEmp[0],
+            'persona_responsable': this.camposEmp[5],
             'cuil_cuit': this.camposEmp[1],
             'telefono': this.camposEmp[2],
             'actividad': this.camposEmp[3],
             'razon_social': this.camposEmp[4],
-            'nombre_apellido': this.camposEmp[5],
+            'nombre': this.camposEmp[0],
             'como_encontro': this.camposEmp[6],
             'mail': this.camposA[0],
             'pass': this.camposA[2],
@@ -117,7 +117,7 @@ export class DatosAccesoComponent{
         break;
         case 'user':
           datos={
-            'nombre_apellido': this.camposUser[0],
+            'nombre': this.camposUser[0],
             'cuil_cuit': this.camposUser[1],
             'telefono': this.camposUser[2],
             'actividad': this.camposUser[3],

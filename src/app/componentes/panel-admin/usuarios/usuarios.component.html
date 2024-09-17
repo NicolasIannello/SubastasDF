@@ -9,10 +9,30 @@
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
     <h2 class="load" *ngIf="Usuarios.length==0 && !error"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
     <h2 *ngIf="error">Error al cargar usuarios</h2>
+    <div class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div class="celda username" style="width: 25%;">Usuario</div>
+        <div class="celda username" style="width: 25%;">E-mail</div>
+        <div class="celda username" style="width: 12%;">Telefono</div>
+        <div class="celda username" style="width: 12%;">CUIL / CUIT</div>
+        <div class="celda" style="border-right: none;">
+            <div class="col-3">
+                <select class="effect-1" [(ngModel)]="ordenar" style="width: 100%; height: 2rem; background: #ececec;">
+                    <option value='' selected hidden>Ordenar</option>    
+                    <option value='true'>Usuario</option>    
+                    <option value='false'>E-mail</option>
+                    <option value='false'>Telefono</option>
+                    <option value='false'>CUIL / CUIT</option>
+                    <option value='false'>Habilitado</option>
+                    <option value='false'>Validado</option>
+                    <option value=''>Default</option>    
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+        </div>
+    </div>
     <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda username" style="width: 25%;">
-            <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>
-            <ng-container *ngIf="u['dato_empresa']; else userBlock">{{u['dato_empresa']['nombre_comercial']}}</ng-container><ng-template #userBlock>{{u['nombre_apellido']}}</ng-template>
+            <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>{{u['nombre']}}
         </div>
         <div class="celda username" style="width: 25%;">{{u['mail']}}</div>
         <div class="celda username" style="width: 12%;">{{u['telefono']}}</div>
@@ -29,8 +49,7 @@
             </i>
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i,u['_id'])"></i>
-            <i *ngIf="u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['dato_empresa']['nombre_comercial'])"></i>
-            <i *ngIf="!u['dato_empresa']" class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre_apellido'])"></i>
+            <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre'])"></i>
         </div>
     </div>
     <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
@@ -50,7 +69,7 @@
         </div>
         <div style="display: flex;">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> {{datoMostrar["nombre_apellido"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> {{datoMostrar["nombre"]}}
             </div>
             <div class="celda" style="width: 50%; border-right: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">CUIL/CUIT:</span> {{datoMostrar["cuil_cuit"]}}
@@ -101,7 +120,6 @@
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span> {{datoMostrar["como_encontro"]}}
             </div>
             <div class="celda borderAbajo" style="width: 50%; border-right: none;">
-                <!-- <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ultima conexion:</span> {{datoMostrar["ultima_conexion"]}} -->
             </div>
         </div>
         <div style="display: flex;">
@@ -112,7 +130,7 @@
         </div>
         <div style="display: flex;" *ngIf="datoMostrar['tipo']=='emp'">
             <div class="celda" style="width: 50%;">
-                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre comercial:</span> {{datoMostrarEMP["nombre_comercial"]}}
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Persona responsable:</span> {{datoMostrarEMP["persona_responsable"]}}
             </div>
             <div class="celda" style="width: 50%;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span> {{datoMostrarEMP["razon_social"]}}
@@ -130,8 +148,8 @@
             <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
-                    <input type="text" class="effect-1" [value]='datoCambio["nombre_apellido"]' [(ngModel)]="datoCambio['nombre_apellido']"
-                    [ngClass]="{'changed': datoCambio['nombre_apellido']!=datoCambioCheck['nombre_apellido']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <input type="text" class="effect-1" [value]='datoCambio["nombre"]' [(ngModel)]="datoCambio['nombre']"
+                    [ngClass]="{'changed': datoCambio['nombre']!=datoCambioCheck['nombre']}" style="width: 100%; height: 2rem; background: #ececec;">
                     <span class="focus-border2"></span>
                 </div>
             </div>
@@ -273,7 +291,6 @@
                 </div>
             </div>
             <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-right: none;">
-                <!-- <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ultima conexion:</span> {{datoCambio["ultima_conexion"]}} -->
             </div>
         </div>
         <div style="display: flex;">
@@ -292,10 +309,10 @@
         </div>
         <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
             <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
-                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre comercial:</span> 
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Persona responsable:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
-                    <input type="text" class="effect-1" [value]='datoCambioEMP["nombre_comercial"]' [(ngModel)]="datoCambioEMP['nombre_comercial']"
-                    [ngClass]="{'changed': datoCambioEMP['nombre_comercial']!=datoCambioEMPCheck['nombre_comercial']}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <input type="text" class="effect-1" [value]='datoCambioEMP["persona_responsable"]' [(ngModel)]="datoCambioEMP['persona_responsable']"
+                    [ngClass]="{'changed': datoCambioEMP['persona_responsable']!=datoCambioEMPCheck['persona_responsable']}" style="width: 100%; height: 2rem; background: #ececec;">
                     <span class="focus-border2"></span>
                 </div>
             </div>

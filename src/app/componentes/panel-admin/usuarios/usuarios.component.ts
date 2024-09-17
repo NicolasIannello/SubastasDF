@@ -37,6 +37,7 @@ export class UsuariosComponent implements OnInit{
   mostrarCrearNormal:boolean=false;
   userAdmin:string="";
   passwordAdmin:string="";
+  ordenar:string="a";
   
   constructor(public api: AdminService){ }
 
@@ -76,7 +77,7 @@ export class UsuariosComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo': 1
     }
-    this.api.cargarUsersDesde(dato,this.pagina*20).subscribe({
+    this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar).subscribe({
       next: (value)=>{
         this.Usuarios = [...value.users];
         this.Total=value.total;
@@ -168,14 +169,14 @@ export class UsuariosComponent implements OnInit{
   actualizar(){
     let datos, tipo='user';
     switch (this.datoCambio['tipo']) {
-      case 'emp':
+      case 'emp':        
         datos={
-          'nombre_comercial': this.datoCambioEMP['nombre_comercial'],
+          'persona_responsable': this.datoCambioEMP['persona_responsable'],
           'cuil_cuit': this.datoCambio['cuil_cuit'],
           'telefono': this.datoCambio['telefono'],
           'actividad': this.datoCambio['actividad'],
           'razon_social': this.datoCambioEMP['razon_social'],
-          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'nombre': this.datoCambio['nombre'],
           'como_encontro': this.datoCambio['como_encontro'],
           'mail': this.datoCambio['mail'],
           'pais': this.datoCambio['pais'],
@@ -190,7 +191,7 @@ export class UsuariosComponent implements OnInit{
       case 'viejo':
         tipo=this.datoCambio['tipo'];
         datos={
-          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'nombre': this.datoCambio['nombre'],
           'cuil_cuit': this.datoCambio['cuil_cuit'],
           'telefono': this.datoCambio['telefono'],
           'actividad': this.datoCambio['actividad'],
@@ -208,7 +209,7 @@ export class UsuariosComponent implements OnInit{
       case 'user': 
         tipo=this.datoCambio['tipo'];
         datos={
-          'nombre_apellido': this.datoCambio['nombre_apellido'],
+          'nombre': this.datoCambio['nombre'],
           'cuil_cuit': this.datoCambio['cuil_cuit'],
           'telefono': this.datoCambio['telefono'],
           'actividad': this.datoCambio['actividad'],
