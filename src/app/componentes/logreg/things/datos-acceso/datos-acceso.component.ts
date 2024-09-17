@@ -136,9 +136,9 @@ export class DatosAccesoComponent{
       this.api.crear(datos).subscribe({
         next(value:any) {
           if (value.ok) {
-            localStorage.setItem('token', value.token)
+            if(window.location.href.includes('login'))localStorage.setItem('token', value.token)
             Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'}).then(()=>{
-              window.location.reload();
+              if(window.location.href.includes('login'))window.location.reload();
             });
           }else{
             Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
