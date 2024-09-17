@@ -27,4 +27,7 @@ export class AdminService {
   actualizarUser(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/actualizarUser', dato, {'headers':this.header})
   }
+  crearAdmin(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/crearAdmin', dato, {'headers':this.header})
+  }
 }

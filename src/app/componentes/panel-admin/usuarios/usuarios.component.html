@@ -3,7 +3,7 @@
         <h1>Usuarios</h1>
         <div>
             <button class="boton boton2 border rounded botones">Imprimir</button>
-            <button class="boton boton2 border rounded botones">Agregar usuario</button>
+            <button class="boton boton2 border rounded botones" (click)="crearUser('tipo')">Agregar usuario</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
@@ -313,6 +313,50 @@
             <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; justify-content: flex-end;">
                 <button class="boton boton2 border rounded botones" (click)="actualizar()">Actualizar</button>
             </div>
+        </div>
+    </div>
+</div>
+<!-- Modal tipo user -->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCrear, '':mostrarCrear }">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="crearUser('tipo')"></i>
+        </div>
+        <div style="display: flex; justify-content: space-evenly;">
+            <button class="boton boton2 border rounded botones" style="width: 20rem;" (click)="crearUser('admin')">Crear usuario Admin</button>
+            <button class="boton boton2 border rounded botones" style="width: 20rem;" (click)="crearUser('normal')">Crear usuario Empresa / Persona</button>
+        </div>
+    </div>
+</div>
+<!-- Modal crear normal-->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCrearNormal, '':mostrarCrearNormal }" style="overflow: auto;">
+    <div class="modal-content" style="padding: 0%; margin: 7% auto;">
+        <div style="display: flex; justify-content: flex-end; font-size: xxx-large; margin-right: 5rem;">
+            <i class="fa-solid fa-xmark icerrar" (click)="crearUser('normal')"></i>
+        </div>
+        <app-logreg></app-logreg>
+    </div>
+</div>
+<!-- Modal tipo admin -->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCrearAdmin, '':mostrarCrearAdmin }">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="crearUser('admin')"></i>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="col-3" style="margin-bottom: 2%; width: 30%;">
+                <label for="user">Usuario </label>
+                <input type="text" class="effect-1" [(ngModel)]="userAdmin" style="width: 100%; height: 2rem; background: #ececec;">
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="margin-bottom: 2%;  width: 30%">
+                <label for="user">Contraseña</label>
+                <input type="text" class="effect-1" [(ngModel)]="passwordAdmin" style="width: 100%; height: 2rem; background: #ececec;">
+                <span class="focus-border2"></span>
+            </div>
+        </div>
+        <div style="width: 100%; display:flex; align-items:center; border-right: none; justify-content: center;">
+            <button class="boton boton2 border rounded botones" (click)="crearAdmin()">Crear</button>
         </div>
     </div>
 </div>

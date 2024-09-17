@@ -5,11 +5,12 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { Countries } from '../../logreg/datos-user/paises';
 import { countries } from '../../logreg/datos-user/paises-data';
+import { LogregComponent } from "../../logreg/logreg.component";
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LogregComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
@@ -31,6 +32,11 @@ export class UsuariosComponent implements OnInit{
   paisI:number=1;
   flagH:boolean=false;
   idCambio:string="";
+  mostrarCrear:boolean=false;
+  mostrarCrearAdmin:boolean=false;
+  mostrarCrearNormal:boolean=false;
+  userAdmin:string="";
+  passwordAdmin:string="";
   
   constructor(public api: AdminService){ }
 
@@ -119,6 +125,16 @@ export class UsuariosComponent implements OnInit{
     }else{
       this.datoMostrar={}; this.datoMostrarEMP={};
     }
+  }
+
+  crearUser(tipo:string){
+    if(tipo=='tipo') {
+      this.mostrarCrear=!this.mostrarCrear;
+    }else{
+      this.mostrarCrear=false;
+    }
+    if(tipo=='normal') this.mostrarCrearNormal=!this.mostrarCrearNormal;
+    if(tipo=='admin') this.mostrarCrearAdmin=!this.mostrarCrearAdmin;
   }
 
   verCambio(i:number,id:string){
@@ -226,5 +242,24 @@ export class UsuariosComponent implements OnInit{
       },		
     });
 
+  }
+
+  crearAdmin(){
+    let dato={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'usuario':this.userAdmin,
+      'pass':this.passwordAdmin,
+    }
+
+    this.api.crearAdmin(dato).subscribe({
+      next: (value)=> {
+          if(value.ok) Swal.fire({title:'Usuario admin creado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(!value.ok) Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+      error: (err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+      },
+    })
   }
 }
