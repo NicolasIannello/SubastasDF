@@ -37,7 +37,8 @@ export class UsuariosComponent implements OnInit{
   mostrarCrearNormal:boolean=false;
   userAdmin:string="";
   passwordAdmin:string="";
-  ordenar:string="a";
+  ordenar:string="_id";
+  orden:string="1";
   
   constructor(public api: AdminService){ }
 
@@ -77,7 +78,7 @@ export class UsuariosComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo': 1
     }
-    this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar).subscribe({
+    this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar,this.orden).subscribe({
       next: (value)=>{
         this.Usuarios = [...value.users];
         this.Total=value.total;

@@ -18,8 +18,8 @@ export class AdminService {
   cargarUsers(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/users', dato, {'headers':this.header})
   }
-  cargarUsersDesde(dato:any, url:number):Observable<any>{
-    return this.http.post(base_url+'/admin/users?desde='+url, dato, {'headers':this.header})
+  cargarUsersDesde(dato:any, url:number,order:string,orden:string):Observable<any>{
+    return this.http.post(base_url+'/admin/users?desde='+url+'&order='+order+'&orden='+orden, dato, {'headers':this.header})
   }
   deleteUsers(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/deleteUser', dato, {'headers':this.header})

@@ -14,17 +14,24 @@
         <div class="celda username" style="width: 25%;">E-mail</div>
         <div class="celda username" style="width: 12%;">Telefono</div>
         <div class="celda username" style="width: 12%;">CUIL / CUIT</div>
-        <div class="celda" style="border-right: none;">
-            <div class="col-3">
-                <select class="effect-1" [(ngModel)]="ordenar" style="width: 100%; height: 2rem; background: #ececec;">
-                    <option value='' selected hidden>Ordenar</option>    
-                    <option value='true'>Usuario</option>    
-                    <option value='false'>E-mail</option>
-                    <option value='false'>Telefono</option>
-                    <option value='false'>CUIL / CUIT</option>
-                    <option value='false'>Habilitado</option>
-                    <option value='false'>Validado</option>
-                    <option value=''>Default</option>    
+        <div class="celda" style="border-right: none; display: flex;">
+            <div class="col-3" style="width: 60%;">
+                <select class="effect-1" [(ngModel)]="ordenar" (change)="recargar()" style="width: 100%; height: 2rem;">
+                    <option value='_id' selected hidden>Ordenar</option>    
+                    <option value='nombre'>Usuario</option>    
+                    <option value='mail'>E-mail</option>
+                    <option value='telefono'>Telefono</option>
+                    <option value='cuil_cuit'>CUIL / CUIT</option>
+                    <option value='habilitado'>Habilitado</option>
+                    <option value='validado'>Validado</option>
+                    <option value='_id'>Default</option>    
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="width: 40%;">
+                <select class="effect-1" [(ngModel)]="orden" (change)="recargar()" style="width: 100%; height: 2rem;">
+                    <option value='1' selected>Asc.</option>    
+                    <option value='-1'>Desc.</option>  
                 </select>
                 <span class="focus-border2"></span>
             </div>
