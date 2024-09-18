@@ -8,7 +8,7 @@ import { ServiciosService } from '../../../servicios/servicios.service';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: '../../logreg/datos-emp/datos-emp.component.css'
+  styleUrl: '../../logreg/datos-acceso/datos-acceso.component.css'
 })
 export class LoginComponent implements OnInit{
   alertas:Array<string>=['',''];

@@ -86,6 +86,7 @@
 .modal-content {
     background-color: #fefefe;
     margin: 7% auto;
+    margin-top: 7rem;
     padding: 1%;
     border: 1px solid var(--amarello);
     width: 80%;
@@ -105,4 +106,10 @@
 
 .borderAbajo{
     border-bottom: 1px solid rgb(48, 131, 220, 0.2); 
+}
+.marginCerrar{
+    margin-right: 5rem;
+    @media (max-width: 1000px) {
+         margin-right: 2rem;
+    }
 }
