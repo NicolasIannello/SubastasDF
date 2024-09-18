@@ -1,8 +1,7 @@
-
 .cuadro{
     font-size: large;
     text-align: center;
-    width: 20%;
+    width: 15rem;
     align-content: center;
     height: 2rem;
     background-color: var(--white);

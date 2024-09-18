@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './datos-emp.component.html',
-  styleUrl: './datos-emp.component.css'
+  styleUrl: '../datos-acceso/datos-acceso.component.css'
 })
 export class DatosEmpComponent implements OnInit{
   camposEmp:Array<string>=['','','','','','','Google'];

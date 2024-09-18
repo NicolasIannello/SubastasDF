@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatosUserComponent } from "./datos-user/datos-user.component";
 import { CommonModule } from '@angular/common';
-import { DatosAccesoComponent } from "./things/datos-acceso/datos-acceso.component";
+import { DatosAccesoComponent } from "./datos-acceso/datos-acceso.component";
 
 @Component({
   selector: 'app-logreg',
