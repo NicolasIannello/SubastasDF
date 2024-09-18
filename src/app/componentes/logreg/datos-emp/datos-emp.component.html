@@ -1,5 +1,5 @@
 <h1>Informacion de la Empresa</h1>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="linea">
     <div class="col-3" style="margin-right: 2%;">
         <label for="nomapel">Nombre Comercial </label><span class="msg">{{alertasEmp[0]}}</span>
         <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="Nombre Comercial" [(ngModel)]="camposEmp[0]">
@@ -11,7 +11,7 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="linea">
     <div class="col-3" style="margin-right: 2%;">
         <label for="cuitcuil">CUIL / CUIT </label> <!-- <span class="msg" style="color: black;">(sin guiones ni espacios) </span>--><span class="msg">{{alertasEmp[1]}}</span>
         <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="CUIL / CUIT" [(ngModel)]="camposEmp[1]">
@@ -23,7 +23,7 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="linea">
     <div class="col-3" style="margin-right: 2%;">
         <label for="cel">Celular </label><span class="msg">{{alertasEmp[2]}}</span>
         <input (change)="sendDatosEmp()" class="effect-1" type="text" placeholder="Celular" [(ngModel)]="camposEmp[2]">
@@ -59,7 +59,7 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%; margin-right: 2%;">
+<div class="linea" style="margin-right: 2%;">
     <div class="col-3">
         <label for="como">¿Como nos encontro? </label>
         <select (change)="sendDatosEmp()" class="effect-1" [(ngModel)]="camposEmp[6]">

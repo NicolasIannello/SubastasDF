@@ -3,8 +3,8 @@ import { AdminService } from '../../../servicios/admin.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { Countries } from '../../logreg/datos-user/paises';
-import { countries } from '../../logreg/datos-user/paises-data';
+import { Countries } from '../../logreg/paises';
+import { countries } from '../../logreg/paises-data';
 import { LogregComponent } from "../../logreg/logreg.component";
 import { ExcelService } from '../../../servicios/excel.service';
 

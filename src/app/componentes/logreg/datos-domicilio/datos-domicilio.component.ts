@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Countries } from '../datos-user/paises';
-import { countries } from '../datos-user/paises-data';
+import { Countries } from '../paises';
+import { countries } from '../paises-data';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

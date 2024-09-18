@@ -11,7 +11,7 @@
     <app-datos-emp *ngIf="tipo=='emp'" (messageEvent)="handleMessage($event,'emp')" [alertasEmp]="alertasEmp"></app-datos-emp>
     <app-datos-user *ngIf="tipo=='user'" (messageEvent)="handleMessage($event,'user')" [alertasUser]="alertasUser"></app-datos-user>
     <h1>Datos de acceso</h1>
-    <div style="display: flex;">
+    <div class="acceso">
         <div class="mitad" style="display: flex; flex-direction: column; margin-right: 1%;">
             <div class="col-3" style="margin-bottom: 2%;">
                 <label for="mail">E-mail </label><span class="msg">{{alertasA[0]}}</span>

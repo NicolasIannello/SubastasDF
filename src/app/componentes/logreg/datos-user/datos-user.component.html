@@ -1,5 +1,5 @@
 <h1>Datos Personales</h1>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="linea">
     <div class="col-3" style="margin-right: 2%;">
         <label for="nomapel">Nombre y apellido </label><span class="msg">{{alertasUser[0]}}</span>
         <input (change)="sendDatosUser()" class="effect-1" type="text" placeholder="Nombre y apellido" [(ngModel)]="camposUser[0]">
@@ -11,7 +11,7 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="linea">
     <div class="col-3" style="margin-right: 2%;">
         <label for="cel">Celular </label><span class="msg">{{alertasUser[2]}}</span>
         <input (change)="sendDatosUser()" class="effect-1" type="text" placeholder="Celular" [(ngModel)]="camposUser[2]">
@@ -47,7 +47,7 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%; margin-right: 2%;">
+<div class="linea" style="margin-right: 2%;">
     <div class="col-3">
         <label for="como">¿Como nos encontro? </label>
         <select (change)="sendDatosUser()" class="effect-1" [(ngModel)]="camposUser[4]">

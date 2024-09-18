@@ -4,8 +4,23 @@ button{
     text-align: center;
     width: 15rem;
     align-content: center;
+    @media (max-width: 700px){
+        width: 50%;
+    }
+    @media (max-width: 510px){
+        font-size: medium;
+    }
+    @media (max-width: 420px){
+        font-size: small;
+    }
 }
 i{
     font-size: x-large;
-    margin-right: 1rem;
+    margin-right: 2%;
+    @media (max-width: 510px){
+        font-size: medium;
+    }
+    @media (max-width: 420px){
+        font-size: small;
+    }
 }

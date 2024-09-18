@@ -118,6 +118,11 @@ i{
         margin: 3rem;
         font-size: xx-large;
         font-weight: bold;
+        @media (max-width: 380px){
+            margin-right: 1rem;
+            margin-left: 1rem;
+            font-size: x-large;
+        }
     }
 }
 .menu2{

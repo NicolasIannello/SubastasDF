@@ -88,6 +88,10 @@ a{
 .margin5{
     margin: 5rem;
     padding: 1rem;
+    @media (max-width: 1000px){
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
 }
 :focus{outline: none;}
 .col-3{ position: relative;}
