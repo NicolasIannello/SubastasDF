@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './datos-domicilio.component.html',
-  styleUrl: './datos-domicilio.component.css'
+  styleUrl: '../datos-acceso/datos-acceso.component.css'
 })
 export class DatosDomicilioComponent {
   Paises:Countries[]=countries;

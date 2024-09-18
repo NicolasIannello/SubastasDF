@@ -1,5 +1,5 @@
 <h1>Domicilio</h1>
-<div style="display: flex; margin-bottom: 2%;">
+<div class="acceso"  style="margin-bottom: 2%;">
     <div class="col-3" style="margin-right: 2%;">
         <label for="pais">Pais </label><span class="msg">{{alertasDom[0]}}</span>
         <select (change)="sendDatosDom()" class="effect-1" [(ngModel)]="campos[0]">
@@ -21,13 +21,13 @@
         <span class="focus-border"></span>
     </div>
 </div>
-<div style="display: flex; margin-bottom: 2%;" *ngIf="campos[1]!=1000">
+<div class="acceso"  style="margin-bottom: 2%;" *ngIf="campos[1]!=1000">
     <div class="col-3" style="margin-right: 2%;">
         <label>Ciudad </label><br><span class="msg">{{alertasDom[2]}}</span>
         <input (change)="sendDatosDom()" class="effect-1" type="text" placeholder="Ej: Rosario" [(ngModel)]="campos[2]">
         <span class="focus-border"></span>
     </div>
-    <div class="col-3" style="margin-right: 2%; width: 20%;">
+    <div class="col-3" style="margin-right: 2%; width: 10rem;">
         <label>Codigo postal </label><br><span class="msg">{{alertasDom[3]}}</span>
         <input (change)="sendDatosDom()" class="effect-1" type="text" placeholder="Ej: 2000" [(ngModel)]="campos[3]">
         <span class="focus-border"></span>
