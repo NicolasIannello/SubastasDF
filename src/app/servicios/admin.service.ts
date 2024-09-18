@@ -30,4 +30,7 @@ export class AdminService {
   crearAdmin(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/crearAdmin', dato, {'headers':this.header})
   }
+  buscarDato(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/buscarDato', dato, {'headers':this.header})
+  }
 }

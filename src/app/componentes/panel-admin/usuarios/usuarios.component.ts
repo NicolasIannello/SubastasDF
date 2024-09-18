@@ -39,6 +39,8 @@ export class UsuariosComponent implements OnInit{
   passwordAdmin:string="";
   ordenar:string="_id";
   orden:string="1";
+  datoBuscar:string="";
+  tipoBuscar:string="nombre";
   
   constructor(public api: AdminService){ }
 
@@ -260,6 +262,33 @@ export class UsuariosComponent implements OnInit{
           if(!value.ok) Swal.fire({title:value.msg, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       },
       error: (err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+      },
+    })
+  }
+
+  buscarDato(){
+    let dato={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'dato':this.datoBuscar,
+      'datoTipo':this.tipoBuscar,
+    }
+
+    this.api.buscarDato(dato).subscribe({
+      next:(value)=> {
+          console.log(value);          
+          if(value.ok){
+            if(value.busqueda.length>0) {
+              this.Usuarios=value.busqueda
+            }else{
+              Swal.fire({title:'No se encontro ningun resultado', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+            }
+          }else{
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+          }
+      },
+      error:(err)=> {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
       },
     })
