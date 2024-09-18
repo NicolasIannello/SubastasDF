@@ -319,6 +319,24 @@
             </div>
         </div>
         <div style="display: flex;">
+            <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Contraseña:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [(ngModel)]="passwordCambio"
+                    [ngClass]="{'changed': passwordCambio!=''}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Repita contraseña:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <input type="text" class="effect-1" [(ngModel)]="passwordCambio2"
+                    [ngClass]="{'changed': passwordCambio2!=''}" style="width: 100%; height: 2rem; background: #ececec;">
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
             <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Tipo de usuario:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -372,8 +390,8 @@
 </div>
 <!-- Modal crear normal-->
 <div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarCrearNormal, '':mostrarCrearNormal }" style="overflow: auto;">
-    <div class="modal-content" style="padding: 0%; margin: 7% auto;">
-        <div style="display: flex; justify-content: flex-end; font-size: xxx-large; margin-right: 5rem;">
+    <div class="modal-content">
+        <div class="marginCerrar" style="display: flex; justify-content: flex-end; font-size: xxx-large;">
             <i class="fa-solid fa-xmark icerrar" (click)="crearUser('normal')"></i>
         </div>
         <app-logreg></app-logreg>

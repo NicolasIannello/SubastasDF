@@ -43,6 +43,8 @@ export class UsuariosComponent implements OnInit{
   datoBuscar:string="";
   tipoBuscar:string="nombre";
   mostrarReporte:boolean=false;
+  passwordCambio:string="";
+  passwordCambio2:string="";
   
   constructor(public api: AdminService, public excel: ExcelService){ }
 
@@ -172,6 +174,11 @@ export class UsuariosComponent implements OnInit{
   }
 
   actualizar(){
+    if(this.passwordCambio!=this.passwordCambio2){
+      Swal.fire({title:'Las contraseñas no coinciden', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      return;
+    }
+
     let datos, tipo='user';
     switch (this.datoCambio['tipo']) {
       case 'emp':        
@@ -235,7 +242,8 @@ export class UsuariosComponent implements OnInit{
       'token':localStorage.getItem('token'),
       "campos":datos,
       'tipo':1,
-      'id':this.idCambio
+      'id':this.idCambio,
+      'nuevaPass':this.passwordCambio
     }
     this.api.actualizarUser(dato).subscribe({
       next: (value:any) => {
