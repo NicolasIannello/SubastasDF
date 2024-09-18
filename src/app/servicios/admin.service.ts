@@ -33,4 +33,7 @@ export class AdminService {
   buscarDato(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/buscarDato', dato, {'headers':this.header})
   }
+  excelUsuarios(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/excelUsuario', dato, {'headers':this.header})
+  }
 }

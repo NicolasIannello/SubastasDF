@@ -2,7 +2,7 @@
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
         <h1>Usuarios</h1>
         <div>
-            <button class="boton boton2 border rounded botones">Imprimir</button>
+            <button class="boton boton2 border rounded botones" (click)="reporte()">Generar reporte</button>
             <button class="boton boton2 border rounded botones" (click)="crearUser('tipo')">Agregar usuario</button>
         </div>
     </div>
@@ -399,6 +399,18 @@
         </div>
         <div style="width: 100%; display:flex; align-items:center; border-right: none; justify-content: center;">
             <button class="boton boton2 border rounded botones" (click)="crearAdmin()">Crear</button>
+        </div>
+    </div>
+</div>
+<!-- Modal reportes -->
+<div id="myModal" class="modal" [ngClass]="{'oculto':!mostrarReporte, '':mostrarReporte }">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="reporte()"></i>
+        </div>
+        <div style="display: flex; justify-content: space-evenly;">
+            <button class="boton boton2 border rounded botones" style="width: 20rem;" (click)="generarExcel(true)">Reporte habilitados</button>
+            <button class="boton boton2 border rounded botones" style="width: 20rem;" (click)="generarExcel(false)">Reporte NO habilitados</button>
         </div>
     </div>
 </div>

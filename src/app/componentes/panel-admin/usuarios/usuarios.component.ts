@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Countries } from '../../logreg/datos-user/paises';
 import { countries } from '../../logreg/datos-user/paises-data';
 import { LogregComponent } from "../../logreg/logreg.component";
+import { ExcelService } from '../../../servicios/excel.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -41,8 +42,9 @@ export class UsuariosComponent implements OnInit{
   orden:string="1";
   datoBuscar:string="";
   tipoBuscar:string="nombre";
+  mostrarReporte:boolean=false;
   
-  constructor(public api: AdminService){ }
+  constructor(public api: AdminService, public excel: ExcelService){ }
 
   ngOnInit(): void {
     let dato={
@@ -284,6 +286,37 @@ export class UsuariosComponent implements OnInit{
             }else{
               Swal.fire({title:'No se encontro ningun resultado', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
             }
+          }else{
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+          }
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+      },
+    })
+  }
+
+  reporte(){
+    this.mostrarReporte=!this.mostrarReporte
+  }
+
+  generarExcel(flag:boolean){
+    let dato={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'estado':flag,
+    }
+
+    this.api.excelUsuarios(dato).subscribe({
+      next:(value)=> {
+          if(value.ok){
+            let hoy=new Date();
+            let mes = hoy.getMonth()>9 ? (hoy.getMonth()+1) : "0"+(hoy.getMonth()+1);
+            let dia = hoy.getDate()>9 ? hoy.getDate() : "0"+hoy.getDate()
+            let fecha = dia+"-"+mes+"-"+hoy.getFullYear();
+            let est = flag ? 'habilitados' : 'deshabilitados';
+
+            this.excel.generateExcel(value.busqueda, "Usuarios "+est+" "+fecha);
           }else{
             Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
           }
