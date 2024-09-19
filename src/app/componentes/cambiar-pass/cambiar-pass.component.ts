@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './cambiar-pass.component.html',
-  styleUrl: '../logreg/datos-emp/datos-emp.component.css'
+  styleUrl: '../logreg/datos-acceso/datos-acceso.component.css'
 })
 export class CambiarPassComponent{
   verificado:boolean|null=null;
