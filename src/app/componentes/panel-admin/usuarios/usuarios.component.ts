@@ -42,9 +42,11 @@ export class UsuariosComponent implements OnInit{
   orden:string="1";
   datoBuscar:string="";
   tipoBuscar:string="nombre";
+  tipoBuscarUser:string="";
   mostrarReporte:boolean=false;
   passwordCambio:string="";
   passwordCambio2:string="";
+  tabla:boolean=true;
   
   constructor(public api: AdminService, public excel: ExcelService){ }
 
@@ -84,19 +86,30 @@ export class UsuariosComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo': 1
     }
-    this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar,this.orden).subscribe({
-      next: (value)=>{
-        this.Usuarios = [...value.users];
-        this.Total=value.total;
-        this.pagU=Math.ceil(this.Total/20)
-      },
-      error: (err)=>{
-        this.error=true;
-      }
-    })
+    if(this.tabla){
+      this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar,this.orden).subscribe({
+        next: (value)=>{
+          this.Usuarios = [...value.users];
+          this.Total=value.total;
+          this.pagU=Math.ceil(this.Total/20)
+        },
+        error: (err)=>{
+          this.error=true;
+        }
+      })
+    }else{
+      this.api.cargarAdmins(dato).subscribe({
+        next:(value)=> {
+            this.Usuarios=value.admins
+        },
+        error:(err)=> {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});            
+        },
+      })
+    }
   }
 
-  eliminar(id:string,nom:string){
+  eliminar(id:string,nom:string,tipo:string){
     Swal.fire({
       title: "Esta por borrar una cuenta",
       text: "¿Desea borrar la cuenta "+nom+" ?",
@@ -109,7 +122,8 @@ export class UsuariosComponent implements OnInit{
         let dato={
           "id":id,
           "token":localStorage.getItem('token'),
-          "tipo":1
+          "tipo":1,
+          "user":tipo
         }
         this.api.deleteUsers(dato).subscribe({
           next:(value)=> {
@@ -283,6 +297,7 @@ export class UsuariosComponent implements OnInit{
       'tipo':1,
       'dato':this.datoBuscar,
       'datoTipo':this.tipoBuscar,
+      'datoTipoUser':this.tipoBuscarUser,
     }
 
     this.api.buscarDato(dato).subscribe({
@@ -333,5 +348,10 @@ export class UsuariosComponent implements OnInit{
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
       },
     })
+  }
+
+  cambiarTabla(flag:boolean){
+    this.tabla=flag;
+    this.recargar();
   }
 }

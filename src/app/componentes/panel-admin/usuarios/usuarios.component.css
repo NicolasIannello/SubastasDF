@@ -113,3 +113,13 @@
          margin-right: 2rem;
     }
 }
+.h1btn{
+    &:hover{
+        color: var(--amarello);
+        cursor: pointer;
+    }
+}
+.h1btn2{
+    color: var(--amarello);
+    text-decoration: underline;
+}

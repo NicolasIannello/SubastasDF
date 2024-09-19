@@ -1,89 +1,116 @@
 <div class="borderAzul margin5 rounded" style="display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
-        <h1>Usuarios</h1>
+        <div style="display: flex;">
+            <h1 [ngClass]="{'h1btn2' : tabla, 'h1btn' : !tabla}" (click)="cambiarTabla(true)">Usuarios</h1>
+            <h1 style="margin-left: 3%; margin-right: 3%;">/</h1>
+            <h1 [ngClass]="{'h1btn' : tabla, 'h1btn2' : !tabla}" (click)="cambiarTabla(false)">Admins</h1>
+        </div>
         <div>
             <button class="boton boton2 border rounded botones" (click)="reporte()">Generar reporte</button>
             <button class="boton boton2 border rounded botones" (click)="crearUser('tipo')">Agregar usuario</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
-    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
-        <div class="celda" style="border-right: none; display: flex; width: 100%;">
-            <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
-                <input type="text" class="effect-1" [(ngModel)]="datoBuscar" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
-                <span class="focus-border2"></span>
+    <div *ngIf="tabla" style="width: 100%;">
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
+            <div class="celda" style="border-right: none; display: flex; width: 100%;">
+                <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
+                    <input type="text" class="effect-1" [(ngModel)]="datoBuscar" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
+                    <span class="focus-border2"></span>
+                </div>
+                <div class="col-3" style="width: 7rem;">
+                    <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
+                        <option value='nombre' selected>Usuario</option>    
+                        <option value='mail'>E-mail</option>
+                        <option value='telefono'>Telefono</option>
+                        <option value='cuil_cuit'>CUIL / CUIT</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+                <div class="col-3" style="width: 7rem;">
+                    <select class="effect-1" [(ngModel)]="tipoBuscarUser" style="width: 100%; height: 2rem;">
+                        <option value='' selected>Todos</option>    
+                        <option value='user'>Persona</option>
+                        <option value='emp'>Empresa</option>
+                        <option value='viejo'>Sin definir</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar</button>
             </div>
-            <div class="col-3" style="width: 7rem;">
-                <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
-                    <option value='nombre' selected>Usuario</option>    
-                    <option value='mail'>E-mail</option>
-                    <option value='telefono'>Telefono</option>
-                    <option value='cuil_cuit'>CUIL / CUIT</option>
-                </select>
-                <span class="focus-border2"></span>
+        </div>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda username" style="width: 25%;">Usuario</div>
+            <div class="celda username" style="width: 25%;">E-mail</div>
+            <div class="celda username" style="width: 12%;">Telefono</div>
+            <div class="celda username" style="width: 12%;">CUIL / CUIT</div>
+            <div class="celda" style="border-right: none; display: flex;">
+                <div class="col-3" style="width: 60%;">
+                    <select class="effect-1" [(ngModel)]="ordenar" (change)="recargar()" style="width: 100%; height: 2rem;">
+                        <option value='_id' selected hidden>Ordenar</option>    
+                        <option value='nombre'>Usuario</option>    
+                        <option value='mail'>E-mail</option>
+                        <option value='telefono'>Telefono</option>
+                        <option value='cuil_cuit'>CUIL / CUIT</option>
+                        <option value='habilitado'>Habilitado</option>
+                        <option value='validado'>Validado</option>
+                        <option value='_id'>Default</option>    
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+                <div class="col-3" style="width: 40%;">
+                    <select class="effect-1" [(ngModel)]="orden" (change)="recargar()" style="width: 100%; height: 2rem;">
+                        <option value='1' selected>Asc.</option>    
+                        <option value='-1'>Desc.</option>  
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
             </div>
-            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar</button>
+        </div>
+        <h2 class="load" *ngIf="Usuarios.length==0 && !error"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+        <h2 *ngIf="error">Error al cargar usuarios</h2>
+        <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda username" style="width: 25%;">
+                <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>{{u['nombre']}}
+            </div>
+            <div class="celda username" style="width: 25%;">{{u['mail']}}</div>
+            <div class="celda username" style="width: 12%;">{{u['telefono']}}</div>
+            <div class="celda username" style="width: 12%;">{{u['cuil_cuit']}}</div>
+            <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
+                <i class="fa-solid fa-clock ibtn tooltip">
+                    <span class="tooltiptext glassTrue rounded border">{{u['ultima_conexion']=='' ? 'No hay ultima conexion' : u['ultima_conexion']}}</span>
+                </i>
+                <i class="fa-solid fa-user ibtn tooltip" [ngClass]="{'verde':u['habilitado'], 'rojo':!u['habilitado'] }">
+                    <span class="tooltiptext glassTrue rounded border">{{u['habilitado'] ? 'Habilitado' : 'Deshabilitado'}}</span>
+                </i>
+                <i class="fa-solid fa-at ibtn tooltip" [ngClass]="{'verde':u['validado'], 'rojo':!u['validado'] }">
+                    <span class="tooltiptext glassTrue rounded border">{{u['validado'] ? 'Validado' : 'Invalidado'}}</span>
+                </i>
+                <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
+                <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i,u['_id'])"></i>
+                <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre'],'user')"></i>
+            </div>
+        </div>
+        <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
+            Pagina {{pagina+1}} de {{pagU}}
+            <div style="margin-right: 2%; margin-left: 2%;">
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+            </div>
+            Usuarios totales: {{Total}}
         </div>
     </div>
-    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
-        <div class="celda username" style="width: 25%;">Usuario</div>
-        <div class="celda username" style="width: 25%;">E-mail</div>
-        <div class="celda username" style="width: 12%;">Telefono</div>
-        <div class="celda username" style="width: 12%;">CUIL / CUIT</div>
-        <div class="celda" style="border-right: none; display: flex;">
-            <div class="col-3" style="width: 60%;">
-                <select class="effect-1" [(ngModel)]="ordenar" (change)="recargar()" style="width: 100%; height: 2rem;">
-                    <option value='_id' selected hidden>Ordenar</option>    
-                    <option value='nombre'>Usuario</option>    
-                    <option value='mail'>E-mail</option>
-                    <option value='telefono'>Telefono</option>
-                    <option value='cuil_cuit'>CUIL / CUIT</option>
-                    <option value='habilitado'>Habilitado</option>
-                    <option value='validado'>Validado</option>
-                    <option value='_id'>Default</option>    
-                </select>
-                <span class="focus-border2"></span>
-            </div>
-            <div class="col-3" style="width: 40%;">
-                <select class="effect-1" [(ngModel)]="orden" (change)="recargar()" style="width: 100%; height: 2rem;">
-                    <option value='1' selected>Asc.</option>    
-                    <option value='-1'>Desc.</option>  
-                </select>
-                <span class="focus-border2"></span>
+    <div *ngIf="!tabla" style="width: 100%;">
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda username" style="width: 75%;">Usuario</div>
+            <div class="celda username" style="width: 25%; border-right: none;"></div>
+        </div>
+        <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda username" style="width: 75%;">{{u['usuario']}}</div>
+            <div class="celda" style="width: 25%; border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
+                <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['usuario'],'admin')"></i>
             </div>
         </div>
-    </div>
-    <h2 class="load" *ngIf="Usuarios.length==0 && !error"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
-    <h2 *ngIf="error">Error al cargar usuarios</h2>
-    <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-        <div class="celda username" style="width: 25%;">
-            <i [ngClass]="{'fa-user' : u['tipo']=='user', 'fa-building-user' : u['tipo']=='emp', 'fa-gears' : u['tipo']=='viejo'}" class="fa-solid "></i>{{u['nombre']}}
-        </div>
-        <div class="celda username" style="width: 25%;">{{u['mail']}}</div>
-        <div class="celda username" style="width: 12%;">{{u['telefono']}}</div>
-        <div class="celda username" style="width: 12%;">{{u['cuil_cuit']}}</div>
-        <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
-            <i class="fa-solid fa-clock ibtn tooltip">
-                <span class="tooltiptext glassTrue rounded border">{{u['ultima_conexion']=='' ? 'No hay ultima conexion' : u['ultima_conexion']}}</span>
-            </i>
-            <i class="fa-solid fa-user ibtn tooltip" [ngClass]="{'verde':u['habilitado'], 'rojo':!u['habilitado'] }">
-                <span class="tooltiptext glassTrue rounded border">{{u['habilitado'] ? 'Habilitado' : 'Deshabilitado'}}</span>
-            </i>
-            <i class="fa-solid fa-at ibtn tooltip" [ngClass]="{'verde':u['validado'], 'rojo':!u['validado'] }">
-                <span class="tooltiptext glassTrue rounded border">{{u['validado'] ? 'Validado' : 'Invalidado'}}</span>
-            </i>
-            <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="ver(i)"></i>
-            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verCambio(i,u['_id'])"></i>
-            <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['nombre'])"></i>
-        </div>
-    </div>
-    <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
-        Pagina {{pagina+1}} de {{pagU}}
-        <div style="margin-right: 2%; margin-left: 2%;">
-            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
-            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
-        </div>
-        Usuarios totales: {{Total}}
     </div>
 </div>
 <!-- Modal ver -->
@@ -284,7 +311,7 @@
                         <option value="SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS">SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS</option>
                         <option value="SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO">SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO</option>
                         <option value="SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO">SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO</option>
-                        <option value="120">OTRA</option>
+                        <option value="OTRA">OTRA</option>
                     </select>
                     <span class="focus-border2"></span>
                 </div>
