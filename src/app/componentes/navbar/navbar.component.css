@@ -170,14 +170,15 @@ i{
 }
 .iuser{
     display: flex;
-    margin-right: 2rem;
-    margin-left: 2rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
     align-items: center;
     font-size: large;
 }
 .ingresar{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .creartitle{
     display: flex;
