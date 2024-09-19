@@ -36,4 +36,7 @@ export class AdminService {
   excelUsuarios(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/excelUsuario', dato, {'headers':this.header})
   }
+  cargarAdmins(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/admins', dato, {'headers':this.header})
+  }
 }
