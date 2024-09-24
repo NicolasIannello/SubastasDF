@@ -39,4 +39,7 @@ export class AdminService {
   cargarAdmins(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/admins', dato, {'headers':this.header})
   }
+  actualizarWeb(dato:any):Observable<any>{
+    return this.http.post(base_url+'/web/actualizarWeb', dato, {'headers':this.header})
+  }
 }
