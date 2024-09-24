@@ -95,7 +95,7 @@ a{
 }
 :focus{outline: none;}
 .col-3{ position: relative;}
-input{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
+input, textarea{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
 select{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
 .effect-1{border: 0; background: var(--white); z-index: 0;}
 .effect-1 ~ .focus-border{position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--amarello); transition: 0.4s;}
@@ -148,4 +148,11 @@ button{
     to {
         transform:rotate(360deg);
     }
+}
+.colorBlue{
+    color: var(--amarello) !important;
+}
+.changed{
+    background-color: var(--amarello) !important;
+    color: var(--white) !important;
 }

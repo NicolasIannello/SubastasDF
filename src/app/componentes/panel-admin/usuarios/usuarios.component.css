@@ -99,10 +99,6 @@
         color: var(--blue);
     }
 }
-.changed{
-    background-color: var(--amarello) !important;
-    color: var(--white) !important;
-}
 
 .borderAbajo{
     border-bottom: 1px solid rgb(48, 131, 220, 0.2); 
