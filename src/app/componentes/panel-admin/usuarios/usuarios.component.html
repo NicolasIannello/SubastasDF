@@ -94,8 +94,10 @@
         <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
             Pagina {{pagina+1}} de {{pagU}}
             <div style="margin-right: 2%; margin-left: 2%;">
-                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
-                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="principio()">Principio</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="atras()">Atras</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
             </div>
             Usuarios totales: {{Total}}
         </div>
@@ -172,6 +174,7 @@
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span> {{datoMostrar["como_encontro"]}}
             </div>
             <div class="celda borderAbajo" style="width: 50%; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Grupo:</span> {{datoMostrar["grupo"]}}
             </div>
         </div>
         <div style="display: flex;">
@@ -343,6 +346,17 @@
                 </div>
             </div>
             <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                <span style="font-weight: bold; text-decoration: underline; width: 35%;">Grupo:</span>
+                <div class="col-3" style="width: 60%; margin-left: 2%;">
+                    <select class="effect-1" [value]='datoCambio["grupo"]' [(ngModel)]="datoCambio['grupo']"
+                    [ngClass]="{'changed': datoCambio['grupo']!=datoCambioCheck['grupo']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <option value='general'>General</option>    
+                        <option value='chocado'>Chocado</option>
+                        <option value='desarmadero'>Desarmadero</option>
+                        <option value='otro'>Otro</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
             </div>
         </div>
         <div style="display: flex;">
@@ -354,7 +368,7 @@
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center;">
+            <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-right: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Repita contraseña:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [(ngModel)]="passwordCambio2"
@@ -364,7 +378,7 @@
             </div>
         </div>
         <div style="display: flex;">
-            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Tipo de usuario:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <select class="effect-1" [value]='datoCambio["tipo"]' [(ngModel)]="datoCambio['tipo']"
@@ -375,10 +389,10 @@
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;"></div>
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;"></div>
         </div>
         <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
-            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Persona responsable:</span> 
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["persona_responsable"]' [(ngModel)]="datoCambioEMP['persona_responsable']"
@@ -386,7 +400,7 @@
                     <span class="focus-border2"></span>
                 </div>
             </div>
-            <div class="celda border" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;">
+            <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;">
                 <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span>
                 <div class="col-3" style="width: 60%; margin-left: 2%;">
                     <input type="text" class="effect-1" [value]='datoCambioEMP["razon_social"]' [(ngModel)]="datoCambioEMP['razon_social']"
