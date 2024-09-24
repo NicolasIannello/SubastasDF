@@ -28,7 +28,7 @@
     height: 20% !important;
 }
 .foto{
-    height: 50%;
+    height: 50vh;
     width: 100%;
     z-index: 1;
     display: flex;
