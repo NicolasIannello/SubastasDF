@@ -11,9 +11,19 @@ const base_url=environment.base_url;
 })
 export class ServiciosService {
   header:HttpHeaders;
+  como_registro:Array<string>=['',''];
+  nosotros:Array<string>=['',''];
 
   constructor(private http: HttpClient) {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
+    this.cargarWeb().subscribe({
+      next:(value)=> {
+        this.como_registro[0]=value.datos[0].texto
+        this.como_registro[1]=value.datos[1].texto
+        this.nosotros[0]=value.datos[2].texto
+        this.nosotros[1]=value.datos[3].texto        
+      },
+    })
   }
 
   crear(dato:any):Observable<any>{
@@ -42,5 +52,14 @@ export class ServiciosService {
   }
   cargarWeb():Observable<any>{
     return this.http.post(base_url+'/web/webs', {'headers':this.header})
+  }
+  getTextos(id:number){
+    switch (id) {
+      case 0:
+        return this.como_registro;
+      case 1:
+        return this.nosotros;
+    }
+    return ['',''];
   }
 }
