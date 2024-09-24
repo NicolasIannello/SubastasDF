@@ -40,4 +40,7 @@ export class ServiciosService {
   sendcambiarPass(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/sendCambio', dato, {'headers':this.header})
   }
+  cargarWeb():Observable<any>{
+    return this.http.post(base_url+'/web/webs', {'headers':this.header})
+  }
 }
