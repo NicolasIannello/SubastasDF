@@ -42,7 +42,7 @@ h1{
     }
 }
 .svh{
-    height: 100vh;
+    min-height: 100vh;
     justify-content: center;
     display: flex;
 }
@@ -85,12 +85,16 @@ a{
         transition: all 0.1s linear;
     }
 }
-.margin5{
+.margin5, .margin5text{
     margin: 5rem;
     padding: 1rem;
     @media (max-width: 1000px){
         margin-left: 2rem;
         margin-right: 2rem;
+        .margin5text{
+            margin-top: 0rem;
+            margin-bottom: 0rem;
+        }
     }
 }
 :focus{outline: none;}
