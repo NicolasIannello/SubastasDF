@@ -1,0 +1,38 @@
+<div class="borderAzul margin5 rounded" style="display: flex; flex-direction: column; align-items: center;">
+    <h1 class="colorBlue">¿Como registrarse?</h1>
+    <div class="col-3" style="margin-bottom: 2%;">
+        <label>Titulo </label>
+        <div style="display: flex;">
+            <input type="text" class="effect-1" [(ngModel)]="campos[0].texto" [value]="campos[0].texto" [ngClass]="{'changed': campos[0].texto!=campos2[0].texto}">
+            <span class="focus-border2"></span>
+        </div>
+    </div>
+    <div class="col-3" style="margin-bottom: 2%;">
+        <label>Texto </label>
+        <div style="display: flex;">
+            <textarea class="effect-1" style="width: 100%; height: 300px;" [(ngModel)]="campos[1].texto" [value]="campos[1].texto" [ngClass]="{'changed': campos[1].texto!=campos2[1].texto}"></textarea>
+            <span class="focus-border2"></span>
+        </div>
+    </div>
+    <div class="col-3" style="text-align: end;">
+        <button class="boton boton2 border rounded botones" (click)="actualizar(0,1)">Actualizar</button>
+    </div>
+    <h1 class="colorBlue">¿Quines somos?</h1>
+    <div class="col-3" style="margin-bottom: 2%;">
+        <label>Titulo </label>
+        <div style="display: flex;">
+            <input type="text" class="effect-1" [(ngModel)]="campos[2].texto" [value]="campos[2].texto" [ngClass]="{'changed': campos[2].texto!=campos2[2].texto}">
+            <span class="focus-border2"></span>
+        </div>
+    </div>
+    <div class="col-3" style="margin-bottom: 2%;">
+        <label>Texto </label>
+        <div style="display: flex;">
+            <textarea class="effect-1" style="width: 100%; height: 300px;" [(ngModel)]="campos[3].texto" [value]="campos[3].texto" [ngClass]="{'changed': campos[3].texto!=campos2[3].texto}"></textarea>
+            <span class="focus-border2"></span>
+        </div>
+    </div>
+    <div class="col-3" style="text-align: end;">
+        <button class="boton boton2 border rounded botones" (click)="actualizar(2,3)">Actualizar</button>
+    </div>
+</div>
