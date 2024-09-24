@@ -184,3 +184,9 @@ i{
     display: flex;
     justify-content: center;
 }
+.imagenLogo{
+    background-image: url('../../../../public/logo.webp');
+    background-repeat:no-repeat;
+    background-size:contain;
+    width: 3rem !important;
+}

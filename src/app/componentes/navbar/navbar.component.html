@@ -1,5 +1,5 @@
 <div class="navbar glass">
-    <div style="align-items: center; display: flex; height: 100%;"><div class="logo" style="cursor: pointer;" (click)="activar('')"><span>Gruppo DF</span><img src="logo.webp" alt="Gruppo DF"></div></div> 
+    <div style="align-items: center; display: flex; height: 100%;"><div class="logo" style="cursor: pointer;" (click)="activar('')"><span>Gruppo DF</span><span class="imagenLogo"></span></div></div> 
     <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap else mobile">
         <div class="btnnav" [ngClass]="{'activa' : activa=='eventos'}" (click)="activar('eventos')"><span>Finalizadas</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='registro'}" (click)="activar('registro')"><span>¿Como registrarse?</span></div>
