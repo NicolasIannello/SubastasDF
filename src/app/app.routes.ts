@@ -8,6 +8,7 @@ import { LoginComponent } from './componentes/panel-admin/login/login.component'
 import { UsuariosComponent } from './componentes/panel-admin/usuarios/usuarios.component';
 import { authGuard } from './guard/auth.guard';
 import { CambiarPassComponent } from './componentes/cambiar-pass/cambiar-pass.component';
+import { WebComponent } from './componentes/panel-admin/web/web.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
         { path: '', component: LoginComponent },
         { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
+        { path: 'web', component: WebComponent, canActivate:[authGuard] },
         { path: '**',   redirectTo: '', pathMatch: 'full' },
     ]},
     { path: '**',   redirectTo: '', pathMatch: 'full' },
