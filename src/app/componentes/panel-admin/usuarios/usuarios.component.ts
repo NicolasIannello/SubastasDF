@@ -68,6 +68,10 @@ export class UsuariosComponent implements OnInit{
     
   }
 
+  principio(){
+    this.pagina=0;
+    this.recargar()
+  }
   atras(){
     if(this.pagina>0){
       this.pagina--;
@@ -79,6 +83,10 @@ export class UsuariosComponent implements OnInit{
       this.pagina++;
       this.recargar()
     }
+  }
+  final(){
+    this.pagina=this.pagU-1
+    this.recargar()
   }
 
   recargar(){
