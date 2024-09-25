@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import Swal from 'sweetalert2';
+import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RecaptchaV3Module],
   templateUrl: './contacto.component.html',
   styleUrl: '../../logreg/datos-acceso/datos-acceso.component.css'
 })
@@ -15,7 +16,25 @@ export class ContactoComponent {
   alertas:Array<string>=['','','','',''];
   flag:boolean=true;
 
-  constructor(public api:ServiciosService) {}
+  constructor(public api:ServiciosService, private recaptchaV3Service: ReCaptchaV3Service) {}
+
+  public send(form: NgForm): void {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    }
+
+    this.recaptchaV3Service.execute('importantAction').subscribe(
+      (token)=> {
+        this.enviar()
+      },
+      (error)=> {
+          console.log(error);
+      },
+    );
+  }
 
   enviar(){
     for (let i = 0; i < this.campos.length; i++) {

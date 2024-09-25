@@ -45,7 +45,9 @@
             </div>
         </div>
         <div style="text-align: end; width: 100%;">
-            <button class="boton border rounded botones" (click)="enviar()">Enviar mensaje</button>
+            <form #form="ngForm">
+                <button class="boton border rounded botones" (click)="send(form)">Enviar mensaje</button>
+            </form>
         </div>
     </div>
 </div>

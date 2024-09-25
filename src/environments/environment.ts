@@ -4,8 +4,11 @@
 
 export const environment = {
   production: false,
-  base_url:'https://vps-4154293-x.dattaweb.com/subasta'
-  //base_url:'http://localhost:3000/subasta'
+  //base_url:'https://vps-4154293-x.dattaweb.com/subasta',
+  base_url:'http://localhost:3000/subasta',
+  recaptcha: {
+    siteKey: '6Let_k4qAAAAAIHQe6HtHzYwosJ58y4feuaKRmRu',
+  },
 };
 
 /*
