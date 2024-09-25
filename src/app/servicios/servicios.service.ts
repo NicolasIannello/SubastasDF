@@ -62,4 +62,7 @@ export class ServiciosService {
     }
     return ['',''];
   }
+  contacto(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/mailContacto', dato, {'headers':this.header})
+  }
 }

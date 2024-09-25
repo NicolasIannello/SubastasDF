@@ -10,6 +10,7 @@ import { authGuard } from './guard/auth.guard';
 import { CambiarPassComponent } from './componentes/cambiar-pass/cambiar-pass.component';
 import { WebComponent } from './componentes/panel-admin/web/web.component';
 import { ComoRegistroComponent } from './componentes/landing/como-registro/como-registro.component';
+import { ContactoComponent } from './componentes/landing/contacto/contacto.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -17,6 +18,7 @@ export const routes: Routes = [
         { path: 'login', component: LogregComponent },
         { path: 'registro', component: ComoRegistroComponent },
         { path: 'nosotros', component: ComoRegistroComponent },
+        { path: 'contacto', component: ContactoComponent },
         { path: 'verificar/:token', component: VerificacionComponent },
         { path: 'cambio/:token', component: CambiarPassComponent },
     ]},
