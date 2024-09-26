@@ -6,8 +6,8 @@
             <h1 [ngClass]="{'h1btn' : tabla, 'h1btn2' : !tabla}" (click)="cambiarTabla(false)">Admins</h1>
         </div>
         <div>
-            <button class="boton boton2 border rounded botones" (click)="reporte()">Generar reporte</button>
-            <button class="boton boton2 border rounded botones" (click)="crearUser('tipo')">Agregar usuario</button>
+            <button class="boton boton2 border rounded botones" (click)="reporte()" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">Generar reporte</button>
+            <button class="boton boton2 border rounded botones" (click)="crearUser('tipo')" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Agregar usuario</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
