@@ -3,6 +3,8 @@
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
 @import url('https://fonts.cdnfonts.com/css/shameimaru-sans');
+@import 'ckeditor5/ckeditor5.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
     --amarello: rgb(48, 131, 220)/*rgb(228, 176, 16)*/;
@@ -156,7 +158,54 @@ button{
 .colorBlue{
     color: var(--amarello) !important;
 }
+.colorWhite{
+    color: var(--white);
+}
 .changed{
     background-color: var(--amarello) !important;
     color: var(--white) !important;
 }
+
+.msg{
+    color: red;
+    font-weight: lighter;
+    font-family: 'avenir';
+}
+
+input::file-selector-button {
+    font-family: Avenir;
+    border-radius: 12px;
+    border: 1px solid rgb(255, 144, 0, 0.2);
+    background-color: var(--white);
+}
+input::file-selector-button:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 250ms linear;
+}
+
+@media print {
+	body {
+		margin: 0 !important;
+	}
+}
+
+.main-container {
+	font-family: 'Lato';
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+    width: 100%;
+}
+
+.ck-content {
+	font-family: 'Lato';
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+/* .editor-container_classic-editor .editor-container__editor {
+	min-width: 795px;
+	max-width: 795px;
+} */
