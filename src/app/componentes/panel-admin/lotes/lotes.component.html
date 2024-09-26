@@ -1,0 +1,80 @@
+<div class="borderAzul margin5 rounded" style="display: flex; flex-direction: column; align-items: center;">
+    <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+        <div style="display: flex;">
+            <h1 class="h1btn2">Lotes</h1>
+        </div>
+        <div>
+            <button class="boton boton2 border rounded botones">Crear lote</button>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
+    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
+        <div class="celda" style="border-right: none; display: flex; width: 100%;">
+            <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
+                <input type="text" class="effect-1" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="width: 7rem;">
+                <select class="effect-1" style="width: 100%; height: 2rem;">
+                    <option value='nombre' selected>Usuario</option>    
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Buscar</button>
+        </div>
+    </div>
+    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+        <div class="celda username">Lote</div>
+        <div class="celda username">Titulo</div>
+        <div class="celda username">Precio base</div>
+        <div class="celda username">Incremento</div>
+        <div class="celda username">Precio salida</div>
+        <div class="celda username">Precio venta</div>
+        <div class="celda username">Oferta actual</div>
+        <div class="celda" style="border-right: none; display: flex;">
+            <div class="col-3">
+                <select class="effect-1" style="width: 100%; height: 2rem;">
+                    <option value='_id' selected hidden>Ordenar</option>    
+                    <option value='_id'>Default</option>    
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="width: 40%;">
+                <select class="effect-1"  style="width: 100%; height: 2rem;">
+                    <option value='1' selected>Asc.</option>    
+                    <option value='-1'>Desc.</option>  
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+        </div>
+    </div>
+    <h2 class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+    <h2>Error al cargar usuarios</h2>
+    <div class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div class="celda username">Lote</div>
+        <div class="celda username">Titulo</div>
+        <div class="celda username">Precio base</div>
+        <div class="celda username">Incremento</div>
+        <div class="celda username">Precio salida</div>
+        <div class="celda username">Precio venta</div>
+        <div class="celda username">Oferta actual</div>
+        <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
+            <i class="fa-regular fa-image boton2 border rounded ibtn"></i>
+            <i class="fa-regular fa-eye boton2 border rounded ibtn" ></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" ></i>
+            <i class="fa-solid fa-trash-can boton2 border rounded ibtn" ></i>
+        </div>
+    </div>
+    <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
+        Pagina  de 
+        <div style="margin-right: 2%; margin-left: 2%;">
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" >Principio</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">Atras</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">Siguiente</button>    
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" >Final</button>
+        </div>
+        Lotes totales: 
+    </div>
+</div>
+
+<app-crear-lote></app-crear-lote>
