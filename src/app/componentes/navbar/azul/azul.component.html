@@ -4,6 +4,7 @@
         <div class="btnnav" [ngClass]="{'activa' : activa=='inicio'}" (click)="activar('inicio')" routerLink='panelAdmin'><span>Inicio</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='usuarios'}" (click)="activar('usuarios')" routerLink='usuarios'><span>Usuarios</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='web'}" (click)="activar('web')" routerLink='web'><span>Web</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='lotes'}" (click)="activar('lotes')" routerLink='lotes'><span>Lotes</span></div>
     </div>
     <div>
         <div *ngIf="User!=''" class="btnnav" [ngClass]="{'activa' : activa=='login'}">
