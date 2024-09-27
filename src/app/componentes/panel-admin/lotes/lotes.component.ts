@@ -10,5 +10,11 @@ import { CrearLoteComponent } from "./crear-lote/crear-lote.component";
   styleUrl: '../usuarios/usuarios.component.css'
 })
 export class LotesComponent {
+  crear:boolean=false;
 
+  handleMessage(message: boolean, tipo:string) {    
+    switch (tipo) {
+      case 'crear': this.crear=message; break;
+    }
+  }
 }

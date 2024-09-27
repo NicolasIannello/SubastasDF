@@ -4,7 +4,7 @@
             <h1 class="h1btn2">Lotes</h1>
         </div>
         <div>
-            <button class="boton boton2 border rounded botones">Crear lote</button>
+            <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear lote</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
@@ -77,4 +77,4 @@
     </div>
 </div>
 
-<app-crear-lote></app-crear-lote>
+<app-crear-lote [ngClass]="{ 'oculto':!crear }" (messageEvent)="handleMessage($event,'crear')"></app-crear-lote>

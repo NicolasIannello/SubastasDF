@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,15 @@ export class CrearLoteComponent {
   alertas:Array<string>=['','',''   ,'','','','','',''];
   sources: Array<any> = [];
   pdf:SafeResourceUrl|null=null;
+  @Output() messageEvent = new EventEmitter<boolean>();
+
+  cerrarModal() {
+    this.datos=  ['','','ars','','','','',[],[]];
+    this.alertas=['','',''   ,'','','','','',''];
+    this.sources = [];
+    this.pdf=null;
+    this.messageEvent.emit(false);
+  }
 
   constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:AdminService) {}
 
