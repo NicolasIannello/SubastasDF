@@ -177,6 +177,7 @@ input::file-selector-button {
     border-radius: 12px;
     border: 1px solid rgb(255, 144, 0, 0.2);
     background-color: var(--white);
+    height: 2rem;
 }
 input::file-selector-button:hover {
     background-color: var(--blue);
