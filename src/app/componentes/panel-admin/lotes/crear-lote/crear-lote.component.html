@@ -39,17 +39,17 @@
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%;">
             <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
                 <div style="display: flex; flex-direction: row;"><label>Precio base: </label><span class="msg">*{{alertas[3]}}</span></div>
-                <input class="effect-1" type="text" placeholder="Precio base" style="height: 2.5rem;" [(ngModel)]="datos[3]">
+                <input class="effect-1" type="number" placeholder="Precio base" style="height: 2.5rem;" [(ngModel)]="datos[3]">
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
             <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
                 <div style="display: flex; flex-direction: row;"><label>Incremento minimo: </label><span class="msg">*{{alertas[4]}}</span></div>
-                <input class="effect-1" type="text" placeholder="Incremento minimo" style="height: 2.5rem;" [(ngModel)]="datos[4]">
+                <input class="effect-1" type="number" placeholder="Incremento minimo" style="height: 2.5rem;" [(ngModel)]="datos[4]">
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
             <div style="display: flex; flex-direction: column; width: 32%;">
                 <div style="display: flex; flex-direction: row;"><label>Precio salida: </label><span class="msg">{{alertas[5]}}</span></div>
-                <input class="effect-1" type="text" placeholder="Precio salida" style="height: 2.5rem;" [(ngModel)]="datos[5]">
+                <input class="effect-1" type="number" placeholder="Precio salida" style="height: 2.5rem;" [(ngModel)]="datos[5]">
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
         </div>
@@ -59,12 +59,15 @@
             <span class="focus-border2"></span>
         </div>
         <label>Terminos y condiciones del lote: </label><span class="msg">*{{alertas[8]}}</span>
+        <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">El archivo debe ser en formato PDF</span>
+        </div>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
-            <embed width="100%" height="450px" [src]="pdf" style="margin-bottom: 2%;">
-            <input type="file" name="pdfTC" id="pdfTC" accept=".pdf," (change)="showPDF($event)" style="height: 2rem;">    
+            <embed *ngIf="pdf!=null" width="100%" height="450px" [src]="pdf" type='application/pdf'>
+            <input type="file" name="pdfTC" id="pdfTC" accept=".pdf," (change)="showPDF($event)">
         </div>
         <label>Imagenes del lote: </label><span class="msg">*{{alertas[7]}}</span>
-        <div>
+        <div style="margin-top: 2%;">
             <span *ngFor="let src of sources">
                 <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
                 <ng-container [ngTemplateOutlet]='src.id % 8 == 0 ? even_tpl : odd_tpl' [ngTemplateOutletContext]="{srcid:src.id}"></ng-container>
@@ -75,6 +78,9 @@
                 </ng-template>
             </span>
         </div>
-        <input type="file" name="imagen" id="imagen" accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%; height: 2rem;">
+        <input type="file" name="imagen" id="imagen" accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
+        <div style="display: flex; justify-content: flex-end;">
+            <button class="border rounded boton boton2 botones">Crear lote</button>
+        </div>
     </div>
 </div>

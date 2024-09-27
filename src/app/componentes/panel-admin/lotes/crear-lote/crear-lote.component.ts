@@ -19,7 +19,7 @@ export class CrearLoteComponent {
   datos:Array<any>=     ['','','ars','','','','',[],[]];
   alertas:Array<string>=['','',''   ,'','','','','',''];
   sources: Array<any> = [];
-  pdf:SafeResourceUrl=[];
+  pdf:SafeResourceUrl|null=null;
 
   constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer) {}
 
@@ -51,7 +51,6 @@ export class CrearLoteComponent {
   showImg(event: Event){
 		this.sources=[];
     const element = event.currentTarget as HTMLInputElement;
-    //let input = (<HTMLInputElement>document.getElementById('imagen'));
 		let cantidad = element.files?.length || 0;    
 		this.datos[7]=element.files;
     
@@ -79,8 +78,9 @@ export class CrearLoteComponent {
 	}
 
   showPDF(event: Event){
-    const element = event.currentTarget as HTMLInputElement;
-    if(element.files?.length!=undefined) this.pdf= this.transform(URL.createObjectURL(element.files[0]));    
+    this.pdf=null;
+    const element = event.currentTarget as HTMLInputElement;    
+    if(element.files?.length!=undefined && element.files?.length>0) this.pdf= this.transform(URL.createObjectURL(element.files[0]));    
 	}
 
 }
