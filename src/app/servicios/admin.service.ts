@@ -42,4 +42,19 @@ export class AdminService {
   actualizarWeb(dato:any):Observable<any>{
     return this.http.post(base_url+'/web/actualizarWeb', dato, {'headers':this.header})
   }
+  async crearLote(dato:any){    
+    try {
+      const resp = await fetch(base_url+'/lote/crearLote',{
+        method: 'POST', 
+        headers: {'Acces-Control-Allow-Origin':'*'},
+        body: dato
+      });
+
+      const data = await resp.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }

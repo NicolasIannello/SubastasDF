@@ -6,6 +6,8 @@ import { ClassicEditor, AccessibilityHelp, Alignment, Autosave, Bold, Essentials
         Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo, type EditorConfig } from 'ckeditor5';
 import translations from 'ckeditor5/translations/es.js';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AdminService } from '../../../../servicios/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-lote',
@@ -21,7 +23,7 @@ export class CrearLoteComponent {
   sources: Array<any> = [];
   pdf:SafeResourceUrl|null=null;
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer) {}
+  constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:AdminService) {}
 
   public isLayoutReady = false;
 	public Editor = ClassicEditor;
@@ -50,6 +52,7 @@ export class CrearLoteComponent {
 
   showImg(event: Event){
 		this.sources=[];
+    this.datos[7]=[];
     const element = event.currentTarget as HTMLInputElement;
 		let cantidad = element.files?.length || 0;    
 		this.datos[7]=element.files;
@@ -70,6 +73,7 @@ export class CrearLoteComponent {
 					}
 				}
 			}			
+      this.datos[7]=element.files;
 		}
 	}
 
@@ -79,8 +83,49 @@ export class CrearLoteComponent {
 
   showPDF(event: Event){
     this.pdf=null;
+    this.datos[8]=[]
     const element = event.currentTarget as HTMLInputElement;    
-    if(element.files?.length!=undefined && element.files?.length>0) this.pdf= this.transform(URL.createObjectURL(element.files[0]));    
+    if(element.files?.length!=undefined && element.files?.length>0){ 
+      this.pdf= this.transform(URL.createObjectURL(element.files[0]));
+      this.datos[8]=element.files;
+    }    
 	}
 
+  crearLote(){    
+    let flag=true;
+    for (let i = 0; i < this.datos.length; i++) {
+      if(i!=5 && i!=6 && i!=7 && this.datos[i]=='') flag=false;
+      this.alertas[i]= (i!=5 && i!=6 && this.datos[i]=='') ? 'Campo obligatorio' : '';
+    }
+    if(this.datos[8].length==0 || this.datos[7].length==0) flag=false;
+    this.alertas[7]= this.datos[7].length==0 ? 'Campo obligatorio' : '';
+    this.alertas[8]= this.pdf==null ? 'Campo obligatorio' : '';
+
+    if(flag){
+      const formData = new FormData();
+      formData.append('titulo', this.datos[0]);
+      formData.append('descripcion', this.datos[1]);
+      formData.append('moneda', this.datos[2]);
+      formData.append('precio_base', this.datos[3]);
+      formData.append('incremento', this.datos[4]);
+      formData.append('precio_salida', this.datos[5]);
+      formData.append('aclaracion', this.datos[6]);
+      formData.append('token', localStorage.getItem('token')!);
+      formData.append('tipo', '1');
+			for (let i = 0; i < this.datos[7].length; i++) {
+				formData.append('img', this.datos[7][i]);		
+			}
+      formData.append('pdf', this.datos[8][0]);
+
+      this.api.crearLote(formData).then(resp =>{
+        if(resp.ok){
+          Swal.fire({title:'Lote creado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+        }else{
+          Swal.fire({title:resp.msg,confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+        }
+      }, (err)=>{				
+        Swal.fire({title:'Ocurrio un error',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+      });
+    }
+  }
 }
