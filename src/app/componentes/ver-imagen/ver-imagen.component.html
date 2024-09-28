@@ -7,6 +7,6 @@
             <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>
         </div>
-        <img *ngIf="imagen!=-1" id=foto{{imagenes[imagen].id}} src="{{imagenes[imagen].link}}" alt="" style="width: 100%;">
+        <img *ngIf="verImg" id=foto{{imagenes[imagen].id}} src="{{imagenes[imagen].link}}" alt="" style="width: 100%;">
     </div>
 </div>
