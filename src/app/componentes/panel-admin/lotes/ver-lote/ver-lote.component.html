@@ -37,7 +37,7 @@
         <label>Imagenes del lote: </label>
         <div style="margin-top: 2%; text-align: center;">
             <span *ngFor="let src of imagenes">
-                <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 200px;">
+                <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 200px; cursor: pointer;" (click)="verImagen(src.id)">
             </span>
         </div>
         <label>Terminos y condiciones del lote: </label>
@@ -47,3 +47,4 @@
     </div>
 </div>
 
+<app-ver-imagen [ngClass]="{ 'oculto':!verImg }" (messageEvent)="handleMessage($event,'crear')" [imagenes]="imagenes" [imagen]="imgID"></app-ver-imagen>
