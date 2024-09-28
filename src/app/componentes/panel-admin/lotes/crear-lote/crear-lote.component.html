@@ -70,12 +70,6 @@
         <div style="margin-top: 2%; text-align: center;">
             <span *ngFor="let src of sources">
                 <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
-                <ng-container [ngTemplateOutlet]='src.id % 5 == 0 ? even_tpl : odd_tpl' [ngTemplateOutletContext]="{srcid:src.id}"></ng-container>
-
-                <ng-template #odd_tpl let-srcid='srcid'></ng-template>
-                <ng-template #even_tpl let-srcid='srcid'>
-                    <br>
-                </ng-template>
             </span>
         </div>
         <input type="file" name="imagen" id="imagen" accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
