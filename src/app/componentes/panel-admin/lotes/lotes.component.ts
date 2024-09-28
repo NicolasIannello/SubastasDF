@@ -66,6 +66,7 @@ export class LotesComponent implements OnInit{
 
   verLote(id:string){
     this.ver=!this.ver;
+    this.loteModal=[];
     let datos={
       'uuid':id,
       'token':localStorage.getItem('token'),
