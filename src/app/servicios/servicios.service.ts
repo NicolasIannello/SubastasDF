@@ -65,4 +65,17 @@ export class ServiciosService {
   contacto(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/mailContacto', dato, {'headers':this.header})
   }
+  async cargarArchivo(dato:any,dato2:any){
+    try {
+      const resp = await fetch(base_url+'/lote/img?img='+dato+'&tipo='+dato2,{
+        method: 'GET', 
+        headers: {'Acces-Control-Allow-Origin':'*'},
+      });
+
+      return resp;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }
