@@ -10,13 +10,13 @@
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
         <div class="celda" style="border-right: none; display: flex; width: 100%;">
-            <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
+            <div class="col-3" style="width: 27.2%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
                 <input type="text" class="effect-1" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
                 <span class="focus-border2"></span>
             </div>
             <div class="col-3" style="width: 7rem;">
                 <select class="effect-1" style="width: 100%; height: 2rem;">
-                    <option value='nombre' selected>Usuario</option>    
+                    <option value='-' selected>-</option>    
                 </select>
                 <span class="focus-border2"></span>
             </div>
@@ -24,14 +24,13 @@
         </div>
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
-        <div class="celda username">Lote</div>
-        <div class="celda username">Titulo</div>
-        <div class="celda username">Precio base</div>
-        <div class="celda username">Incremento</div>
-        <div class="celda username">Precio salida</div>
-        <div class="celda username">Precio venta</div>
-        <div class="celda username">Oferta actual</div>
-        <div class="celda" style="border-right: none; display: flex;">
+        <div class="celda" style="width: 30%;">Titulo</div>
+        <div class="celda username" style="width: 10%;">Precio base</div>
+        <div class="celda username" style="width: 10%;">Incremento</div>
+        <div class="celda username" style="width: 10%;">Precio salida</div>
+        <div class="celda username" style="width: 10%;">Oferta ganadora</div>
+        <div class="celda username" style="width: 10%;">Oferta actual</div>
+        <div class="celda" style="border-right: none; display: flex; width: 20%;">
             <div class="col-3">
                 <select class="effect-1" style="width: 100%; height: 2rem;">
                     <option value='_id' selected hidden>Ordenar</option>    
@@ -39,7 +38,7 @@
                 </select>
                 <span class="focus-border2"></span>
             </div>
-            <div class="col-3" style="width: 40%;">
+            <div class="col-3" style="width: 50%;">
                 <select class="effect-1"  style="width: 100%; height: 2rem;">
                     <option value='1' selected>Asc.</option>    
                     <option value='-1'>Desc.</option>  
@@ -48,17 +47,16 @@
             </div>
         </div>
     </div>
-    <h2 class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
-    <h2>Error al cargar usuarios</h2>
-    <div class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-        <div class="celda username">Lote</div>
-        <div class="celda username">Titulo</div>
-        <div class="celda username">Precio base</div>
-        <div class="celda username">Incremento</div>
-        <div class="celda username">Precio salida</div>
-        <div class="celda username">Precio venta</div>
-        <div class="celda username">Oferta actual</div>
-        <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
+    <h2 *ngIf="!error && total==0" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+    <h2 *ngIf="error">Error al cargar usuarios</h2>
+    <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div class="celda" style="width: 30%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
+        <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
+        <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div>
+        <div class="celda username" style="width: 10%;">{{lote['precio_salida'] ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
+        <div class="celda username" style="width: 10%;">{{lote['precio_venta'] ? lote['moneda']+' '+lote['precio_venta'] : '-'}}</div>
+        <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['oferta'] : '-'}}</div>
+        <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
             <i class="fa-regular fa-image boton2 border rounded ibtn"></i>
             <i class="fa-regular fa-eye boton2 border rounded ibtn" ></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" ></i>
@@ -73,7 +71,7 @@
             <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">Siguiente</button>    
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" >Final</button>
         </div>
-        Lotes totales: 
+        Lotes totales: {{total}}
     </div>
 </div>
 

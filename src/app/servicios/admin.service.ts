@@ -57,4 +57,7 @@ export class AdminService {
       return false;
     }
   }
+  cargarLotes(dato:any, url:number,order:string,orden:string):Observable<any>{
+    return this.http.post(base_url+'/lote/lotes?desde='+url+'&order='+order+'&orden='+orden, dato, {'headers':this.header})
+  }
 }
