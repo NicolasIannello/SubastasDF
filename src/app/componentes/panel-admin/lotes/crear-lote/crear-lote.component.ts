@@ -18,14 +18,14 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None
 })
 export class CrearLoteComponent {
-  datos:Array<any>=     ['','','ars','','','','',[],[]];
+  datos:Array<any>=     ['','','ARS','','','','',[],[]];
   alertas:Array<string>=['','',''   ,'','','','','',''];
   sources: Array<any> = [];
   pdf:SafeResourceUrl|null=null;
   @Output() messageEvent = new EventEmitter<boolean>();
 
   cerrarModal() {
-    this.datos=  ['','','ars','','','','',[],[]];
+    this.datos=  ['','','ARS','','','','',[],[]];
     this.alertas=['','',''   ,'','','','','',''];
     this.sources = [];
     this.pdf=null;
@@ -132,8 +132,10 @@ export class CrearLoteComponent {
         }else{
           Swal.fire({title:resp.msg,confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
         }
+        this.cerrarModal();
       }, (err)=>{				
-        Swal.fire({title:'Ocurrio un error',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+        Swal.fire({title:'Ocurrio un error',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        this.cerrarModal();
       });
     }
   }
