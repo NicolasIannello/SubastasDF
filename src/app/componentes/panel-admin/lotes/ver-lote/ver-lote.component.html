@@ -1,0 +1,55 @@
+<div id="myModal" class="modal" style="overflow: auto;">
+    <div class="modal-content" style="width: 50%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
+        </div>
+        <label>Titulo: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{lote['titulo']}}
+            </span>
+        </div>
+        <label>Descripcion: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;" [innerHTML]="lote['descripcion'] | sanitizeHtml"></span>
+        </div>
+        <label>Aclaracion: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{lote['aclaracion']}}
+            </span>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <label>Moneda: </label><span style="font-family: Avenir;">{{lote['moneda']}}</span>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <label>Precio base: </label><span style="font-family: Avenir;">{{lote['moneda']}} {{lote['precio_base']}}</span>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <label>Incremento: </label><span style="font-family: Avenir;">{{lote['moneda']}} {{lote['incremento']}}</span>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <label>Precio salida: </label><span style="font-family: Avenir;">{{lote['moneda']}} {{lote['precio_salida']}}</span>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <label>Estado: </label><span style="font-family: Avenir;">{{lote['disponible'] ? 'Disponible' : 'No disponible' }}</span>
+        </div>
+        <label>Imagenes del lote: </label>
+        <div style="margin-top: 2%; text-align: center;">
+            <span *ngFor="let src of imagenes">
+                <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
+                <ng-container [ngTemplateOutlet]='src.id % 5 == 0 ? even_tpl : odd_tpl' [ngTemplateOutletContext]="{srcid:src.id}"></ng-container>
+
+                <ng-template #odd_tpl let-srcid='srcid'></ng-template>
+                <ng-template #even_tpl let-srcid='srcid'>
+                    <br>
+                </ng-template>
+            </span>
+        </div>
+        <label>Terminos y condiciones del lote: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <embed *ngIf="pdf!=null" width="100%" height="450px" [src]="pdf" type='application/pdf'>
+        </div>
+    </div>
+</div>
+
