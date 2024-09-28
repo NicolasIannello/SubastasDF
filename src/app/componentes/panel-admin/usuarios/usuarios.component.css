@@ -65,12 +65,6 @@
     visibility: visible;
     transition-delay: 0.3s;
 }
-.rojo{
-    color:red
-}
-.verde{
-    color:green
-}
 
 .modal {
     position: fixed;
