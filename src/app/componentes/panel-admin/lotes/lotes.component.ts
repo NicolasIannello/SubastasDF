@@ -82,4 +82,33 @@ export class LotesComponent implements OnInit{
       },
     })
   }
+
+  eliminar(id:string,nom:string){
+    Swal.fire({
+      title: "Esta por borrar un lote",
+      text: '¿Desea borrar el lote: "'+nom+'"?',
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "red",
+      cancelButtonText: "Atras",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          "uuid":id,
+          "token":localStorage.getItem('token'),
+          "tipo":1,
+        }        
+        this.api.borrarLote(dato).subscribe({
+          next:(value)=> {
+            if(value.ok) Swal.fire({title:'Lote eliminado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            this.cargarLotes();
+          },
+          error:(err)=> {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        })
+      }
+    });
+  }
 }

@@ -63,4 +63,7 @@ export class AdminService {
   cargarLote(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/lote', dato, {'headers':this.header})
   }
+  borrarLote(dato:any):Observable<any>{
+    return this.http.post(base_url+'/lote/borrarLote', dato, {'headers':this.header})
+  }
 }
