@@ -5,17 +5,19 @@ import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { VerLoteComponent } from "./ver-lote/ver-lote.component";
 import { FormsModule } from '@angular/forms';
+import { EditarLoteComponent } from "./editar-lote/editar-lote.component";
 
 @Component({
   selector: 'app-lotes',
   standalone: true,
-  imports: [CommonModule, CrearLoteComponent, VerLoteComponent, FormsModule],
+  imports: [CommonModule, CrearLoteComponent, VerLoteComponent, FormsModule, EditarLoteComponent],
   templateUrl: './lotes.component.html',
   styleUrl: '../usuarios/usuarios.component.css'
 })
 export class LotesComponent implements OnInit{
   crear:boolean=false;
   ver:boolean=false;
+  editar:boolean=false;
   error:boolean=false;
   Lotes:Array<any>=[];
   total:number=-1;
@@ -24,6 +26,7 @@ export class LotesComponent implements OnInit{
   orden:string="1";
   loteModal:Array<any>=[];
   @ViewChild(VerLoteComponent)verComp!:VerLoteComponent;
+  @ViewChild(EditarLoteComponent)editComp!:EditarLoteComponent;
   datoBuscar:string="";
   tipoBuscar:string="titulo";
   pagU:number=0;
@@ -42,6 +45,10 @@ export class LotesComponent implements OnInit{
       break;
       case 'ver': 
         this.ver=message;
+        this.loteModal=[];
+      break;
+      case 'editar': 
+        this.editar=message;
         this.loteModal=[];
       break;
     }
@@ -69,8 +76,9 @@ export class LotesComponent implements OnInit{
     })
   }
 
-  verLote(id:string){
-    this.ver=!this.ver;
+  verLote(id:string,tipo:number){
+    if(tipo==1) this.ver=!this.ver;
+    if(tipo==2) this.editar=!this.editar;
     this.loteModal=[];
     let datos={
       'uuid':id,
@@ -80,7 +88,8 @@ export class LotesComponent implements OnInit{
     this.api.cargarLote(datos).subscribe({
       next:(value)=> {
         this.loteModal=value.lote[0];
-        this.verComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
+        if(tipo==1) this.verComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
+        if(tipo==2) this.editComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
       },
       error:(err)=> {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});

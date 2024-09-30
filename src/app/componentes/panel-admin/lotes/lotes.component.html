@@ -66,8 +66,8 @@
         <div class="celda username" style="width: 10%;">{{lote['precio_venta'] ? lote['moneda']+' '+lote['precio_venta'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['oferta'] : '-'}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 15%;">
-            <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="verLote(lote['uuid']);"></i>
-            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" ></i>
+            <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="verLote(lote['uuid'],1);"></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verLote(lote['uuid'],2);"></i>
             <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(lote['uuid'],lote['titulo'])"></i>
         </div>
     </div>
@@ -85,3 +85,4 @@
 
 <app-crear-lote [ngClass]="{ 'oculto':!crear }" (messageEvent)="handleMessage($event,'crear')"></app-crear-lote>
 <app-ver-lote [ngClass]="{ 'oculto':!ver }" (messageEvent)="handleMessage($event,'ver')" [lote]="loteModal"></app-ver-lote>
+<app-editar-lote [ngClass]="{ 'oculto':!editar }" (messageEvent)="handleMessage($event,'editar')" [lote]="loteModal"></app-editar-lote>
