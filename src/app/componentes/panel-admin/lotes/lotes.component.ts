@@ -17,7 +17,7 @@ export class LotesComponent implements OnInit{
   ver:boolean=false;
   error:boolean=false;
   Lotes:Array<any>=[];
-  total:number=0;
+  total:number=-1;
   pagina:number=0;
   ordenar:string="_id";
   orden:string="1";

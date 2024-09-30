@@ -47,8 +47,9 @@
             </div>
         </div>
     </div>
-    <h2 *ngIf="!error && total==0" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+    <h2 *ngIf="!error && total==-1" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
     <h2 *ngIf="error">Error al cargar usuarios</h2>
+    <h2 *ngIf="total==0">No hay lotes para mostrar</h2>
     <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda" style="width: 30%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
