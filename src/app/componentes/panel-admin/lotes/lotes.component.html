@@ -11,16 +11,19 @@
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
         <div class="celda" style="border-right: none; display: flex; width: 100%;">
             <div class="col-3" style="width: 27.2%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
-                <input type="text" class="effect-1" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
+                <input type="text" class="effect-1" [(ngModel)]="datoBuscar" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
                 <span class="focus-border2"></span>
             </div>
             <div class="col-3" style="width: 7rem;">
-                <select class="effect-1" style="width: 100%; height: 2rem;">
-                    <option value='-' selected>-</option>    
+                <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
+                    <option value='titulo' selected>Titulo</option>
+                    <option value='precio_base'>Precio base</option>
+                    <option value='incremento'>Incremento</option>    
+                    <option value='precio_salida'>Precio salida</option> 
                 </select>
                 <span class="focus-border2"></span>
             </div>
-            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Buscar</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar</button>
         </div>
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
@@ -32,14 +35,19 @@
         <div class="celda username" style="width: 10%;">Oferta actual</div>
         <div class="celda" style="border-right: none; display: flex; width: 15%; justify-content: flex-end;">
             <div class="col-3" style="width: 60%;">
-                <select class="effect-1" style="width: 100%; height: 2rem;">
+                <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
                     <option value='_id' selected hidden>Ordenar</option>    
+                    <option value='titulo'>Titulo</option>
+                    <option value='precio_base'>Precio base</option>
+                    <option value='incremento'>Incremento</option>    
+                    <option value='precio_salida'>Precio salida</option>    
+                    <option value='disponible'>Disponibilidad</option>    
                     <option value='_id'>Default</option>    
                 </select>
                 <span class="focus-border2"></span>
             </div>
             <div class="col-3" style="width: 40%;">
-                <select class="effect-1"  style="width: 100%; height: 2rem;">
+                <select class="effect-1" [(ngModel)]="orden" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
                     <option value='1' selected>Asc.</option>    
                     <option value='-1'>Desc.</option>  
                 </select>
@@ -64,12 +72,12 @@
         </div>
     </div>
     <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
-        Pagina  de 
+        Pagina {{pagina+1}} de {{pagU}}
         <div style="margin-right: 2%; margin-left: 2%;">
-            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" >Principio</button>
-            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">Atras</button>
-            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">Siguiente</button>    
-            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" >Final</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="principio()">Principio</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="atras()">Atras</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
         </div>
         Lotes totales: {{total}}
     </div>

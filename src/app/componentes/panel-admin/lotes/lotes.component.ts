@@ -4,11 +4,12 @@ import { CrearLoteComponent } from "./crear-lote/crear-lote.component";
 import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { VerLoteComponent } from "./ver-lote/ver-lote.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lotes',
   standalone: true,
-  imports: [CommonModule, CrearLoteComponent, VerLoteComponent],
+  imports: [CommonModule, CrearLoteComponent, VerLoteComponent, FormsModule],
   templateUrl: './lotes.component.html',
   styleUrl: '../usuarios/usuarios.component.css'
 })
@@ -23,6 +24,9 @@ export class LotesComponent implements OnInit{
   orden:string="1";
   loteModal:Array<any>=[];
   @ViewChild(VerLoteComponent)verComp!:VerLoteComponent;
+  datoBuscar:string="";
+  tipoBuscar:string="titulo";
+  pagU:number=0;
 
   constructor(public api:AdminService) {}
 
@@ -53,6 +57,7 @@ export class LotesComponent implements OnInit{
           if(value.ok) {
             this.Lotes=value.lotes;
             this.total=value.total;
+            this.pagU=Math.ceil(this.total/20)
           }else{
             this.error=true;
           }
@@ -110,5 +115,54 @@ export class LotesComponent implements OnInit{
         })
       }
     });
+  }
+
+  buscarDato(){
+    let dato={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'dato':this.datoBuscar,
+      'datoTipo':this.tipoBuscar,
+      'datoTipoUser':'lote',
+    }
+
+    this.api.buscarDato(dato).subscribe({
+      next:(value)=> {
+          console.log(value);          
+          if(value.ok){
+            if(value.busqueda.length>0) {
+              this.Lotes=value.busqueda
+            }else{
+              Swal.fire({title:'No se encontro ningun resultado', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+            }
+          }else{
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+          }
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+      },
+    })
+  }
+
+  principio(){
+    this.pagina=0;
+    this.cargarLotes()
+  }
+  atras(){
+    if(this.pagina>0){
+      this.pagina--;
+      this.cargarLotes()
+    }
+  }
+  siguiente(){    
+    if(this.pagina<this.pagU-1){
+      this.pagina++;
+      this.cargarLotes()
+    }
+  }
+  final(){
+    this.pagina=this.pagU-1
+    this.cargarLotes()
   }
 }
