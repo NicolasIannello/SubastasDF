@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
@@ -23,12 +23,16 @@ export class CrearLoteComponent {
   sources: Array<any> = [];
   pdf:SafeResourceUrl|null=null;
   @Output() messageEvent = new EventEmitter<boolean>();
+  @ViewChild('imagen') inputImagen!: ElementRef;
+  @ViewChild('pdfTC') inputPDF!: ElementRef;
 
   cerrarModal() {
     this.datos=  ['','','ARS','','','','',[],[]];
     this.alertas=['','',''   ,'','','','','',''];
     this.sources = [];
     this.pdf=null;
+    this.inputImagen.nativeElement.value = "";
+    this.inputPDF.nativeElement.value = "";
     this.messageEvent.emit(false);
   }
 

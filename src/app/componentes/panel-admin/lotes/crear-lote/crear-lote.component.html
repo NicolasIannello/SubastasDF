@@ -64,7 +64,7 @@
         </div>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <embed *ngIf="pdf!=null" width="100%" height="450px" [src]="pdf" type='application/pdf'>
-            <input type="file" name="pdfTC" id="pdfTC" accept=".pdf," (change)="showPDF($event)">
+            <input type="file" name="pdfTC" id="pdfTC" #pdfTC accept=".pdf," (change)="showPDF($event)">
         </div>
         <label>Imagenes del lote: </label><span class="msg">*{{alertas[7]}}</span>
         <div style="margin-top: 2%; text-align: center;">
@@ -72,7 +72,7 @@
                 <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
             </span>
         </div>
-        <input type="file" name="imagen" id="imagen" accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
+        <input type="file" name="imagen" id="imagen" #imagen accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
         <div style="display: flex; justify-content: flex-end;">
             <button class="border rounded boton boton2 botones" (click)="crearLote()">Crear lote</button>
         </div>
