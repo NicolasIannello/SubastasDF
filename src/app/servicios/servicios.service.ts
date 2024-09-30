@@ -74,7 +74,6 @@ export class ServiciosService {
 
       return resp;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }

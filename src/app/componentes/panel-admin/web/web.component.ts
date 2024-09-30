@@ -52,7 +52,6 @@ export class WebComponent implements OnInit{
     }
     this.apiAdmin.actualizarWeb(dato).subscribe({
       next:(value)=> {
-          console.log(value);
           if(value.ok){
             Swal.fire({title:'Datos cambiados con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           }

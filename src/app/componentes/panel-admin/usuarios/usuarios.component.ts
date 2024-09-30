@@ -310,7 +310,6 @@ export class UsuariosComponent implements OnInit{
 
     this.api.buscarDato(dato).subscribe({
       next:(value)=> {
-          console.log(value);          
           if(value.ok){
             if(value.busqueda.length>0) {
               this.Usuarios=value.busqueda

@@ -31,7 +31,6 @@ export class ContactoComponent {
         this.enviar()
       },
       (error)=> {
-          console.log(error);
       },
     );
   }

@@ -53,7 +53,6 @@ export class AdminService {
       const data = await resp.json();
       return data;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
