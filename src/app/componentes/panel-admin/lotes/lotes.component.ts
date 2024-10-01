@@ -50,6 +50,7 @@ export class LotesComponent implements OnInit{
       case 'editar': 
         this.editar=message;
         this.loteModal=[];
+        this.cargarLotes(); 
       break;
     }
   }
