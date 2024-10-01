@@ -65,4 +65,18 @@ export class AdminService {
   borrarLote(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/borrarLote', dato, {'headers':this.header})
   }
+  async actualizarLote(dato:any){    
+    try {
+      const resp = await fetch(base_url+'/lote/actualizarLote',{
+        method: 'POST', 
+        headers: {'Acces-Control-Allow-Origin':'*'},
+        body: dato
+      });
+
+      const data = await resp.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  }
 }

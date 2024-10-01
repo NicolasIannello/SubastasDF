@@ -1,0 +1,98 @@
+<div id="myModal" class="modal" style="overflow: auto;">
+    <div class="modal-content" style="width: 50%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
+        </div>
+        <label>Titulo: </label><span class="msg">*{{alertas[0]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="text" placeholder="Titulo" style="height: 2.5rem;" 
+            [ngClass]="{'changed': loteNuevo['titulo']!=lote['titulo']}" [(ngModel)]="loteNuevo['titulo']">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Descripcion: </label><span class="msg">*{{alertas[1]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <div>
+                <div class="main-container">
+                    <div class="editor-container editor-container_classic-editor" #editorContainerElement>
+                        <div class="editor-container__editor">
+                            <div #editorElement>
+                                <ckeditor [editor]="Editor" [config]="config" *ngIf="isLayoutReady" [(ngModel)]="loteNuevo['descripcion']"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <label>Moneda: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="loteNuevo['moneda']" 
+            [ngClass]="{'changed': loteNuevo['moneda']!=lote['moneda']}" style="width: 100%; height: 2.5rem;">
+                <option value='ARS' selected>Peso Argentino (ARS)</option>
+                <option value='USD'>Dolar Americano (USD)</option>    
+            </select>
+            <span class="focus-border2"></span>
+        </div>
+        <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                No utilice separadores de miles.<br>
+                Utilice el PUNTO (.) como separador de decimales.    
+            </span>
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%;">
+            <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
+                <div style="display: flex; flex-direction: row;"><label>Precio base: </label><span class="msg">*{{alertas[2]}}</span></div>
+                <input class="effect-1" type="number" placeholder="Precio base" style="height: 2.5rem;" 
+                [ngClass]="{'changed': loteNuevo['precio_base']!=lote['precio_base']}" [(ngModel)]="loteNuevo['precio_base']">
+                <span class="focus-border2" style="position: relative !important;"></span>
+            </div>
+            <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
+                <div style="display: flex; flex-direction: row;"><label>Incremento minimo: </label><span class="msg">*{{alertas[3]}}</span></div>
+                <input class="effect-1" type="number" placeholder="Incremento minimo" style="height: 2.5rem;" 
+                [ngClass]="{'changed': loteNuevo['incremento']!=lote['incremento']}" [(ngModel)]="loteNuevo['incremento']">
+                <span class="focus-border2" style="position: relative !important;"></span>
+            </div>
+            <div style="display: flex; flex-direction: column; width: 32%;">
+                <div style="display: flex; flex-direction: row;"><label>Precio salida: </label></div>
+                <input class="effect-1" type="number" placeholder="Precio salida" style="height: 2.5rem;" 
+                [ngClass]="{'changed': loteNuevo['precio_salida']!=lote['precio_salida']}" [(ngModel)]="loteNuevo['precio_salida']">
+                <span class="focus-border2" style="position: relative !important;"></span>
+            </div>
+        </div>
+        <label>Aclaracion: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="text" placeholder="Aclaracion" style="height: 2.5rem;" 
+            [ngClass]="{'changed': loteNuevo['aclaracion']!=lote['aclaracion']}" [(ngModel)]="loteNuevo['aclaracion']">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Terminos y condiciones del lote: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <embed *ngIf="pdf!=null" width="100%" height="600px" [src]="pdf" type='application/pdf'>
+        </div>
+        <label>Nuevos terminos y condiciones del lote: </label>
+        <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">El archivo debe ser en formato PDF</span>
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <embed *ngIf="pdfNuevo!=null" width="100%" height="450px" [src]="pdfNuevo" type='application/pdf'>
+            <input type="file" name="pdfTC" id="pdfTC" #pdfTC accept=".pdf," (change)="showPDF($event)">
+        </div>
+        <label>Imagenes del lote: </label>
+        <div style="margin-top: 2%; text-align: center;">
+            <span *ngFor="let src of imagenes">
+                <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 200px; cursor: pointer;" (click)="verImagen(src.id)">
+            </span>
+        </div>
+        <label>Nuevas imagenes del lote: </label>
+        <div style="margin-top: 2%; text-align: center;">
+            <span *ngFor="let src of sources">
+                <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
+            </span>
+        </div>
+        <input type="file" name="imagen" id="imagen" #imagen accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
+        <div style="display: flex; justify-content: flex-end;">
+            <button class="border rounded boton boton2 botones" (click)="actualizar()">Actualizar</button>
+        </div>
+    </div>
+</div>
+
+<app-ver-imagen [ngClass]="{ 'oculto':!verImg }" (messageEvent)="handleMessage($event,'crear')" [imagenes]="imagenes" [imagen]="imgID" [verImg]="verImg"></app-ver-imagen>
