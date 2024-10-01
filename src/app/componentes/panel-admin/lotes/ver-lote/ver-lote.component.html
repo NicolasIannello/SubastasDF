@@ -29,7 +29,7 @@
             <label>Incremento: </label><span style="font-family: Avenir;">{{lote['moneda']}} {{lote['incremento']}}</span>
         </div>
         <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
-            <label>Precio salida: </label><span style="font-family: Avenir;">{{lote['precio_salida']!='null' ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</span>
+            <label>Precio salida: </label><span style="font-family: Avenir;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</span>
         </div>
         <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <label>Estado: </label><span style="font-family: Avenir;">{{lote['disponible'] ? 'Disponible' : 'No disponible' }}</span>

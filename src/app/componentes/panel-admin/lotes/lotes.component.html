@@ -62,7 +62,7 @@
         <div class="celda" style="width: 30%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div>
-        <div class="celda username" style="width: 10%;">{{lote['precio_salida']!='null' ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
+        <div class="celda username" style="width: 10%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['precio_venta'] ? lote['moneda']+' '+lote['precio_venta'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['oferta'] : '-'}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 15%;">
