@@ -341,7 +341,7 @@ export class UsuariosComponent implements OnInit{
       next:(value)=> {
           if(value.ok){
             let hoy=new Date();
-            let mes = hoy.getMonth()>9 ? (hoy.getMonth()+1) : "0"+(hoy.getMonth()+1);
+            let mes = hoy.getMonth()>8 ? (hoy.getMonth()+1) : "0"+(hoy.getMonth()+1);
             let dia = hoy.getDate()>9 ? hoy.getDate() : "0"+hoy.getDate()
             let fecha = dia+"-"+mes+"-"+hoy.getFullYear();
             let est = flag ? 'habilitados' : 'deshabilitados';
