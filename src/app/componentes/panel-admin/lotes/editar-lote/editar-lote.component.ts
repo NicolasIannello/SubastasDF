@@ -166,12 +166,12 @@ export class EditarLoteComponent{
       formData.append('lote', this.loteNuevo['uuid']);
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');
-      if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined) formData.append('pdf', this.pdfFile);
+      if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined) formData.append('pdf', this.pdfFile[0]);
       if(this.imgs.length!=0 && this.imgs.length!=undefined) {
         for (let i = 0; i < this.imgs.length; i++) {
           formData.append('img', this.imgs[i]);		
         }
-      }
+      }      
       
       this.apiAdmin.actualizarLote(formData).then(resp =>{
         if(resp.ok){
