@@ -19,6 +19,7 @@ export class VerLoteComponent{
   pdf:SafeResourceUrl|null=null;
   verImg:boolean=false;
   imgID:number=-1;
+  Ofertas:Array<any>=[]
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -33,6 +34,7 @@ export class VerLoteComponent{
   cerrarModal() {
     this.imagenes=[];
     this.pdf=null;
+    this.Ofertas=[]
     this.messageEvent.emit(false);
   }
 
@@ -58,5 +60,9 @@ export class VerLoteComponent{
   verImagen(id:number){
     this.verImg=true;
     this.imgID=(id-1);    
+  }
+
+  generarExcel(){
+    console.log(this.lote);
   }
 }

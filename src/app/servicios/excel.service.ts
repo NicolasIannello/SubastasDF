@@ -43,5 +43,9 @@ export class ExcelService {
       saveAs(blob, `${fileName}.xlsx`);
     });
   }
+
+  generarLote(data: any[], fileName: string): void {
+    
+  }
 }
 
