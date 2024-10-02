@@ -79,4 +79,7 @@ export class AdminService {
       return false;
     }
   }
+  duplicarLote(dato:any):Observable<any>{
+    return this.http.post(base_url+'/lote/duplicarLote', dato, {'headers':this.header})
+  }
 }

@@ -138,7 +138,6 @@ export class LotesComponent implements OnInit{
 
     this.api.buscarDato(dato).subscribe({
       next:(value)=> {
-          console.log(value);          
           if(value.ok){
             if(value.busqueda.length>0) {
               this.Lotes=value.busqueda
@@ -174,5 +173,34 @@ export class LotesComponent implements OnInit{
   final(){
     this.pagina=this.pagU-1
     this.cargarLotes()
+  }
+
+  duplicar(id:string,nom:string){
+    Swal.fire({
+      title: "Esta por duplicar un lote",
+      text: '¿Desea duplicar el lote: "'+nom+'"?',
+      showCancelButton: true,
+      confirmButtonText: "Duplicar",
+      confirmButtonColor: '#ff9000',
+      cancelButtonText: "Atras",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          "id":id,
+          "token":localStorage.getItem('token'),
+          "tipo":1,
+        }
+        this.api.duplicarLote(dato).subscribe({
+          next:(value)=> {
+            if(value.ok) Swal.fire({title:'Lote duplicado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            this.cargarLotes();
+          },
+          error:(err)=> {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        })
+      }
+    });
   }
 }
