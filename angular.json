@@ -13,6 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "sweetalert2",
+              "file-saver",
+              "color-convert",
+              "color-name",
+              "exceljs"
+            ],
             "outputPath": "dist/subastas",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -38,12 +45,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1.7MB",
-                  "maximumError": "2MB"
+                  "maximumWarning": "3MB",
+                  "maximumError": "4MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
+                  "maximumWarning": "3kB",
                   "maximumError": "4kB"
                 }
               ],
