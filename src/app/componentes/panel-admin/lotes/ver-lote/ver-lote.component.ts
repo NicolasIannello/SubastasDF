@@ -101,7 +101,7 @@ export class VerLoteComponent{
     const doc = new jsPDF('p', 'pt', 'a4');
 
     let html=
-    "<div style='width:33rem'>"+
+    "<div style='width:33rem; font-family:Arial'>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Titulo</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['titulo']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Descripcion</div>"+
