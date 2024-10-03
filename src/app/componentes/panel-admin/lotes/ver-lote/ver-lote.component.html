@@ -17,7 +17,7 @@
         <label>Aclaracion: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;">
-                {{lote['aclaracion']}}
+                {{lote['aclaracion']=='' ? '-' : lote['aclaracion']}}
             </span>
         </div>
         <div style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
