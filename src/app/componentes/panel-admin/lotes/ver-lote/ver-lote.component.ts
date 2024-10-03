@@ -41,13 +41,14 @@ export class VerLoteComponent{
 
   cargarImagenes(imgs:Array<any>, pdf:any){
     this.imagenes=[];
+    for (let i = 1; i < imgs.length+1; i++) {      
+      this.imagenes.push({link:'', id:i});
+    }
     this.pdf=null;
-    let index=1
     for (let i = 0; i < imgs.length; i++) {      
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
         if(resp!=false){
-          this.imagenes.push({link:resp.url, id:index});
-          index++;
+          this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden)};
         }
       })
     }    

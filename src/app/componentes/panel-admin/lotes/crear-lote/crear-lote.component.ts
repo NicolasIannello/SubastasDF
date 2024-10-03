@@ -82,11 +82,11 @@ export class CrearLoteComponent {
 					reader.readAsDataURL(element.files![index]);
 
 					reader.onloadend = ()=>{
-						this.sources.push({id: (index+1), link: reader.result})
+						this.sources.push({id: (index+1), link: reader.result, name: element.files![index].name})
 					}
 				}
 			}			
-      this.datos[7]=element.files;
+      //this.datos[7]=Object.assign( { }, element.files)//element.files;
 		}
 	}
 
@@ -126,7 +126,8 @@ export class CrearLoteComponent {
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');
 			for (let i = 0; i < this.datos[7].length; i++) {
-				formData.append('img', this.datos[7][i]);		
+				formData.append('img', this.datos[7][i]);  
+        formData.append('imgOrden', this.sources[i].name);	
 			}
       formData.append('pdf', this.datos[8][0]);
 
@@ -141,6 +142,24 @@ export class CrearLoteComponent {
         Swal.fire({title:'Ocurrio un error',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         this.cerrarModal();
       });
+    }
+  }
+
+  cambiarOrden(id:number){
+    let index=id-1
+    let link=this.sources[index].link;
+    let name=this.sources[index].name;
+
+    if(id==this.sources.length){
+      this.sources[index].link=this.sources[0].link;
+      this.sources[0].link=link;
+      this.sources[index].name=this.sources[0].name;
+      this.sources[0].name=name;
+    }else{
+      this.sources[index].link=this.sources[id].link;
+      this.sources[id].link=link;
+      this.sources[index].name=this.sources[id].name;
+      this.sources[id].name=name;
     }
   }
 }

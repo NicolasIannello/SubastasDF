@@ -87,13 +87,14 @@ export class EditarLoteComponent{
 
   cargarImagenes(imgs:Array<any>, pdf:any){
     this.imagenes=[];
+    for (let i = 1; i < imgs.length+1; i++) {      
+      this.imagenes.push({link:'', id:i});
+    }
     this.pdf=null;
-    let index=1        
     for (let i = 0; i < imgs.length; i++) {      
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
         if(resp!=false){
-          this.imagenes.push({link:resp.url, id:index});
-          index++;
+          this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden)};
         }
       })
     }    
@@ -129,7 +130,7 @@ export class EditarLoteComponent{
 					reader.readAsDataURL(element.files![index]);
 
 					reader.onloadend = ()=>{
-						this.sources.push({id: (index+1), link: reader.result})
+						this.sources.push({id: (index+1), link: reader.result, name: element.files![index].name})
 					}
 				}
 			}			
@@ -170,6 +171,7 @@ export class EditarLoteComponent{
       if(this.imgs.length!=0 && this.imgs.length!=undefined) {
         for (let i = 0; i < this.imgs.length; i++) {
           formData.append('img', this.imgs[i]);		
+          formData.append('imgOrden', this.sources[i].name);	
         }
       }      
       
@@ -184,6 +186,24 @@ export class EditarLoteComponent{
         Swal.fire({title:'Ocurrio un error',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         this.cerrarModal();
       });
+    }
+  }
+
+  cambiarOrden(id:number){
+    let index=id-1
+    let link=this.sources[index].link;
+    let name=this.sources[index].name;
+
+    if(id==this.sources.length){
+      this.sources[index].link=this.sources[0].link;
+      this.sources[0].link=link;
+      this.sources[index].name=this.sources[0].name;
+      this.sources[0].name=name;
+    }else{
+      this.sources[index].link=this.sources[id].link;
+      this.sources[id].link=link;
+      this.sources[index].name=this.sources[id].name;
+      this.sources[id].name=name;
     }
   }
 }

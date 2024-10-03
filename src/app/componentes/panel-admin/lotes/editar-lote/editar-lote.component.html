@@ -83,9 +83,10 @@
             </span>
         </div>
         <label>Nuevas imagenes del lote: </label>
-        <div style="margin-top: 2%; text-align: center;">
+        <div style="margin-top: 2%; text-align: center; margin-bottom: 4%;">
             <span *ngFor="let src of sources">
                 <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px;">
+                <span class="boton boton2 glassAzul border rounded colorWhite" style="position: relative; left: -10px; bottom: -5px; display: inline-block; width: 1rem; cursor: pointer;" (click)="cambiarOrden(src.id)">{{src.id}}</span>
             </span>
         </div>
         <input type="file" name="imagen" id="imagen" #imagen accept="image/*," multiple (change)="showImg($event)" style="margin-bottom: 2%;">
