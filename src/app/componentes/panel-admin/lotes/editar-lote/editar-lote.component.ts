@@ -23,7 +23,7 @@ import { AdminService } from '../../../../servicios/admin.service';
 export class EditarLoteComponent{
   @Output() messageEvent = new EventEmitter<boolean>();
   @Input() lote:{[key: string]: any}={descripcion:''};
-  imagenes: Array<{link:SafeResourceUrl,id:number}> = [];
+  imagenes: Array<{link:SafeResourceUrl,id:number,name:string}> = [];
   pdf:SafeResourceUrl|null=null;
   verImg:boolean=false;
   imgID:number=-1;
@@ -35,6 +35,9 @@ export class EditarLoteComponent{
   pdfNuevo:SafeResourceUrl|null=null;
   @ViewChild('imagen') inputImagen!: ElementRef;
   @ViewChild('pdfTC') inputPDF!: ElementRef;
+  flagElim:boolean=false;
+  imgElim:Array<string>=[]
+  imgElimCount:number=1;
 
   constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:ServiciosService, public apiAdmin:AdminService) {}
 
@@ -72,6 +75,9 @@ export class EditarLoteComponent{
   }
 
   cerrarModal() {
+    this.flagElim=false;
+    this.imgElim=[];
+    this.imgElimCount=1;
     this.imagenes=[];
     this.pdf=null;
     this.loteNuevo={descripcion:''};
@@ -88,13 +94,13 @@ export class EditarLoteComponent{
   cargarImagenes(imgs:Array<any>, pdf:any){
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
-      this.imagenes.push({link:'', id:i});
+      this.imagenes.push({link:'', id:i,name:''});
     }
     this.pdf=null;
     for (let i = 0; i < imgs.length; i++) {      
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
         if(resp!=false){
-          this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden)};
+          this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden), name:imgs[i].img};
         }
       })
     }    
@@ -168,12 +174,17 @@ export class EditarLoteComponent{
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');
       if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined) formData.append('pdf', this.pdfFile[0]);
-      if(this.imgs.length!=0 && this.imgs.length!=undefined) {
+      if(this.imgs.length!=0 && this.imgs.length!=undefined && !this.flagElim) {
         for (let i = 0; i < this.imgs.length; i++) {
           formData.append('img', this.imgs[i]);		
           formData.append('imgOrden', this.sources[i].name);	
         }
       }      
+      if(this.flagElim){
+        for (let i = 0; i < this.imgElim.length; i++) {
+          formData.append('imgElim', this.imgElim[i]);		
+        }
+      }
       
       this.apiAdmin.actualizarLote(formData).then(resp =>{
         if(resp.ok){
@@ -204,6 +215,15 @@ export class EditarLoteComponent{
       this.sources[id].link=link;
       this.sources[index].name=this.sources[id].name;
       this.sources[id].name=name;
+    }
+  }
+
+  eliminarImg(imagen:any){
+    if(this.imagenes.length>this.imgElimCount) {
+      this.imgElimCount++;
+      this.flagElim=true;
+      this.imgElim.push(this.imagenes[imagen.id-1].name);
+      this.imagenes[imagen.id-1]={link:'',id:0,name:''};
     }
   }
 }

@@ -80,6 +80,9 @@
         <div style="margin-top: 2%; text-align: center;">
             <span *ngFor="let src of imagenes">
                 <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 200px; cursor: pointer;" (click)="verImagen(src.id)">
+                <span *ngIf="src.link!=''" style="position: relative; left: -10px; bottom: -5px; display: inline-block; width: 2rem; height: 2rem; cursor: pointer;">
+                    <i class="fa-solid fa-trash-can boton2 border glassAzul colorWhite rounded ibtn" style="width: 2rem; height: 2rem;" (click)="eliminarImg(src)"></i>
+                </span>
             </span>
         </div>
         <label>Nuevas imagenes del lote: </label>
