@@ -121,6 +121,8 @@ export class VerLoteComponent{
       "</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Estado</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['disponible'] ? 'Disponible' : 'No disponible')+"</div>"+
+      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Terminos y condiciones</div>"+
+      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['pdf']['name']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Imagenes</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center'>";
     
