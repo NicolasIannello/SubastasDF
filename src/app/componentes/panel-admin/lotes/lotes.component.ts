@@ -41,6 +41,7 @@ export class LotesComponent implements OnInit{
     switch (tipo) {
       case 'crear': 
         this.crear=message;
+        this.error=false;
         this.cargarLotes(); 
       break;
       case 'ver': 
