@@ -1,0 +1,90 @@
+<div class="borderAzul margin5 rounded" style="display: flex; flex-direction: column; align-items: center;">
+    <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+        <div style="display: flex;">
+            <h1 class="h1btn2">Eventos</h1>
+        </div>
+        <div>
+            <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear evento</button>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
+    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
+        <div class="celda" style="border-right: none; display: flex; width: 100%;">
+            <div class="col-3" style="width: 27.2%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
+                <input type="text" class="effect-1" [(ngModel)]="datoBuscar" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="width: 10rem;">
+                <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
+                    <option value='nombre' selected>Nombre del evento</option>
+                    <option value='fecha_cierre'>Fecha de cierre</option>
+                    <option value='home'>Mostrar en home</option>    
+                    <option value='eventos'>Mostrar en Eventos</option> 
+                    <option value='lotes'>Nro. de lotes</option> 
+                    <option value='visitas'>Visitas</option> 
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar</button>
+        </div>
+    </div>
+    <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+        <div class="celda" style="width: 30%;">Nombre del evento</div>
+        <div class="celda username" style="width: 10%;">Fecha de cierre</div>
+        <div class="celda username" style="width: 12%;">Mostrar en Home</div>
+        <div class="celda username" style="width: 12%;">Mostrar en Eventos</div>
+        <div class="celda username" style="width: 8%;">Nro. de lotes</div>
+        <div class="celda username" style="width: 5%;">Visitas</div>
+        <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
+            <div class="col-3" style="width: 60%;">
+                <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarEventos()" style="width: 100%; height: 2rem;">
+                    <option value='_id' selected hidden>Ordenar</option>    
+                    <option value='nombre' selected>Nombre del evento</option>
+                    <option value='fecha_cierre'>Fecha de cierre</option>
+                    <option value='home'>Mostrar en home</option>    
+                    <option value='eventos'>Mostrar en Eventos</option> 
+                    <option value='lotes'>Nro. de lotes</option> 
+                    <option value='visitas'>Visitas</option> 
+                    <option value='_id'>Default</option>    
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <div class="col-3" style="width: 40%;">
+                <select class="effect-1" [(ngModel)]="orden" (change)="cargarEventos()" style="width: 100%; height: 2rem;">
+                    <option value='1' selected>Asc.</option>    
+                    <option value='-1'>Desc.</option>  
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+        </div>
+    </div>
+    <h2 *ngIf="!error && total==-1" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+    <h2 *ngIf="error">Error al cargar eventos</h2>
+    <h2 *ngIf="total==0">No hay eventos para mostrar</h2>
+    <div *ngFor="let evento of Eventos" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div class="celda" style="width: 30%;">{{evento['nombre']}}</div>
+        <div class="celda username" style="width: 10%;">{{evento['fecha_cierre']}}</div>
+        <div class="celda username" style="width: 12%;">{{evento['home']}}</div>
+        <div class="celda username" style="width: 12%;">{{evento['inicio']}}</div>
+        <div class="celda username" style="width: 8%;">nro</div>
+        <div class="celda username" style="width: 5%;">{{evento['visitas']}}</div>
+        <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
+            <i class="fa-regular fa-eye boton2 border rounded ibtn" ></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn"></i>
+            <i class="fa-solid fa-copy boton2 border rounded ibtn"></i>
+            <i class="fa-solid fa-trash-can boton2 border rounded ibtn"></i>
+        </div>
+    </div>
+    <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
+        Pagina {{pagina+1}} de {{pagU}}
+        <div style="margin-right: 2%; margin-left: 2%;">
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="principio()">Principio</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="atras()">Atras</button>
+            <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
+        </div>
+        Lotes totales: {{total}}
+    </div>
+</div>
+
+<app-crear-evento [ngClass]="{ 'oculto':!crear }" (messageEvent)="handleMessage($event,'crear')"></app-crear-evento>

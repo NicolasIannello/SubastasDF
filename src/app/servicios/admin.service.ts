@@ -82,4 +82,10 @@ export class AdminService {
   duplicarLote(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/duplicarLote', dato, {'headers':this.header})
   }
+  cargarEventos(dato:any, url:number,order:string,orden:string):Observable<any>{
+    return this.http.post(base_url+'/evento/eventos?desde='+url+'&order='+order+'&orden='+orden, dato, {'headers':this.header})
+  }
+  crearEvento(dato:any):Observable<any>{
+    return this.http.post(base_url+'/evento/crearEvento', dato, {'headers':this.header})
+  }
 }

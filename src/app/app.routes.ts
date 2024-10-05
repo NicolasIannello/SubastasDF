@@ -12,6 +12,7 @@ import { WebComponent } from './componentes/panel-admin/web/web.component';
 import { ComoRegistroComponent } from './componentes/landing/como-registro/como-registro.component';
 import { ContactoComponent } from './componentes/landing/contacto/contacto.component';
 import { LotesComponent } from './componentes/panel-admin/lotes/lotes.component';
+import { EventosComponent } from './componentes/panel-admin/eventos/eventos.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -28,6 +29,7 @@ export const routes: Routes = [
         { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
         { path: 'web', component: WebComponent, canActivate:[authGuard] },
         { path: 'lotes', component: LotesComponent, canActivate:[authGuard] },
+        { path: 'eventos', component: EventosComponent, canActivate:[authGuard] },
         { path: '**',   redirectTo: '', pathMatch: 'full' },
     ]},
     { path: '**',   redirectTo: '', pathMatch: 'full' },
