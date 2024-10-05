@@ -1,0 +1,55 @@
+<div id="myModal" class="modal" style="overflow: auto;">
+    <div class="modal-content" style="width: 50%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
+        </div>
+        <label>Nombre del evento: </label><span class="msg">*{{alertas[0]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="text" placeholder="Nombre del evento" style="height: 2.5rem;" [(ngModel)]="datos[0]">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Categoria: </label><span class="msg">{{alertas[1]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="datos[1]" style="width: 100%; height: 2.5rem;">
+                <option value='Autos y motos' selected>Autos y motos</option> 
+                <option value='Movimiento y transporte'>Movimiento y transporte</option> 
+                <option value='Maquinas y equipos'>Maquinas y equipos</option> 
+                <option value='Rezagos'>Rezagos</option> 
+                <option value='Inmuebles'>Inmuebles</option> 
+                <option value='Varios'>Varios</option>
+            </select>
+            <span class="focus-border2"></span>
+        </div>
+        <label>Fecha de inicio: </label><span class="msg">*{{alertas[2]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="date" placeholder="Fecha de inicio" style="height: 2.5rem;" [(ngModel)]="datos[2]">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Fecha de cierre: </label><span class="msg">*{{alertas[3]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="date" placeholder="Fecha de cierre" style="height: 2.5rem;" [(ngModel)]="datos[3]">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Modalidad: </label><span class="msg">{{alertas[4]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="datos[4]" style="width: 100%; height: 2.5rem;">
+                <option value='Remates' selected>Remates</option> 
+            </select>
+            <span class="focus-border2"></span>
+        </div>
+        <label>Publicar fecha de cierre: </label><span class="msg">{{alertas[5]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="datos[5]" style="width: 100%; height: 2.5rem;">
+                <option value=true selected>Si</option> 
+                <option value=false>No</option> 
+            </select>
+            <span class="focus-border2"></span>
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':datos[6], 'fa-circle-xmark rojo':!datos[6]}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="datos[6]=!datos[6]"></i> Inicio automatico
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+            <button class="border rounded boton boton2 botones" (click)="crearEvento()">Crear Evento</button>
+        </div>
+    </div>
+</div>
