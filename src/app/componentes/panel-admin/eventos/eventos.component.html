@@ -70,7 +70,7 @@
         <div class="celda username" style="width: 5%;">{{evento['visitas']}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
             <i class="fa-regular fa-eye boton2 border rounded ibtn" ></i>
-            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn"></i>
+            <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="modal(evento,'editar')"></i>
             <i class="fa-solid fa-copy boton2 border rounded ibtn"></i>
             <i class="fa-solid fa-trash-can boton2 border rounded ibtn"></i>
         </div>
@@ -88,3 +88,4 @@
 </div>
 
 <app-crear-evento [ngClass]="{ 'oculto':!crear }" (messageEvent)="handleMessage($event,'crear')"></app-crear-evento>
+<app-editar-evento [ngClass]="{ 'oculto':!editar }" (messageEvent)="handleMessage($event,'editar')"></app-editar-evento>

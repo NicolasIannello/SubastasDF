@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { CrearEventoComponent } from "./crear-evento/crear-evento.component";
+import { EditarEventoComponent } from "./editar-evento/editar-evento.component";
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule, FormsModule, CrearEventoComponent],
+  imports: [CommonModule, FormsModule, CrearEventoComponent, EditarEventoComponent],
   templateUrl: './eventos.component.html',
   styleUrl: '../usuarios/usuarios.component.css'
 })
 export class EventosComponent {
   crear:boolean=false;
+  editar:boolean=false;
   datoBuscar:string="";
   tipoBuscar:string="nombre";
   error:boolean=false;
@@ -23,6 +25,7 @@ export class EventosComponent {
   pagU:number=0;
   ordenar:string="_id";
   orden:string="1";
+  @ViewChild(EditarEventoComponent)editComp!:EditarEventoComponent;
 
   constructor(public api:AdminService) {}
 
@@ -37,6 +40,10 @@ export class EventosComponent {
         this.error=false;
         this.cargarEventos();
       break;
+      case 'editar':
+        this.editar=message;
+        this.cargarEventos();
+        break;
     }
   }
 
@@ -108,5 +115,14 @@ export class EventosComponent {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       },
     })
+  }
+
+  modal(lote:any,modal:string){
+    switch (modal) {
+      case 'editar':
+        this.editar=true;
+        this.editComp.init(lote)
+        break;
+    }
   }
 }
