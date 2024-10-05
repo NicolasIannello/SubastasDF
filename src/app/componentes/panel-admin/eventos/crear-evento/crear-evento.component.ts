@@ -26,9 +26,9 @@ export class CrearEventoComponent {
 
   crearEvento(){    
     let flag=true;
-    for (let i = 0; i < this.datos.length; i++) {
-      if(this.datos[i]=='') flag=false;
-      this.alertas[i]= (this.datos[i]=='') ? 'Campo obligatorio' : '';
+    for (let i = 0; i < this.datos.length; i++) {      
+      if(this.datos[i]==='') flag=false;
+      this.alertas[i]= (this.datos[i]==='') ? 'Campo obligatorio' : '';
     }
 
     if(flag){
@@ -39,6 +39,7 @@ export class CrearEventoComponent {
         'fecha_cierre': this.datos[3],
         'modalidad': this.datos[4],
         'publicar_cierre': this.datos[5],
+        'inicio_automatico': this.datos[6],
         'token': localStorage.getItem('token')!,
         'tipo': '1',
       };
