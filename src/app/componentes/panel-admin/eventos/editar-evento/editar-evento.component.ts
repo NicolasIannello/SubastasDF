@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ListaLotesComponent } from "../lista-lotes/lista-lotes.component";
+import { AdminService } from '../../../../servicios/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-evento',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, ListaLotesComponent],
   templateUrl: './editar-evento.component.html',
   styleUrl: '../../usuarios/usuarios.component.css'
 })
@@ -13,12 +16,41 @@ export class EditarEventoComponent {
   @Output() messageEvent = new EventEmitter<boolean>();
   evento:{[key: string]: any}={lotes:[]};
   eventoNuevo:{[key: string]: any}={lotes:[]}
+  lotes:Array<any>=[];
   alertas:Array<string>=['','','','',''];
+  lotesLista:boolean=false;
+  agregados:Array<string>=[];
+  @ViewChild(ListaLotesComponent)listaComp!:ListaLotesComponent;
+
+  constructor(public api:AdminService) {}
+
+  handleMessage(obj: {message:boolean,lotes:Array<string>}) {    
+    this.lotesLista=obj.message;
+    if(obj.lotes.length>0){
+      let datos={
+        'evento':this.evento['uuid'],
+        'lotes':obj.lotes,
+        'token':localStorage.getItem('token'),
+        'tipo':1
+      }
+      this.api.agregarLotes(datos).subscribe({
+        next: (value:any) => {
+          if(value.ok) Swal.fire({title:'Lotes agregados con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+        error(err:any) {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+        },		
+      });
+    }
+  }
 
   cerrarModal() {
     this.eventoNuevo={};
     this.evento={};
     this.alertas=['','','','',''];
+    this.agregados=[];
+    this.lotes=[];
     this.messageEvent.emit(false);
   }
 
@@ -28,6 +60,27 @@ export class EditarEventoComponent {
 
   init(ev:any){
     this.evento=ev;
+    for (let i = 0; i < ev.lotes.length; i++) {
+      this.agregados.push(ev.lotes[i].uuid_lote)
+      let datos={
+        'uuid':ev.lotes[i].uuid_lote,
+        'token':localStorage.getItem('token'),
+        'tipo':1
+      }      
+      this.api.cargarLote(datos).subscribe({
+        next:(value)=> {
+          this.lotes.push(value.lote[0]);
+        },
+        error:(err)=> {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+      })      
+    }
     this.eventoNuevo= Object.assign( { }, this.evento);
+  }
+
+  lotesListaModal(){
+    this.lotesLista=true;
+    this.listaComp.init();
   }
 }

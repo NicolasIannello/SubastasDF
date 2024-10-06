@@ -88,4 +88,7 @@ export class AdminService {
   crearEvento(dato:any):Observable<any>{
     return this.http.post(base_url+'/evento/crearEvento', dato, {'headers':this.header})
   }
+  agregarLotes(dato:any):Observable<any>{
+    return this.http.post(base_url+'/evento/agregarLotes', dato, {'headers':this.header})
+  }
 }
