@@ -61,7 +61,7 @@ export class LotesComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo':1
     }
-    this.api.cargarLotes(datos,this.pagina*20,this.ordenar,this.orden).subscribe({
+    this.api.cargarLotes(datos,this.pagina*20,this.ordenar,this.orden,false).subscribe({
       next:(value)=> {
           if(value.ok) {
             this.Lotes=value.lotes;

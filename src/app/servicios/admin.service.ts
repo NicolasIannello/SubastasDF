@@ -56,8 +56,8 @@ export class AdminService {
       return false;
     }
   }
-  cargarLotes(dato:any, url:number,order:string,orden:string):Observable<any>{
-    return this.http.post(base_url+'/lote/lotes?desde='+url+'&order='+order+'&orden='+orden, dato, {'headers':this.header})
+  cargarLotes(dato:any, url:number,order:string,orden:string,disp:boolean):Observable<any>{
+    return this.http.post(base_url+'/lote/lotes?desde='+url+'&order='+order+'&orden='+orden+'&disp='+disp, dato, {'headers':this.header})
   }
   cargarLote(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/lote', dato, {'headers':this.header})
