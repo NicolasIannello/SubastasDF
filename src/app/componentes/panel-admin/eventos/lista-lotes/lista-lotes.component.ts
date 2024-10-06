@@ -46,8 +46,6 @@ export class ListaLotesComponent{
       'token':localStorage.getItem('token'),
       'tipo':1
     }
-    console.log('holaa');
-    
     this.api.cargarLotes(datos,0,'_id','1').subscribe({
       next:(value)=> {
           if(value.ok) {
