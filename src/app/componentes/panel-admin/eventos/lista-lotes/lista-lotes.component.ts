@@ -37,7 +37,7 @@ export class ListaLotesComponent{
         if(this.Lotes[i].agregar && this.Lotes[i].agregar!='fijo') lotes.push(this.Lotes[i].uuid)
       }
     }
-    this.cargarLotes();    
+    this.Lotes=[];
     this.messageEvent.emit({message:false,lotes:lotes});
   }
 
@@ -46,6 +46,8 @@ export class ListaLotesComponent{
       'token':localStorage.getItem('token'),
       'tipo':1
     }
+    console.log('holaa');
+    
     this.api.cargarLotes(datos,0,'_id','1').subscribe({
       next:(value)=> {
           if(value.ok) {
