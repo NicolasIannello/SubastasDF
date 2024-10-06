@@ -69,7 +69,7 @@
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="verLote(lote['uuid'],1);"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verLote(lote['uuid'],2);"></i>
             <i class="fa-solid fa-copy boton2 border rounded ibtn" (click)="duplicar(lote['_id'],lote['titulo']);"></i>
-            <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(lote['uuid'],lote['titulo'])"></i>
+            <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(lote['uuid'],lote['titulo'],lote['disponible'])"></i>
         </div>
     </div>
     <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
