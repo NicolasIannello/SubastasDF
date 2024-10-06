@@ -37,6 +37,7 @@ export class EditarEventoComponent {
         next: (value:any) => {
           if(value.ok) Swal.fire({title:'Lotes agregados con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          this.init(this.evento,false)
         },
         error(err:any) {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
@@ -58,7 +59,7 @@ export class EditarEventoComponent {
     console.log(this.evento);
   }
 
-  init(ev:any){
+  init(ev:any,flag:boolean){
     this.evento=ev;
     for (let i = 0; i < ev.lotes.length; i++) {
       this.agregados.push(ev.lotes[i].uuid_lote)
@@ -76,11 +77,32 @@ export class EditarEventoComponent {
         },
       })      
     }
-    this.eventoNuevo= Object.assign( { }, this.evento);
+    if(flag) this.eventoNuevo= Object.assign( { }, this.evento);
   }
 
   lotesListaModal(){
     this.lotesLista=true;
     this.listaComp.init();
+  }
+
+  eliminar(id:string,nom:string){
+    Swal.fire({
+      title: "Esta por desvincular un lote",
+      text: '¿Desea desvincular el lote: "'+nom+'"?',
+      showCancelButton: true,
+      confirmButtonText: "Desvincular",
+      confirmButtonColor: "red",
+      cancelButtonText: "Atras",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          "uuid":id,
+          "token":localStorage.getItem('token'),
+          "tipo":1,
+        }        
+        
+        this.init(this.evento,false);
+      }
+    });
   }
 }
