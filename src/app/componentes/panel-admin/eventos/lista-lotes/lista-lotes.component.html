@@ -1,0 +1,35 @@
+<div id="myModal" class="modal" style="overflow: auto;">
+    <div class="modal-content" style="width: 80%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal(false)"></i>
+        </div>
+        <label>Lotes: </label>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda" style="width: 25%;">Titulo</div>
+            <div class="celda" style="width: 24%;">Precio Base</div>
+            <div class="celda" style="width: 24%;">Incremento</div>
+            <div class="celda" style="width: 24%;">Precio salida</div>
+            <div class="celda" style="border-right: none; width: 5rem;"></div>
+        </div>
+        <div *ngFor="let lote of Lotes; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda username" style="width: 25%;">{{lote['titulo']}}</div>
+            <div class="celda username" style="width: 24%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
+            <div class="celda username" style="width: 24%;">{{lote['moneda']}} {{lote['incremento']}}</div>
+            <div class="celda username" style="width: 24%;">{{lote['moneda']}} {{lote['precio_salida']}}</div>
+            <div class="celda username" style="border-right: none; width: 5rem; display: flex;">
+                <i class="fa-solid fa-eye border rounded boton2 ibtn" style="height: 2rem; width: 2rem;" (click)="verLote(lote['uuid']);"></i>
+                <i *ngIf="lote['agregar']!='fijo'" class="fa-solid border rounded boton2 ibtn" [ngClass]="{ 'fa-plus':!lote['agregar'], 'fa-check':lote['agregar'] }" 
+                style="height: 2rem; width: 2rem;" (click)="Lotes[i].agregar= Lotes[i].agregar ? !Lotes[i].agregar : true;"></i>
+                <i *ngIf="lote['agregar']=='fijo'" class="fa-solid fa-circle-check ibtn verde" style="font-size: x-large; cursor: default;"></i>
+            </div>
+        </div>
+        <div *ngIf="Lotes.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
+            <div class="celda username" style="width: 100%; border-right: none;">No hay lotes para mostrar</div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 2%;">
+            <button class="border rounded boton boton2 botones" (click)="cerrarModal(true)">Actualizar</button>
+        </div>
+    </div>
+</div>
+
+<app-ver-lote [ngClass]="{ 'oculto':!ver }" (messageEvent)="handleMessage($event)" [lote]="loteModal"></app-ver-lote>
