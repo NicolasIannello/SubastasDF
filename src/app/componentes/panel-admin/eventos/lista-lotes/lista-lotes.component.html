@@ -18,9 +18,8 @@
             <div class="celda username" style="width: 24%;">{{lote['moneda']}} {{lote['precio_salida']}}</div>
             <div class="celda username" style="border-right: none; width: 5rem; display: flex;">
                 <i class="fa-solid fa-eye border rounded boton2 ibtn" style="height: 2rem; width: 2rem;" (click)="verLote(lote['uuid']);"></i>
-                <i *ngIf="lote['agregar']!='fijo'" class="fa-solid border rounded boton2 ibtn" [ngClass]="{ 'fa-plus':!lote['agregar'], 'fa-check':lote['agregar'] }" 
+                <i class="fa-solid border rounded boton2 ibtn" [ngClass]="{ 'fa-plus':!lote['agregar'], 'fa-check':lote['agregar'] }" 
                 style="height: 2rem; width: 2rem;" (click)="Lotes[i].agregar= Lotes[i].agregar ? !Lotes[i].agregar : true;"></i>
-                <i *ngIf="lote['agregar']=='fijo'" class="fa-solid fa-circle-check ibtn verde" style="font-size: x-large; cursor: default;"></i>
             </div>
         </div>
         <div *ngIf="Lotes.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">

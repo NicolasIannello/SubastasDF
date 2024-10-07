@@ -17,7 +17,6 @@ export class ListaLotesComponent{
   ver:boolean=false;
   loteModal:Array<any>=[];
   @ViewChild(VerLoteComponent)verComp!:VerLoteComponent;
-  @Input() agregados!:Array<string>;
 
   constructor(public api:AdminService) {}
 
@@ -34,7 +33,7 @@ export class ListaLotesComponent{
     let lotes=[];
     if(flag){
       for (let i = 0; i < this.Lotes.length; i++) {
-        if(this.Lotes[i].agregar && this.Lotes[i].agregar!='fijo') lotes.push(this.Lotes[i].uuid)
+        if(this.Lotes[i].agregar) lotes.push(this.Lotes[i].uuid)
       }
     }
     this.Lotes=[];
@@ -49,12 +48,7 @@ export class ListaLotesComponent{
     this.api.cargarLotes(datos,0,'_id','1',true).subscribe({
       next:(value)=> {
           if(value.ok) {
-            this.Lotes=value.lotes;
-            for (let i = 0; i < this.agregados.length; i++) {
-              for (let j = 0; j < this.Lotes.length; j++) {
-                if(this.agregados[i]==this.Lotes[j].uuid) this.Lotes[j].agregar='fijo';
-              }
-            }            
+            this.Lotes=value.lotes;         
           }
       },
       error:(err)=> {
