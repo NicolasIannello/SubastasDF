@@ -19,7 +19,6 @@ export class EditarEventoComponent {
   lotes:Array<any>=[];
   alertas:Array<string>=['','','','',''];
   lotesLista:boolean=false;
-  agregados:Array<string>=[];
   @ViewChild(ListaLotesComponent)listaComp!:ListaLotesComponent;
 
   constructor(public api:AdminService) {}
@@ -35,9 +34,11 @@ export class EditarEventoComponent {
       }
       this.api.agregarLotes(datos).subscribe({
         next: (value:any) => {
-          if(value.ok) Swal.fire({title:'Lotes agregados con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(value.ok) {
+            Swal.fire({title:'Lotes agregados con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            this.cargarEvento(this.evento['uuid'])
+          }
           if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          this.init(this.evento,false)
         },
         error(err:any) {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
@@ -50,19 +51,18 @@ export class EditarEventoComponent {
     this.eventoNuevo={};
     this.evento={};
     this.alertas=['','','','',''];
-    this.agregados=[];
     this.lotes=[];
     this.messageEvent.emit(false);
   }
 
   actualizarEvento(){
-    console.log(this.evento);
+    console.log(this.eventoNuevo);
   }
 
   init(ev:any,flag:boolean){
+    this.lotes=[]
     this.evento=ev;
     for (let i = 0; i < ev.lotes.length; i++) {
-      this.agregados.push(ev.lotes[i].uuid_lote)
       let datos={
         'uuid':ev.lotes[i].uuid_lote,
         'token':localStorage.getItem('token'),
@@ -96,13 +96,40 @@ export class EditarEventoComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         let dato={
-          "uuid":id,
+          "lote":id,
           "token":localStorage.getItem('token'),
           "tipo":1,
         }        
-        
-        this.init(this.evento,false);
+        this.api.quitarLote(dato).subscribe({
+          next: (value:any) => {
+            if(value.ok) {
+              Swal.fire({title:'Lotes quitado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              this.cargarEvento(this.evento['uuid'])
+            }
+            if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+          error(err:any) {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+          },		
+        });
       }
     });
+  }
+
+  cargarEvento(uuid:string){
+    let datos={
+      'uuid':uuid,
+      'token':localStorage.getItem('token'),
+      'tipo':1
+    }      
+    this.api.cargarEvento(datos).subscribe({
+      next:(value)=> {          
+        this.evento=value.evento[0];
+        this.init(this.evento,false)
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+    })    
   }
 }

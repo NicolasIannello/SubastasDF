@@ -91,4 +91,10 @@ export class AdminService {
   agregarLotes(dato:any):Observable<any>{
     return this.http.post(base_url+'/evento/agregarLotes', dato, {'headers':this.header})
   }
+  quitarLote(dato:any):Observable<any>{
+    return this.http.post(base_url+'/evento/quitarLote', dato, {'headers':this.header})
+  }
+  cargarEvento(dato:any):Observable<any>{
+    return this.http.post(base_url+'/evento/getEvento', dato, {'headers':this.header})
+  }
 }
