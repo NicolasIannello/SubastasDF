@@ -13,7 +13,7 @@
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['categoria']" style="width: 100%; height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['categoria']!=evento['categoria']}">
-                <option value='Autos y motos' selected>Autos y motos</option> 
+                <option value='Autos y motos'>Autos y motos</option> 
                 <option value='Movimiento y transporte'>Movimiento y transporte</option> 
                 <option value='Maquinas y equipos'>Maquinas y equipos</option> 
                 <option value='Rezagos'>Rezagos</option> 
@@ -38,7 +38,7 @@
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['modalidad']" 
             [ngClass]="{'changed': eventoNuevo['modalidad']!=evento['modalidad']}" style="width: 100%; height: 2.5rem;">
-                <option value='Remates' selected>Remates</option> 
+                <option value='Remates'>Remates</option> 
             </select>
             <span class="focus-border2"></span>
         </div>
@@ -46,29 +46,29 @@
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['publicar_cierre']"
             [ngClass]="{'changed': eventoNuevo['publicar_cierre']!=evento['publicar_cierre']}" style="width: 100%; height: 2.5rem;">
-                <option value=true selected>Si</option> 
-                <option value=false>No</option> 
+                <option [ngValue]=true>Si</option> 
+                <option [ngValue]=false>No</option> 
             </select>
             <span class="focus-border2"></span>
         </div>
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
-            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['publicar_cierre'], 'fa-circle-xmark rojo':!eventoNuevo['publicar_cierre']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['publicar_cierre']=!eventoNuevo['publicar_cierre']"></i> Inicio automatico
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['inicio_automatico'], 'fa-circle-xmark rojo':!eventoNuevo['inicio_automatico']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['inicio_automatico']=!eventoNuevo['inicio_automatico']"></i> Inicio automatico
         </div>
         <label>Lotes del evento: </label>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda" style="width: 25%;">Titulo</div>
             <div class="celda" style="width: 25%;">Precio Base</div>
             <div class="celda" style="width: 25%;">Incremento</div>
-            <div class="celda" style="border-right: none; width: 25%;">Precio salida</div>
+            <div class="celda" style="width: 25%;">Precio salida</div>
             <div class="celda" style="border-right: none; width: 3rem;"></div>
         </div>
-        <div *ngFor="let lote of lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+        <div *ngFor="let lote of lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda username" style="width: 25%;">{{lote['titulo']}}</div>
             <div class="celda username" style="width: 25%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
             <div class="celda username" style="width: 25%;">{{lote['moneda']}} {{lote['incremento']}}</div>
-            <div class="celda username" style="border-right: none; width: 25%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
+            <div class="celda username" style="width: 25%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
             <div class="celda" style="border-right: none; width: 3rem;">
-
+                <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(lote['uuid'],lote['titulo'])" style="height: 2rem;"></i>
             </div>
         </div>
         <div *ngIf="lotes.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
