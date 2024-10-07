@@ -117,11 +117,11 @@ export class EventosComponent {
     })
   }
 
-  modal(lote:any,modal:string){
+  modal(evento:any,modal:string){
     switch (modal) {
       case 'editar':
         this.editar=true;
-        this.editComp.init(lote,true)
+        this.editComp.init(evento,true)
         break;
     }
   }
