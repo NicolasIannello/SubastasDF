@@ -70,7 +70,7 @@
         <div class="celda username" style="width: 12%;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['eventos'], 'fa-circle-xmark rojo':!evento['eventos']}" style="font-size: larger; margin-right: 1%;"></i>
         </div>
-        <div class="celda username" style="width: 8%;">nro</div>
+        <div class="celda username" style="width: 8%;">{{evento['lotes'].length}}</div>
         <div class="celda username" style="width: 5%;">{{evento['visitas']}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="modal(evento,'ver')"></i>
