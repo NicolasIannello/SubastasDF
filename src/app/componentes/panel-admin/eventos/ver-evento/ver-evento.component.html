@@ -1,0 +1,68 @@
+<div id="myModal" class="modal" style="overflow: auto;">
+    <div class="modal-content" style="width: 50%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large;">
+            <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
+        </div>
+        <label>Nombre del evento: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['nombre']}}
+            </span>
+        </div>
+        <label>Categoria: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['categoria']}}
+            </span>
+        </div>
+        <label>Fecha de inicio: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['fecha_inicio']}}
+            </span>
+        </div>
+        <label>Fecha de cierre: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['fecha_cierre']}}
+            </span>
+        </div>
+        <label>Modalidad: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['modalidad']}}
+            </span>
+        </div>
+        <label>Publicar fecha de cierre: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['publicar_cierre']}}
+            </span>
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['inicio_automatico'], 'fa-circle-xmark rojo':!evento['inicio_automatico']}" style="font-size: larger; margin-right: 1%;"></i> Inicio automatico
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['home'], 'fa-circle-xmark rojo':!evento['home']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar en Home
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['eventos'], 'fa-circle-xmark rojo':!evento['eventos']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar en Eventos
+        </div>
+        <label>Lotes del evento: </label>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda" style="width: 25%;">Titulo</div>
+            <div class="celda" style="width: 25%;">Precio Base</div>
+            <div class="celda" style="width: 25%;">Incremento</div>
+            <div class="celda" style="border-right: none; width: 25%;">Precio salida</div>
+        </div>
+        <div *ngFor="let lote of lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda username" style="width: 25%;">{{lote['titulo']}}</div>
+            <div class="celda username" style="width: 25%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
+            <div class="celda username" style="width: 25%;">{{lote['moneda']}} {{lote['incremento']}}</div>
+            <div class="celda username" style="border-right: none; width: 25%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
+        </div>
+        <div *ngIf="lotes.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
+            <div class="celda username" style="width: 100%; border-right: none;">No hay lotes asignados</div>
+        </div>
+    </div>
+</div>

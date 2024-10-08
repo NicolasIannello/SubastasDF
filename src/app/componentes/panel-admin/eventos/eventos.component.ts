@@ -5,17 +5,19 @@ import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { CrearEventoComponent } from "./crear-evento/crear-evento.component";
 import { EditarEventoComponent } from "./editar-evento/editar-evento.component";
+import { VerEventoComponent } from "./ver-evento/ver-evento.component";
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule, FormsModule, CrearEventoComponent, EditarEventoComponent],
+  imports: [CommonModule, FormsModule, CrearEventoComponent, EditarEventoComponent, VerEventoComponent],
   templateUrl: './eventos.component.html',
   styleUrl: '../usuarios/usuarios.component.css'
 })
 export class EventosComponent {
   crear:boolean=false;
   editar:boolean=false;
+  ver:boolean=false;
   datoBuscar:string="";
   tipoBuscar:string="nombre";
   error:boolean=false;
@@ -26,6 +28,7 @@ export class EventosComponent {
   ordenar:string="_id";
   orden:string="1";
   @ViewChild(EditarEventoComponent)editComp!:EditarEventoComponent;
+  @ViewChild(VerEventoComponent)verComp!:VerEventoComponent;
 
   constructor(public api:AdminService) {}
 
@@ -43,7 +46,10 @@ export class EventosComponent {
       case 'editar':
         this.editar=message;
         this.cargarEventos();
-        break;
+      break;
+      case 'ver':
+        this.ver=message;
+      break;
     }
   }
 
@@ -122,7 +128,11 @@ export class EventosComponent {
       case 'editar':
         this.editar=true;
         this.editComp.init(evento,true)
-        break;
+      break;
+      case 'ver':
+        this.ver=true;
+        this.verComp.init(evento)
+      break;
     }
   }
 }
