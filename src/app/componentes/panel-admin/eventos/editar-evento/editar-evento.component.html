@@ -54,6 +54,12 @@
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['inicio_automatico'], 'fa-circle-xmark rojo':!eventoNuevo['inicio_automatico']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['inicio_automatico']=!eventoNuevo['inicio_automatico']"></i> Inicio automatico
         </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['home'], 'fa-circle-xmark rojo':!eventoNuevo['home']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['home']=!eventoNuevo['home']"></i> Mostrar en Home
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['eventos'], 'fa-circle-xmark rojo':!eventoNuevo['eventos']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['eventos']=!eventoNuevo['eventos']"></i> Mostrar en Eventos
+        </div>
         <label>Lotes del evento: </label>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda" style="width: 25%;">Titulo</div>
