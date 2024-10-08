@@ -97,4 +97,7 @@ export class AdminService {
   cargarEvento(dato:any):Observable<any>{
     return this.http.post(base_url+'/evento/getEvento', dato, {'headers':this.header})
   }
+  actualizarEvento(dato:any):Observable<any>{
+    return this.http.post(base_url+'/evento/actualizarEvento', dato, {'headers':this.header})
+  }
 }

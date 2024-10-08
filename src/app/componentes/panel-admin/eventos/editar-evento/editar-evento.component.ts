@@ -56,7 +56,39 @@ export class EditarEventoComponent {
   }
 
   actualizarEvento(){
-    console.log(this.eventoNuevo);
+    let flag=true;
+    this.alertas[0]=this.eventoNuevo['nombre']=='' ? 'El campo es obligatorio' : '';
+    this.alertas[1]=this.eventoNuevo['fecha_inicio']=='' ? 'El campo es obligatorio' : '';
+    this.alertas[2]=this.eventoNuevo['fecha_cierre']=='' ? 'El campo es obligatorio' : '';
+    if(this.eventoNuevo['nombre']=='' || this.eventoNuevo['fecha_inicio']=='' || this.eventoNuevo['fecha_cierre']=='') flag=false;
+
+    if(flag){
+      let datos={
+        'uuid':this.eventoNuevo['uuid'],
+        'campos':{
+          'categoria': this.eventoNuevo['categoria'],
+          'eventos': this.eventoNuevo['eventos'],
+          'fecha_cierre': this.eventoNuevo['fecha_cierre'],
+          'fecha_inicio': this.eventoNuevo['fecha_inicio'],
+          'home': this.eventoNuevo['home'],
+          'inicio_automatico': this.eventoNuevo['inicio_automatico'],
+          'modalidad': this.eventoNuevo['modalidad'],
+          'nombre': this.eventoNuevo['nombre'],
+          'publicar_cierre': this.eventoNuevo['publicar_cierre'],
+        },
+        'token':localStorage.getItem('token'),
+        'tipo':1
+      }
+      this.api.actualizarEvento(datos).subscribe({
+        next: (value:any) => {
+          if(value.ok) Swal.fire({title:'Evento actualizado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+        error(err:any) {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
+        },
+      });
+    }
   }
 
   init(ev:any,flag:boolean){
