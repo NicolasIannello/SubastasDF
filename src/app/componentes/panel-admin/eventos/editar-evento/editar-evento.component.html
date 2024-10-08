@@ -9,7 +9,7 @@
             [ngClass]="{'changed': eventoNuevo['nombre']!=evento['nombre']}" [(ngModel)]="eventoNuevo['nombre']">
             <span class="focus-border2"></span>
         </div>
-        <label>Categoria: </label><span class="msg">{{alertas[1]}}</span>
+        <label>Categoria: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['categoria']" style="width: 100%; height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['categoria']!=evento['categoria']}">
@@ -22,19 +22,19 @@
             </select>
             <span class="focus-border2"></span>
         </div>
-        <label>Fecha de inicio: </label><span class="msg">*{{alertas[2]}}</span>
+        <label>Fecha de inicio: </label><span class="msg">*{{alertas[1]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="date" placeholder="Fecha de inicio" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['fecha_inicio']!=evento['fecha_inicio']}" [(ngModel)]="eventoNuevo['fecha_inicio']">
             <span class="focus-border2"></span>
         </div>
-        <label>Fecha de cierre: </label><span class="msg">*{{alertas[3]}}</span>
+        <label>Fecha de cierre: </label><span class="msg">*{{alertas[2]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="date" placeholder="Fecha de cierre" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['fecha_cierre']!=evento['fecha_cierre']}" [(ngModel)]="eventoNuevo['fecha_cierre']">
             <span class="focus-border2"></span>
         </div>
-        <label>Modalidad: </label><span class="msg">{{alertas[4]}}</span>
+        <label>Modalidad: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['modalidad']" 
             [ngClass]="{'changed': eventoNuevo['modalidad']!=evento['modalidad']}" style="width: 100%; height: 2.5rem;">
@@ -42,7 +42,7 @@
             </select>
             <span class="focus-border2"></span>
         </div>
-        <label>Publicar fecha de cierre: </label><span class="msg">{{alertas[5]}}</span>
+        <label>Publicar fecha de cierre: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="eventoNuevo['publicar_cierre']"
             [ngClass]="{'changed': eventoNuevo['publicar_cierre']!=evento['publicar_cierre']}" style="width: 100%; height: 2.5rem;">
