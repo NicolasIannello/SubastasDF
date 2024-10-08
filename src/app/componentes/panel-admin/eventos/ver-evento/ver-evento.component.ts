@@ -23,9 +23,7 @@ export class VerEventoComponent {
     this.messageEvent.emit(false);
   }
 
-  init(ev:any){
-    console.log(ev);
-    
+  init(ev:any){    
     this.lotes=[]
     this.evento=ev;
     for (let i = 0; i < ev.lotes.length; i++) {
