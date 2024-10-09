@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ListaLotesComponent } from "../lista-lotes/lista-lotes.component";
 import { AdminService } from '../../../../servicios/admin.service';
 import Swal from 'sweetalert2';
+import { ServiciosService } from '../../../../servicios/servicios.service';
 
 @Component({
   selector: 'app-editar-evento',
@@ -20,8 +21,12 @@ export class EditarEventoComponent {
   alertas:Array<string>=['','','','',''];
   lotesLista:boolean=false;
   @ViewChild(ListaLotesComponent)listaComp!:ListaLotesComponent;
+  img:any|null=[];
+  sources:any='';
+  sources2:any='';
+  @ViewChild('imagen') inputImagen!: ElementRef;
 
-  constructor(public api:AdminService) {}
+  constructor(public api:AdminService, public api2:ServiciosService) {}
 
   handleMessage(obj: {message:boolean,lotes:Array<string>}) {    
     this.lotesLista=obj.message;
@@ -52,6 +57,10 @@ export class EditarEventoComponent {
     this.evento={};
     this.alertas=['','','','',''];
     this.lotes=[];
+    this.img=[];
+    this.sources='';
+    this.sources2='';
+    this.inputImagen.nativeElement.value = "";
     this.messageEvent.emit(false);
   }
 
@@ -88,6 +97,26 @@ export class EditarEventoComponent {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
         },
       });
+      if(this.img!=null && this.img.length!=0){
+        const formData = new FormData();
+        console.log(this.evento['uuid']);
+            formData.append('uuid', this.evento['uuid']);  
+            formData.append('img', this.img[0]);  
+            formData.append('caso', 'edit');
+            formData.append('token', localStorage.getItem('token')!);  
+            formData.append('tipo', '1');	
+            this.api.imagenEvento(formData).then(resp =>{
+              if(resp.ok){
+                Swal.fire({title:'Evento creado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+              }else{
+                Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+              }
+              this.cerrarModal();
+            }, (err)=>{				
+              Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+              this.cerrarModal();   
+            });
+      }
     }
   }
 
@@ -108,7 +137,12 @@ export class EditarEventoComponent {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         },
       })      
-    }
+    }   
+    this.api2.cargarArchivo(ev.img.img,'evento').then(resp=>{						
+      if(resp!=false){
+        this.sources=resp.url;
+      }
+    })
     if(flag) this.eventoNuevo= Object.assign( { }, this.evento);
   }
 
@@ -150,7 +184,7 @@ export class EditarEventoComponent {
 
   cargarEvento(uuid:string){
     let datos={
-      'uuid':uuid,
+      'dato':uuid,
       'token':localStorage.getItem('token'),
       'tipo':1
     }      
@@ -164,4 +198,18 @@ export class EditarEventoComponent {
       },
     })    
   }
+
+  showImg(event: Event){
+		this.sources2='';
+    this.img=null;
+    const element = event.currentTarget as HTMLInputElement;
+		this.img=element.files;    
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(element.files![0]);
+
+    reader.onloadend = ()=>{
+      this.sources2=reader.result;
+    }
+	}
 }
