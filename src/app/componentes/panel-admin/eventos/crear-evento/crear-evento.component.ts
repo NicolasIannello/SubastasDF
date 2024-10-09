@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../../servicios/admin.service';
@@ -17,12 +17,16 @@ export class CrearEventoComponent {
   alertas:Array<string>=['',''             ,'','',''       ,'',''];
   img:any|null=[];
   sources:any='';
+  @ViewChild('imagen') inputImagen!: ElementRef;
 
   constructor(public api:AdminService) {}
 
   cerrarModal() {
     this.datos=  ['','Autos y motos','','','Remates',true,true];
     this.alertas=['',''             ,'','',''       ,''];  
+    this.inputImagen.nativeElement.value = "";
+    this.img=[];
+    this.sources='';  
     this.messageEvent.emit(false);
   }
 
@@ -80,7 +84,7 @@ export class CrearEventoComponent {
     }
   }
 
-showImg(event: Event){
+  showImg(event: Event){
 		this.sources='';
     this.img=null;
     const element = event.currentTarget as HTMLInputElement;
