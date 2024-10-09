@@ -48,6 +48,11 @@
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':datos[6], 'fa-circle-xmark rojo':!datos[6]}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="datos[6]=!datos[6]"></i> Inicio automatico
         </div>
+        <label>Imagen de portada: </label><span class="msg">*{{alertas[7]}}</span>
+        <div style="margin-top: 2%; text-align: center;">
+            <img src="{{sources}}" alt="" style="width: 100px;">
+        </div>
+        <input type="file" name="imagen" id="imagen" #imagen accept="image/*," (change)="showImg($event)" style="margin-bottom: 2%;">
         <div style="display: flex; justify-content: flex-end;">
             <button class="border rounded boton boton2 botones" (click)="crearEvento()">Crear Evento</button>
         </div>
