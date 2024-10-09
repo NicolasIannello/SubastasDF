@@ -92,6 +92,7 @@ export class EditarEventoComponent {
         next: (value:any) => {
           if(value.ok) Swal.fire({title:'Evento actualizado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(this.img==null && this.img.length==0) this.cerrarModal();
         },
         error(err:any) {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
