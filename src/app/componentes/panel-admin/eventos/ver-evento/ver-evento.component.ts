@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AdminService } from '../../../../servicios/admin.service';
 import Swal from 'sweetalert2';
+import { ServiciosService } from '../../../../servicios/servicios.service';
 
 @Component({
   selector: 'app-ver-evento',
@@ -14,8 +15,9 @@ export class VerEventoComponent {
   @Output() messageEvent = new EventEmitter<boolean>();
   evento:{[key: string]: any}={lotes:[]};
   lotes:Array<any>=[];
+  sources:any='';
 
-  constructor(public api:AdminService) {}
+  constructor(public api:AdminService, public api2:ServiciosService) {}
 
   cerrarModal() {
     this.evento={};
@@ -41,5 +43,10 @@ export class VerEventoComponent {
         },
       })      
     }
+    this.api2.cargarArchivo(ev.img.img,'evento').then(resp=>{						
+      if(resp!=false){
+        this.sources=resp.url;
+      }
+    })
   }
 }

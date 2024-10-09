@@ -48,6 +48,10 @@
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['eventos'], 'fa-circle-xmark rojo':!evento['eventos']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar en Eventos
         </div>
+        <label>Imagen de portada: </label>
+        <div style="margin-top: 2%; text-align: center;">
+            <img src="{{sources}}" alt="" style="width: 100px;">
+        </div>
         <label>Lotes del evento: </label>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda" style="width: 25%;">Titulo</div>
