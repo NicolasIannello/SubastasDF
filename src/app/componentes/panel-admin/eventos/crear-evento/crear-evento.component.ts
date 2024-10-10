@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CrearEventoComponent {
   @Output() messageEvent = new EventEmitter<boolean>();
-  datos:Array<any>=     ['','Autos y motos','','','Remates',true,true];
+  datos:Array<any>=     ['','Autos y motos','','','Subasta',true,true];
   alertas:Array<string>=['',''             ,'','',''       ,'',''];
   img:any|null=[];
   sources:any='';
@@ -22,7 +22,7 @@ export class CrearEventoComponent {
   constructor(public api:AdminService) {}
 
   cerrarModal() {
-    this.datos=  ['','Autos y motos','','','Remates',true,true];
+    this.datos=  ['','Autos y motos','','','Subasta',true,true];
     this.alertas=['',''             ,'','',''       ,''];  
     this.inputImagen.nativeElement.value = "";
     this.img=[];
