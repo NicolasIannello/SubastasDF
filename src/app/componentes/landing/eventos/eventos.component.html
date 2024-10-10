@@ -1,0 +1,18 @@
+<div class="svh" >
+    <div class="margin5" style="width: 100%; text-align: center;">
+        <span *ngIf="error==1">Inicie sesion para ver los eventos</span>
+        <span *ngIf="error==2">No hay eventos para mostrar</span>
+        <span *ngIf="error==3">Su cuenta debe ser habilitada para ver los eventos</span>
+        <div *ngFor="let ev of Eventos" class="borderAzul rounded" style="width: 25rem;">
+            <div style="width: 100%; border-bottom: 1px solid rgb(48, 131, 220, 0.2);">
+                <img src="{{ev['img'].img}}" alt="" style="width: 100px;">
+            </div>
+            <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">{{ev['nombre']}}</div>
+            <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Inicio: {{ev['fecha_inicio']}}</div>
+            <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Numero de lotes: {{ev['lotes'].length}}</div>
+            <div style="width: 100%;">
+                <button class="rounded boton" style="width: 100%; border:none; border-top-left-radius: 0%; border-top-right-radius: 0%; height: 2rem;">Ver Evento</button>    
+            </div>
+        </div>
+    </div>
+</div>

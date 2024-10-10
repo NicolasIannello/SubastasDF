@@ -13,6 +13,7 @@ import { ComoRegistroComponent } from './componentes/landing/como-registro/como-
 import { ContactoComponent } from './componentes/landing/contacto/contacto.component';
 import { LotesComponent } from './componentes/panel-admin/lotes/lotes.component';
 import { EventosComponent } from './componentes/panel-admin/eventos/eventos.component';
+import { EventosUserComponent } from './componentes/landing/eventos/eventos.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -21,6 +22,7 @@ export const routes: Routes = [
         { path: 'registro', component: ComoRegistroComponent },
         { path: 'nosotros', component: ComoRegistroComponent },
         { path: 'contacto', component: ContactoComponent },
+        { path: 'eventos', component: EventosUserComponent },
         { path: 'verificar/:token', component: VerificacionComponent },
         { path: 'cambio/:token', component: CambiarPassComponent },
     ]},
