@@ -78,12 +78,14 @@ export class CrearLoteComponent {
 				var extensionArchivo=nombreCortado[nombreCortado.length-1];
 				
 				if(extensionArchivo!="pdf"){
-					const reader = new FileReader();
-					reader.readAsDataURL(element.files![index]);
+          setTimeout(() => {
+            const reader = new FileReader();
+            reader.readAsDataURL(element.files![index]);
 
-					reader.onloadend = ()=>{
-						this.sources.push({id: (index+1), link: reader.result, name: element.files![index].name})
-					}
+            reader.onloadend = ()=>{
+              this.sources.push({id: (index+1), link: reader.result, name: element.files![index].name})
+            }            
+          }, index*200);
 				}
 			}			
       //this.datos[7]=Object.assign( { }, element.files)//element.files;
