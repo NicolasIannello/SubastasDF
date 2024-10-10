@@ -135,4 +135,33 @@ export class EventosComponent {
       break;
     }
   }
+
+  eliminar(nom:string,id:string){
+    Swal.fire({
+      title: "Esta por borrar un evento",
+      text: '¿Desea borrar el evento: "'+nom+'"?',
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "red",
+      cancelButtonText: "Atras",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          "uuid":id,
+          "token":localStorage.getItem('token'),
+          "tipo":1,
+        }        
+        this.api.borrarEvento(dato).subscribe({
+          next:(value)=> {
+            if(value.ok) Swal.fire({title:'Lote eliminado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            this.cargarEventos()
+          },
+          error:(err)=> {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        })
+      }
+    });
+  }
 }
