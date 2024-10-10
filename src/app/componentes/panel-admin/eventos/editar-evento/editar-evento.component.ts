@@ -100,23 +100,22 @@ export class EditarEventoComponent {
       });
       if(this.img!=null && this.img.length!=0){
         const formData = new FormData();
-        console.log(this.evento['uuid']);
-            formData.append('uuid', this.evento['uuid']);  
-            formData.append('img', this.img[0]);  
-            formData.append('caso', 'edit');
-            formData.append('token', localStorage.getItem('token')!);  
-            formData.append('tipo', '1');	
-            this.api.imagenEvento(formData).then(resp =>{
-              if(resp.ok){
-                Swal.fire({title:'Evento creado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
-              }else{
-                Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
-              }
-              this.cerrarModal();
-            }, (err)=>{				
-              Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
-              this.cerrarModal();   
-            });
+        formData.append('uuid', this.evento['uuid']);  
+        formData.append('img', this.img[0]);  
+        formData.append('caso', 'edit');
+        formData.append('token', localStorage.getItem('token')!);  
+        formData.append('tipo', '1');	
+        this.api.imagenEvento(formData).then(resp =>{
+          if(resp.ok){
+            Swal.fire({title:'Evento creado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          }else{
+            Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          }
+          this.cerrarModal();
+        }, (err)=>{				
+          Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          this.cerrarModal();   
+        });
       }
     }
   }
