@@ -17,29 +17,32 @@ export class EventosUserComponent implements OnInit{
   constructor(public api:AdminService, public api2:ServiciosService) {}
 
   ngOnInit(): void {
-    let datos={
-      'dato': 'eventos',
-      'token':localStorage.getItem('token'),
-      'tipo':1
-    }      
-    
-    this.api.cargarEvento(datos).subscribe({
-      next:(value)=> {          
-        if(value.ok) this.Eventos=value.evento
-        if(!value.ok) this.error=1;
-        if(value.t && value.t==3) this.error=3
-        console.log(this.Eventos);
-        for (let i = 0; i < this.Eventos.length; i++) {
-          this.api2.cargarArchivo(this.Eventos[i].img.img,'evento').then(resp=>{						
-            if(resp!=false){
-              this.Eventos[i].img.img=resp.url;
-            }
-          })
-        }
-      },
-      error:(err)=> {
-        this.error= !err.error.ok ? 1 : 2
-      },
-    })  
+    if(localStorage.getItem('token')!=null){
+        let datos={
+        'dato': 'eventos',
+        'token':localStorage.getItem('token'),
+        'tipo':1
+      }      
+      
+      this.api.cargarEvento(datos).subscribe({
+        next:(value)=> {          
+          if(value.ok) this.Eventos=value.evento
+          if(!value.ok) this.error=1;
+          if(value.t && value.t==3) this.error=3
+          for (let i = 0; i < this.Eventos.length; i++) {
+            this.api2.cargarArchivo(this.Eventos[i].img.img,'evento').then(resp=>{						
+              if(resp!=false){
+                this.Eventos[i].img.img=resp.url;
+              }
+            })
+          }
+        },
+        error:(err)=> {
+          this.error= !err.error.ok ? 1 : 2
+        },
+      })  
+    }else{
+      this.error=1
+    }
   }
 }
