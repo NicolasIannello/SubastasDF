@@ -170,6 +170,7 @@ export class EditarLoteComponent{
       formData.append('precio_base', this.loteNuevo['precio_base']);
       formData.append('precio_salida', this.loteNuevo['precio_salida']);
       formData.append('titulo', this.loteNuevo['titulo']);
+      formData.append('base_salida', this.loteNuevo['base_salida']);
       formData.append('lote', this.loteNuevo['uuid']);
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');

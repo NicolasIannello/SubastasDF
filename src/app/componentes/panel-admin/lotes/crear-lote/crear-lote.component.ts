@@ -18,8 +18,8 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None
 })
 export class CrearLoteComponent {
-  datos:Array<any>=     ['','','ARS','','','','',[],[]];
-  alertas:Array<string>=['','',''   ,'','','','','',''];
+  datos:Array<any>=     ['','','ARS','','','','',[],[],true];
+  alertas:Array<string>=['','',''   ,'','','','','','',''];
   sources: Array<any> = [];
   pdf:SafeResourceUrl|null=null;
   @Output() messageEvent = new EventEmitter<boolean>();
@@ -109,8 +109,8 @@ export class CrearLoteComponent {
   crearLote(){    
     let flag=true;
     for (let i = 0; i < this.datos.length; i++) {
-      if(i!=5 && i!=6 && i!=7 && this.datos[i]=='') flag=false;
-      this.alertas[i]= (i!=5 && i!=6 && this.datos[i]=='') ? 'Campo obligatorio' : '';
+      if(i!=5 && i!=6 && i!=7 &&  i!=9 && this.datos[i]=='') flag=false;
+      this.alertas[i]= (i!=5 && i!=6 && i!=9 && this.datos[i]=='') ? 'Campo obligatorio' : '';
     }
     if(this.datos[8].length==0 || this.datos[7].length==0) flag=false;
     this.alertas[7]= this.datos[7].length==0 ? 'Campo obligatorio' : '';
@@ -125,6 +125,7 @@ export class CrearLoteComponent {
       formData.append('incremento', this.datos[4]);
       formData.append('precio_salida', this.datos[5]);
       formData.append('aclaracion', this.datos[6]);
+      formData.append('base_salida', this.datos[9]);
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');
 			for (let i = 0; i < this.datos[7].length; i++) {

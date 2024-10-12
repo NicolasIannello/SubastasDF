@@ -36,10 +36,17 @@
                 Utilice el PUNTO (.) como separador de decimales.    
             </span>
         </div>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="datos[9]" style="width: 100%; height: 2.5rem;">
+                <option [ngValue]=true selected>Precio base / Precio salida</option>
+                <option [ngValue]=false>Monto arranque / Monto esperado</option>    
+            </select>
+            <span class="focus-border2"></span>
+        </div>
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%;">
             <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
-                <div style="display: flex; flex-direction: row;"><label>Precio base: </label><span class="msg">*{{alertas[3]}}</span></div>
-                <input class="effect-1" type="number" placeholder="Precio base" style="height: 2.5rem;" [(ngModel)]="datos[3]">
+                <div style="display: flex; flex-direction: row;"><label>{{datos[9] ? 'Precio base' : 'Monto arranque'}}: </label><span class="msg">*{{alertas[3]}}</span></div>
+                <input class="effect-1" type="number" placeholder="{{datos[9] ? 'Precio base' : 'Monto arranque'}}" style="height: 2.5rem;" [(ngModel)]="datos[3]">
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
             <div style="display: flex; flex-direction: column; width: 32%; margin-right: 2%;">
@@ -48,8 +55,8 @@
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
             <div style="display: flex; flex-direction: column; width: 32%;">
-                <div style="display: flex; flex-direction: row;"><label>Precio salida: </label><span class="msg">{{alertas[5]}}</span></div>
-                <input class="effect-1" type="number" placeholder="Precio salida" style="height: 2.5rem;" [(ngModel)]="datos[5]">
+                <div style="display: flex; flex-direction: row;"><label>{{datos[9] ? 'Precio salida' : 'Monto esperado'}}: </label><span class="msg">{{alertas[5]}}</span></div>
+                <input class="effect-1" type="number" placeholder="{{datos[9] ? 'Precio salida' : 'Monto esperado'}}" style="height: 2.5rem;" [(ngModel)]="datos[5]">
                 <span class="focus-border2" style="position: relative !important;"></span>
             </div>
         </div>
