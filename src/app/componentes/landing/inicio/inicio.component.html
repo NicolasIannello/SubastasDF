@@ -6,20 +6,29 @@
         </p>
     </div>
     <div class="shadow"></div>
-    <div style="height: 50vh; width: 100%; display: flex; align-items: center;">
-        <div class="margin5" style="width: 100%; text-align: center;">
+    <div style="min-height: 50vh; width: 100%; display: flex; align-items: center;">
+        <div class="margin5" style="width: 100%; text-align: center; display: flex; flex-wrap: wrap; justify-content: center;">
             <span *ngIf="error==1">Inicie sesion para ver los eventos</span>
             <span *ngIf="error==2">No hay eventos para mostrar</span>
             <span *ngIf="error==3">Su cuenta debe ser habilitada para ver los eventos</span>
-            <div *ngFor="let ev of Eventos" class="borderAzul rounded" style="width: 25rem;">
+            <div *ngFor="let ev of Eventos" class="borderAzul rounded" style="width: 25rem; margin-right: 3%; margin-bottom: 3%;">
                 <div style="width: 100%; border-bottom: 1px solid rgb(48, 131, 220, 0.2);">
                     <img src="{{ev['img'].img}}" alt="" style="width: 100px;">
                 </div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">{{ev['nombre']}}</div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Inicio: {{ev['fecha_inicio']}}</div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Numero de lotes: {{ev['lotes'].length}}</div>
-                <div style="width: 100%;">
+                <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Modalidad: {{ev['modalidad']}}</div>
+                <div *ngIf="ev['estado']==1" style="width: 100%;">
                     <button class="rounded boton" style="width: 100%; border:none; border-top-left-radius: 0%; border-top-right-radius: 0%; height: 2rem;">Ver Evento</button>    
+                </div>
+                <div *ngIf="ev['estado']==0" style="width: 100%;">
+                    <span class="rounded glassAzul colorWhite" style="display: flex; width: 100%; border: none; border-top-left-radius: 0%; 
+                    border-top-right-radius: 0%; height: 2rem; justify-content: center; align-items: center; font-family: Avenir;">Proximamente</span>    
+                </div>
+                <div *ngIf="ev['estado']==2" style="width: 100%;">
+                    <span class="rounded glass" style="display: flex; width: 100%; border: none; border-top-left-radius: 0%; 
+                    border-top-right-radius: 0%; height: 2rem; justify-content: center; align-items: center; font-family: Avenir;">Finalizado</span>    
                 </div>
             </div>
         </div>
