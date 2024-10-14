@@ -28,10 +28,28 @@
             [ngClass]="{'changed': eventoNuevo['fecha_inicio']!=evento['fecha_inicio']}" [(ngModel)]="eventoNuevo['fecha_inicio']">
             <span class="focus-border2"></span>
         </div>
+        <label>Hora de inicio: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="time" placeholder="hora de inicio" style="height: 2.5rem;"
+            [ngClass]="{'changed': eventoNuevo['hora_inicio']!=evento['hora_inicio']}" [(ngModel)]="eventoNuevo['hora_inicio']">
+            <span class="focus-border2"></span>
+        </div>
         <label>Fecha de cierre: </label><span class="msg">*{{alertas[2]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="date" placeholder="Fecha de cierre" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['fecha_cierre']!=evento['fecha_cierre']}" [(ngModel)]="eventoNuevo['fecha_cierre']">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Hora de cierre: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="time" placeholder="hora de cierre" style="height: 2.5rem;"
+            [ngClass]="{'changed': eventoNuevo['hora_cierre']!=evento['hora_cierre']}" [(ngModel)]="eventoNuevo['hora_cierre']">
+            <span class="focus-border2"></span>
+        </div>
+        <label>Segundos entre cierres: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="number" placeholder="Segundos entre cierres" style="height: 2.5rem;"
+            [ngClass]="{'changed': eventoNuevo['segundos_cierre']!=evento['segundos_cierre']}" [(ngModel)]="eventoNuevo['segundos_cierre']">
             <span class="focus-border2"></span>
         </div>
         <label>Modalidad: </label>
@@ -40,6 +58,17 @@
             [ngClass]="{'changed': eventoNuevo['modalidad']!=evento['modalidad']}" style="width: 100%; height: 2.5rem;">
                 <option value='Subasta'>Subasta</option> 
                 <option value='Remate'>Remate</option> 
+            </select>
+            <span class="focus-border2"></span>
+        </div>
+        <label>Grupo: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <select class="effect-1" [(ngModel)]="eventoNuevo['grupo']" 
+            [ngClass]="{'changed': eventoNuevo['grupo']!=evento['grupo']}" style="width: 100%; height: 2.5rem;">
+                <option value='general' selected>General</option>
+                <option value='chocado'>Chocado</option>
+                <option value='desarmadero'>Desarmadero</option>
+                <option value='otro'>Otro</option>
             </select>
             <span class="focus-border2"></span>
         </div>
@@ -60,6 +89,15 @@
         </div>
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['eventos'], 'fa-circle-xmark rojo':!eventoNuevo['eventos']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['eventos']=!eventoNuevo['eventos']"></i> Mostrar en Eventos
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['mostrar_precio'], 'fa-circle-xmark rojo':!eventoNuevo['mostrar_precio']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['mostrar_precio']=!eventoNuevo['mostrar_precio']"></i> Mostrar precio
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['mostrar_ganadores'], 'fa-circle-xmark rojo':!eventoNuevo['mostrar_ganadores']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['mostrar_ganadores']=!eventoNuevo['mostrar_ganadores']"></i> Mostrar ganadores
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':eventoNuevo['mostrar_ofertas'], 'fa-circle-xmark rojo':!eventoNuevo['mostrar_ofertas']}" style="font-size: larger; margin-right: 1%; cursor: pointer;" (click)="eventoNuevo['mostrar_ofertas']=!eventoNuevo['mostrar_ofertas']"></i> Mostrar ofertas
         </div>
         <label>Imagen de portada: </label>
         <div style="margin-top: 2%; text-align: center;">

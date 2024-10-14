@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CrearEventoComponent {
   @Output() messageEvent = new EventEmitter<boolean>();
-  datos:Array<any>=     ['','Autos y motos','','','Subasta',true,true];
+  datos:Array<any>=     ['','Autos y motos','','','Subasta',true,true,'00:00','00:00',120,false,false,false,'general'];
   alertas:Array<string>=['',''             ,'','',''       ,'',''];
   img:any|null=[];
   sources:any='';
@@ -45,9 +45,16 @@ export class CrearEventoComponent {
         'categoria': this.datos[1],
         'fecha_inicio': this.datos[2],
         'fecha_cierre': this.datos[3],
+        'hora_inicio': this.datos[7],
+        'hora_cierre': this.datos[8],
+        'segundos_cierre': this.datos[9],
         'modalidad': this.datos[4],
         'publicar_cierre': this.datos[5],
         'inicio_automatico': this.datos[6],
+        'mostrar_precio':this.datos[10],
+        'mostrar_ganadores':this.datos[11],
+        'mostrar_ofertas':this.datos[12],
+        'grupo':this.datos[13],
         'token': localStorage.getItem('token')!,
         'tipo': '1',
       };

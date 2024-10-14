@@ -79,8 +79,15 @@ export class EditarEventoComponent {
           'eventos': this.eventoNuevo['eventos'],
           'fecha_cierre': this.eventoNuevo['fecha_cierre'],
           'fecha_inicio': this.eventoNuevo['fecha_inicio'],
+          'hora_inicio': this.eventoNuevo['hora_inicio'],
+          'hora_cierre': this.eventoNuevo['hora_cierre'],
+          'segundos_cierre': this.eventoNuevo['segundos_cierre'],  
           'home': this.eventoNuevo['home'],
           'inicio_automatico': this.eventoNuevo['inicio_automatico'],
+          'mostrar_precio':this.eventoNuevo['mostrar_precio'],
+          'mostrar_ganadores':this.eventoNuevo['mostrar_ganadores'],
+          'mostrar_ofertas':this.eventoNuevo['mostrar_ofertas'],
+          'grupo':this.eventoNuevo['grupo'],
           'modalidad': this.eventoNuevo['modalidad'],
           'nombre': this.eventoNuevo['nombre'],
           'publicar_cierre': this.eventoNuevo['publicar_cierre'],
@@ -92,7 +99,7 @@ export class EditarEventoComponent {
         next: (value:any) => {
           if(value.ok) Swal.fire({title:'Evento actualizado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
           if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          if(this.img==null && this.img.length==0) this.cerrarModal();
+          if(this.img.length==0 && this.img.length==0) this.cerrarModal();
         },
         error(err:any) {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       

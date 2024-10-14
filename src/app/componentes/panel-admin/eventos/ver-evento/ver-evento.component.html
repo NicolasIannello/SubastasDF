@@ -21,16 +21,40 @@
                 {{evento['fecha_inicio']}}
             </span>
         </div>
+        <label>Hora de inicio: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['hora_inicio']}}
+            </span>
+        </div>
         <label>Fecha de cierre: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;">
                 {{evento['fecha_cierre']}}
             </span>
         </div>
+        <label>Hora de cierre: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['hora_cierre']}}
+            </span>
+        </div>
+        <label>Segundos entre cierres: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['segundos_cierre']}}
+            </span>
+        </div>
         <label>Modalidad: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;">
                 {{evento['modalidad']}}
+            </span>
+        </div>
+        <label>Grupo: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['grupo']}}
             </span>
         </div>
         <label>Publicar fecha de cierre: </label>
@@ -47,6 +71,15 @@
         </div>
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['eventos'], 'fa-circle-xmark rojo':!evento['eventos']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar en Eventos
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['mostrar_precio'], 'fa-circle-xmark rojo':!evento['mostrar_precio']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar precio
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['mostrar_ganadores'], 'fa-circle-xmark rojo':!evento['mostrar_ganadores']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar ganadores
+        </div>
+        <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
+            <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['mostrar_ofertas'], 'fa-circle-xmark rojo':!evento['mostrar_ofertas']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar ofertas
         </div>
         <label>Imagen de portada: </label>
         <div style="margin-top: 2%; text-align: center;">
