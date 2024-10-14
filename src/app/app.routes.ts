@@ -14,6 +14,7 @@ import { ContactoComponent } from './componentes/landing/contacto/contacto.compo
 import { LotesComponent } from './componentes/panel-admin/lotes/lotes.component';
 import { EventosComponent } from './componentes/panel-admin/eventos/eventos.component';
 import { EventosUserComponent } from './componentes/landing/eventos/eventos.component';
+import { LotesUserComponent } from './componentes/subasta/lotes/lotes.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -25,6 +26,7 @@ export const routes: Routes = [
         { path: 'eventos', component: EventosUserComponent },
         { path: 'verificar/:token', component: VerificacionComponent },
         { path: 'cambio/:token', component: CambiarPassComponent },
+        { path: 'evento/:id', component: LotesUserComponent, canActivate:[authGuard] },
     ]},
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
         { path: '', component: LoginComponent },
