@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AdminService } from '../../../servicios/admin.service';
 import { ServiciosService } from '../../../servicios/servicios.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
@@ -21,6 +22,7 @@ export class InicioComponent implements OnInit{
   ngOnInit(): void {
     if(localStorage.getItem('token')!=null){
       let datos={
+        'flag': true,
         'dato': 'home',
         'token':localStorage.getItem('token'),
         'tipo':1

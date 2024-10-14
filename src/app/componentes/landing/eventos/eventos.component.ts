@@ -19,6 +19,7 @@ export class EventosUserComponent implements OnInit{
   ngOnInit(): void {
     if(localStorage.getItem('token')!=null){
         let datos={
+        'flag': true,
         'dato': 'eventos',
         'token':localStorage.getItem('token'),
         'tipo':1
