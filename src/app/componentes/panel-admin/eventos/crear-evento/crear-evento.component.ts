@@ -22,8 +22,8 @@ export class CrearEventoComponent {
   constructor(public api:AdminService) {}
 
   cerrarModal() {
-    this.datos=  ['','Autos y motos','','','Subasta',true,true];
-    this.alertas=['',''             ,'','',''       ,''];  
+    this.datos=  ['','Autos y motos','','','Subasta',true,true,'00:00','00:00',120,false,false,false,'general'];
+    this.alertas=['',''             ,'','',''       ,'',''];  
     this.inputImagen.nativeElement.value = "";
     this.img=[];
     this.sources='';  
