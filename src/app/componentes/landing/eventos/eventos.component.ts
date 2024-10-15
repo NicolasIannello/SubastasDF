@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../servicios/admin.service';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './eventos.component.html',
   styleUrl: '../../logreg/datos-acceso/datos-acceso.component.css'
 })
