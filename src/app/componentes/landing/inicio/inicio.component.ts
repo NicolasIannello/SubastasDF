@@ -31,8 +31,9 @@ export class InicioComponent implements OnInit{
       this.api.cargarEvento(datos).subscribe({
         next:(value)=> {          
           if(value.ok) this.Eventos=value.evento
-          if(!value.ok) this.error=1;
-          if(value.t && value.t==3) this.error=3
+          //if(!value.ok) this.error=1;
+          //if(value.t && value.t==3) this.error=3
+          this.error=value.t;
           for (let i = 0; i < this.Eventos.length; i++) {
             this.api2.cargarArchivo(this.Eventos[i].img.img,'evento').then(resp=>{						
               if(resp!=false){
