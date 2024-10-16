@@ -1,5 +1,7 @@
 <div class="svh" >
     <div class="margin5 border rounded" style="width: 100%; text-align: center;">
+        <span *ngIf="error==4">El evento aun no ha iniciado</span>
+        <span *ngIf="error==5">El evento ha terminado</span>
         <div *ngFor="let lote of lotes; index as i" style="display: flex; align-items: center; height: 20%; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">
             <div class="celda" style="height: 100%; display: flex; align-items: center; justify-content: center;">
                 <img src="{{imagenes[i].link}}" alt="" style="width: 100px;">

@@ -16,6 +16,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 export class LotesUserComponent implements OnInit{
   lotes:Array<any>=[]
   imagenes: Array<{link:SafeResourceUrl}> = [];
+  error:number=0
 
   constructor(public ruta:ActivatedRoute, public api: AdminService, public api2:ServiciosService){ }
 
@@ -28,6 +29,7 @@ export class LotesUserComponent implements OnInit{
     }      
     this.api.cargarEvento(datos).subscribe({
       next:(value)=> {        
+        this.error=value.t;
         for (let i = 0; i < value.evento[0].lotes.length; i++) {          
           let datos={
             'uuid':value.evento[0].lotes[i].uuid_lote,
