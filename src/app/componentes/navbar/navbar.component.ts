@@ -80,7 +80,7 @@ export class NavbarComponent implements OnInit{
         localStorage.setItem('token',value.token);
         this.User=value.user;
         if (value.ok) {
-          
+          window.location.reload();
         }else{
           if(!value.validado) {
             Swal.fire({title:'Revise su correo electronico', text:"Hemos enviado un mail de verificacion al correo: "+value.mail, confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
