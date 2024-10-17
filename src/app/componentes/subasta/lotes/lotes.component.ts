@@ -37,9 +37,7 @@ export class LotesUserComponent implements OnInit{
             'tipo':1
           }      
           this.api.cargarLote(datos).subscribe({
-            next:(value)=> {
-              console.log(value.lote[0].img[0].img);
-              
+            next:(value)=> {              
               this.lotes.push(value.lote[0]);
               this.api2.cargarArchivo(value.lote[0].img[0].img,'lotes').then(resp=>{						
                 if(resp!=false){                  
