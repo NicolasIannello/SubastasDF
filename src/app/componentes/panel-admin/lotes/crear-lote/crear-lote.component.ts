@@ -27,7 +27,7 @@ export class CrearLoteComponent {
   @ViewChild('pdfTC') inputPDF!: ElementRef;
 
   cerrarModal() {
-    this.datos=  ['','','ARS','','','','',[],[]];
+    this.datos=  ['','','ARS','','','','',[],[],true];
     this.alertas=['','',''   ,'','','','','',''];
     this.sources = [];
     this.pdf=null;
