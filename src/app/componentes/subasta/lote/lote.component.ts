@@ -28,7 +28,9 @@ export class LoteComponent{
   remHours:number=0;
   remMinutes:number=0;
   remSeconds:number=0;
-  oferta:number=0;
+  oferta:number|null=null;
+  ofertaAuto:number|null=null;
+  programar:boolean=false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -46,7 +48,9 @@ export class LoteComponent{
     this.imagenes=[];
     this.pdf=null;
     this.flagTimer=false;
-    this.oferta=0;
+    this.oferta=null;
+    this.ofertaAuto=null
+    this.programar=false;
     this.messageEvent.emit(false);
   }
 
@@ -70,7 +74,6 @@ export class LoteComponent{
       }
       this.dateFin= new Date(Date.parse(this.evento['fecha_cierre']+' '+this.evento['hora_cierre']));
       this.dateHoy= new Date();
-      this.oferta=this.lote['precio_base'];
       this.countDown()
     })    
   }
