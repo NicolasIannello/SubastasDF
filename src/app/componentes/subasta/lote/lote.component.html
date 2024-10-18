@@ -3,17 +3,27 @@
         <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
-        <div style="display: flex;">
-            <div style="margin-top: 2%; text-align: center; width: 60%;">
-                <label>Imagenes del lote: </label>
-                <div>
+        <div class="border rounded glass colorWhite" style="margin-bottom: 2%; padding: 0.5rem;">
+            <span *ngIf="flagTimer" style="margin-right: 5%; width: 95%; display: flex; justify-content: flex-end;">
+                <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> Finaliza en {{totalDays}} Dias {{remHours}}h {{remMinutes}}m {{remSeconds}}s
+            </span>
+            <span *ngIf="!flagTimer" style="margin-right: 5%; width: 95%; display: flex; justify-content: flex-end;">
+                <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> Evento finalizado
+            </span>
+        </div>
+        <div style="display: flex; margin-bottom: 2%;">
+            <div class="border rounded" style="text-align: center; width: 60%; border-top-right-radius: 0;">
+                <div style="padding: 1%; padding-top: 3%;">
+                    <label>Imagenes del lote: </label>
+                </div>
+                <div style="margin: 1.5%; padding: 1%; padding-top: 3%; border-top: 1px solid rgb(255, 144, 0, 0.2);">
                     <span *ngFor="let src of imagenes">
                         <img id=foto{{src.id}} src="{{src.link}}" alt="" style="width: 100px; cursor: pointer;" (click)="verImagen(src.id)">
                     </span>
                 </div>
             </div>
             <div style="width: 40%;">
-                <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+                <div class="border rounded" style="width: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;">
                     <span style="margin: 1.5%; display: block; font-family: Avenir; padding: 1%; padding-top: 3%;">
                         Evento: {{evento['nombre']}}
                     </span>
