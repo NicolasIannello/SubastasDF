@@ -113,3 +113,8 @@
     color: var(--amarello);
     text-decoration: underline;
 }
+.none2{
+    transform: scale3d(1, 0, 1);
+    visibility: hidden;
+    opacity: 0;
+}
