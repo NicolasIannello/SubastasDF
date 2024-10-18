@@ -1,6 +1,6 @@
 <div id="myModal" class="modal" style="overflow: auto;">
     <div class="modal-content" style="width: 90%;">
-        <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
+        <div style="display: flex; justify-content: flex-end; font-size: x-large; margin-bottom: 2%;">
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
         <div class="border rounded glass colorWhite" style="margin-bottom: 2%; padding: 0.5rem;">
@@ -52,6 +52,28 @@
                         Ofertando en este lote se estan aceptando los <i class="fa-solid fa-landmark"></i> terminos y condiciones
                     </span>
                 </div>
+            </div>
+        </div>
+        <div style="width: 100%; margin-bottom: 2%; margin-top: 2%; display: flex; align-items: center; flex-direction: column;">
+            <div class="col-3" style="width: 30rem;">
+                <div style="display: flex; justify-content: space-between;">
+                    <label>Realizar oferta</label>
+                    <span style="font-family: Avenir;">Incremento minimo (INC): {{lote['moneda']}} {{lote['incremento']}}</span>
+                </div>
+                <div style="display: flex;">
+                    <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
+                    align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
+                    <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;">
+                    <button class="border boton boton paginacion" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;">Ofertar</button>
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+            <div style="font-family: Avenir; display: flex; justify-content: flex-end; width: 30rem; align-items: center;">
+                <button class="border boton boton paginacion" style="width: 7rem;" (click)="oferta=lote['precio_base']">Precio base</button>
+                <button class="border boton boton paginacion" (click)="oferta=+oferta+ +lote['incremento']">X1 INC</button>
+                <button class="border boton boton paginacion" (click)="oferta=+oferta+ +lote['incremento']*2">X2 INC</button>
+                <button class="border boton boton paginacion" (click)="oferta=+oferta+ +lote['incremento']*3">X3 INC</button>
+                <button class="border boton boton paginacion" (click)="oferta=+oferta+ +lote['incremento']*10">X10 INC</button>
             </div>
         </div>
         <label>Descripcion: </label>

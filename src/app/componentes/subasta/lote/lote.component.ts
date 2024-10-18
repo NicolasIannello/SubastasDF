@@ -4,11 +4,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SanitizeHtmlPipe } from "../../../servicios/html.pipe";
 import { CommonModule } from '@angular/common';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lote',
   standalone: true,
-  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent],
+  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule],
   templateUrl: './lote.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -27,6 +28,7 @@ export class LoteComponent{
   remHours:number=0;
   remMinutes:number=0;
   remSeconds:number=0;
+  oferta:number=0;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -44,6 +46,7 @@ export class LoteComponent{
     this.imagenes=[];
     this.pdf=null;
     this.flagTimer=false;
+    this.oferta=0;
     this.messageEvent.emit(false);
   }
 
@@ -67,6 +70,7 @@ export class LoteComponent{
       }
       this.dateFin= new Date(Date.parse(this.evento['fecha_cierre']+' '+this.evento['hora_cierre']));
       this.dateHoy= new Date();
+      this.oferta=this.lote['precio_base'];
       this.countDown()
     })    
   }
