@@ -4,7 +4,7 @@
         <span *ngIf="error==5">El evento ha terminado</span>
         <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">
             <span>Evento: {{evento['nombre']}}</span>
-            <span>Lotes: {{evento['lotes'].length}}</span>
+            <span>Lotes: {{nlotes}}</span>
         </div>
         <div *ngFor="let lote of lotes; index as i" style="display: flex; align-items: center; height: 20%; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">
             <div *ngIf="imagenes.length>i" class="celda" style="height: 100%; display: flex; align-items: center; justify-content: center;">

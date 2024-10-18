@@ -19,6 +19,7 @@ export class LotesUserComponent implements OnInit{
   imagenes: Array<{link:SafeResourceUrl}> = [];
   error:number=0
   evento:any=[];
+  nlotes:number=0;
   loteModal:any=[];
   ver:boolean=false;
   @ViewChild(LoteComponent)loteComp!:LoteComponent;
@@ -35,6 +36,7 @@ export class LotesUserComponent implements OnInit{
     this.api.cargarEvento(datos).subscribe({
       next:(value)=> {        
         this.evento=value.evento[0]
+        this.nlotes=this.evento['lotes'].length
         this.error=value.t;        
         for (let i = 0; i < value.evento[0].lotes.length; i++) {          
           let datos={
@@ -71,8 +73,6 @@ export class LotesUserComponent implements OnInit{
   verLote(lote:any){
     this.ver=true;
     this.loteModal=lote;    
-    console.log(this.loteModal);
-    
     this.loteComp.cargarImagenes(this.loteModal.img, this.loteModal.pdf);
   }
 }
