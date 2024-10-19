@@ -95,7 +95,7 @@
                                 El sistema intentara generar una oferta por el precio actual mas un incremento minimo, siempre y cuando el precio actual del lote no sea mayor o igual al monto maximo configurado por Ud.
                             </span>
                         </div>
-                        <button class="border boton boton paginacion bgred" style="width: 100%;"><i class="fa-solid fa-trash-can" style="margin-right: 2%;"></i>Eliminar oferta programada</button>
+                        <button class="border boton boton paginacion bgred" style="width: 100%;" (click)="eliminarOferta()"><i class="fa-solid fa-trash-can" style="margin-right: 2%;"></i>Eliminar oferta programada</button>
                         <div style="display: flex;">
                             <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                             align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>

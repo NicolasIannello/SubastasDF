@@ -206,4 +206,33 @@ export class LoteComponent{
       Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
     }
   }
+
+  eliminarOferta(){
+    Swal.fire({
+      title: "Oferta automatica", text: '¿Desea eliminar la oferta automatica de este lote?',
+      showCancelButton: true, confirmButtonText: "Eliminar", confirmButtonColor:'red', cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let dato={
+          'token':localStorage.getItem('token'),
+          'lote':this.lote['uuid'],
+          'evento':this.evento['uuid'],
+          'tipo':1
+        }
+  
+        this.api.eliminarOfertaAuto(dato).subscribe({
+          next:(value)=>{
+            if(value.ok) {
+              Swal.fire({title:'Oferta automatica eliminada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              this.ofertaAutoExiste=null
+            }
+            if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+          error:(err)=>{
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        }) 
+      }
+    });
+  }
 }

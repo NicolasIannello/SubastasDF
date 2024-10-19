@@ -89,4 +89,7 @@ export class ServiciosService {
   getOfertaAuto(dato:any):Observable<any>{
     return this.http.post(base_url+'/oferta/getOfertaA', dato, {'headers':this.header})
   }
+  eliminarOfertaAuto(dato:any):Observable<any>{
+    return this.http.post(base_url+'/oferta/eliminarOfertaA', dato, {'headers':this.header})
+  }
 }
