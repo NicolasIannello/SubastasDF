@@ -31,6 +31,7 @@ export class LoteComponent{
   remSeconds:number=0;
   oferta:number|null=null;
   ofertaAuto:number|null=null;
+  ofertaAutoExiste:number|null=null;
   programar:boolean=false;
   precio_actual:number|null=null;
   cantidad_ofertas:number|null=null;
@@ -91,6 +92,12 @@ export class LoteComponent{
             this.precio_actual=value.precio;
             this.cantidad_ofertas=value.cantidad;
             this.ganador=value.ganador
+        },
+        error:(err)=> { },
+      })
+      this.api.getOfertaAuto(dato).subscribe({
+        next:(value)=> {
+          if(value.ok) this.ofertaAutoExiste=value.cantidad
         },
         error:(err)=> { },
       })
@@ -155,6 +162,46 @@ export class LoteComponent{
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         },
       })
+    }else{
+      Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+    }
+  }
+
+  programarOferta(){
+    if(this.ofertaAuto!=null && this.ofertaAuto>=this.lote['precio_base'] && (this.precio_actual==null || this.ofertaAuto>this.precio_actual)){
+      Swal.fire({
+        title: "Oferta automatica", text: '¿Desea crear una oferta automatica para este lote?',
+        showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let dato={
+            'token':localStorage.getItem('token'),
+            'cantidad':this.ofertaAuto,
+            'lote':this.lote['uuid'],
+            'evento':this.evento['uuid'],
+            'tipo':1
+          }
+    
+          this.api.programarOferta(dato).subscribe({
+            next:(value)=>{
+              if(value.ok) {
+                Swal.fire({title:'Oferta automatica creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+                this.ofertaAuto=null;
+                this.api.getOfertaAuto(dato).subscribe({
+                  next:(value)=> {
+                    if(value.ok) this.ofertaAutoExiste=value.cantidad
+                  },
+                  error:(err)=> { },
+                })
+              }
+              if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            },
+            error:(err)=>{
+              Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            },
+          }) 
+        }
+      });
     }else{
       Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
     }

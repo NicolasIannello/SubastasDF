@@ -83,4 +83,10 @@ export class ServiciosService {
   ofertaDatos(dato:any):Observable<any>{
     return this.http.post(base_url+'/oferta/datos', dato, {'headers':this.header})
   }
+  programarOferta(dato:any):Observable<any>{
+    return this.http.post(base_url+'/oferta/setOfertaA', dato, {'headers':this.header})
+  }
+  getOfertaAuto(dato:any):Observable<any>{
+    return this.http.post(base_url+'/oferta/getOfertaA', dato, {'headers':this.header})
+  }
 }
