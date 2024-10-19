@@ -77,4 +77,10 @@ export class ServiciosService {
       return false;
     }
   }
+  ofertar(dato:any):Observable<any>{
+    return this.http.post(base_url+'/oferta/ofertar', dato, {'headers':this.header})
+  }
+  ofertaDatos(dato:any):Observable<any>{
+    return this.http.post(base_url+'/oferta/datos', dato, {'headers':this.header})
+  }
 }

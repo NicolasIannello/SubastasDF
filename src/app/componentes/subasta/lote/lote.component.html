@@ -37,13 +37,19 @@
                         {{lote['base_salida'] ? 'Precio base' : 'Monto arranque'}}: {{lote['moneda']}} {{lote['precio_base']}}
                     </span>
                     <span style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
-                        Precio actual: 
+                        Precio actual: {{precio_actual==null ? '-' : precio_actual}}
                     </span>
                     <span *ngIf="evento['mostrar_ofertas']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
-                        Cantidad de ofertas: 
+                        Cantidad de ofertas: {{cantidad_ofertas==null ? '-' : cantidad_ofertas}}
                     </span>
                     <span *ngIf="evento['mostrar_ganadores']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
-                        Ganador actual: 
+                        Ganador actual: {{ganador==null ? '-' : ganador}}
+                    </span>
+                </div>
+                <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+                    <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                        Cotizar segun lo observado en la exhibicion y en las imagenes aportadas para cada fin. Ofertar segun los montos esperados por el vendedor. Leer las condiciones de venta Particulares.<br>
+                        Nota: Vehiculos de recupero de robo para transferir y en el estado que se encuentran y exhiben, los vehiculos no poseen garantia.
                     </span>
                 </div>
                 <div class="border rounded glassAzul colorWhite" style="width: 100%; margin-bottom: 2%;">
@@ -65,7 +71,7 @@
                         <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                         align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
                         <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;">
-                        <button class="border boton boton paginacion" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;">Ofertar</button>
+                        <button class="border boton boton paginacion" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="ofertar()">Ofertar</button>
                         <span class="focus-border2"></span>
                     </div>
                 </div>
@@ -80,10 +86,13 @@
             <div style="display: flex; width: 30rem; flex-direction: column;">
                 <button class="border boton boton paginacion" style="width: 50%;" (click)="programar=!programar; ofertaAuto=null">Programar oferta automatica <i [ngClass]="{'fa-caret-down' : !programar, 'fa-caret-up' : programar}"class="fa-solid"></i></button>
                 <div style="transform: scale3d(1, 1, 1); transform-origin: top; transition: all 0.3s ease-in;" [ngClass]="{'none2' : !programar}">
-                    <div class="col-3" style="width: 30rem;">
-                        <!-- <div style="display: flex; justify-content: space-between;">
-                            <label>Maximo a ofertar: </label>
-                        </div> -->
+                    <div class="col-3">
+                        <div class="border rounded glass colorWhite" style="margin-bottom: 2%; margin-top: 2%;">
+                            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                                El sistema intentara generar una oferta por el precio actual mas un incremento minimo, siempre y cuando el precio actual del lote no sea mayor o igual al monto maximo configurado por Ud.
+                            </span>
+                        </div>
+                        <button class="border boton boton paginacion bgred" style="width: 100%;"><i class="fa-solid fa-trash-can" style="margin-right: 2%;"></i>Eliminar oferta programada</button>
                         <div style="display: flex;">
                             <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                             align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
@@ -92,7 +101,7 @@
                             <span class="focus-border2"></span>
                         </div>
                     </div>
-                    <div style="font-family: Avenir; display: flex; justify-content: flex-end; width: 30rem; align-items: center;">
+                    <div style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center; width: 100%;">
                         <button class="border boton boton paginacion" style="width: 7rem;" (click)="ofertaAuto=lote['precio_base']">Precio base</button>
                         <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']">X1 INC</button>
                         <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*2">X2 INC</button>

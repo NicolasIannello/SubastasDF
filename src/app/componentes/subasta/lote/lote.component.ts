@@ -5,6 +5,7 @@ import { SanitizeHtmlPipe } from "../../../servicios/html.pipe";
 import { CommonModule } from '@angular/common';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lote',
@@ -31,6 +32,9 @@ export class LoteComponent{
   oferta:number|null=null;
   ofertaAuto:number|null=null;
   programar:boolean=false;
+  precio_actual:number|null=null;
+  cantidad_ofertas:number|null=null;
+  ganador:string|null=null;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -43,14 +47,15 @@ export class LoteComponent{
   }
 
   cerrarModal() {
-    //this.lote=[]
-    //this.evento=[]
     this.imagenes=[];
     this.pdf=null;
     this.flagTimer=false;
     this.oferta=null;
     this.ofertaAuto=null
     this.programar=false;
+    this.precio_actual=null;
+    this.cantidad_ofertas=null;
+    this.ganador=null;
     this.messageEvent.emit(false);
   }
 
@@ -75,6 +80,20 @@ export class LoteComponent{
       this.dateFin= new Date(Date.parse(this.evento['fecha_cierre']+' '+this.evento['hora_cierre']));
       this.dateHoy= new Date();
       this.countDown()
+      let dato={
+        'token':localStorage.getItem('token'),
+        'lote':this.lote['uuid'],
+        'evento':this.evento['uuid'],
+        'tipo':1
+      }
+      this.api.ofertaDatos(dato).subscribe({
+        next:(value)=> {
+            this.precio_actual=value.precio;
+            this.cantidad_ofertas=value.cantidad;
+            this.ganador=value.ganador
+        },
+        error:(err)=> { },
+      })
     })    
   }
 
@@ -117,4 +136,27 @@ export class LoteComponent{
     if(this.flagTimer) setTimeout( ()=>this.timer(), 1000);
   }
 
+  ofertar(){
+    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual)){
+      let dato={
+        'token':localStorage.getItem('token'),
+        'cantidad':this.oferta,
+        'lote':this.lote['uuid'],
+        'evento':this.evento['uuid'],
+        'tipo':1
+      }
+
+      this.api.ofertar(dato).subscribe({
+        next:(value)=>{
+          if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+        error:(err)=>{
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+      })
+    }else{
+      Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+    }
+  }
 }
