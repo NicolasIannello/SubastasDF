@@ -57,6 +57,7 @@ export class LoteComponent{
     this.precio_actual=null;
     this.cantidad_ofertas=null;
     this.ganador=null;
+    this.ofertaAutoExiste=null;
     this.messageEvent.emit(false);
   }
 
