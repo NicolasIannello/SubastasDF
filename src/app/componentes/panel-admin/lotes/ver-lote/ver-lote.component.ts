@@ -56,6 +56,20 @@ export class VerLoteComponent{
       if(resp!=false){
         this.pdf=this.transform(resp.url);
       }
+      let dato={
+        'token':localStorage.getItem('token'),
+        'lote':this.lote['uuid'],
+        'evento':'null',
+        'tipo':1
+      }
+      this.api.ofertaDatos(dato).subscribe({
+        next:(value)=> {
+            console.log(value);
+            this.Ofertas=value.ofertaDB
+        },
+        error(err) { 
+        },
+      })
     })
   }
 
@@ -106,7 +120,7 @@ export class VerLoteComponent{
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Titulo</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['titulo']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Descripcion</div>"+
-      "<div style='border: 1px solid rgb(48, 131, 220, 0.2);'>"+this.lote['descripcion']+"</div>"+
+      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); font-size:small;'>"+this.lote['descripcion']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Aclaracion</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['aclaracion']=='' ? '-' : this.lote['aclaracion'])+"</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
@@ -119,28 +133,54 @@ export class VerLoteComponent{
         "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['incremento']+"</div>"+
         "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+((this.lote['precio_salida']!='null' && this.lote['precio_salida']!='') ? this.lote['moneda']+' '+this.lote['precio_salida'] : '-')+"</div>"+
       "</div>"+
-      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Estado</div>"+
-      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['disponible'] ? 'Disponible' : 'No disponible')+"</div>"+
+      "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
+        "<div style='width:33%'>Fecha de cierre</div>"+
+        "<div style='width:34%'>Ofertas</div>"+
+        "<div style='width:34%'>Estado</div>"+
+      "</div>"+
+      "<div style='display:flex'; text-align:center;>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.Ofertas[0]['evento']['fecha_cierre']+" "+this.Ofertas[0]['evento']['hora_cierre']+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.Ofertas.length+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+(this.Ofertas[0]['evento']['estado']==2? 'Finalizado':"En proceso")+"</div>"+
+      "</div>"+
+      // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Estado</div>"+
+      // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['disponible'] ? 'Disponible' : 'No disponible')+"</div>"+
+      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Ganador</div>"+
+      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.Ofertas[0]['mail']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Terminos y condiciones</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['pdf']['name']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Imagenes</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center'>";
     
-    for (let i = 0; i < this.imagenes.length; i++) {
-      html+="<img src='"+this.imagenes[i].link+"' style='width: 150px;'>";
-    }
+    //for (let i = 0; i < this.imagenes.length; i++) {
+      html+="<img src='"+this.imagenes[0].link+"' style='width: 150px;'>";
+    //}
+    html+="<br><span>Se muestra 1 imagen de "+this.imagenes.length+" totales</span>";
     html+=
     "</div>"+
     "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Ofertas</div>"+
     "<div style='display: flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
         "<div style='width:20%'>Fecha</div>"+
-        "<div style='width:20%'>Evento</div>"+
-        "<div style='width:20%'>Usuario</div>"+
-        "<div style='width:20%'>Metodo</div>"+
-        "<div style='width:20%'>Estado</div>"+
+        "<div style='width:45%'>Usuario</div>"+
+        "<div style='width:15%'>Metodo</div>"+
+        //"<div style='width:20%'>Estado</div>"+
         "<div style='width:20%'>Monto</div>"+
     "</div>";
-    if(this.Ofertas.length==0) html+="<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>No hay ofertas</div>"
+    if(this.Ofertas.length==0) {
+      html+="<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>No hay ofertas</div>"
+    }else{
+      let cantidad=this.Ofertas.length>5 ? 5 : this.Ofertas.length;
+      for (let i = 0; i < cantidad; i++) {
+        html+="<div style='display: flex; text-align:center;'>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['fecha']+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:45%; font-size:smaller;'>"+this.Ofertas[i]['mail']+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:smaller;'>"+this.Ofertas[i]['tipo']+"</div>"+
+            //"<div style='width:20%'>"+Estado+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['cantidad']+"</div>"+
+        "</div>";
+      }
+      html+="<br><span>Se muestra 5 ofertas de "+this.Ofertas.length+" totales</span>";
+    }
 
 
     html+="</div>"
