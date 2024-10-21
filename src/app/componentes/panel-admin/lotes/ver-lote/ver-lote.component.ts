@@ -64,7 +64,6 @@ export class VerLoteComponent{
       }
       this.api.ofertaDatos(dato).subscribe({
         next:(value)=> {
-            console.log(value);
             this.Ofertas=value.ofertaDB
         },
         error(err) { 
