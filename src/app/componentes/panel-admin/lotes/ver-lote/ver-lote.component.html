@@ -1,5 +1,5 @@
 <div id="myModal" class="modal" style="overflow: auto;">
-    <div class="modal-content" style="width: 50%;">
+    <div class="modal-content" style="width: 70%;">
         <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
             <button class="boton boton2 border rounded" (click)="generarExcel()">Generar PDF</button>
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
@@ -49,18 +49,18 @@
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda">Fecha</div>
             <div class="celda">Evento</div>
-            <div class="celda">Usuario</div>
+            <div class="celda" style="width: 15rem;">Usuario</div>
             <div class="celda">Metodo</div>
-            <div class="celda">Estado</div>
-            <div class="celda" style="border-right: none;">Monto</div>
+            <!-- <div class="celda">Estado</div> -->
+            <div class="celda" style="border-right: none; width: 8rem;">Monto</div>
         </div>
         <div *ngFor="let oferta of Ofertas" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-            <div class="celda username">{{lote['fecha']}}</div>
-            <div class="celda username">{{lote['evento']}}</div>
-            <div class="celda username">{{lote['usuario']}}</div>
-            <div class="celda username">{{lote['metodo']}}</div>
-            <div class="celda username">{{lote['estado']}}</div>
-            <div class="celda username" style="border-right: none;">{{lote['monto']}}</div>
+            <div class="celda">{{oferta['fecha']}}</div>
+            <div class="celda">{{oferta['evento']['nombre']}}</div>
+            <div class="celda" style="width: 15rem;">{{oferta['mail']}}</div>
+            <div class="celda">{{oferta['tipo']}}</div>
+            <!-- <div class="celda">{{oferta['estado']}}</div> -->
+            <div class="celda" style="border-right: none; width: 8rem;">{{oferta['cantidad']}}</div>
         </div>
         <div *ngIf="Ofertas.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
             <div class="celda username" style="width: 100%; border-right: none;">No hay ofertas</div>
