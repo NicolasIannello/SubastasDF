@@ -16,6 +16,7 @@ import { EventosComponent } from './componentes/panel-admin/eventos/eventos.comp
 import { EventosUserComponent } from './componentes/landing/eventos/eventos.component';
 import { LotesUserComponent } from './componentes/subasta/lotes/lotes.component';
 import { MiPerfilComponent } from './componentes/user/mi-perfil/mi-perfil.component';
+import { OfertasComponent } from './componentes/user/ofertas/ofertas.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -29,6 +30,7 @@ export const routes: Routes = [
         { path: 'cambio/:token', component: CambiarPassComponent },
         { path: 'evento/:id', component: LotesUserComponent, canActivate:[authGuard] },
         { path: 'mi-perfil', component: MiPerfilComponent, canActivate:[authGuard] },
+        { path: 'mis-ofertas', component: OfertasComponent, canActivate:[authGuard] },
     ]},
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
         { path: '', component: LoginComponent },

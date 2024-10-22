@@ -1,0 +1,34 @@
+<div class="svh" >
+    <div class="border margin5 rounded seccion" style="width: 100%;">            
+        <h1>Ofertas</h1>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda">Fecha</div>
+            <div class="celda">Evento</div>
+            <div class="celda" style="width: 15rem;">Lote</div>
+            <div class="celda">Metodo</div>
+            <div class="celda" style="border-right: none; width: 8rem;">Monto</div>
+        </div>
+        <div *ngFor="let _ of [].constructor(20); index as i" style="width: 100%;">
+            <div *ngIf="Ofertas[i+index]" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2);">
+                <div class="celda">{{Ofertas[i+index]['fecha']}}</div>
+                <div class="celda">{{Ofertas[i+index]['evento']['nombre']}}</div>
+                <div class="celda" style="width: 15rem;">{{Ofertas[i+index]['lote']['titulo']}}</div>
+                <div class="celda">{{Ofertas[i+index]['tipo']}}</div>
+                <div class="celda" style="border-right: none; width: 8rem;">{{Ofertas[i+index]['cantidad']}}</div>
+            </div>
+        </div>
+        <div *ngIf="Ofertas.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
+            <div class="celda username" style="width: 100%; border-right: none;">No hay ofertas</div>
+        </div>
+        <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: flex-end; height: 100%;">
+            Pagina {{pagina+1}} de {{pagU}}
+            <div style="margin-right: 2%; margin-left: 2%;">
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="principio()">Principio</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="atras()">Atras</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
+            </div>
+            Ofertas totales: {{Ofertas.length}}
+        </div>
+    </div>
+</div>
