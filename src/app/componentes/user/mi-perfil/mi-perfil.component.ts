@@ -91,7 +91,6 @@ export class MiPerfilComponent implements OnInit{
           'ciudad': this.datoCambio['ciudad'],
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
-          'tipo': 'user'
         }
         break;
     }
