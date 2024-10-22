@@ -124,7 +124,8 @@ export class VerEventoComponent {
                 callback: (doc: jsPDF) => {
                   doc.save(this.evento['nombre']);
                 },
-                margin: [40, 200, 60, 40]
+                margin: [35, 0, 0, 35],
+                autoPaging:'text'
               });
             }
         },

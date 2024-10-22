@@ -188,7 +188,8 @@ export class VerLoteComponent{
       callback: (doc: jsPDF) => {
         doc.save(this.lote['titulo']);
       },
-      margin: [40, 200, 60, 40]
+      margin: [35, 0, 0, 35],
+      autoPaging:'text'
     });
   }
 }
