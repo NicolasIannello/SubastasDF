@@ -72,14 +72,11 @@ export class MiPerfilComponent implements OnInit{
           'razon_social': this.datoCambioEMP['razon_social'],
           'nombre': this.datoCambio['nombre'],
           'como_encontro': this.datoCambio['como_encontro'],
-          'mail': this.datoCambio['mail'],
           'pais': this.datoCambio['pais'],
           'provincia': this.datoCambio['provincia'],
           'ciudad': this.datoCambio['ciudad'],
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
-          'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
-          'tipo': 'emp'
         }
         break; 
       case 'user': 
@@ -89,13 +86,11 @@ export class MiPerfilComponent implements OnInit{
           'telefono': this.datoCambio['telefono'],
           'actividad': this.datoCambio['actividad'],
           'como_encontro': this.datoCambio['como_encontro'],
-          'mail': this.datoCambio['mail'],
           'pais': this.datoCambio['pais'],
           'provincia': this.datoCambio['provincia'],
           'ciudad': this.datoCambio['ciudad'],
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
-          'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
           'tipo': 'user'
         }
         break;
