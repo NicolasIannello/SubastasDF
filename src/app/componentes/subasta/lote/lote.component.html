@@ -1,6 +1,7 @@
 <div id="myModal" class="modal" style="overflow: auto;">
     <div class="modal-content" style="width: 90%;">
         <div style="display: flex; justify-content: flex-end; font-size: x-large; margin-bottom: 2%;">
+            <i [ngClass]="{'fa-regular' : !fav, 'fa-solid': fav}" class="fa-star icerrar" style="margin-right: 3rem;" (click)="setFavorito()"></i>
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
         <div class="border rounded glass colorWhite" style="margin-bottom: 2%; padding: 0.5rem;">

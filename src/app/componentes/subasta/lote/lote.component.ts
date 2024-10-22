@@ -36,6 +36,7 @@ export class LoteComponent{
   precio_actual:number|null=null;
   cantidad_ofertas:number|null=null;
   ganador:string|null=null;
+  fav:boolean=false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -58,6 +59,7 @@ export class LoteComponent{
     this.cantidad_ofertas=null;
     this.ganador=null;
     this.ofertaAutoExiste=null;
+    this.fav=false;
     this.messageEvent.emit(false);
   }
 
@@ -99,6 +101,12 @@ export class LoteComponent{
       this.api.getOfertaAuto(dato).subscribe({
         next:(value)=> {
           if(value.ok) this.ofertaAutoExiste=value.cantidad
+        },
+        error:(err)=> { },
+      })
+      this.api.getFavorito(dato).subscribe({
+        next:(value)=> {
+          this.fav=value.favDB!=0;
         },
         error:(err)=> { },
       })
@@ -235,5 +243,20 @@ export class LoteComponent{
         }) 
       }
     });
+  }
+
+  setFavorito(){
+    let dato={
+      'token':localStorage.getItem('token'),
+      'lote':this.lote['uuid'],
+      'evento':this.evento['uuid'],
+      'tipo':1
+    }
+    this.api.setFavorito(dato).subscribe({
+      next:(value)=> {
+        this.fav= !this.fav;
+      },
+      error:(err)=> { },
+    })
   }
 }
