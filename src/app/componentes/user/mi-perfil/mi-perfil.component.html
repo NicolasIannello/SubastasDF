@@ -1,0 +1,166 @@
+<div class="svh" >
+    <div class="seccion" style="width: 100%; justify-content: center;">
+        <div class="modal-content rounded">
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> 
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["nombre"]' [(ngModel)]="datoCambio['nombre']"
+                        [ngClass]="{'changed': datoCambio['nombre']!=datoCambioCheck['nombre']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">CUIL/CUIT:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["cuil_cuit"]' [(ngModel)]="datoCambio['cuil_cuit']"
+                        [ngClass]="{'changed': datoCambio['cuil_cuit']!=datoCambioCheck['cuil_cuit']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">E-mail: </span> {{datoCambio["mail"]}}
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Telefono:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["telefono"]' [(ngModel)]="datoCambio['telefono']"
+                        [ngClass]="{'changed': datoCambio['telefono']!=datoCambioCheck['telefono']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Pais:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <select class="effect-1" [value]='datoCambio["pais"]' [(ngModel)]="datoCambio['pais']" (change)="getPais(true)"
+                        [ngClass]="{'changed': datoCambio['pais']!=datoCambioCheck['pais']}" style="width: 100%; height: 2rem; background: #ececec;">
+                            <ng-container *ngFor="let p of Paises, index as i">
+                                <option value="{{p.name}}" selected>{{p.name}}</option>
+                            </ng-container>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Provincia:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <select class="effect-1" [value]='datoCambio["provincia"]' [(ngModel)]='datoCambio["provincia"]'
+                        [ngClass]="{'changed': datoCambio['provincia']!=datoCambioCheck['provincia']}" style="width: 100%; height: 2rem; background: #ececec;">
+                            <ng-container *ngFor="let p of Paises[paisI].states, index as i">
+                                <option value="{{Paises[paisI].states[i]}}" selected>{{Paises[paisI].states[i]}}</option>
+                            </ng-container>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ciudad:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["ciudad"]' [(ngModel)]="datoCambio['ciudad']"
+                        [ngClass]="{'changed': datoCambio['ciudad']!=datoCambioCheck['ciudad']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Codigo Postal:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["postal"]' [(ngModel)]="datoCambio['postal']"
+                        [ngClass]="{'changed': datoCambio['postal']!=datoCambioCheck['postal']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Domicilio:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["domicilio"]' [(ngModel)]="datoCambio['domicilio']"
+                        [ngClass]="{'changed': datoCambio['domicilio']!=datoCambioCheck['domicilio']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Actividad:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <select class="effect-1" [value]='datoCambio["actividad"]' [(ngModel)]="datoCambio['actividad']"
+                        [ngClass]="{'changed': datoCambio['actividad']!=datoCambioCheck['actividad']}" style="width: 100%; height: 2rem; background: #ececec;">
+                            <option value="ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO">ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS DE APOYO</option>
+                            <option value="ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA">ADMINISTRACION PUBLICA, DEFENSA Y SEGURIDAD SOCIAL OBLIGATORIA</option>
+                            <option value="AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA">AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA</option>
+                            <option value="COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS">COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS</option>
+                            <option value="CONSTRUCCIÓN">CONSTRUCCIÓN</option>
+                            <option value="ENSEÑANZA">ENSEÑANZA</option>
+                            <option value="EXPLOTACIÓN DE MINAS Y CANTERAS">EXPLOTACIÓN DE MINAS Y CANTERAS</option>
+                            <option value="INDUSTRIA MANUFACTURERA">INDUSTRIA MANUFACTURERA</option>
+                            <option value="INFORMACIÓN Y COMUNICACIONES">INFORMACIÓN Y COMUNICACIONES</option>
+                            <option value="INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS">INTERMEDIACIÓN FINANCIERA Y SERVICIOS DE SEGUROS</option>
+                            <option value="SALUD HUMANA Y SERVICIOS SOCIALES">SALUD HUMANA Y SERVICIOS SOCIALES</option>
+                            <option value="SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO">SERVICIOS ARTÍSTICOS, CULTURALES, DEPORTIVOS Y DE ESPARCIMIENTO</option>
+                            <option value="SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA">SERVICIOS DE ALOJAMIENTO Y SERVICIOS DE COMIDA</option>
+                            <option value="SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES">SERVICIOS DE ASOCIACIONES Y SERVICIOS PERSONALES</option>
+                            <option value="SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO">SERVICIOS DE HOGARES PRIVADOS QUE CONTRATAN SERVICIO DOMESTICO</option>
+                            <option value="SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES">SERVICIOS DE ORGANIZACIONES Y ÓRGANOS EXTRATERRITORIALES</option>
+                            <option value="SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO">SERVICIOS DE TRANSPORTE Y ALMACENAMIENTO</option>
+                            <option value="SERVICIOS INMOBILIARIOS">SERVICIOS INMOBILIARIOS</option>
+                            <option value="SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS">SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS</option>
+                            <option value="SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO">SUMINISTRO DE AGUA, CLOACAS, GESTIÓN DE RESIDUOS Y RECUPERACIÓN DE MATERIALES Y SANEAMIENTO PÚBLICO</option>
+                            <option value="SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO">SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO</option>
+                            <option value="OTRA">OTRA</option>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">Validado: </span> {{datoCambio["validado"]? 'Validado' : 'Invalidado'}}
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; border-bottom: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">Habilitado: </span> {{datoCambio["habilitado"]? 'Habilitado' : 'Inhabilitado'}}
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-bottom: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambio["como_encontro"]' [(ngModel)]="datoCambio['como_encontro']"
+                        [ngClass]="{'changed': datoCambio['como_encontro']!=datoCambioCheck['como_encontro']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-right: none; border-bottom: none;">
+                </div>
+            </div>
+            <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Persona responsable:</span> 
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambioEMP["persona_responsable"]' [(ngModel)]="datoCambioEMP['persona_responsable']"
+                        [ngClass]="{'changed': datoCambioEMP['persona_responsable']!=datoCambioEMPCheck['persona_responsable']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; border-top: none;">
+                    <span style="font-weight: bold; text-decoration: underline; width: 35%;">Razon social:</span>
+                    <div class="col-3" style="width: 60%; margin-left: 2%;">
+                        <input type="text" class="effect-1" [value]='datoCambioEMP["razon_social"]' [(ngModel)]="datoCambioEMP['razon_social']"
+                        [ngClass]="{'changed': datoCambioEMP['razon_social']!=datoCambioEMPCheck['razon_social']}" style="width: 100%; height: 2rem; background: #ececec;">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="celda" style="width: 50%; display:flex; align-items:center;border-right: none;"></div>
+                <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; justify-content: flex-end;">
+                    <button class="boton boton2 border rounded botones" (click)="actualizar()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

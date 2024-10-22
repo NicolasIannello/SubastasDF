@@ -98,4 +98,7 @@ export class ServiciosService {
   setFavorito(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/setFavorito', dato, {'headers':this.header})
   }
+  getDatos(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/getDatos', dato, {'headers':this.header})
+  }
 }
