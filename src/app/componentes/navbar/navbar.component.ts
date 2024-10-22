@@ -55,6 +55,11 @@ export class NavbarComponent implements OnInit{
     this.menuOpen2=false;
   }
 
+  cerrarMenus(){
+    this.menuOpen=false;
+    this.menuOpen2=false;
+  }
+
   open(){
     this.menuOpen=!this.menuOpen;
     this.menuOpen2=false;
