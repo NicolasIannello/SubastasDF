@@ -200,7 +200,8 @@ export class UsuariosComponent implements OnInit{
       Swal.fire({title:'Las contraseñas no coinciden', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       return;
     }
-
+    console.log(this.datoCambioCheck);
+    
     let datos, tipo='user';
     switch (this.datoCambio['tipo']) {
       case 'emp':        
@@ -219,6 +220,7 @@ export class UsuariosComponent implements OnInit{
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
           'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'grupo': this.datoCambio['grupo'],
           'tipo': 'emp'
         }
         break; 
@@ -237,6 +239,7 @@ export class UsuariosComponent implements OnInit{
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
           'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'grupo': this.datoCambio['grupo'],
           'tipo': tipo
         }
         break;
@@ -255,6 +258,7 @@ export class UsuariosComponent implements OnInit{
           'postal': this.datoCambio['postal'],
           'domicilio': this.datoCambio['domicilio'],
           'habilitado': (this.datoCambio['habilitado']==true || this.datoCambio['habilitado']=='true') ? true : false,
+          'grupo': this.datoCambio['grupo'],
           'tipo': tipo
         }
         break;
