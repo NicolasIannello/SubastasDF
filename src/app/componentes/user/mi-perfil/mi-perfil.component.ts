@@ -35,11 +35,9 @@ export class MiPerfilComponent implements OnInit{
         if(value.ok){
           this.datoCambio=JSON.parse(JSON.stringify(value.userDatos[0]));
           this.datoCambioCheck=JSON.parse(JSON.stringify(value.userDatos[0]));
-          console.log(this.datoCambio);
           if(value.userDatos[0].dato_empresa){
             this.datoCambioEMP=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
             this.datoCambioEMPCheck=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
-            console.log(this.datoCambioEMP);
           }
           this.getPais(false)
         }

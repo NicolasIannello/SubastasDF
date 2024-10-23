@@ -24,7 +24,6 @@ export class OfertasComponent implements OnInit{
     }
     this.api.getOfertas(dato).subscribe({
       next:(value)=> {
-        console.log(value);
         if(value.ok) this.Ofertas=value.ofertaDB;
         this.pagU=Math.ceil(this.Ofertas.length/20)
       },
