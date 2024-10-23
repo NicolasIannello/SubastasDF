@@ -20,8 +20,9 @@
                 border-top-right-radius: 0%; height: 2rem; justify-content: center; align-items: center; font-family: Avenir;">Proximamente</span>    
             </div>
             <div *ngIf="ev['estado']==2" style="width: 100%;">
-                <span class="rounded glass" style="display: flex; width: 100%; border: none; border-top-left-radius: 0%; 
-                border-top-right-radius: 0%; height: 2rem; justify-content: center; align-items: center; font-family: Avenir;">Finalizado</span>    
+                <!-- <span class="rounded glass" style="display: flex; width: 100%; border: none; border-top-left-radius: 0%; 
+                border-top-right-radius: 0%; height: 2rem; justify-content: center; align-items: center; font-family: Avenir;">Finalizado</span>     -->
+                <button class="rounded boton boton2" style="width: 100%; border:none; border-top-left-radius: 0%; border-top-right-radius: 0%; height: 2rem;" [routerLink]="['/evento', ev.uuid]">Finalizado</button>
             </div>
         </div>
     </div>
