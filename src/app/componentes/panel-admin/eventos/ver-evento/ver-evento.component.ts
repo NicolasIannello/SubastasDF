@@ -114,7 +114,7 @@ export class VerEventoComponent {
               "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:x-small; text-align:center;'>"+this.lotes[i]['precio_base']+"</div>"+
               "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:x-small; text-align:center;'>"+(this.lotes[i]['precio_venta']? this.lotes[i]['precio_venta']:'-')+"</div>"+
               "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:10%; font-size:x-small; text-align:center;'>"+oferta.length+"</div>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:30%; font-size:x-small; text-align:center;'>"+oferta[0]['mail']+"</div>"+
+              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:30%; font-size:x-small; text-align:center;'>"+this.lotes[i]['ganador']+"</div>"+
             "</div>";
             flag++;
             if(flag==this.lotes.length){
