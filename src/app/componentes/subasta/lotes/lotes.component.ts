@@ -33,6 +33,7 @@ export class LotesUserComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo':1
     }      
+    let int = 0;
     this.api.cargarEvento(datos).subscribe({
       next:(value)=> {        
         this.evento=value.evento[0]
@@ -52,6 +53,10 @@ export class LotesUserComponent implements OnInit{
                   this.imagenes.push({link:resp.url});
                 }
               })
+              int++;              
+              if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value.lote[0].uuid){
+                this.verLote(value.lote[0])
+              }
             },
             error:(err)=> {
               Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
