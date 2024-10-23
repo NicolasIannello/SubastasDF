@@ -220,3 +220,10 @@ input::file-selector-button:hover {
 .bgred:hover{
     background-color: red;
 }
+.boton2{
+    &:hover{
+        background-color: var(--blue);
+        color: var(--white);
+    }
+    transition: all 0.2s linear;
+}
