@@ -104,4 +104,7 @@ export class ServiciosService {
   getOfertas(dato:any):Observable<any>{
     return this.http.post(base_url+'/oferta/getOfertas', dato, {'headers':this.header})
   }
+  getFavoritos(dato:any):Observable<any>{
+    return this.http.post(base_url+'/lote/getFavoritos', dato, {'headers':this.header})
+  }
 }
