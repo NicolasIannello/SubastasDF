@@ -107,4 +107,7 @@ export class ServiciosService {
   getFavoritos(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/getFavoritos', dato, {'headers':this.header})
   }
+  getAdjudicados(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/getAdjudicados', dato, {'headers':this.header})
+  }
 }

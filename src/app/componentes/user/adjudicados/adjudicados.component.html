@@ -1,0 +1,22 @@
+<div class="svh" >
+    <div class="border margin5 rounded seccion" style="width: 100%;">            
+        <h1>Lotes adjudicados</h1>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda" style="width: 40%;">Evento</div>
+            <div class="celda" style="width: 40%;">Lote</div>
+            <div class="celda" style="width: 10%;">Oferta</div>
+            <div style="width: 10%; border-right: none;"></div>
+        </div>
+        <div *ngFor="let ad of Adjudicados" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda" style="width: 40%;">{{ad['evento']['nombre']}}</div>
+            <div class="celda" style="width: 40%;">{{ad['lote']['titulo']}}</div>
+            <div class="celda" style="width: 10%;">{{ad['lote']['precio_ganador']}}</div>
+            <div style="width: 10%; border-right: none;">
+                <button class="boton border" style="width: 100%; height: 100%;" [routerLink]="['/evento/', ad['uuid_evento'], 'lote', ad['uuid_lote']]">Ver</button>
+            </div>
+        </div>
+        <div *ngIf="Adjudicados.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
+            <div class="celda username" style="width: 100%; border-right: none;">No tiene lotes adjudicados</div>
+        </div>
+    </div>
+</div>

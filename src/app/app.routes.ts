@@ -18,6 +18,7 @@ import { LotesUserComponent } from './componentes/subasta/lotes/lotes.component'
 import { MiPerfilComponent } from './componentes/user/mi-perfil/mi-perfil.component';
 import { OfertasComponent } from './componentes/user/ofertas/ofertas.component';
 import { FavoritosComponent } from './componentes/user/favoritos/favoritos.component';
+import { AdjudicadosComponent } from './componentes/user/adjudicados/adjudicados.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent , children: [
@@ -34,6 +35,7 @@ export const routes: Routes = [
         { path: 'mi-perfil', component: MiPerfilComponent, canActivate:[authGuard] },
         { path: 'mis-ofertas', component: OfertasComponent, canActivate:[authGuard] },
         { path: 'mis-favoritos', component: FavoritosComponent, canActivate:[authGuard] },
+        { path: 'mis-adjudicados', component: AdjudicadosComponent, canActivate:[authGuard] },
     ]},
     { path: 'panelAdmin', component: PanelAdminComponent , children: [
         { path: '', component: LoginComponent },

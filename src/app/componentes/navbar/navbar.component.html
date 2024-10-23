@@ -47,7 +47,7 @@
         </ng-container>
         <ng-template #userBlock>
             <button class="border rounded boton" style="display: flex; align-items: center;" routerLink='mi-perfil' (click)="cerrarMenus()"><i class="fa-solid fa-user iuser"></i> Mi perfil</button>    
-            <button class="border rounded boton" style="display: flex; align-items: center;" (click)="cerrarMenus()"><i class="fa-solid fa-cart-shopping iuser"></i> Lotes adjudicados</button>    
+            <button class="border rounded boton" style="display: flex; align-items: center;" routerLink="mis-adjudicados" (click)="cerrarMenus()"><i class="fa-solid fa-cart-shopping iuser"></i> Lotes adjudicados</button>    
             <button class="border rounded boton" style="display: flex; align-items: center;" routerLink='mis-ofertas' (click)="cerrarMenus()"><i class="fa-solid fa-calendar-days iuser"></i> Lotes ofertados</button>    
             <button class="border rounded boton" style="display: flex; align-items: center; margin-bottom: 2rem;" routerLink="mis-favoritos" (click)="cerrarMenus()"><i class="fa-solid fa-star iuser"></i> Favoritos</button>    
             <button class="border rounded boton" (click)="logout()">Cerrar session</button>    
