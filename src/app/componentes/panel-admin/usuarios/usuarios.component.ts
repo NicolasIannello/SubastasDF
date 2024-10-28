@@ -200,8 +200,6 @@ export class UsuariosComponent implements OnInit{
       Swal.fire({title:'Las contraseñas no coinciden', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       return;
     }
-    console.log(this.datoCambioCheck);
-    
     let datos, tipo='user';
     switch (this.datoCambio['tipo']) {
       case 'emp':        
