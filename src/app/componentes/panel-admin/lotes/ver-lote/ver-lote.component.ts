@@ -118,19 +118,19 @@ export class VerLoteComponent{
     "<div style='width:33rem; font-family:Arial'>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Titulo</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['titulo']+"</div>"+
-      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Descripcion</div>"+
-      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); font-size:small;'>"+this.lote['descripcion']+"</div>"+
-      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Aclaracion</div>"+
-      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['aclaracion']=='' ? '-' : this.lote['aclaracion'])+"</div>"+
+      // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Descripcion</div>"+
+      // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); font-size:small;'>"+this.lote['descripcion']+"</div>"+
+      // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Aclaracion</div>"+
+      // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['aclaracion']=='' ? '-' : this.lote['aclaracion'])+"</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-        "<div style='width:33%'>Precio Base</div>"+
-        "<div style='width:34%'>Incremento</div>"+
-        "<div style='width:33%'>Precio Salida</div>"+
+        "<div style='width:50%'>Precio Base</div>"+
+        // "<div style='width:34%'>Incremento</div>"+
+        "<div style='width:50%'>Precio Salida</div>"+
       "</div>"+
       "<div style='display:flex'; text-align:center;>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['precio_base']+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['incremento']+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+((this.lote['precio_salida']!='null' && this.lote['precio_salida']!='') ? this.lote['moneda']+' '+this.lote['precio_salida'] : '-')+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['precio_base']+"</div>"+
+        // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['incremento']+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+((this.lote['precio_salida']!='null' && this.lote['precio_salida']!='') ? this.lote['moneda']+' '+this.lote['precio_salida'] : '-')+"</div>"+
       "</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
         "<div style='width:33%'>Fecha de cierre</div>"+
@@ -146,7 +146,7 @@ export class VerLoteComponent{
       // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['disponible'] ? 'Disponible' : 'No disponible')+"</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
         "<div style='width:50%'>Ganador</div>"+
-        "<div style='width:50%'>Cantidad</div>"+
+        "<div style='width:50%'>Mayor oferta</div>"+
       "</div>"+
       "<div style='display:flex'; text-align:center;>"+
         "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['ganador']+"</div>"+
