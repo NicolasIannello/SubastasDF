@@ -64,7 +64,7 @@ export class LoteComponent{
   }
 
   cargarImagenes(imgs:Array<any>, pdf:any){
-    this.flagTimer=true;
+    if(this.evento['estado']==1) this.flagTimer=true;
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
       this.imagenes.push({link:'', id:i});
