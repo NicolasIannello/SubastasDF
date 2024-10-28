@@ -22,13 +22,37 @@
             </select>
             <span class="focus-border2"></span>
         </div>
-        <label>Fecha de inicio: </label><span class="msg">*{{alertas[1]}}</span>
+        <!-- <label>Fecha de inicio: </label><span class="msg">*{{alertas[1]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="date" placeholder="Fecha de inicio" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['fecha_inicio']!=evento['fecha_inicio']}" [(ngModel)]="eventoNuevo['fecha_inicio']">
             <span class="focus-border2"></span>
+        </div> -->
+        <label>Fecha de inicio: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['fecha_inicio']}}
+            </span>
         </div>
         <label>Hora de inicio: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['hora_inicio']}}
+            </span>
+        </div>
+        <label>Fecha de cierre: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['fecha_cierre']}}
+            </span>
+        </div>
+        <label>Hora de cierre: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{evento['hora_cierre']}}
+            </span>
+        </div>
+        <!-- <label>Hora de inicio: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="time" placeholder="hora de inicio" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['hora_inicio']!=evento['hora_inicio']}" [(ngModel)]="eventoNuevo['hora_inicio']">
@@ -45,7 +69,7 @@
             <input class="effect-1" type="time" placeholder="hora de cierre" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['hora_cierre']!=evento['hora_cierre']}" [(ngModel)]="eventoNuevo['hora_cierre']">
             <span class="focus-border2"></span>
-        </div>
+        </div> -->
         <label>Segundos entre cierres: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <input class="effect-1" type="number" placeholder="Segundos entre cierres" style="height: 2.5rem;"
