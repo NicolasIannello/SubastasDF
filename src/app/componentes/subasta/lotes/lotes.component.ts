@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,7 @@ export class LotesUserComponent implements OnInit{
   ver:boolean=false;
   @ViewChild(LoteComponent)loteComp!:LoteComponent;
 
-  constructor(public ruta:ActivatedRoute, public api: AdminService, public api2:ServiciosService){ }
+  constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService){ }
 
   ngOnInit(): void {
     let datos={
@@ -71,6 +71,9 @@ export class LotesUserComponent implements OnInit{
   }
 
   handleMessage(message: boolean) {    
+    if(this.ruta.snapshot.paramMap.get('id2')){
+      this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id')])
+    }
     this.loteModal=[];
     this.ver=message; 
   }
