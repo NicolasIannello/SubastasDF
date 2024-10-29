@@ -79,6 +79,7 @@ export class LotesUserComponent implements OnInit{
   }
 
   verLote(lote:any){
+    if(!this.ruta.snapshot.paramMap.get('id2')) this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id'),'lote',lote.uuid])
     this.ver=true;
     this.loteModal=lote;    
     this.loteComp.cargarImagenes(this.loteModal.img, this.loteModal.pdf);
