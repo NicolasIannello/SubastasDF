@@ -227,3 +227,15 @@ input::file-selector-button:hover {
     }
     transition: all 0.2s linear;
 }
+.blink {
+	-webkit-animation: pulse 2s 2 alternate;
+	        animation: pulse 2s 2 alternate;
+}
+@-webkit-keyframes pulse {
+	0% { background-color: none; }
+	100% { background-color: var(--amarello); }
+}
+@keyframes pulse {
+	0% { background-color: none; }
+	100% { background-color: var(--amarello); }
+}

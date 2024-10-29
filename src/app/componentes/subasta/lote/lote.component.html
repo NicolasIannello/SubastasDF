@@ -15,7 +15,7 @@
         <div style="display: flex; margin-bottom: 2%;">
             <div class="border rounded" style="text-align: center; width: 60%; border-top-right-radius: 0;">
                 <div style="padding: 1%; padding-top: 3%;">
-                    <label>Imagenes del lote: </label>
+                    <label>Imagenes del lote: (click sobre las imagenes para expandir)</label>
                 </div>
                 <div style="margin: 1.5%; padding: 1%; padding-top: 3%; border-top: 1px solid rgb(255, 144, 0, 0.2);">
                     <span *ngFor="let src of imagenes">
@@ -37,14 +37,14 @@
                     <span *ngIf="evento['mostrar_precio']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         {{lote['base_salida'] ? 'Precio base' : 'Monto arranque'}}: {{lote['moneda']}} {{lote['precio_base']}}
                     </span>
-                    <span style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
-                        Oferta actual: {{precio_actual==null ? '-' : precio_actual}}
+                    <span [className]="blink" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                        Oferta actual: {{precio_actual==null ? '-' : precio_actual}} {{same ? '(Usted)' : ""}}
                     </span>
-                    <span *ngIf="evento['mostrar_ofertas']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span [className]="blink" *ngIf="evento['mostrar_ofertas']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         Cantidad de ofertas: {{cantidad_ofertas==null ? '-' : cantidad_ofertas}}
                     </span>
-                    <span *ngIf="evento['mostrar_ganadores']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
-                        Ganador actual: {{ganador==null ? '-' : ganador}}
+                    <span [className]="blink" *ngIf="evento['mostrar_ganadores']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                        Ganador actual: {{ganador==null ? '-' : ganador}} {{same ? '(Usted)' : ""}}
                     </span>
                 </div>
                 <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
