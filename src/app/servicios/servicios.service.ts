@@ -14,6 +14,7 @@ export class ServiciosService {
   como_registro:Array<string>=['',''];
   nosotros:Array<string>=['',''];
   userAdmin:string="";
+  userID:string="";
 
   constructor(private http: HttpClient) {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
@@ -116,5 +117,11 @@ export class ServiciosService {
   }
   getUserAdmin(){
     return this.userAdmin;
+  }
+  setUserId(user:string){
+    this.userID=user;
+  }
+  getUserId(){
+    return this.userID;
   }
 }

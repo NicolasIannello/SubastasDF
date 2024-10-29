@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit{
           if (value.ok) {
             localStorage.setItem('token',value.token);
             this.User=value.nombre;
+            this.api.setUserId(value._id)
           }else{
             localStorage.removeItem('token')
           }
