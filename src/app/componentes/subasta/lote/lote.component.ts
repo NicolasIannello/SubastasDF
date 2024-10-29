@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { SocketService } from '../../../servicios/socket.service';
 
 @Component({
   selector: 'app-lote',
@@ -25,6 +26,7 @@ export class LoteComponent{
   dateFin:Date|null=null;
   dateHoy:Date|null=null;
   flagTimer:boolean=false;
+  flag2:boolean=true;
   totalDays:number=0;
   remHours:number=0;
   remMinutes:number=0;
@@ -38,7 +40,7 @@ export class LoteComponent{
   ganador:string|null=null;
   fav:boolean=false;
 
-  constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
+  constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
   transform(url: any) {
 		return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -60,10 +62,24 @@ export class LoteComponent{
     this.ganador=null;
     this.ofertaAutoExiste=null;
     this.fav=false;
+    this.flag2=true;
     this.messageEvent.emit(false);
   }
 
   cargarImagenes(imgs:Array<any>, pdf:any){
+    this.socketIo.onMessage().subscribe((message:any) => {
+      if(this.lote['uuid']==message.uuid_lote){
+        this.cantidad_ofertas=message.nro;
+        this.precio_actual=message.cantidad;
+        this.ganador=message.user._id
+        this.flag2=false;
+        this.dateFin= new Date(Date.parse(message.evento.fecha_cierre+' '+message.evento.hora_cierre));
+        this.dateHoy= new Date();
+        this.countDown()
+      }
+    });
+    this.socketIo.sendMessage(this.evento['uuid']);
+
     if(this.evento['estado']==1) this.flagTimer=true;
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
@@ -130,7 +146,7 @@ export class LoteComponent{
     this.remMinutes = totalMinutes % 60;
     this.remHours = totalHours % 24;
 
-    this.timer();
+    if(this.flag2) this.timer();
   }
 
   timer(){
