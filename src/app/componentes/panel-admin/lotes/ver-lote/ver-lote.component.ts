@@ -116,6 +116,10 @@ export class VerLoteComponent{
 
     let html=
     "<div style='width:33rem; font-family:Arial'>"+
+      "<div style='display:flex'; text-align:right;>"+
+        "<div style='width:50%; text-align:left; font-size:small;'> Admin: "+this.api.getUserAdmin()+"</div>"+
+        "<div style='width:50%; text-align:right; font-size:small;'>"+new Date().toLocaleString()+"</div>"+
+      "</div>"+ 
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Titulo</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['titulo']+"</div>"+
       // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Descripcion</div>"+
