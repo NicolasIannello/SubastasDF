@@ -13,6 +13,7 @@ export class ServiciosService {
   header:HttpHeaders;
   como_registro:Array<string>=['',''];
   nosotros:Array<string>=['',''];
+  userAdmin:string="";
 
   constructor(private http: HttpClient) {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
@@ -109,5 +110,11 @@ export class ServiciosService {
   }
   getAdjudicados(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/getAdjudicados', dato, {'headers':this.header})
+  }
+  setUserAdmin(user:string){
+    this.userAdmin=user;
+  }
+  getUserAdmin(){
+    return this.userAdmin;
   }
 }

@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit{
           if (value.ok) {
             localStorage.setItem('token',value.token);
             this.User=value.user;
+            this.api.setUserAdmin(this.User);
           }else{
             localStorage.removeItem('token')
           }
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit{
           if(value.ok){
             localStorage.setItem('token',value.token)
             this.User=value.user
+            this.api.setUserAdmin(this.User);
           }
           if(!value.ok)localStorage.removeItem('token')
         },
