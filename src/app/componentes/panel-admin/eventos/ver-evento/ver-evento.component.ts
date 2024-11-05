@@ -137,7 +137,7 @@ export class VerEventoComponent {
 
                     doc.html(html, {
                       callback: (doc: jsPDF) => {
-                        doc.save(this.evento['nombre']);
+                        doc.save(this.evento['nombre'].includes('.') ? this.evento['nombre']+".pdf" : this.evento['nombre']);
                       },
                       margin: [35, 0, 0, 35],
                       autoPaging:'text'

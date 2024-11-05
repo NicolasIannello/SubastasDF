@@ -196,7 +196,7 @@ export class VerLoteComponent{
 
     doc.html(html, {
       callback: (doc: jsPDF) => {
-        doc.save(this.lote['titulo']);
+        doc.save(this.lote['titulo'].includes('.') ? this.lote['titulo']+".pdf" : this.lote['titulo']);
       },
       margin: [35, 0, 0, 35],
       autoPaging:'text'
