@@ -22,6 +22,7 @@
                     <option value='eventos'>Mostrar en Publicaciones</option> 
                     <option value='lotes'>Nro. de lotes</option> 
                     <option value='visitas'>Visitas</option> 
+                    <option value='uuid'>ID</option> 
                 </select>
                 <span class="focus-border2"></span>
             </div>
@@ -29,7 +30,8 @@
         </div>
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
-        <div class="celda" style="width: 30%;">Nombre de la publicaciones</div>
+        <div class="celda" style="width: 14rem;">ID</div>
+        <div class="celda" style="width: 20%;">Nombre de la publicaciones</div>
         <div class="celda username" style="width: 10%;">Fecha de cierre</div>
         <div class="celda username" style="width: 12%;">Mostrar en Home</div>
         <div class="celda username" style="width: 12%;">Mostrar en Publicaciones</div>
@@ -62,7 +64,8 @@
     <h2 *ngIf="error">Error al cargar publicaciones</h2>
     <h2 *ngIf="total==0">No hay publicaciones para mostrar</h2>
     <div *ngFor="let evento of Eventos" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-        <div class="celda" style="width: 30%;">{{evento['nombre']}}</div>
+        <div class="celda" style="width: 14rem;">{{evento['uuid']}}</div>
+        <div class="celda" style="width: 20%;">{{evento['nombre']}}</div>
         <div class="celda username" style="width: 10%;">{{evento['fecha_cierre']}}</div>
         <div class="celda username" style="width: 12%;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['home'], 'fa-circle-xmark rojo':!evento['home']}" style="font-size: larger; margin-right: 1%;"></i>
