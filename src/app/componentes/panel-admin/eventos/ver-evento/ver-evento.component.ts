@@ -87,19 +87,19 @@ export class VerEventoComponent {
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+(this.evento['estado']==2? 'Finalizado':"En proceso")+"</div>"+
           "</div>"+
           "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-            "<div style='width:50%'>Configuracion</div>"+
-            "<div style='width:50%'>Imagen de portada</div>"+
+            // "<div style='width:50%'>Configuracion</div>"+
+            "<div style='width:100%'>Imagen de portada</div>"+
           "</div>"+
           "<div style='display:flex'; text-align:center;>"+
-            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Segundos entre cierres: "+this.evento['segundos_cierre']+"</div>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar precio: "+(this.evento['mostrar_precio']?'Si':'No')+"</div>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar ganadores: "+(this.evento['mostrar_ganadores']?'Si':'No')+"</div>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar ofertas: "+(this.evento['mostrar_ofertas']?'Si':'No')+"</div>"+
-              "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar fecha de cierre: "+(this.evento['publicar_cierre']?'Si':'No')+"</div>"+
-            "</div>"+
-            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+
-              "<img src='"+this.sources+"' style='width: 90px;'>"+
+            // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+
+            //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Segundos entre cierres: "+this.evento['segundos_cierre']+"</div>"+
+            //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar precio: "+(this.evento['mostrar_precio']?'Si':'No')+"</div>"+
+            //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar ganadores: "+(this.evento['mostrar_ganadores']?'Si':'No')+"</div>"+
+            //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar ofertas: "+(this.evento['mostrar_ofertas']?'Si':'No')+"</div>"+
+            //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>Mostrar fecha de cierre: "+(this.evento['publicar_cierre']?'Si':'No')+"</div>"+
+            // "</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:100%; text-align:center;'>"+
+              "<img src='"+this.sources+"' style='width: 90%;'>"+
             "</div>"+
           "</div>"+
           "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Lotes</div>"+
@@ -129,7 +129,7 @@ export class VerEventoComponent {
                     "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:x-small; text-align:center;'>"+(oferta[0] ? oferta[0].cantidad : "-")+"</div>"+
                     "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:5%; font-size:x-small; text-align:center;'>"+oferta.length+"</div>"+
                     "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:30%; font-size:x-small; text-align:center;'>"+this.lotes[i]['ganador']+"</div>"+
-                    "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:x-small; text-align:center;'>"+(oferta[0] ? oferta[0].user.cuil_cuit : "-")+"</div>"+
+                    "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:x-small; text-align:center;'>"+(this.lotes[i]['ganador']!='' ? oferta[0].user.cuil_cuit : "-")+"</div>"+
                   "</div>";
                   flag++;
                   if(flag==this.lotes.length){
