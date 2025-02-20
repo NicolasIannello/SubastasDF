@@ -17,6 +17,7 @@ export class authGuard implements CanActivate {
     }
     this.api.checkTokenA(datos).subscribe({
       next: (value)=>{
+        this.api.setUserAdmin(value.user);        
         return value.ok;
       },
       error: (err)=>{
