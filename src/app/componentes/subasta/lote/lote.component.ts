@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { SanitizeHtmlPipe } from "../../../servicios/html.pipe";
 import { CommonModule } from '@angular/common';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 @Component({
   selector: 'app-lote',
   standalone: true,
-  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule, MatExpansionModule],
+  imports: [CommonModule, VerImagenComponent, FormsModule, MatExpansionModule],
   templateUrl: './lote.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
