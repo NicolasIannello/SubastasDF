@@ -126,26 +126,26 @@ export class VerLoteComponent{
       // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); font-size:small;'>"+this.lote['descripcion']+"</div>"+
       // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Aclaracion</div>"+
       // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['aclaracion']=='' ? '-' : this.lote['aclaracion'])+"</div>"+
-      "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-        "<div style='width:50%'>Precio Base</div>"+
-        // "<div style='width:34%'>Incremento</div>"+
-        "<div style='width:50%'>Precio Salida</div>"+
-      "</div>"+
-      "<div style='display:flex'; text-align:center;>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['precio_base']+"</div>"+
-        // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['incremento']+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+((this.lote['precio_salida']!='null' && this.lote['precio_salida']!='') ? this.lote['moneda']+' '+this.lote['precio_salida'] : '-')+"</div>"+
-      "</div>"+
-      "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-        "<div style='width:33%'>Fecha de cierre</div>"+
-        "<div style='width:34%'>Ofertas</div>"+
-        "<div style='width:34%'>Estado</div>"+
-      "</div>"+
-      "<div style='display:flex'; text-align:center;>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.Ofertas[0]['evento']['fecha_cierre']+" "+this.Ofertas[0]['evento']['hora_cierre']+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.Ofertas.length+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+(this.Ofertas[0]['evento']['estado']==2? 'Finalizado':"En proceso")+"</div>"+
-      "</div>"+
+      // "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
+      //   "<div style='width:50%'>Precio Base</div>"+
+      //   "<div style='width:34%'>Incremento</div>"+
+      //   "<div style='width:50%'>Precio Salida</div>"+
+      // "</div>"+
+      // "<div style='display:flex'; text-align:center;>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['precio_base']+"</div>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['incremento']+"</div>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+((this.lote['precio_salida']!='null' && this.lote['precio_salida']!='') ? this.lote['moneda']+' '+this.lote['precio_salida'] : '-')+"</div>"+
+      // "</div>"+
+      // "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
+      //   "<div style='width:33%'>Fecha de cierre</div>"+
+      //   "<div style='width:34%'>Ofertas</div>"+
+      //   "<div style='width:34%'>Estado</div>"+
+      // "</div>"+
+      // "<div style='display:flex'; text-align:center;>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.lote['evento']['fecha_cierre']+" "+this.lote['evento']['hora_cierre']+"</div>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+this.Ofertas.length+"</div>"+
+      //   "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+(this.lote['evento']['estado']==2? 'Finalizado':"En proceso")+"</div>"+
+      // "</div>"+
       // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Estado</div>"+
       // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['disponible'] ? 'Disponible' : 'No disponible')+"</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
@@ -153,11 +153,11 @@ export class VerLoteComponent{
         "<div style='width:50%'>Mayor oferta</div>"+
       "</div>"+
       "<div style='display:flex'; text-align:center;>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['ganador']+"</div>"+
-        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['precio_ganador']+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+(this.lote['ganador']=='' ? '-':this.lote['ganador'])+"</div>"+
+        "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+(this.lote['precio_ganador']=='' ? '-':this.lote['precio_ganador'])+"</div>"+
       "</div>"+
-      "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Terminos y condiciones</div>"+
-      "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['pdf']['name']+"</div>"+
+      // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Terminos y condiciones</div>"+
+      // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+this.lote['pdf']['name']+"</div>"+
       "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Imagenes</div>"+
       "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center'>";
     
@@ -172,7 +172,7 @@ export class VerLoteComponent{
         "<div style='width:20%'>Fecha</div>"+
         "<div style='width:45%'>Usuario</div>"+
         "<div style='width:15%'>Metodo</div>"+
-        //"<div style='width:20%'>Estado</div>"+
+        "<div style='width:20%'>CUIL/CUIT</div>"+
         "<div style='width:20%'>Monto</div>"+
     "</div>";
     if(this.Ofertas.length==0) {
@@ -184,7 +184,7 @@ export class VerLoteComponent{
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['fecha']+"</div>"+
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:45%; font-size:smaller;'>"+this.Ofertas[i]['mail']+"</div>"+
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:15%; font-size:smaller;'>"+this.Ofertas[i]['tipo']+"</div>"+
-            //"<div style='width:20%'>"+Estado+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['user']['cuil_cuit']+"</div>"+
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['cantidad']+"</div>"+
         "</div>";
       }
