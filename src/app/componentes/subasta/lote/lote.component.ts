@@ -7,11 +7,12 @@ import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SocketService } from '../../../servicios/socket.service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-lote',
   standalone: true,
-  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule],
+  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule, MatExpansionModule],
   templateUrl: './lote.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -102,7 +103,7 @@ export class LoteComponent{
     }    
     this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{						
       if(resp!=false){
-        this.pdf=this.transform(resp.url);
+        this.pdf=this.transform(resp.url+'#toolbar=0');
       }
       this.dateFin= new Date(Date.parse(this.evento['fecha_cierre']+' '+this.evento['hora_cierre']));
       this.dateHoy= new Date();
