@@ -17,8 +17,8 @@
             <div class="col-3" style="width: 7rem;">
                 <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
                     <option value='titulo' selected>Titulo</option>
-                    <option value='precio_base'>Precio base</option>
-                    <option value='incremento'>Incremento</option>    
+                    <option value='precio_base'>Monto arranque</option>
+                    <!-- <option value='incremento'>Incremento</option>     -->
                     <option value='precio_salida'>Precio salida</option> 
                 </select>
                 <span class="focus-border2"></span>
@@ -28,9 +28,11 @@
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
         <div class="celda" style="width: 30%;">Titulo</div>
-        <div class="celda username" style="width: 10%;">Precio base</div>
-        <div class="celda username" style="width: 10%;">Incremento</div>
+        <div class="celda username" style="width: 10%;">Monto arranque</div>
+        <!-- <div class="celda username" style="width: 10%;">Incremento</div> -->
         <div class="celda username" style="width: 10%;">Precio salida</div>
+        <div class="celda username" style="width: 5%;">Visitas</div>
+        <div class="celda username" style="width: 5%;">Ofertas</div>
         <div class="celda username" style="width: 10%;">Oferta ganadora</div>
         <div class="celda username" style="width: 10%;">Oferta actual</div>
         <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
@@ -38,10 +40,12 @@
                 <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
                     <option value='_id' selected hidden>Ordenar</option>    
                     <option value='titulo'>Titulo</option>
-                    <option value='precio_base'>Precio base</option>
-                    <option value='incremento'>Incremento</option>    
+                    <option value='precio_base'>Monto arranque</option>
+                    <!-- <option value='incremento'>Incremento</option>     -->
                     <option value='precio_salida'>Precio salida</option>    
-                    <option value='disponible'>Disponibilidad</option>    
+                    <option value='disponible'>Disponibilidad</option>
+                    <option value='visitas'>Visitas</option>    
+                    <option value='ofertas'>Ofertas</option>        
                     <option value='_id'>Default</option>    
                 </select>
                 <span class="focus-border2"></span>
@@ -61,8 +65,10 @@
     <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda" style="width: 30%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
-        <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div>
+        <!-- <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div> -->
         <div class="celda username" style="width: 10%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
+        <div class="celda username" style="width: 5%;">{{lote['visitas']}}</div>
+        <div class="celda username" style="width: 5%;">{{lote['ofertas'] ? lote['ofertas'].length : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['precio_ganador'] ? lote['moneda']+' '+lote['precio_ganador'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['moneda']+' '+lote['oferta']['cantidad'] : '-'}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
