@@ -1,7 +1,7 @@
 <div class="navbar glass">
     <div style="align-items: center; display: flex; height: 100%;"><div class="logo" style="cursor: pointer;" (click)="activar('')"><span>Gruppo DF</span><span class="imagenLogo"></span></div></div> 
     <div *ngIf="widthC!=undefined && cap!=undefined && widthC>cap else mobile">
-        <div class="btnnav" [ngClass]="{'activa' : activa=='eventos'}" (click)="activar('eventos')"><span>Finalizadas</span></div>
+        <div class="btnnav" [ngClass]="{'activa' : activa=='eventos'}" (click)="activar('publicaciones')"><span>Finalizadas</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='registro'}" (click)="activar('registro')"><span>¿Como registrarse?</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='nosotros'}" (click)="activar('nosotros')"><span>¿Quienes somos?</span></div>
         <div class="btnnav" [ngClass]="{'activa' : activa=='contacto'}" (click)="activar('contacto')"><span>Contacto</span></div>

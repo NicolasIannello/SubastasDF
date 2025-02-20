@@ -3,9 +3,9 @@
         <div style="display: flex; justify-content: flex-end; font-size: x-large;">
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
-        <label>Nombre del evento: </label><span class="msg">*{{alertas[0]}}</span>
+        <label>Nombre de la publicacion: </label><span class="msg">*{{alertas[0]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
-            <input class="effect-1" type="text" placeholder="Nombre del evento" style="height: 2.5rem;"
+            <input class="effect-1" type="text" placeholder="Nombre de la publicacion" style="height: 2.5rem;"
             [ngClass]="{'changed': eventoNuevo['nombre']!=evento['nombre']}" [(ngModel)]="eventoNuevo['nombre']">
             <span class="focus-border2"></span>
         </div>
@@ -134,7 +134,7 @@
         <div style="margin-top: 2%;">
             <input type="file" name="imagen" id="imagen" #imagen accept="image/*," (change)="showImg($event)" style="margin-bottom: 2%;">
         </div>
-        <label>Lotes del evento: </label>
+        <label>Lotes de la publicacion: </label>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda" style="width: 25%;">Titulo</div>
             <div class="celda" style="width: 25%;">Precio Base</div>

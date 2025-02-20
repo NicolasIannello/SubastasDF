@@ -1,9 +1,9 @@
 <div class="svh" >
     <div class="margin5 border rounded" style="width: 100%; text-align: center;">
-        <span *ngIf="error==4">El evento aun no ha iniciado</span>
-        <span *ngIf="error==5">El evento ha terminado</span>
+        <span *ngIf="error==4">La publicacion aun no ha iniciado</span>
+        <span *ngIf="error==5">La publicacion ha terminado</span>
         <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">
-            <span>Evento: {{evento['nombre']}}</span>
+            <span>Publicacion: {{evento['nombre']}}</span>
             <span>Lotes: {{nlotes}}</span>
         </div>
         <div *ngFor="let lote of lotes; index as i" style="display: flex; align-items: center; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">

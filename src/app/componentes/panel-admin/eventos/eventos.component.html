@@ -1,10 +1,10 @@
 <div class="borderAzul margin5 rounded" style="display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
         <div style="display: flex;">
-            <h1 class="h1btn2">Eventos</h1>
+            <h1 class="h1btn2">Publicaciones</h1>
         </div>
         <div>
-            <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear evento</button>
+            <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear publicacion</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
@@ -16,10 +16,10 @@
             </div>
             <div class="col-3" style="width: 10rem;">
                 <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
-                    <option value='nombre' selected>Nombre del evento</option>
+                    <option value='nombre' selected>Nombre de la publicacion</option>
                     <option value='fecha_cierre'>Fecha de cierre</option>
                     <option value='home'>Mostrar en home</option>    
-                    <option value='eventos'>Mostrar en Eventos</option> 
+                    <option value='eventos'>Mostrar en Publicaciones</option> 
                     <option value='lotes'>Nro. de lotes</option> 
                     <option value='visitas'>Visitas</option> 
                 </select>
@@ -29,20 +29,20 @@
         </div>
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
-        <div class="celda" style="width: 30%;">Nombre del evento</div>
+        <div class="celda" style="width: 30%;">Nombre de la publicaciones</div>
         <div class="celda username" style="width: 10%;">Fecha de cierre</div>
         <div class="celda username" style="width: 12%;">Mostrar en Home</div>
-        <div class="celda username" style="width: 12%;">Mostrar en Eventos</div>
+        <div class="celda username" style="width: 12%;">Mostrar en Publicaciones</div>
         <div class="celda username" style="width: 8%;">Nro. de lotes</div>
         <div class="celda username" style="width: 5%;">Visitas</div>
         <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
             <div class="col-3" style="width: 60%;">
                 <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarEventos()" style="width: 100%; height: 2rem;">
                     <option value='_id' selected hidden>Ordenar</option>    
-                    <option value='nombre' selected>Nombre del evento</option>
+                    <option value='nombre' selected>Nombre de la publicacion</option>
                     <option value='fecha_cierre'>Fecha de cierre</option>
                     <option value='home'>Mostrar en home</option>    
-                    <option value='eventos'>Mostrar en Eventos</option> 
+                    <option value='eventos'>Mostrar en Publicaciones</option> 
                     <option value='lotes'>Nro. de lotes</option> 
                     <option value='visitas'>Visitas</option> 
                     <option value='_id'>Default</option>    
@@ -59,8 +59,8 @@
         </div>
     </div>
     <h2 *ngIf="!error && total==-1" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
-    <h2 *ngIf="error">Error al cargar eventos</h2>
-    <h2 *ngIf="total==0">No hay eventos para mostrar</h2>
+    <h2 *ngIf="error">Error al cargar publicaciones</h2>
+    <h2 *ngIf="total==0">No hay publicaciones para mostrar</h2>
     <div *ngFor="let evento of Eventos" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda" style="width: 30%;">{{evento['nombre']}}</div>
         <div class="celda username" style="width: 10%;">{{evento['fecha_cierre']}}</div>
@@ -86,7 +86,7 @@
             <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
         </div>
-        Eventos totales: {{total}}
+        Publicaciones totales: {{total}}
     </div>
 </div>
 

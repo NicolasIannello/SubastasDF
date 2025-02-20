@@ -3,9 +3,9 @@
         <div style="display: flex; justify-content: flex-end; font-size: x-large;">
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
-        <label>Nombre del evento: </label><span class="msg">*{{alertas[0]}}</span>
+        <label>Nombre de la publicacion: </label><span class="msg">*{{alertas[0]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
-            <input class="effect-1" type="text" placeholder="Nombre del evento" style="height: 2.5rem;" [(ngModel)]="datos[0]">
+            <input class="effect-1" type="text" placeholder="Nombre de la publicacion" style="height: 2.5rem;" [(ngModel)]="datos[0]">
             <span class="focus-border2"></span>
         </div>
         <label>Categoria: </label><span class="msg">{{alertas[1]}}</span>
@@ -89,7 +89,7 @@
         </div>
         <input type="file" name="imagen" id="imagen" #imagen accept="image/*," (change)="showImg($event)" style="margin-bottom: 2%;">
         <div style="display: flex; justify-content: flex-end;">
-            <button class="border rounded boton boton2 botones" (click)="crearEvento()">Crear Evento</button>
+            <button class="border rounded boton boton2 botones" (click)="crearEvento()">Crear Publicacion</button>
         </div>
     </div>
 </div>
