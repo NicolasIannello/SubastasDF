@@ -13,7 +13,7 @@
     }
     div, h1, span{
         /* display: inline-flex; */
-        margin-bottom: 2rem;
+        /* margin-bottom: 2rem; */
         flex-direction: column;
         position: relative;
         margin-left: 2rem;
