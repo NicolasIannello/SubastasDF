@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ofertas',
@@ -15,7 +16,7 @@ export class OfertasComponent implements OnInit{
   pagU:number=0;
   index:number=0;
 
-  constructor(public api:ServiciosService){}
+  constructor(public api:ServiciosService, private router: Router){}
 
   ngOnInit(): void {
     let dato={
@@ -51,5 +52,9 @@ export class OfertasComponent implements OnInit{
   final(){
     this.pagina=this.pagU-1
     this.index=(this.pagU-1)*20;
+  }
+
+  verLote(evento:string,lote:string){
+    this.router.navigate(['evento',evento,'lote',lote])
   }
 }

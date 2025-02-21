@@ -2,19 +2,25 @@
     <div class="border margin5 rounded seccion" style="width: 100%;">            
         <h1>Ofertas</h1>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
-            <div class="celda">Fecha</div>
-            <div class="celda">Publicacion</div>
-            <div class="celda" style="width: 15rem;">Lote</div>
-            <div class="celda">Metodo</div>
-            <div class="celda" style="border-right: none; width: 8rem;">Monto</div>
+            <div class="celda username" style="width: 20%;">Fecha</div>
+            <div class="celda username" style="width: 15%;">Publicacion</div>
+            <div class="celda username" style="width: 20%;">Lote</div>
+            <div class="celda username" style="width: 10%;">Metodo</div>
+            <div class="celda username" style="width: 10%;">Monto</div>
+            <div class="celda username" style="width: 15%;">Mayor Oferta</div>
+            <div class="celda username" style="border-right: none; width: 7.5%;"></div>
         </div>
         <div *ngFor="let _ of [].constructor(20); index as i" style="width: 100%;">
             <div *ngIf="Ofertas[i+index]" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2);">
-                <div class="celda">{{Ofertas[i+index]['fecha']}}</div>
-                <div class="celda">{{Ofertas[i+index]['evento']['nombre']}}</div>
-                <div class="celda" style="width: 15rem;">{{Ofertas[i+index]['lote']['titulo']}}</div>
-                <div class="celda">{{Ofertas[i+index]['tipo']}}</div>
-                <div class="celda" style="border-right: none; width: 8rem;">{{Ofertas[i+index]['cantidad']}}</div>
+                <div class="celda" style="width: 20%;">{{Ofertas[i+index]['fecha']}}</div>
+                <div class="celda" style="width: 15%;">{{Ofertas[i+index]['evento']['nombre']}}</div>
+                <div class="celda" style="width: 20%;">{{Ofertas[i+index]['lote']['titulo']}}</div>
+                <div class="celda" style="width: 10%;">{{Ofertas[i+index]['tipo']}}</div>
+                <div class="celda" style="width: 10%;">{{Ofertas[i+index]['cantidad']}}</div>
+                <div class="celda" style="width: 15%;">{{Ofertas[i+index]['lote']['oferta'].cantidad===Ofertas[i+index]['cantidad'] ? Ofertas[i+index]['lote']['oferta'].cantidad+' (Usted)' : Ofertas[i+index]['lote']['oferta'].cantidad}}</div>
+                <div style="width: 10%; border-right: none;">
+                    <button class="boton border" style="width: 100%; height: 100%;" (click)="verLote(Ofertas[i+index]['uuid_evento'],Ofertas[i+index]['uuid_lote'])">Ver</button>
+                </div>
             </div>
         </div>
         <div *ngIf="Ofertas.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
