@@ -8,7 +8,7 @@
 
 :root {
     --amarello: rgb(48, 131, 220)/*rgb(228, 176, 16)*/;
-    --amarelloD: rgb(48, 131, 220, 0.75)/*rgba(228, 176, 16, 0.75)*/;
+    --amarelloD: rgb(48, 131, 220, 0.3)/*rgba(228, 176, 16, 0.75)*/;
     --black: rgb(20,20,20);
     --white: #F9F9F9;
     --blue: rgb(255, 144, 0)/*rgb(48, 131, 220)*/;
@@ -97,6 +97,11 @@ a{
             margin-top: 0rem;
             margin-bottom: 0rem;
         }
+    }
+    @media (max-width: 500px){
+        margin-left: 0rem;
+        margin-right: 0rem;
+        padding: 0rem;
     }
 }
 :focus{outline: none;}

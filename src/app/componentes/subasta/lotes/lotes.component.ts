@@ -49,6 +49,12 @@ export class LotesUserComponent implements OnInit{
             next:(value)=> {              
               this.lotes[i]=value.lote[0]
               //this.lotes.push(value.lote[0]);
+              for (let j = 0; j < this.evento['vistas'].length; j++) {
+                if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estado='Visto'
+              }
+              for (let j = 0; j < this.evento['ofertas'].length; j++) {
+                if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estado='Ofertado'
+              }
               this.api2.cargarArchivo(value.lote[0].img[0].img,'lotes').then(resp=>{						
                 if(resp!=false){                  
                   this.imagenes[i]={link:resp.url};
