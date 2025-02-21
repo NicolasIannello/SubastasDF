@@ -4,11 +4,17 @@
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda" style="width: 45%;">Lote</div>
             <div class="celda" style="width: 45%;">Publicacion</div>
+            <div class="celda" style="width: 45%;">Mi oferta</div>
+            <div class="celda" style="width: 45%;">Mayor oferta</div>
             <div style="width: 10%; border-right: none;"></div>
         </div>
         <div *ngFor="let fav of Favoritos" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
             <div class="celda" style="width: 45%;">{{fav['lote']['titulo']}}</div>
             <div class="celda" style="width: 45%;">{{fav['evento']['nombre']}}</div>
+            <div class="celda" style="width: 45%;">{{fav['lote']['mioferta'] ? fav['lote']['mioferta'].cantidad : '-'}}</div>
+            <div class="celda" style="width: 45%;">
+                {{(fav['lote']['oferta'] && fav['lote']['mioferta']) ? (fav['lote']['oferta'].cantidad===fav['lote']['mioferta'].cantidad ? fav['lote']['oferta'].cantidad+' (Usted)' : fav['lote']['oferta'] ? fav['lote']['oferta'].cantidad : '') : fav['lote']['oferta'] ? fav['lote']['oferta'].cantidad : '-'}}
+            </div>
             <div style="width: 10%; border-right: none;">
                 <button class="boton border" style="width: 100%; height: 100%;" [routerLink]="['/evento/', fav['uuid_evento'], 'lote', fav['uuid_lote']]">Ver</button>
             </div>
