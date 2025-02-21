@@ -3,11 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AdminService } from '../../../servicios/admin.service';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { RouterModule } from '@angular/router';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, VerImagenComponent],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
@@ -16,8 +18,20 @@ export class InicioComponent implements OnInit{
   @Input() cap: number | undefined;
   Eventos:Array<any>=[];
   error:number=0
+  verImg:boolean=false;
+  imagenes: Array<{link:SafeResourceUrl,id:number}> = [];
 
   constructor(public api:AdminService, public api2:ServiciosService) {}
+
+  handleMessage(message: boolean, tipo:string) {    
+    this.verImg=message;
+  }
+
+  verImagen(id:number){
+    this.verImg=true;
+    this.imagenes=[];
+    this.imagenes.push({link: this.Eventos[id].img.img, id: 0})
+  }
 
   ngOnInit(): void {
     if(localStorage.getItem('token')!=null){
