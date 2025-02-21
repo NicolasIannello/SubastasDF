@@ -14,6 +14,7 @@ export class VerImagenComponent {
   @Input() imagen:number=0;
   @Input() imagenes: Array<{link:SafeResourceUrl,id:number}> = [];
   @Input() verImg:boolean=false;
+  @Input() botones:boolean=true;
 
   cerrarModal() {
     this.messageEvent.emit(false);

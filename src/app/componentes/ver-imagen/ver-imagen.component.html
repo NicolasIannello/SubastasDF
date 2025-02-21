@@ -3,7 +3,7 @@
         <div style="display: flex; justify-content: flex-end; font-size: x-large;">
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
-        <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: center; width: 100%; align-items: center;">
+        <div *ngIf="botones" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: center; width: 100%; align-items: center;">
             <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="atras()">Atras</button>
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>
         </div>
