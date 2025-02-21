@@ -86,6 +86,7 @@ export class LotesUserComponent implements OnInit{
     this.loteModal=lote;    
     this.loteComp.cargarImagenes(this.loteModal.img, this.loteModal.pdf);
     let datos={
+      'uuid_evento':this.ruta.snapshot.paramMap.get('id'),
       'uuid_lote':lote.uuid,
       'token':localStorage.getItem('token'),
       'tipo':1
