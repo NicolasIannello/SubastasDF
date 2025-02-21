@@ -85,5 +85,11 @@ export class LotesUserComponent implements OnInit{
     this.ver=true;
     this.loteModal=lote;    
     this.loteComp.cargarImagenes(this.loteModal.img, this.loteModal.pdf);
+    let datos={
+      'uuid_lote':lote.uuid,
+      'token':localStorage.getItem('token'),
+      'tipo':1
+    }      
+    this.api2.setVista(datos).subscribe({ })      
   }
 }

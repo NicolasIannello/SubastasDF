@@ -112,6 +112,9 @@ export class ServiciosService {
   getAdjudicados(dato:any):Observable<any>{
     return this.http.post(base_url+'/usuarios/getAdjudicados', dato, {'headers':this.header})
   }
+  setVista(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/setVista', dato, {'headers':this.header})
+  }
   setUserAdmin(user:string){
     this.userAdmin=user;
   }
