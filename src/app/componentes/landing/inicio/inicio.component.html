@@ -16,12 +16,16 @@
             <div *ngFor="let ev of Eventos, index as i" class="borderAzul rounded" style="width: 25rem; margin: 1%;">
                 <div style="width: 100%; border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; flex-direction: column;">
                     <span class="boton boton2 glassAzul border rounded colorWhite" style="height: 2.5rem; position: absolute; width: 2.5rem; cursor: pointer;display: flex; align-items: center; justify-content: center; margin-left: 0.4rem; margin-top: 0.3rem;" (click)="verImagen(i)"><i class="fa-solid fa-maximize" style="font-size: x-large;"></i></span>
-                    <img src="{{ev['img'].img}}" alt="" style="height: 200px;">
+                    <img src="{{ev['img'].img}}" alt="" style="height: 200px; border-top-left-radius: 12px; border-top-right-radius: 12px;">
                 </div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">{{ev['nombre']}}</div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Inicio: {{ev['fecha_inicio']}}</div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Cierre: {{ev['fecha_cierre']+'  '+ev['hora_cierre']}}</div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Numero de lotes: {{ev['lotes'].length}}</div>
+                <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center;">
+                    <span class="glassAzul" style="width: 50%; border-right: 1px solid rgb(48, 131, 220, 0.2); padding: 0.5rem;">Vistos {{ev['vistas'].length}}/{{ev['lotes'].length}}</span>
+                    <span style="background-color: greenyellow; width: 50%; padding: 0.5rem;">Ofertados {{ev['ofertas'].length}}/{{ev['lotes'].length}}</span>
+                </div>
                 <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Modalidad: {{ev['modalidad']}}</div>
                 <div *ngIf="ev['estado']==1" style="width: 100%;">
                     <button class="rounded boton" style="width: 100%; border:none; border-top-left-radius: 0%; border-top-right-radius: 0%; height: 2rem;" [routerLink]="['/evento', ev.uuid]">Ver publicacion</button>    
