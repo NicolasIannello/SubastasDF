@@ -35,7 +35,7 @@ export class LotesUserComponent implements OnInit{
     }      
     let int = 0;
     this.api.cargarEvento(datos).subscribe({
-      next:(value)=> {        
+      next:(value)=> {
         this.evento=value.evento[0]
         this.nlotes=this.evento['lotes'].length
         this.error=value.t;        
@@ -50,10 +50,10 @@ export class LotesUserComponent implements OnInit{
               this.lotes[i]=value.lote[0]
               //this.lotes.push(value.lote[0]);
               for (let j = 0; j < this.evento['vistas'].length; j++) {
-                if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estado='Visto'
+                if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Visto'
               }
               for (let j = 0; j < this.evento['ofertas'].length; j++) {
-                if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estado='Ofertado'
+                if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Ofertado'
               }
               this.api2.cargarArchivo(value.lote[0].img[0].img,'lotes').then(resp=>{						
                 if(resp!=false){                  
