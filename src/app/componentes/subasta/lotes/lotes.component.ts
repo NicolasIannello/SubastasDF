@@ -23,10 +23,19 @@ export class LotesUserComponent implements OnInit{
   loteModal:any=[];
   ver:boolean=false;
   @ViewChild(LoteComponent)loteComp!:LoteComponent;
+  // dateFin:Array<Date|null>=[null];
+  // dateHoy:Date|null=null;
+  // flagTimer:Array<boolean>=[false];
+  // flag2:Array<boolean>=[true];
+  // totalDays:Array<number>=[0];
+  // remHours:Array<number>=[0];
+  // remMinutes:Array<number>=[0];
+  // remSeconds:Array<number>=[0];
 
   constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService){ }
 
   ngOnInit(): void {
+    //this.dateHoy= new Date();
     let datos={
       'flag': false,
       'dato': this.ruta.snapshot.paramMap.get('id'),
@@ -62,6 +71,8 @@ export class LotesUserComponent implements OnInit{
                 }
               })
               int++;              
+              // this.dateFin[i]= new Date(Date.parse(value.lote[0]['fecha_cierre']+' '+value.lote[0]['hora_cierre']));
+              // this.countDown(i);
               if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value.lote[0].uuid){
                 this.verLote(value.lote[0])
               }
@@ -99,4 +110,38 @@ export class LotesUserComponent implements OnInit{
     }      
     this.api2.setVista(datos).subscribe({ })      
   }
+
+  // countDown(id:number){
+  //   const milliDiff: number = (this.dateHoy!.getTime()- this.dateFin[id]!.getTime())*-1;
+    
+  //   const totalSeconds = Math.floor(milliDiff / 1000);
+  //   const totalMinutes = Math.floor(totalSeconds / 60);
+  //   const totalHours = Math.floor(totalMinutes / 60);
+
+  //   this.totalDays[id] = Math.floor(totalHours / 24);    
+  //   this.remSeconds[id] = totalSeconds % 60;
+  //   this.remMinutes[id] = totalMinutes % 60;
+  //   this.remHours[id] = totalHours % 24;
+
+  //   if(this.flag2) this.timer(id);
+  // }
+
+  // timer(id:number){
+  //   this.remSeconds[id]--
+  //   if(this.remSeconds[id]<0) {
+  //     this.remMinutes[id]--;
+  //     this.remSeconds[id]=60;
+  //   }
+  //   if(this.remMinutes[id]<0){ 
+  //     this.remHours[id]--;
+  //     this.remMinutes[id]=60
+  //   }
+  //   if(this.remHours[id]<0) {
+  //     this.totalDays[id]--
+  //     this.remHours[id]=24;
+  //   }
+  //   if(this.totalDays[id]<0) this.flagTimer[id]=false;
+    
+  //   if(this.flagTimer[id]) setTimeout( ()=>this.timer(id), 1000);
+  // }
 }
