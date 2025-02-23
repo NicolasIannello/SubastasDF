@@ -71,18 +71,20 @@ export class LoteComponent{
   }
 
   cargarImagenes(imgs:Array<any>, pdf:any){
-    this.socketIo.onMessage().subscribe((message:any) => {
-      if(this.lote['uuid']==message.uuid_lote){
-        this.cantidad_ofertas=message.nro;
-        this.precio_actual=message.cantidad;
-        this.ganador=message.user._id
-        this.flag2=false;
-        this.dateFin= new Date(Date.parse(message.evento.fecha_cierre+' '+message.evento.hora_cierre));
-        this.dateHoy= new Date();
-        this.countDown();
-        this.blink="";
-        this.same=this.ganador==this.api.getUserId();
-        setTimeout( ()=>this.blink="blink", 250);
+    this.socketIo.onMessage().subscribe((message:any) => {      
+      for (let i = 0; i < message.eventolotes.length; i++) {
+        if(this.lote['uuid']==message.eventolotes[i].lote.uuid){
+          this.cantidad_ofertas=message.nro;
+          this.precio_actual=message.cantidad;
+          this.ganador=message.user._id
+          this.flag2=false;
+          this.dateFin= new Date(Date.parse(message.eventolotes[i].lote.fecha_cierre+' '+message.eventolotes[i].lote.hora_cierre));
+          this.dateHoy= new Date();
+          this.countDown();
+          this.blink="";
+          this.same=this.ganador==this.api.getUserId();
+          setTimeout( ()=>this.blink="blink", 250);
+        } 
       }
     });
     this.socketIo.sendMessage(this.evento['uuid']);
@@ -104,7 +106,7 @@ export class LoteComponent{
       if(resp!=false){
         this.pdf=this.transform(resp.url+'#toolbar=0');
       }
-      this.dateFin= new Date(Date.parse(this.evento['fecha_cierre']+' '+this.evento['hora_cierre']));
+      this.dateFin= new Date(Date.parse(this.lote['fecha_cierre']+' '+this.lote['hora_cierre']));
       this.dateHoy= new Date();
       this.countDown()
       let dato={
