@@ -7,8 +7,11 @@
             <span>Lotes: {{nlotes}}</span>
         </div>
         <div *ngFor="let lote of lotes; index as i" style="max-height: 100%; align-items: center; border-bottom: 1px solid rgb(48, 131, 220, 0.2); /*padding: 1%;*/">
-            <span class="glass" [ngClass]="{'glassAzul' : i%2 }" [ngStyle]="{'color': i%2 ? 'white' : 'black' }" style="width: 100%; display: flex; justify-content: center;">
-                <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> Finaliza el {{lote['fecha_cierre']+' a las '+lote['hora_cierre']+' horas'}}
+            <span *ngIf="flagTimer[i]" class="glass" [ngClass]="{'glassAzul' : i%2 }" [ngStyle]="{'color': i%2 ? 'white' : 'black' }" style="width: 100%; display: flex; justify-content: center;">
+                <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> Finaliza en {{totalDays[i]}} Dias {{remHours[i]}}h {{remMinutes[i]}}m {{remSeconds[i]}}s
+            </span>
+            <span *ngIf="!flagTimer[i]" class="glass" [ngClass]="{'glassAzul' : i%2 }" [ngStyle]="{'color': i%2 ? 'white' : 'black' }" style="width: 100%; display: flex; justify-content: center;">
+                <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> {{lote['estado']==1 ? 'Esperando cierre' : 'Lote finalizado'}} 
             </span>
             <div style="display: flex;" [ngClass]="{'glassTrueAzul' : i%2}">
                 <div *ngIf="imagenes.length>i" class="celda" style="width: 6rem; min-height: 4rem; display: flex; align-items: center; justify-content: center;">

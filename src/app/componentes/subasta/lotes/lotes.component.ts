@@ -23,19 +23,20 @@ export class LotesUserComponent implements OnInit{
   loteModal:any=[];
   ver:boolean=false;
   @ViewChild(LoteComponent)loteComp!:LoteComponent;
-  // dateFin:Array<Date|null>=[null];
-  // dateHoy:Date|null=null;
-  // flagTimer:Array<boolean>=[false];
-  // flag2:Array<boolean>=[true];
-  // totalDays:Array<number>=[0];
-  // remHours:Array<number>=[0];
-  // remMinutes:Array<number>=[0];
-  // remSeconds:Array<number>=[0];
+  dateFin:Array<Date|null>=[];
+  dateHoy:Date|null=null;
+  flagTimer:Array<boolean>=[];
+  stringCierre:Array<string>=[];
+  flag2:Array<boolean>=[];
+  totalDays:Array<number>=[];
+  remHours:Array<number>=[];
+  remMinutes:Array<number>=[];
+  remSeconds:Array<number>=[];
 
   constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService){ }
 
   ngOnInit(): void {
-    //this.dateHoy= new Date();
+    this.dateHoy= new Date();
     let datos={
       'flag': false,
       'dato': this.ruta.snapshot.paramMap.get('id'),
@@ -55,26 +56,29 @@ export class LotesUserComponent implements OnInit{
             'tipo':1
           }      
           this.api.cargarLote(datos).subscribe({
-            next:(value)=> {              
-              this.lotes[i]=value.lote[0]
-              //this.lotes.push(value.lote[0]);
+            next:(value2)=> {              
+              this.lotes[i]=value2.lote[0]
+              //this.lotes.push(value2.lote[0]);
               for (let j = 0; j < this.evento['vistas'].length; j++) {
                 if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Visto'
               }
               for (let j = 0; j < this.evento['ofertas'].length; j++) {
                 if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Ofertado'
               }
-              this.api2.cargarArchivo(value.lote[0].img[0].img,'lotes').then(resp=>{						
+              this.api2.cargarArchivo(value2.lote[0].img[0].img,'lotes').then(resp=>{						
                 if(resp!=false){                  
                   this.imagenes[i]={link:resp.url};
                   //this.imagenes.push({link:resp.url});
                 }
               })
               int++;              
-              // this.dateFin[i]= new Date(Date.parse(value.lote[0]['fecha_cierre']+' '+value.lote[0]['hora_cierre']));
-              // this.countDown(i);
-              if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value.lote[0].uuid){
-                this.verLote(value.lote[0])
+              this.dateFin[i]= new Date(Date.parse(value2.lote[0]['fecha_cierre']+' '+value2.lote[0]['hora_cierre']));
+              this.flag2[i]=true;
+              this.stringCierre[i]='';
+              if(this.lotes[i].estado==1) this.flagTimer[i]=true;
+              if(int==value.evento[0].lotes.length) this.countDown();
+              if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value2.lote[0].uuid){
+                this.verLote(value2.lote[0])
               }
             },
             error:(err)=> {
@@ -111,37 +115,48 @@ export class LotesUserComponent implements OnInit{
     this.api2.setVista(datos).subscribe({ })      
   }
 
-  // countDown(id:number){
-  //   const milliDiff: number = (this.dateHoy!.getTime()- this.dateFin[id]!.getTime())*-1;
+  countDown(){
+    let flagloop = false;
+    for (let id = 0; id < this.dateFin.length; id++) {
+      const milliDiff: number = (this.dateHoy!.getTime()- this.dateFin[id]!.getTime())*-1;
     
-  //   const totalSeconds = Math.floor(milliDiff / 1000);
-  //   const totalMinutes = Math.floor(totalSeconds / 60);
-  //   const totalHours = Math.floor(totalMinutes / 60);
+      const totalSeconds = Math.floor(milliDiff / 1000);
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const totalHours = Math.floor(totalMinutes / 60);
 
-  //   this.totalDays[id] = Math.floor(totalHours / 24);    
-  //   this.remSeconds[id] = totalSeconds % 60;
-  //   this.remMinutes[id] = totalMinutes % 60;
-  //   this.remHours[id] = totalHours % 24;
+      this.totalDays[id] = Math.floor(totalHours / 24);    
+      this.remSeconds[id] = totalSeconds % 60;
+      this.remMinutes[id] = totalMinutes % 60;
+      this.remHours[id] = totalHours % 24;
+            
+      if(this.flag2[id]) flagloop=true;
+    }
+    this.timer()
+  }
 
-  //   if(this.flag2) this.timer(id);
-  // }
-
-  // timer(id:number){
-  //   this.remSeconds[id]--
-  //   if(this.remSeconds[id]<0) {
-  //     this.remMinutes[id]--;
-  //     this.remSeconds[id]=60;
-  //   }
-  //   if(this.remMinutes[id]<0){ 
-  //     this.remHours[id]--;
-  //     this.remMinutes[id]=60
-  //   }
-  //   if(this.remHours[id]<0) {
-  //     this.totalDays[id]--
-  //     this.remHours[id]=24;
-  //   }
-  //   if(this.totalDays[id]<0) this.flagTimer[id]=false;
-    
-  //   if(this.flagTimer[id]) setTimeout( ()=>this.timer(id), 1000);
-  // }
+  timer(){
+    let flagloop = false;
+    for (let id = 0; id < this.dateFin.length; id++) {
+      this.remSeconds[id]--
+      if(this.remSeconds[id]<0) {
+        this.remMinutes[id]--;
+        this.remSeconds[id]=60;
+      }
+      if(this.remMinutes[id]<0){ 
+        this.remHours[id]--;
+        this.remMinutes[id]=60
+      }
+      if(this.remHours[id]<0) {
+        this.totalDays[id]--
+        this.remHours[id]=24;
+      }
+      
+      if(this.totalDays[id]<0) {
+        this.flagTimer[id]=false;
+      }
+      
+      if(this.flagTimer[id]) flagloop=true;
+    }
+    if(flagloop) setTimeout( ()=>this.timer(), 1000);
+  }
 }
