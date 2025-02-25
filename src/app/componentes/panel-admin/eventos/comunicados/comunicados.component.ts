@@ -21,6 +21,7 @@ export class ComunicadosComponent {
 
   cerrarModal() {
     this.texto='';
+    this.asunto='';
     this.messageEvent.emit(false);
   }
 
