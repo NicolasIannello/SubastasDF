@@ -4,7 +4,8 @@
             <h1 class="h1btn2">Publicaciones</h1>
         </div>
         <div>
-            <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear publicacion</button>
+            <button class="boton boton2 border rounded botones" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" (click)="comunicados=!comunicados">Comunicados</button>
+            <button class="boton boton2 border rounded botones" style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;" (click)="crear=!crear">Crear publicacion</button>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
@@ -96,3 +97,4 @@
 <app-crear-evento [ngClass]="{ 'oculto':!crear }" (messageEvent)="handleMessage($event,'crear')"></app-crear-evento>
 <app-editar-evento [ngClass]="{ 'oculto':!editar }" (messageEvent)="handleMessage($event,'editar')"></app-editar-evento>
 <app-ver-evento [ngClass]="{ 'oculto':!ver }" (messageEvent)="handleMessage($event,'ver')"></app-ver-evento>
+<app-comunicados [ngClass]="{ 'oculto':!comunicados }" (messageEvent)="handleMessage($event,'comunicados')"></app-comunicados>

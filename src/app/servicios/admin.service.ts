@@ -117,4 +117,7 @@ export class AdminService {
   borrarEvento(dato:any):Observable<any>{
     return this.http.post(base_url+'/evento/borrarEvento', dato, {'headers':this.header})
   }
+  comunicar(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/comunicar', dato, {'headers':this.header})
+  }
 }

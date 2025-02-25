@@ -6,11 +6,12 @@ import Swal from 'sweetalert2';
 import { CrearEventoComponent } from "./crear-evento/crear-evento.component";
 import { EditarEventoComponent } from "./editar-evento/editar-evento.component";
 import { VerEventoComponent } from "./ver-evento/ver-evento.component";
+import { ComunicadosComponent } from "./comunicados/comunicados.component";
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule, FormsModule, CrearEventoComponent, EditarEventoComponent, VerEventoComponent],
+  imports: [CommonModule, FormsModule, CrearEventoComponent, EditarEventoComponent, VerEventoComponent, ComunicadosComponent],
   templateUrl: './eventos.component.html',
   styleUrl: '../usuarios/usuarios.component.css'
 })
@@ -18,6 +19,7 @@ export class EventosComponent {
   crear:boolean=false;
   editar:boolean=false;
   ver:boolean=false;
+  comunicados:boolean=false;
   datoBuscar:string="";
   tipoBuscar:string="nombre";
   error:boolean=false;
@@ -49,6 +51,9 @@ export class EventosComponent {
       break;
       case 'ver':
         this.ver=message;
+      break;
+      case 'comunicados':
+        this.comunicados=message;
       break;
     }
   }
