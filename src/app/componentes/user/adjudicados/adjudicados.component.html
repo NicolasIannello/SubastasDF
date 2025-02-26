@@ -8,11 +8,11 @@
             <div style="width: 10%; border-right: none;"></div>
         </div>
         <div *ngFor="let ad of Adjudicados" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
-            <div class="celda" style="width: 40%;">{{ad['evento']['nombre']}}</div>
-            <div class="celda" style="width: 40%;">{{ad['lote']['titulo']}}</div>
-            <div class="celda" style="width: 10%;">{{ad['lote']['precio_ganador']}}</div>
+            <div class="celda" style="width: 40%;">{{ad['evlot'][0]['evento'].nombre}}</div>
+            <div class="celda" style="width: 40%;">{{ad['titulo']}}</div>
+            <div class="celda" style="width: 10%;">{{ad['precio_ganador']}}</div>
             <div style="width: 10%; border-right: none;">
-                <button class="boton border" style="width: 100%; height: 100%;" [routerLink]="['/evento/', ad['uuid_evento'], 'lote', ad['uuid_lote']]">Ver</button>
+                <button class="boton border" style="width: 100%; height: 100%;" [routerLink]="['/evento/', ad['evlot'][0].uuid_evento, 'lote', ad['uuid']]">Ver</button>
             </div>
         </div>
         <div *ngIf="Adjudicados.length==0" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; text-align: center;">
