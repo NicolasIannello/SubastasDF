@@ -12,13 +12,13 @@
     justify-content: space-between;
     font-family: Avenir;
     font-size: large;
-    @media (max-width: 1230px){
+    @media (max-width: 1250px){
         height: 7%;
     }
 }
 .logo{
     margin-inline: 0.5rem;
-    @media (max-width: 1230px){
+    @media (max-width: 1250px){
         margin-inline: 0rem;
     }
     height: 80%;
@@ -27,7 +27,7 @@
     font-weight: bold;
     transform: skew(0deg);
     span {
-        @media (max-width: 1230px){
+        @media (max-width: 1250px){
             width: 7rem;
         }
         width: 8rem;

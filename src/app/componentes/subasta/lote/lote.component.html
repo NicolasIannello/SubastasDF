@@ -25,16 +25,16 @@
             </div>
             <div style="width: 40%;">
                 <div class="border rounded" style="width: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                    <span style="margin: 1.5%; display: block; font-family: Avenir; padding: 1%; padding-top: 3%;">
+                    <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir; padding: 1%; padding-top: 3%;">
                         Publicacion: {{evento['nombre']}}
                     </span>
-                    <span style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         Lote: {{lote['titulo']}}
                     </span>
-                    <span *ngIf="evento['publicar_cierre']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span class="datoLote" *ngIf="evento['publicar_cierre']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         Fecha de cierre: {{evento['fecha_cierre']}} {{evento['hora_cierre']}}
                     </span>
-                    <span *ngIf="evento['mostrar_precio']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span class="datoLote" *ngIf="evento['mostrar_precio']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         {{lote['base_salida'] ? 'Precio base' : 'Monto arranque'}}: {{lote['moneda']}} {{lote['precio_base']}}
                     </span>
                     <span [className]="blink" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
@@ -48,7 +48,7 @@
                     </span>
                 </div>
                 <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
-                    <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                    <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
                         Cotizar segun lo observado en la exhibicion y en las imagenes aportadas para cada fin. Ofertar segun los montos esperados por el vendedor. Leer las condiciones de venta Particulares.<br>
                         Nota: Vehiculos de recupero de robo para transferir y en el estado que se encuentran y exhiben, los vehiculos no poseen garantia.
                     </span>
@@ -64,13 +64,13 @@
         <mat-expansion-panel hideToggle class="border rounded glassAzul colorWhite">
             <mat-expansion-panel-header class="glassAzul colorWhite">
                 <mat-panel-title class="glassAzul colorWhite">
-                    <span class="colorWhite" style="margin: 1.5%; display: block; font-family: Avenir;">
+                    <span class="colorWhite datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
                         <label style="text-decoration: underline;">ATENCION</label><br>
                         Ofertando en este lote se estan aceptando los <i class="fa-solid fa-landmark"></i> terminos y condiciones
                     </span>
-                    <span class="colorWhite" style="margin: 1.5%; display: flex; font-family: Avenir; align-items: center;">
+                    <span class="colorWhite datoLote" style="margin: 1.5%; display: flex; font-family: Avenir; align-items: center;">
                         <i class="fa-solid fa-bars textWhite" style="margin-right: 0.5rem; cursor: pointer;"></i>
-                        <span class="textWhite" style="cursor: pointer; margin-right: 2rem;">Ver T&C</span>         
+                        <span class="textWhite" style="cursor: pointer;">Ver T&C</span>         
                     </span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
@@ -79,55 +79,55 @@
             </div>
         </mat-expansion-panel>
         <div *ngIf="evento['estado']==1" style="width: 100%; margin-bottom: 2%; margin-top: 2%; display: flex; align-items: center; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
-            <div style="width: 30rem;">
+            <div class="campoOferta">
                 <div class="col-3">
                     <div style="display: flex; justify-content: space-between; height: 2rem;">
                         <label>Realizar oferta</label>
-                        <span style="font-family: Avenir;">Incremento minimo (INC): {{lote['moneda']}} {{lote['incremento']}}</span>
+                        <span style="font-family: Avenir;" class="datoLote">Incremento minimo (INC): {{lote['moneda']}} {{lote['incremento']}}</span>
                     </div>
                     <div style="display: flex;">
                         <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                         align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
                         <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;">
-                        <button class="border boton boton paginacion" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="ofertar()">Ofertar</button>
+                        <button class="border boton boton paginacion datoLote" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="ofertar()">Ofertar</button>
                         <span class="focus-border2"></span>
                     </div>
                 </div>
                 <div style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center;">
-                    <button class="border boton boton paginacion" style="width: 7rem;" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +(precio_actual ? precio_actual : lote['precio_base'])">{{precio_actual ? "Mayor oferta" : "Precio base"}}</button>
-                    <button class="border boton boton paginacion" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']">X1 INC</button>
-                    <button class="border boton boton paginacion" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*2">X2 INC</button>
-                    <button class="border boton boton paginacion" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*3">X3 INC</button>
-                    <button class="border boton boton paginacion" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*10">X10 INC</button>
+                    <button class="border boton boton paginacion datoLote" style="width: 7rem;" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +(precio_actual ? precio_actual : lote['precio_base'])">{{precio_actual ? "Mayor oferta" : "Precio base"}}</button>
+                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']">X1 INC</button>
+                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*2">X2 INC</button>
+                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*3">X3 INC</button>
+                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*10">X10 INC</button>
                 </div>
             </div>
-            <div style="display: flex; width: 30rem; flex-direction: column;">
+            <div class="campoOferta" style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; height: 2rem;">
-                    <button class="border boton boton paginacion" style="width: 50%;" (click)="programar=!programar; ofertaAuto=null">Programar oferta automatica <i [ngClass]="{'fa-caret-down' : !programar, 'fa-caret-up' : programar}"class="fa-solid"></i></button>
-                    <span *ngIf="ofertaAutoExiste!=null" style="font-family: Avenir;">Oferta automatica: {{lote['moneda']}} {{ofertaAutoExiste}}</span>
+                    <button class="border boton boton paginacion datoLote" style="width: 50%;" (click)="programar=!programar; ofertaAuto=null">Programar oferta automatica <i [ngClass]="{'fa-caret-down' : !programar, 'fa-caret-up' : programar}"class="fa-solid"></i></button>
+                    <span class="datoLote" *ngIf="ofertaAutoExiste!=null" style="font-family: Avenir;">Oferta automatica: {{lote['moneda']}} {{ofertaAutoExiste}}</span>
                 </div>
                 <div style="transform: scale3d(1, 1, 1); transform-origin: top; transition: all 0.3s ease-in;" [ngClass]="{'none2' : !programar}">
                     <div class="col-3">
                         <div class="border rounded glass colorWhite" style="margin-bottom: 2%; margin-top: 2%;">
-                            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                            <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
                                 El sistema intentara generar una oferta por el precio actual mas un incremento minimo, siempre y cuando el precio actual del lote no sea mayor o igual al monto maximo configurado por Ud.
                             </span>
                         </div>
-                        <button class="border boton boton paginacion bgred" style="width: 100%;" (click)="eliminarOferta()"><i class="fa-solid fa-trash-can" style="margin-right: 2%;"></i>Eliminar oferta programada</button>
+                        <button class="border boton boton paginacion bgred datoLote" style="width: 100%;" (click)="eliminarOferta()"><i class="fa-solid fa-trash-can" style="margin-right: 2%;"></i>Eliminar oferta programada</button>
                         <div style="display: flex;">
                             <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                             align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
                             <input class="effect-1" type="number" min="0" [(ngModel)]="ofertaAuto" placeholder="Oferta automatica" style="height: 2.5rem; width: 100%;">
-                            <button class="border boton boton paginacion" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="programarOferta()">Programar</button>
+                            <button class="border boton boton paginacion datoLote" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="programarOferta()">Programar</button>
                             <span class="focus-border2"></span>
                         </div>
                     </div>
                     <div style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center; width: 100%;">
-                        <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*10">X10 INC</button>
-                        <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*20">X20 INC</button>
-                        <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*30">X30 INC</button>
-                        <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*40">X40 INC</button>
-                        <button class="border boton boton paginacion" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*50">X50 INC</button>
+                        <button class="border boton boton paginacion datoLote" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*10">X10 INC</button>
+                        <button class="border boton boton paginacion datoLote" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*20">X20 INC</button>
+                        <button class="border boton boton paginacion datoLote" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*30">X30 INC</button>
+                        <button class="border boton boton paginacion datoLote" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*40">X40 INC</button>
+                        <button class="border boton boton paginacion datoLote" (click)="ofertaAuto=(ofertaAuto==undefined ? 0 : +ofertaAuto)+ +lote['incremento']*50">X50 INC</button>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
             <span style="margin: 1.5%; display: block; font-family: Avenir;" [innerHTML]="lote['descripcion'] | sanitizeHtml"></span>
         </div> -->
         <div class="border rounded glassAzul colorWhite" style="width: 100%; margin-bottom: 2%;">
-            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+            <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
                 <label style="text-decoration: underline;">Informacion adicional del lote: </label><br><br>
                 {{lote['aclaracion']=='' ? 'No hay informacion adicional' : lote['aclaracion']}}
             </span>

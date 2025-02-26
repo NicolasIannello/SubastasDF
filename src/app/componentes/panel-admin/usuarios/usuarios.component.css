@@ -25,6 +25,9 @@
     height: 2rem;
     width: 6rem;
     font-size: medium;
+    @media (max-width: 650px) {
+        width: 3.5rem;
+    }
 }
 .ibtn{
     display: flex; 
@@ -77,8 +80,21 @@
     padding: 1%;
     border: 1px solid var(--amarello);
     width: 80%;
+    @media (max-width: 1000px) {
+        width: 97.5% !important;
+    }
 }
-
+.campoOferta{
+    width: 30rem;
+    @media (max-width: 530px) {
+        width: 100%;
+    }
+}
+.datoLote{
+    @media (max-width: 600px) {
+        font-size: smaller;
+    }
+}
 .icerrar{
     color: var(--amarello);
     &:hover{
@@ -110,4 +126,13 @@
     transform: scale3d(1, 0, 1);
     visibility: hidden;
     opacity: 0;
+}
+.campoUser{
+    display: flex;
+    @media (max-width: 650px) {
+        flex-wrap: wrap;
+        div{
+            width: 100% !important;
+        }
+    }
 }

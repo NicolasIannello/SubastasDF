@@ -20,11 +20,17 @@ export class AzulComponent{
   pass:string="";
   type:string="password";
   User:string="";
+  menuOpen:boolean=false;
 
   constructor(public api: ServiciosService){ }
 
   activar(tab:string){
     this.activa=tab;
+    this.menuOpen=false;
+  }
+
+  open(){
+    this.menuOpen=!this.menuOpen;
   }
 
   login(){

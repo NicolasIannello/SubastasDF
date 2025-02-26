@@ -1,7 +1,7 @@
 <div class="svh" >
     <div class="seccion" style="width: 100%; justify-content: center;">
         <div class="modal-content rounded">
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center; display: flex; align-items: center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Nombre:</span> 
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">E-mail: </span> {{datoCambio["mail"]}}
                 </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Pais:</span>
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Ciudad:</span>
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Domicilio:</span>
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -117,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">Validado: </span> {{datoCambio["validado"]? 'Validado' : 'Invalidado'}}
                 </div>
@@ -125,7 +125,7 @@
                     <span style="font-weight: bold; text-decoration: underline; width: 35%; margin-right: 2%;">Habilitado: </span> {{datoCambio["habilitado"]? 'Habilitado' : 'Inhabilitado'}}
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-bottom: none;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Como encontro:</span>
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -146,7 +146,7 @@
                 <div class="celda borderAbajo" style="width: 50%; display:flex; align-items:center; border-right: none; border-bottom: none;">
                 </div>
             </div>
-            <div style="display: flex;" *ngIf="datoCambio['tipo']=='emp'">
+            <div class="campoUser" *ngIf="datoCambio['tipo']=='emp'">
                 <div class="celda" style="width: 50%; display:flex; align-items:center; border-left: none; border-top: none;">
                     <span style="font-weight: bold; text-decoration: underline; width: 35%;">Persona responsable:</span> 
                     <div class="col-3" style="width: 60%; margin-left: 2%;">
@@ -164,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div class="campoUser">
                 <div class="celda" style="width: 50%; display:flex; align-items:center;border-right: none;"></div>
                 <div class="celda" style="width: 50%; display:flex; align-items:center; border-right: none; justify-content: flex-end;">
                     <button class="boton boton2 border rounded botones" (click)="actualizar()">Actualizar</button>

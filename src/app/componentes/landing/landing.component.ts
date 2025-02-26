@@ -14,7 +14,7 @@ export class LandingComponent {
   injector = inject(Injector);
   title = 'subastas';
   width:number | undefined;
-  cap:number = 1230;
+  cap:number = 1250;
 
   ngOnInit() {
     afterNextRender(() => this.width=window.innerWidth, {injector: this.injector});

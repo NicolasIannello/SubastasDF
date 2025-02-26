@@ -39,7 +39,7 @@ export class LoteComponent{
   cantidad_ofertas:number|null=null;
   ganador:string|null=null;
   fav:boolean=false;
-  blink:string="";
+  blink:string="datoLote";
   same:boolean=false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
@@ -53,7 +53,7 @@ export class LoteComponent{
   }
 
   cerrarModal() {
-    this.blink="";
+    this.blink="datoLote";
     this.same=false;
     this.imagenes=[];
     this.pdf=null;
@@ -81,9 +81,9 @@ export class LoteComponent{
           this.dateFin= new Date(Date.parse(message.eventolotes[i].lote.fecha_cierre+' '+message.eventolotes[i].lote.hora_cierre));
           this.dateHoy= new Date();
           this.countDown();
-          this.blink="";
+          this.blink="datoLote";
           this.same=this.ganador==this.api.getUserId();
-          setTimeout( ()=>this.blink="blink", 250);
+          setTimeout( ()=>this.blink="datoLote blink", 250);
         } 
       }
     });
