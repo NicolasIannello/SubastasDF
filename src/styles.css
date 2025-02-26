@@ -132,6 +132,9 @@ select{font: 15px/24px "Avenir"; color: #333; box-sizing: border-box;}
     height: 3rem;
     width: 11rem;
     font-size: larger;
+    @media (max-width: 710px){
+        width: 7rem;
+    }
 }
 .oculto{
     display: none;
