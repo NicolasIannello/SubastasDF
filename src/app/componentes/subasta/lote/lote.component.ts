@@ -21,6 +21,7 @@ export class LoteComponent{
   @Input() lote:{[key: string]: any}=[];
   @Input() evento:{[key: string]: any}=[];
   imagenes: Array<{link:SafeResourceUrl,id:number}> = [];
+  imagen:{link:SafeResourceUrl,id:number}={link:'',id:0};
   pdf:SafeResourceUrl|null=null;
   imgID:number=-1;
   dateFin:Date|null=null;
@@ -56,6 +57,7 @@ export class LoteComponent{
     this.blink="datoLote";
     this.same=false;
     this.imagenes=[];
+    this.imagen={link:'',id:0}
     this.pdf=null;
     this.flagTimer=false;
     this.oferta=null;
@@ -99,6 +101,7 @@ export class LoteComponent{
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
         if(resp!=false){
           this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden)};
+          this.imagen=this.imagenes[0];
         }
       })
     }    
