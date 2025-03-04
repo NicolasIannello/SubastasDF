@@ -38,6 +38,7 @@
         <div class="celda username" style="width: 12%;">Mostrar en Publicaciones</div>
         <div class="celda username" style="width: 8%;">Nro. de lotes</div>
         <div class="celda username" style="width: 5%;">Visitas</div>
+        <div class="celda username" style="width: 5%;">Estado</div>
         <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
             <div class="col-3" style="width: 60%;">
                 <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarEventos()" style="width: 100%; height: 2rem;">
@@ -76,6 +77,7 @@
         </div>
         <div class="celda username" style="width: 8%;">{{evento['lotes'].length}}</div>
         <div class="celda username" style="width: 5%;">{{evento['visitas']}}</div>
+        <div class="celda username" style="width: 5%;">{{evento['estado']==1 ? 'Abierto' : evento['estado']==0 ? 'Cerrado' : 'Finalizado'}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="modal(evento,'ver')"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="modal(evento,'editar')"></i>

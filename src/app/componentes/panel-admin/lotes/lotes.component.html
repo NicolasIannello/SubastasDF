@@ -37,6 +37,7 @@
         <div class="celda username" style="width: 5%;">Ofertas</div>
         <div class="celda username" style="width: 10%;">Oferta ganadora</div>
         <div class="celda username" style="width: 10%;">Oferta actual</div>
+        <div class="celda username" style="width: 5%;">Estado</div>
         <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
             <div class="col-3" style="width: 60%;">
                 <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
@@ -74,6 +75,7 @@
         <div class="celda username" style="width: 5%;">{{lote['ofertas'] ? lote['ofertas'].length : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['precio_ganador'] ? lote['moneda']+' '+lote['precio_ganador'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['moneda']+' '+lote['oferta']['cantidad'] : '-'}}</div>
+        <div class="celda username" style="width: 5%;">{{lote['estado']==1 ? 'Abierto' : lote['estado']==0 ? 'Cerrado' : 'Finalizado'}}</div>
         <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
             <i class="fa-regular fa-eye boton2 border rounded ibtn" (click)="verLote(lote['uuid'],1);"></i>
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verLote(lote['uuid'],2);"></i>
