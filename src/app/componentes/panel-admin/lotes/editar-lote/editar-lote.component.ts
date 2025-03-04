@@ -155,9 +155,8 @@ export class EditarLoteComponent{
 	}
 
   actualizar(){    
-    if(this.loteNuevo['titulo']=='' || this.loteNuevo['descripcion']=='' || this.loteNuevo['precio_base']=='null' || this.loteNuevo['incremento']=='null'){
+    if(this.loteNuevo['titulo']=='' || this.loteNuevo['precio_base']=='null' || this.loteNuevo['incremento']=='null'){
       this.alertas[0]=this.loteNuevo['titulo']=='' ? 'El campo es obligatorio' : '';
-      this.alertas[1]=this.loteNuevo['descripcion']=='' ? 'El campo es obligatorio' : '';
       this.alertas[2]=this.loteNuevo['precio_base']=='null' ? 'El campo es obligatorio' : '';
       this.alertas[3]=this.loteNuevo['incremento']=='null' ? 'El campo es obligatorio' : '';      
       Swal.fire({title:'Hay campos que no pueden estar vacios',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
@@ -171,6 +170,7 @@ export class EditarLoteComponent{
       formData.append('precio_salida', this.loteNuevo['precio_salida']);
       formData.append('titulo', this.loteNuevo['titulo']);
       formData.append('base_salida', this.loteNuevo['base_salida']);
+      formData.append('informacion', this.loteNuevo['informacion']);
       formData.append('lote', this.loteNuevo['uuid']);
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');

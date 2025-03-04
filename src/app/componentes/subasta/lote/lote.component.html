@@ -59,8 +59,9 @@
                 </div>
                 <div class="border rounded glass colorWhite" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
                     <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
-                        Cotizar segun lo observado en la exhibicion y en las imagenes aportadas para cada fin. Ofertar segun los montos esperados por el vendedor. Leer las condiciones de venta Particulares.<br>
-                        Nota: Vehiculos de recupero de robo para transferir y en el estado que se encuentran y exhiben, los vehiculos no poseen garantia.
+                        {{lote['informacion']=='' ? 'No hay informacion adicional' : lote['informacion']}}
+                        <!-- Cotizar segun lo observado en la exhibicion y en las imagenes aportadas para cada fin. Ofertar segun los montos esperados por el vendedor. Leer las condiciones de venta Particulares.<br>
+                        Nota: Vehiculos de recupero de robo para transferir y en el estado que se encuentran y exhiben, los vehiculos no poseen garantia. -->
                     </span>
                 </div>
                 <!-- <div class="border rounded glassAzul colorWhite" style="width: 100%; margin-bottom: 2%;">

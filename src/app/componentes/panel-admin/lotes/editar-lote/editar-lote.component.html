@@ -23,6 +23,12 @@
                 </div>
             </div>
         </div>
+        <label>Informacion: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="text" placeholder="Informacion" style="height: 2.5rem;" 
+            [ngClass]="{'changed': loteNuevo['informacion']!=lote['informacion']}" [(ngModel)]="loteNuevo['informacion']">
+            <span class="focus-border2"></span>
+        </div>
         <label>Moneda: </label>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <select class="effect-1" [(ngModel)]="loteNuevo['moneda']" 

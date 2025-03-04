@@ -8,7 +8,7 @@
             <input class="effect-1" type="text" placeholder="Titulo" style="height: 2.5rem;" [(ngModel)]="datos[0]">
             <span class="focus-border2"></span>
         </div>
-        <label>Descripcion: </label><span class="msg">*{{alertas[1]}}</span>
+        <label>Descripcion: </label><span class="msg">{{alertas[1]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
             <div>
                 <div class="main-container">
@@ -21,6 +21,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <label>Informacion: </label><span class="msg">{{alertas[6]}}</span>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <input class="effect-1" type="text" placeholder="Informacion" style="height: 2.5rem;" [(ngModel)]="datos[10]">
+            <span class="focus-border2"></span>
         </div>
         <label>Moneda: </label><span class="msg">{{alertas[2]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">

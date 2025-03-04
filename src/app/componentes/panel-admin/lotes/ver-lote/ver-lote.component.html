@@ -14,6 +14,12 @@
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;" [innerHTML]="lote['descripcion'] | sanitizeHtml"></span>
         </div>
+        <label>Informacion: </label>
+        <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
+            <span style="margin: 1.5%; display: block; font-family: Avenir;">
+                {{lote['informacion']=='' ? '-' : lote['informacion']}}
+            </span>
+        </div>
         <label>Aclaracion: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;">
