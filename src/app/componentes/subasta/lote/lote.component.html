@@ -142,10 +142,10 @@
                 </div>
             </div>
         </div>
-        <!-- <label>Descripcion: </label>
+        <label>Descripcion: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
-            <span style="margin: 1.5%; display: block; font-family: Avenir;" [innerHTML]="lote['descripcion'] | sanitizeHtml"></span>
-        </div> -->
+            <span style="margin: 1.5%; display: block; font-family: Avenir;" [innerHTML]="lote['descripcion']=='' ? 'No hay informacion adicional' : lote['descripcion'] | sanitizeHtml"></span>
+        </div>
         <div class="border rounded glassAzul colorWhite" style="width: 100%; margin-bottom: 2%;">
             <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
                 <label style="text-decoration: underline;">Informacion adicional del lote: </label><br><br>

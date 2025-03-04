@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SocketService } from '../../../servicios/socket.service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SanitizeHtmlPipe } from '../../../servicios/html.pipe';
 
 @Component({
   selector: 'app-lote',
   standalone: true,
-  imports: [CommonModule, VerImagenComponent, FormsModule, MatExpansionModule],
+  imports: [CommonModule, VerImagenComponent, FormsModule, MatExpansionModule, SanitizeHtmlPipe],
   templateUrl: './lote.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -181,32 +182,64 @@ export class LoteComponent{
     if(this.flagTimer) setTimeout( ()=>this.timer(), 1000);
   }
 
-  ofertar(){
+  async ofertar(){
     if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual)){
-      Swal.fire({
-        title: "Esta por realizar una oferta", text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
-        showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let dato={
-            'token':localStorage.getItem('token'),
-            'cantidad':this.oferta,
-            'lote':this.lote['uuid'],
-            'evento':this.evento['uuid'],
-            'tipo':1
-          }
-    
-          this.api.ofertar(dato).subscribe({
-            next:(value)=>{
-              if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-              if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-            },
-            error:(err)=>{
-              Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-            },
-          })
+      const { value: accept } = await Swal.fire({
+        width: '90%',
+        title: "Esta por realizar una oferta",
+        text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
+        input: "checkbox",
+        inputValue: 0,
+        inputPlaceholder: `He leido y acepto los terminos y condiciones`,
+        confirmButtonText: `Ofertar`,
+        showCancelButton: true, confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
+        inputValidator: (result) => {
+          return !result && "Debe aceptar los Terminos y condiciones";
         }
       });
+      if (accept) {
+        let dato={
+          'token':localStorage.getItem('token'),
+          'cantidad':this.oferta,
+          'lote':this.lote['uuid'],
+          'evento':this.evento['uuid'],
+          'tipo':1
+        }
+  
+        this.api.ofertar(dato).subscribe({
+          next:(value)=>{
+            if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+          error:(err)=>{
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        })
+      }
+      // Swal.fire({
+      //   title: "Esta por realizar una oferta", text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
+      //   showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     let dato={
+      //       'token':localStorage.getItem('token'),
+      //       'cantidad':this.oferta,
+      //       'lote':this.lote['uuid'],
+      //       'evento':this.evento['uuid'],
+      //       'tipo':1
+      //     }
+    
+      //     this.api.ofertar(dato).subscribe({
+      //       next:(value)=>{
+      //         if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //         if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //       },
+      //       error:(err)=>{
+      //         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //       },
+      //     })
+      //   }
+      // });
     }else{
       Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
     }
