@@ -21,9 +21,7 @@ export class AdjudicadosComponent implements OnInit{
       "tipo":1,
     }
     this.api.getAdjudicados(dato).subscribe({
-      next:(value)=> {
-        console.log(value);
-        
+      next:(value)=> {        
         if(value.ok) this.Adjudicados=value.adjudicadosDB;        
       },
       error:(err)=> {

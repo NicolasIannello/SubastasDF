@@ -147,7 +147,7 @@ i{
         color: var(--white);
     }
     button, input{
-        font-size: medium;
+        /* font-size: medium; */
         height: 2rem;
         width: 100%;
     }
