@@ -87,6 +87,9 @@
             </mat-expansion-panel-header>
             <div class="col-3" style="display: flex; flex-direction: column;">
                 <embed *ngIf="pdf!=null" width="100%" height="600px" [src]="pdf" type='application/pdf'>
+                <mat-checkbox [(ngModel)]="tyc">
+                    <span  class="colorWhite" style="font-size: large;">He leido y acepto los Terminos y condiciones del lote</span>
+                </mat-checkbox>
             </div>
         </mat-expansion-panel>
         <div *ngIf="evento['estado']==1" style="width: 100%; margin-bottom: 2%; margin-top: 2%; display: flex; align-items: center; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
@@ -99,17 +102,17 @@
                     <div style="display: flex;">
                         <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                         align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
-                        <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;">
+                        <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;" disabled>
                         <button class="border boton boton paginacion datoLote" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="ofertar()">Ofertar</button>
                         <span class="focus-border2"></span>
                     </div>
                 </div>
                 <div style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center;">
-                    <button class="border boton boton paginacion datoLote" style="width: 7rem;" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +(precio_actual ? precio_actual : lote['precio_base'])">{{precio_actual ? "Mayor oferta" : "Precio base"}}</button>
-                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']">X1 INC</button>
-                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*2">X2 INC</button>
-                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*3">X3 INC</button>
-                    <button class="border boton boton paginacion datoLote" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +lote['incremento']*10">X10 INC</button>
+                    <!-- <button class="border boton boton paginacionof datoLote" style="width: 7rem;" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +(precio_actual ? precio_actual : lote['precio_base'])">{{precio_actual ? "Mayor oferta" : "Precio base"}}</button> -->
+                    <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']">X1 INC</button>
+                    <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*2">X2 INC</button>
+                    <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*3">X3 INC</button>
+                    <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*10">X10 INC</button>
                 </div>
             </div>
             <div class="campoOferta" style="display: flex; flex-direction: column;">

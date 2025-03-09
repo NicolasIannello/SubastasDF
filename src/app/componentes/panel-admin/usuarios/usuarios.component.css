@@ -29,6 +29,14 @@
         width: 3.5rem;
     }
 }
+.paginacionof{
+    height: 2rem;
+    width: 8rem;
+    font-size: medium;
+    @media (max-width: 650px) {
+        width: 3.5rem;
+    }
+}
 .ibtn{
     display: flex; 
     align-items: center; 

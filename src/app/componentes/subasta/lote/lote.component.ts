@@ -8,11 +8,12 @@ import Swal from 'sweetalert2';
 import { SocketService } from '../../../servicios/socket.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SanitizeHtmlPipe } from '../../../servicios/html.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-lote',
   standalone: true,
-  imports: [CommonModule, VerImagenComponent, FormsModule, MatExpansionModule, SanitizeHtmlPipe],
+  imports: [CommonModule, VerImagenComponent, FormsModule, MatExpansionModule, SanitizeHtmlPipe, MatCheckboxModule],
   templateUrl: './lote.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -43,6 +44,7 @@ export class LoteComponent{
   fav:boolean=false;
   blink:string="datoLote";
   same:boolean=false;
+  tyc:boolean=false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -183,72 +185,77 @@ export class LoteComponent{
   }
 
   async ofertar(){
-    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual)){
-      const { value: accept } = await Swal.fire({
-        width: '90%',
-        title: "Esta por realizar una oferta",
-        text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
-        input: "checkbox",
-        inputValue: 0,
-        inputPlaceholder: `He leido y acepto los terminos y condiciones`,
-        confirmButtonText: `Ofertar`,
-        showCancelButton: true, confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
-        inputValidator: (result) => {
-          return !result && "Debe aceptar los Terminos y condiciones";
-        }
-      });
-      if (accept) {
-        let dato={
-          'token':localStorage.getItem('token'),
-          'cantidad':this.oferta,
-          'lote':this.lote['uuid'],
-          'evento':this.evento['uuid'],
-          'tipo':1
-        }
-  
-        this.api.ofertar(dato).subscribe({
-          next:(value)=>{
-            if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-            if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          },
-          error:(err)=>{
-            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          },
-        })
-      }
-      // Swal.fire({
-      //   title: "Esta por realizar una oferta", text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
-      //   showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     let dato={
-      //       'token':localStorage.getItem('token'),
-      //       'cantidad':this.oferta,
-      //       'lote':this.lote['uuid'],
-      //       'evento':this.evento['uuid'],
-      //       'tipo':1
-      //     }
-    
-      //     this.api.ofertar(dato).subscribe({
-      //       next:(value)=>{
-      //         if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //         if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //       },
-      //       error:(err)=>{
-      //         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //       },
-      //     })
+    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual) && this.tyc && this.oferta%this.lote['incremento']==0){
+      // const { value: accept } = await Swal.fire({
+      //   width: '90%',
+      //   title: "Esta por realizar una oferta",
+      //   text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
+      //   input: "checkbox",
+      //   inputValue: 0,
+      //   inputPlaceholder: `He leido y acepto los terminos y condiciones`,
+      //   confirmButtonText: `Ofertar`,
+      //   showCancelButton: true, confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
+      //   inputValidator: (result) => {
+      //     return !result && "Debe aceptar los Terminos y condiciones";
       //   }
       // });
+      // if (accept) {
+      //   let dato={
+      //     'token':localStorage.getItem('token'),
+      //     'cantidad':this.oferta,
+      //     'lote':this.lote['uuid'],
+      //     'evento':this.evento['uuid'],
+      //     'tipo':1
+      //   }
+  
+      //   this.api.ofertar(dato).subscribe({
+      //     next:(value)=>{
+      //       if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //       if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //     },
+      //     error:(err)=>{
+      //       Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      //     },
+      //   })
+      // }
+      Swal.fire({
+        title: "Esta por realizar una oferta", text: 'Antes de ofertar asegure haber leido y aceptado los terminos y condiciones del lote',
+        showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let dato={
+            'token':localStorage.getItem('token'),
+            'cantidad':this.oferta,
+            'lote':this.lote['uuid'],
+            'evento':this.evento['uuid'],
+            'tipo':1
+          }
+    
+          this.api.ofertar(dato).subscribe({
+            next:(value)=>{
+              if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              this.oferta=null;
+            },
+            error:(err)=>{
+              Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            },
+          })
+        }
+      });
     }else{
-      Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      if(!this.tyc){
+        Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      }else{
+        Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      }
     }
   }
 
   programarOferta(){
-    if(this.ofertaAuto!=null && this.ofertaAuto>=this.lote['precio_base'] && (this.precio_actual==null || this.ofertaAuto>this.precio_actual)){
+    if(this.ofertaAuto!=null && this.ofertaAuto>=this.lote['precio_base'] && (this.precio_actual==null || this.ofertaAuto>this.precio_actual) && this.tyc && this.ofertaAuto%this.lote['incremento']==0){
       Swal.fire({
-        title: "Esta por programar una oferta automatica", text: 'Antes de programar una oferta automatica asegure haber leido los terminos y condiciones del lote',
+        title: "Esta por programar una oferta automatica", text: 'Antes de programar una oferta automatica asegure haber leido y aceptado los terminos y condiciones del lote',
         showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -281,7 +288,11 @@ export class LoteComponent{
         }
       });
     }else{
-      Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      if(!this.tyc){
+        Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      }else{
+        Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      }
     }
   }
 
