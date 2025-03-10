@@ -1,6 +1,18 @@
 <div class="svh" >
     <div class="border margin5 rounded seccion" style="width: 100%;">            
         <h1>Ofertas</h1>
+        <div class="celda" style="border-right: none; display: flex; width: 100%;">
+            <div class="col-3" style="width: 10rem;">
+                <select class="effect-1" [(ngModel)]="loteBuscar" style="width: 100%; height: 2rem;">
+                    <option value='' selected>Todos</option>
+                    <ng-container *ngFor="let l of Lotes">
+                        <option value="{{l['_id']}}">{{l['titulo']}}</option>
+                    </ng-container>
+                </select>
+                <span class="focus-border2"></span>
+            </div>
+            <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar lote</button>
+        </div>
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda username datoLote" style="width: 20%;">Fecha</div>
             <div class="celda username datoLote" style="width: 15%;">Publicacion</div>

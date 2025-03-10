@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ofertas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './ofertas.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -15,6 +16,8 @@ export class OfertasComponent implements OnInit{
   pagina:number=0;
   pagU:number=0;
   index:number=0;
+  loteBuscar:string='';
+  Lotes:Array<any>=[];
 
   constructor(public api:ServiciosService, private router: Router){}
 
@@ -22,11 +25,15 @@ export class OfertasComponent implements OnInit{
     let dato={
       "token":localStorage.getItem('token'),
       "tipo":1,
+      "lote":''
     }
     this.api.getOfertas(dato).subscribe({
       next:(value)=> {
-        if(value.ok) this.Ofertas=value.ofertaDB;
-        this.pagU=Math.ceil(this.Ofertas.length/20)
+        if(value.ok) {
+          this.Ofertas=value.ofertaDB;
+          this.Lotes=value.lotesDB
+          this.pagU=Math.ceil(this.Ofertas.length/20)
+        }
       },
       error:(err)=> {
       },
@@ -56,5 +63,26 @@ export class OfertasComponent implements OnInit{
 
   verLote(evento:string,lote:string){
     this.router.navigate(['evento',evento,'lote',lote])
+  }
+
+  buscarDato(){
+    let dato={
+      "token":localStorage.getItem('token'),
+      "tipo":1,
+      "lote":this.loteBuscar
+    }
+    
+    this.api.getOfertas(dato).subscribe({
+      next:(value)=> {
+        if(value.ok) {
+          this.Ofertas=value.ofertaDB;
+          this.Lotes=value.lotesDB
+          this.pagU=Math.ceil(this.Ofertas.length/20)
+        }
+        this.loteBuscar='';
+      },
+      error:(err)=> {
+      },
+    })
   }
 }
