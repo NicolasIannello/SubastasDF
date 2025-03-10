@@ -120,4 +120,7 @@ export class AdminService {
   comunicar(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/comunicar', dato, {'headers':this.header})
   }
+  reComunicar(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/recomunicar', dato, {'headers':this.header})
+  }
 }

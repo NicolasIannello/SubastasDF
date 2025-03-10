@@ -158,4 +158,34 @@ export class VerEventoComponent {
     });
   }
 
+  comunicar(){
+    Swal.fire({
+          title: "Comunicado",
+          text: '¿Desea comunicar la publicacion a todos los usuarios?',
+          showCancelButton: true,
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Atras",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let dato={
+              "token":localStorage.getItem('token'),
+              "tipo":1,
+              "grupo":this.evento['grupo'],
+              "nombre":this.evento['nombre'],
+              "fecha_cierre":this.evento['fecha_cierre'],
+              "hora_cierre":this.evento['hora_cierre'],
+              "uuid":this.evento['uuid']
+            }        
+            this.api.reComunicar(dato).subscribe({
+              next:(value)=> {
+                if(value.ok) Swal.fire({title:'Publicacion comunicada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+                if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              },
+              error:(err)=> {
+                Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              },
+            })
+          }
+        });
+  }
 }

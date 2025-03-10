@@ -1,7 +1,10 @@
 <div id="myModal" class="modal" style="overflow: auto;">
     <div class="modal-content" style="width: 50%;">
         <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
-            <button class="boton boton2 border rounded" (click)="generarExcel()">Generar PDF</button>
+            <div>
+                <button class="boton boton2 border rounded" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" (click)="generarExcel()">Generar PDF</button>
+                <button class="boton boton2 border rounded" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" (click)="comunicar()">Comunicar</button>
+            </div>
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
         <label>Nombre de la publicacion: </label>
