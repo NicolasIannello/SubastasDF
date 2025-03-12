@@ -185,7 +185,7 @@ export class LoteComponent{
   }
 
   async ofertar(){
-    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual) && this.tyc && this.oferta%this.lote['incremento']==0){
+    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual) && this.tyc && (this.oferta-this.lote['precio_base'])%this.lote['incremento']==0){
       // const { value: accept } = await Swal.fire({
       //   width: '90%',
       //   title: "Esta por realizar una oferta",
