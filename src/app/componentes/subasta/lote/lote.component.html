@@ -44,10 +44,10 @@
                     <span class="datoLote" *ngIf="evento['publicar_cierre']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         Fecha de cierre: {{evento['fecha_cierre']}} {{evento['hora_cierre']}}
                     </span>
-                    <span class="datoLote" *ngIf="evento['mostrar_precio']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span class="datoLote" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         {{lote['base_salida'] ? 'Precio base' : 'Monto arranque'}}: {{lote['moneda']}} {{lote['precio_base']}}
                     </span>
-                    <span [className]="blink" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
+                    <span [className]="blink" *ngIf="evento['mostrar_precio']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
                         Oferta actual: {{precio_actual==null ? '-' : precio_actual}} {{same ? '(Usted)' : ""}}
                     </span>
                     <span [className]="blink" *ngIf="evento['mostrar_ofertas']" style="margin: 1.5%; display: block; font-family: Avenir; border-top: 1px solid rgb(255, 144, 0, 0.2); padding: 1%; padding-top: 3%;">
@@ -102,7 +102,7 @@
                     <div style="display: flex;">
                         <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
                         align-items: center; padding-left: 1%; padding-right: 1%;">{{lote['moneda']}}</span>
-                        <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;" disabled>
+                        <input class="effect-1" type="number" min="{{lote['precio_base']}}" [(ngModel)]="oferta" placeholder="Oferta" style="height: 2.5rem; width: 100%;" disabled="{{flagModalidad}}">
                         <button class="border boton boton paginacion datoLote" style="height: 2.5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="ofertar()">Ofertar</button>
                         <span class="focus-border2"></span>
                     </div>
@@ -114,8 +114,9 @@
                     <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*3">X3 INC</button>
                     <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*10">X10 INC</button>
                 </div>
+                <span *ngIf="!flagModalidad" style="font-family: Avenir;" class="datoLote">*Si ingresa una nueva oferta esta sobreescribira su oferta actual</span>
             </div>
-            <div class="campoOferta" style="display: flex; flex-direction: column;">
+            <div *ngIf="flagModalidad" class="campoOferta" style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; height: 2rem;">
                     <button class="border boton boton paginacion datoLote" style="width: 50%;" (click)="programar=!programar; ofertaAuto=null">Programar oferta automatica <i [ngClass]="{'fa-caret-down' : !programar, 'fa-caret-up' : programar}"class="fa-solid"></i></button>
                     <span class="datoLote" *ngIf="ofertaAutoExiste!=null" style="font-family: Avenir;">Oferta automatica: {{lote['moneda']}} {{ofertaAutoExiste}}</span>

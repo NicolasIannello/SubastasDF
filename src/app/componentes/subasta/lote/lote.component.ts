@@ -9,6 +9,9 @@ import { SocketService } from '../../../servicios/socket.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SanitizeHtmlPipe } from '../../../servicios/html.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { environment } from '../../../../environments/environment';
+
+const link=environment.link;
 
 @Component({
   selector: 'app-lote',
@@ -45,6 +48,7 @@ export class LoteComponent{
   blink:string="datoLote";
   same:boolean=false;
   tyc:boolean=false;
+  flagModalidad:boolean=window.location.href.includes(link) ? true : false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -184,40 +188,8 @@ export class LoteComponent{
     if(this.flagTimer) setTimeout( ()=>this.timer(), 1000);
   }
 
-  async ofertar(){
-    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual) && this.tyc && (this.oferta-this.lote['precio_base'])%this.lote['incremento']==0){
-      // const { value: accept } = await Swal.fire({
-      //   width: '90%',
-      //   title: "Esta por realizar una oferta",
-      //   text: 'Antes de ofertar asegure haber leido los terminos y condiciones del lote',
-      //   input: "checkbox",
-      //   inputValue: 0,
-      //   inputPlaceholder: `He leido y acepto los terminos y condiciones`,
-      //   confirmButtonText: `Ofertar`,
-      //   showCancelButton: true, confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
-      //   inputValidator: (result) => {
-      //     return !result && "Debe aceptar los Terminos y condiciones";
-      //   }
-      // });
-      // if (accept) {
-      //   let dato={
-      //     'token':localStorage.getItem('token'),
-      //     'cantidad':this.oferta,
-      //     'lote':this.lote['uuid'],
-      //     'evento':this.evento['uuid'],
-      //     'tipo':1
-      //   }
-  
-      //   this.api.ofertar(dato).subscribe({
-      //     next:(value)=>{
-      //       if(value.ok) Swal.fire({title:'Oferta creada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //       if(!value.ok) Swal.fire({title: value.msg ? value.msg : 'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //     },
-      //     error:(err)=>{
-      //       Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      //     },
-      //   })
-      // }
+  ofertar(){
+    if(this.oferta!=null && this.oferta>=this.lote['precio_base'] && (this.precio_actual==null || this.oferta>this.precio_actual || !this.flagModalidad) && this.tyc && ((this.oferta-this.lote['precio_base'])%this.lote['incremento']==0 || !this.flagModalidad)){
       Swal.fire({
         title: "Esta por realizar una oferta", text: 'Antes de ofertar asegure haber leido y aceptado los terminos y condiciones del lote',
         showCancelButton: true, confirmButtonText: "Crear", confirmButtonColor:'#3083dc', cancelButtonText: "Cancelar",
@@ -253,6 +225,7 @@ export class LoteComponent{
   }
 
   programarOferta(){
+    if(!this.flagModalidad) return;
     if(this.ofertaAuto!=null && this.ofertaAuto>=this.lote['precio_base'] && (this.precio_actual==null || this.ofertaAuto>this.precio_actual) && this.tyc && this.ofertaAuto%this.lote['incremento']==0){
       Swal.fire({
         title: "Esta por programar una oferta automatica", text: 'Antes de programar una oferta automatica asegure haber leido y aceptado los terminos y condiciones del lote',
