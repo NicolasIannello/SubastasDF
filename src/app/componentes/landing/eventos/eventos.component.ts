@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
+import { environment } from '../../../../environments/environment';
+
+const link=environment.link;
 
 @Component({
   selector: 'app-eventos',
@@ -37,6 +40,7 @@ export class EventosUserComponent implements OnInit{
         'flag': true,
         'dato': 'eventos',
         'token':localStorage.getItem('token'),
+        'modalidad': window.location.href.includes(link) ? 'Subasta' : 'Remate',
         'tipo':1
       }      
       

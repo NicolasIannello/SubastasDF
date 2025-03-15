@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { LoteComponent } from "../lote/lote.component";
+import { environment } from '../../../../environments/environment';
+
+const link=environment.link;
 
 @Component({
   selector: 'app-lotes',
@@ -41,6 +44,7 @@ export class LotesUserComponent implements OnInit{
       'flag': false,
       'dato': this.ruta.snapshot.paramMap.get('id'),
       'token':localStorage.getItem('token'),
+      'modalidad': window.location.href.includes(link) ? 'Subasta' : 'Remate',
       'tipo':1
     }      
     let int = 0;
