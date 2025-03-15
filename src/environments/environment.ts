@@ -12,6 +12,9 @@ export const environment = {
   recaptcha: {
     siteKey: '6Let_k4qAAAAAIHQe6HtHzYwosJ58y4feuaKRmRu',
   },
+  //link:'4201',
+  //link:'subasta',
+  link:'210a03',
 };
 
 /*
