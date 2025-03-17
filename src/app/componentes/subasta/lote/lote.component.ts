@@ -48,7 +48,7 @@ export class LoteComponent{
   blink:string="datoLote";
   same:boolean=false;
   tyc:boolean=false;
-  flagModalidad:boolean=window.location.href.includes(link) ? true : false;
+  flagModalidad:boolean= this.evento['modalidad']=='Subasta' ? true : false; //window.location.href.includes(link) ? true : false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -80,6 +80,7 @@ export class LoteComponent{
   }
 
   cargarImagenes(imgs:Array<any>, pdf:any){
+    this.flagModalidad=this.evento['modalidad']=='Subasta' ? true : false;
     this.socketIo.onMessage().subscribe((message:any) => {      
       for (let i = 0; i < message.eventolotes.length; i++) {
         if(this.lote['uuid']==message.eventolotes[i].lote.uuid){
