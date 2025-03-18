@@ -15,6 +15,7 @@ export class ServiciosService {
   nosotros:Array<string>=['',''];
   userAdmin:string="";
   userID:string="";
+  lastPage:string="";
 
   constructor(private http: HttpClient) {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
@@ -126,5 +127,11 @@ export class ServiciosService {
   }
   getUserId(){
     return this.userID;
+  }
+  setLastPage(page:string){
+    this.lastPage=page;
+  }
+  getLastPage(){
+    return this.lastPage;
   }
 }
