@@ -49,6 +49,7 @@ export class LoteComponent{
   same:boolean=false;
   tyc:boolean=false;
   flagModalidad:boolean= this.evento['modalidad']=='Subasta' ? true : false; //window.location.href.includes(link) ? true : false;
+  panel:boolean=false;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -219,6 +220,7 @@ export class LoteComponent{
     }else{
       if(!this.tyc){
         Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        this.panel=true;
       }else{
         Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       }
@@ -264,6 +266,7 @@ export class LoteComponent{
     }else{
       if(!this.tyc){
         Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        this.panel=true;
       }else{
         Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       }
