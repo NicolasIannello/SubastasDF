@@ -5,9 +5,6 @@ import { ServiciosService } from '../../../servicios/servicios.service';
 import { RouterModule } from '@angular/router';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { VerImagenComponent } from '../../ver-imagen/ver-imagen.component';
-import { environment } from '../../../../environments/environment';
-
-const link=environment.link;
 
 @Component({
   selector: 'app-inicio',
@@ -42,7 +39,8 @@ export class InicioComponent implements OnInit{
         'flag': true,
         'dato': 'home',
         'token':localStorage.getItem('token'),
-        'modalidad': window.location.href.includes(link) ? 'Subasta' : 'Licitacion',
+        'modalidad': '',//window.location.href.includes(link) ? 'Subasta' : 'Licitacion',
+        'estado': '',
         'tipo':1
       }      
       
