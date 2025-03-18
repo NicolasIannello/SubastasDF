@@ -16,7 +16,7 @@
                 <span class="glassAzul" style="width: 50%; border-right: 1px solid rgb(48, 131, 220, 0.2); padding: 0.5rem;">Vistos {{ev['vistas'].length}}/{{ev['lotes'].length}}</span>
                 <span style="background-color: greenyellow; width: 50%; padding: 0.5rem;">Ofertados {{ev['ofertas'].length}}/{{ev['lotes'].length}}</span>
             </div>
-            <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Modalidad: {{ev['modalidad']}}</div>
+            <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); display: flex; align-items: center; justify-content: center; padding: 0.5rem;">Modalidad: {{ev['modalidad']=='Remate' ? 'Licitacion' : ev['modalidad']}}</div>
             <div *ngIf="ev['estado']==1" style="width: 100%;">
                 <button class="rounded boton" style="width: 100%; border:none; border-top-left-radius: 0%; border-top-right-radius: 0%; height: 2rem;" [routerLink]="['/evento', ev.uuid]">Ver publicacion</button>    
             </div>

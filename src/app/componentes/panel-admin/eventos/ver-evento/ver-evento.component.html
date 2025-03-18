@@ -52,7 +52,7 @@
         <label>Modalidad: </label>
         <div class="border rounded" style="width: 100%; margin-bottom: 2%; margin-top: 2%;">
             <span style="margin: 1.5%; display: block; font-family: Avenir;">
-                {{evento['modalidad']}}
+                {{evento['modalidad']=='Remate' ? 'Licitacion' : evento['modalidad']}}
             </span>
         </div>
         <label>Grupo: </label>
