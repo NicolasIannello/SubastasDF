@@ -44,7 +44,7 @@ export class LotesUserComponent implements OnInit{
       'flag': false,
       'dato': this.ruta.snapshot.paramMap.get('id'),
       'token':localStorage.getItem('token'),
-      'modalidad': '',//window.location.href.includes(link) ? 'Subasta' : 'Remate',
+      'modalidad': '',//window.location.href.includes(link) ? 'Subasta' : 'Licitacion',
       'tipo':1
     }      
     let int = 0;
