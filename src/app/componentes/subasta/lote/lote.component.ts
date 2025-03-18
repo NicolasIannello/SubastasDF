@@ -9,9 +9,6 @@ import { SocketService } from '../../../servicios/socket.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SanitizeHtmlPipe } from '../../../servicios/html.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { environment } from '../../../../environments/environment';
-
-const link=environment.link;
 
 @Component({
   selector: 'app-lote',
@@ -81,6 +78,7 @@ export class LoteComponent{
   }
 
   cargarImagenes(imgs:Array<any>, pdf:any){
+    this.api.setLastPage(window.location.href);
     this.flagModalidad=this.evento['modalidad']=='Subasta' ? true : false;
     this.socketIo.onMessage().subscribe((message:any) => {      
       for (let i = 0; i < message.eventolotes.length; i++) {
