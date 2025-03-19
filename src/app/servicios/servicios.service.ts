@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 const base_url=environment.base_url;
+const link=environment.link;
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ServiciosService {
   nosotros:Array<string>=['',''];
   userAdmin:string="";
   userID:string="";
-  lastPage:string="";
+  lastPage:string=link;
 
   constructor(private http: HttpClient) {
     this.header=new HttpHeaders().set('Acces-Control-Allow-Origin','*');
