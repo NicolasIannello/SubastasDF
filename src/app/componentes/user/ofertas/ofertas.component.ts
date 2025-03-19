@@ -3,11 +3,12 @@ import { ServiciosService } from '../../../servicios/servicios.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AtrasComponent } from "../../atras/atras.component";
 
 @Component({
   selector: 'app-ofertas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AtrasComponent],
   templateUrl: './ofertas.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })

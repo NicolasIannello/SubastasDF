@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { RouterModule } from '@angular/router';
+import { AtrasComponent } from "../../atras/atras.component";
 
 @Component({
   selector: 'app-favoritos',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AtrasComponent],
   templateUrl: './favoritos.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })

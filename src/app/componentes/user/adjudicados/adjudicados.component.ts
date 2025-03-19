@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ServiciosService } from '../../../servicios/servicios.service';
+import { AtrasComponent } from "../../atras/atras.component";
 
 @Component({
   selector: 'app-adjudicados',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AtrasComponent],
   templateUrl: './adjudicados.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
