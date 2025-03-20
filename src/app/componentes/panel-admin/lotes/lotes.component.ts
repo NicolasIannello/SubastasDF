@@ -145,7 +145,16 @@ export class LotesComponent implements OnInit{
       next:(value)=> {
           if(value.ok){
             if(value.busqueda.length>0) {
-              this.Lotes=value.busqueda
+              if(this.tipoBuscar=='uuid_evento'){
+                let doble = [];
+                for (let i = 0; i < value.busqueda.length; i++) {
+                  doble[i]= value.busqueda[i].lote
+                  doble[i].evento = { 'uuid_evento': value.busqueda[i].uuid_evento }
+                }
+                this.Lotes=doble
+              }else{
+                this.Lotes=value.busqueda
+              }              
             }else{
               Swal.fire({title:'No se encontro ningun resultado', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
             }

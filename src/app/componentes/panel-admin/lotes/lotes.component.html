@@ -18,6 +18,7 @@
                 <select class="effect-1" [(ngModel)]="tipoBuscar" style="width: 100%; height: 2rem;">
                     <option value='titulo' selected>Titulo</option>
                     <option value='uuid'>ID</option>  
+                    <option value='uuid_evento'>ID Evento</option>  
                     <option value='precio_base'>Monto arranque</option>
                     <!-- <option value='incremento'>Incremento</option>     -->
                     <option value='precio_salida'>Precio salida</option> 
@@ -29,7 +30,8 @@
     </div>
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
         <div class="celda" style="width: 17rem;">ID</div>
-        <div class="celda" style="width: 30%;">Titulo</div>
+        <div class="celda" style="width: 20%;">Titulo</div>
+        <div class="celda" style="width: 17rem;">ID Evento</div>
         <div class="celda username" style="width: 10%;">Monto arranque</div>
         <!-- <div class="celda username" style="width: 10%;">Incremento</div> -->
         <div class="celda username" style="width: 10%;">Precio salida</div>
@@ -67,12 +69,13 @@
     <h2 *ngIf="total==0">No hay lotes para mostrar</h2>
     <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda" style="width: 17rem;">{{lote['uuid']}}</div>
-        <div class="celda" style="width: 30%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
+        <div class="celda" style="width: 20%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
+        <div class="celda" style="width: 17rem;">{{lote['evento'].uuid_evento}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
         <!-- <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div> -->
         <div class="celda username" style="width: 10%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
         <div class="celda username" style="width: 5%;">{{lote['visitas']}}</div>
-        <div class="celda username" style="width: 5%;">{{lote['ofertas'] ? lote['ofertas'].length : '-'}}</div>
+        <div class="celda username" style="width: 5%;">{{lote['ofertas'].total[0] ? lote['ofertas'].total[0].count : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['precio_ganador'] ? lote['moneda']+' '+lote['precio_ganador'] : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['oferta'] ? lote['moneda']+' '+lote['oferta']['cantidad'] : '-'}}</div>
         <div class="celda username" style="width: 5%;">{{lote['estado']==1 ? 'Abierto' : lote['estado']==2 ? 'Finalizado' : '-'}}</div>
