@@ -127,9 +127,9 @@ export class VerLoteComponent{
       // "<div style='background-color:#3083dc; color:#F9F9F9; text-align:center;'>Aclaracion</div>"+
       // "<div style='border: 1px solid rgb(48, 131, 220, 0.2); text-align:center;'>"+(this.lote['aclaracion']=='' ? '-' : this.lote['aclaracion'])+"</div>"+
       "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-        "<div style='width:50%'>Monto de arranque</div>"+
+        "<div style='width:50%'>"+(this.lote['base_salida'] ? 'Precio base' : 'Monto de arranque')+"</div>"+
         "<div style='width:34%'>Incremento</div>"+
-        "<div style='width:50%'>Monto esperado</div>"+
+        "<div style='width:50%'>"+(this.lote['base_salida'] ? 'Precio salida' : 'Monto esperado')+"</div>"+
       "</div>"+
       "<div style='display:flex'; text-align:center;>"+
         "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.lote['moneda']+" "+this.lote['precio_base']+"</div>"+
@@ -190,7 +190,7 @@ export class VerLoteComponent{
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:20%; font-size:smaller;'>"+this.Ofertas[i]['cantidad']+"</div>"+
         "</div>";
       }
-      html+="<br><span>Se muestra 5 ofertas de "+this.Ofertas.length+" totales</span>";
+      html+=(this.Ofertas.length<=5 ? ("<br><span>Ofertas: "+this.Ofertas.length+"</span>") : ("<br><span>Se muestra 5 ofertas de "+this.Ofertas.length+" totales</span>"));
     }
 
 
