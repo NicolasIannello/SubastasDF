@@ -70,7 +70,7 @@
     <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
         <div class="celda" style="width: 17rem;">{{lote['uuid']}}</div>
         <div class="celda" style="width: 20%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
-        <div class="celda" style="width: 17rem;">{{lote['evento'].uuid_evento}}</div>
+        <div class="celda" style="width: 17rem;">{{lote['evento'] ? lote['evento'].uuid_evento : '-'}}</div>
         <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['precio_base']}}</div>
         <!-- <div class="celda username" style="width: 10%;">{{lote['moneda']}} {{lote['incremento']}}</div> -->
         <div class="celda username" style="width: 10%;">{{(lote['precio_salida']!='null' && lote['precio_salida']!='') ? lote['moneda']+' '+lote['precio_salida'] : '-'}}</div>
