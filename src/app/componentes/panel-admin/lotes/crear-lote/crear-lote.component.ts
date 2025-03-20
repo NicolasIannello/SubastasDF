@@ -109,7 +109,7 @@ export class CrearLoteComponent {
   crearLote(){    
     let flag=true;
     for (let i = 0; i < this.datos.length; i++) {
-      if(i!=1 && i!=5 && i!=6 && i!=7 &&  i!=9 && i!=10 && this.datos[i]=='') flag=false;
+      if(i!=1 && i!=4 && i!=5 && i!=6 && i!=7 &&  i!=9 && i!=10 && this.datos[i]=='') flag=false;
       this.alertas[i]= (i!=1 && i!=5 && i!=6 && i!=9 && i!=10 && this.datos[i]=='') ? 'Campo obligatorio' : '';
     }
     if(this.datos[8].length==0 || this.datos[7].length==0) flag=false;

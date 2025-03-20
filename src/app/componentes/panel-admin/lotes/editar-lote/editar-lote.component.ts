@@ -155,10 +155,10 @@ export class EditarLoteComponent{
 	}
 
   actualizar(){    
-    if(this.loteNuevo['titulo']=='' || this.loteNuevo['precio_base']=='null' || this.loteNuevo['incremento']=='null'){
+    if(this.loteNuevo['titulo']=='' || this.loteNuevo['precio_base']=='null' /*|| this.loteNuevo['incremento']=='null'*/){
       this.alertas[0]=this.loteNuevo['titulo']=='' ? 'El campo es obligatorio' : '';
       this.alertas[2]=this.loteNuevo['precio_base']=='null' ? 'El campo es obligatorio' : '';
-      this.alertas[3]=this.loteNuevo['incremento']=='null' ? 'El campo es obligatorio' : '';      
+      //this.alertas[3]=this.loteNuevo['incremento']=='null' ? 'El campo es obligatorio' : '';      
       Swal.fire({title:'Hay campos que no pueden estar vacios',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
     }else{
       const formData = new FormData();
