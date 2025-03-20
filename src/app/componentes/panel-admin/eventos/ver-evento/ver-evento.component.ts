@@ -79,12 +79,14 @@ export class VerEventoComponent {
             "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.evento['grupo']+"</div>"+
           "</div>"+
           "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
-            "<div style='width:50%'>Modalidad</div>"+
-            "<div style='width:50%'>Estado</div>"+
+            "<div style='width:33%'>Modalidad</div>"+
+            "<div style='width:34%'>Estado</div>"+
+            "<div style='width:33%'>Visitas</div>"+
           "</div>"+
           "<div style='display:flex'; text-align:center;>"+
-            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+this.evento['modalidad']+"</div>"+
-            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:50%; text-align:center;'>"+(this.evento['estado']==2? 'Finalizado':"En proceso")+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+(this.evento['modalidad']=='Subasta' ? this.evento['modalidad'] : 'Licitacion')+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:34%; text-align:center;'>"+(this.evento['estado']==2? 'Finalizado':"En proceso")+"</div>"+
+            "<div style='border: 1px solid rgb(48, 131, 220, 0.2); width:33%; text-align:center;'>"+this.evento['visitas']+"</div>"+
           "</div>"+
           "<div style='display:flex; background-color:#3083dc; color:#F9F9F9; text-align:center;'>"+
             // "<div style='width:50%'>Configuracion</div>"+
