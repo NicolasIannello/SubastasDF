@@ -97,7 +97,7 @@
                 <div class="col-3">
                     <div style="display: flex; justify-content: space-between; height: 2rem;">
                         <label>Realizar oferta</label>
-                        <span style="font-family: Avenir;" class="datoLote">Incremento minimo (INC): {{lote['moneda']}} {{lote['incremento']}}</span>
+                        <span *ngIf="flagModalidad" style="font-family: Avenir;" class="datoLote">Incremento minimo (INC): {{lote['moneda']}} {{lote['incremento']}}</span>
                     </div>
                     <div style="display: flex;">
                         <span class="border glass colorWhite" style="height: 2.5rem; height: 2.5rem; display: flex; 
@@ -107,7 +107,7 @@
                         <span class="focus-border2"></span>
                     </div>
                 </div>
-                <div style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center;">
+                <div *ngIf="flagModalidad" style="font-family: Avenir; display: flex; justify-content: flex-end; align-items: center;">
                     <!-- <button class="border boton boton paginacionof datoLote" style="width: 7rem;" (click)="oferta=(oferta==undefined ? 0 : +oferta)+ +(precio_actual ? precio_actual : lote['precio_base'])">{{precio_actual ? "Mayor oferta" : "Precio base"}}</button> -->
                     <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']">X1 INC</button>
                     <button class="border boton boton paginacionof datoLote" (click)="oferta=(oferta==undefined ? (precio_actual ? +precio_actual : +lote['precio_base']) : +oferta)+ +lote['incremento']*2">X2 INC</button>
