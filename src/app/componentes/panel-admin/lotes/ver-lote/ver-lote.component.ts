@@ -21,6 +21,8 @@ export class VerLoteComponent{
   verImg:boolean=false;
   imgID:number=-1;
   Ofertas:Array<any>=[];
+  flagReporte:boolean=true;
+  textReporte:string='Cargando';
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer){}
 
@@ -64,6 +66,8 @@ export class VerLoteComponent{
       }
       this.api.ofertaDatos(dato).subscribe({
         next:(value)=> {
+            this.flagReporte=false;
+            this.textReporte='Generar PDF';
             this.Ofertas=value.ofertaDB
         },
         error(err) { 

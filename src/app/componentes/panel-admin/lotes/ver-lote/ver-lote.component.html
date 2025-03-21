@@ -1,7 +1,7 @@
 <div id="myModal" class="modal" style="overflow: auto;">
     <div class="modal-content" style="width: 70%;">
         <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
-            <button class="boton boton2 border rounded" (click)="generarExcel()">Generar PDF</button>
+            <button class="boton boton2 border rounded" (click)="generarExcel()" [disabled]="flagReporte">{{textReporte}}</button>
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
         </div>
         <label>Titulo: </label>
