@@ -44,7 +44,7 @@ export class LoteComponent{
   fav:boolean=false;
   blink:string="datoLote";
   same:boolean=false;
-  tyc:boolean=false;
+  @Input() tyc:boolean=false;
   flagModalidad:boolean= this.evento['modalidad']=='Subasta' ? true : false; //window.location.href.includes(link) ? true : false;
   panel:boolean=false;
 
@@ -112,7 +112,7 @@ export class LoteComponent{
         }
       })
     }    
-    this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{						
+    this.api.cargarArchivo(pdf,'pdfs').then(resp=>{						
       if(resp!=false){
         this.pdf=this.transform(resp.url+'#toolbar=0');
       }
