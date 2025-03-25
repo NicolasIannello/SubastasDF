@@ -143,8 +143,8 @@ export class EventosComponent {
 
   eliminar(nom:string,id:string){
     Swal.fire({
-      title: "Esta por borrar un evento",
-      text: '¿Desea borrar el evento: "'+nom+'"?',
+      title: "Esta por borrar una publicacion",
+      text: '¿Desea borrar la publicacion: "'+nom+'"?',
       showCancelButton: true,
       confirmButtonText: "Borrar",
       confirmButtonColor: "red",
@@ -158,7 +158,7 @@ export class EventosComponent {
         }        
         this.api.borrarEvento(dato).subscribe({
           next:(value)=> {
-            if(value.ok) Swal.fire({title:'Lote eliminado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            if(value.ok) Swal.fire({title:'Publicacion eliminada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
             if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
             this.cargarEventos()
           },
