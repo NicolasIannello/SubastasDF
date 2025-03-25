@@ -2,10 +2,30 @@
     <div class="margin5 border rounded" style="width: 100%; text-align: center;">
         <span *ngIf="error==4">La publicacion aun no ha iniciado</span>
         <span *ngIf="error==5">La publicacion ha terminado</span>
-        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgb(48, 131, 220, 0.2); padding: 1%;">
+        <div style="display: flex; justify-content: space-between;">
             <span>Publicacion: {{evento['nombre']}}</span>
             <span>Lotes: {{nlotes}}</span>
         </div>
+        <mat-expansion-panel hideToggle class="border rounded glassAzul colorWhite" style="margin-top: 1%; margin-bottom: 1%;" [expanded]="panel">
+            <mat-expansion-panel-header class="glassAzul colorWhite">
+                <mat-panel-title class="glassAzul colorWhite">
+                    <span class="colorWhite datoLote" style="margin: 1.5%; display: block; font-family: Avenir;">
+                        <label style="text-decoration: underline; display: flex;">ATENCION</label><br>
+                        Ofertando en estos lotes se estan aceptando los <i class="fa-solid fa-landmark"></i> terminos y condiciones
+                    </span>
+                    <span class="colorWhite datoLote" style="margin: 1.5%; display: flex; font-family: Avenir; align-items: center;">
+                        <i class="fa-solid fa-bars textWhite" style="margin-right: 0.5rem; cursor: pointer;"></i>
+                        <span class="textWhite" style="cursor: pointer;">Ver T&C</span>         
+                    </span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="col-3" style="display: flex; flex-direction: column;">
+                <embed *ngIf="pdf!=null" width="100%" height="600px" [src]="pdf" type='application/pdf'>
+                <mat-checkbox [(ngModel)]="tyc" (click)="panel=false">
+                    <span  class="colorWhite" style="font-size: large;">He leido y acepto los Terminos y condiciones del lote</span>
+                </mat-checkbox>
+            </div>
+        </mat-expansion-panel>
         <div *ngFor="let lote of lotes; index as i" style="max-height: 100%; align-items: center; border-bottom: 1px solid rgb(48, 131, 220, 0.2); /*padding: 1%;*/">
             <span *ngIf="flagTimer[i]" class="glass" [ngClass]="{'glassAzul' : i%2 }" [ngStyle]="{'color': i%2 ? 'white' : 'black' }" style="width: 100%; display: flex; justify-content: center;">
                 <i class="fa-solid fa-calendar-days" style="margin-right: 1%;"></i> Finaliza en {{totalDays[i]}} Dias {{remHours[i]}}h {{remMinutes[i]}}m {{remSeconds[i]}}s
@@ -28,4 +48,4 @@
     </div>
 </div>
 
-<app-lote [ngClass]="{ 'oculto':!ver }" (messageEvent)="handleMessage($event)" [lote]="loteModal" [evento]="evento"></app-lote>
+<app-lote [ngClass]="{ 'oculto':!ver }" (messageEvent)="handleMessage($event)" [lote]="loteModal" [evento]="evento" [tyc]="tyc"></app-lote>
