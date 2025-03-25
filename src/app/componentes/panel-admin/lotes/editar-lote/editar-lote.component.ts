@@ -24,17 +24,17 @@ export class EditarLoteComponent{
   @Output() messageEvent = new EventEmitter<boolean>();
   @Input() lote:{[key: string]: any}={descripcion:''};
   imagenes: Array<{link:SafeResourceUrl,id:number,name:string}> = [];
-  pdf:SafeResourceUrl|null=null;
+  //pdf:SafeResourceUrl|null=null;
   verImg:boolean=false;
   imgID:number=-1;
   loteNuevo:{[key: string]: any}={descripcion:''}
   alertas:Array<string>=['','','',''];
   sources: Array<any> = [];
   imgs: any = [];
-  pdfFile: any = [];
-  pdfNuevo:SafeResourceUrl|null=null;
+  //pdfFile: any = [];
+  //pdfNuevo:SafeResourceUrl|null=null;
   @ViewChild('imagen') inputImagen!: ElementRef;
-  @ViewChild('pdfTC') inputPDF!: ElementRef;
+  //@ViewChild('pdfTC') inputPDF!: ElementRef;
   flagElim:boolean=false;
   imgElim:Array<string>=[]
   imgElimCount:number=1;
@@ -79,37 +79,40 @@ export class EditarLoteComponent{
     this.imgElim=[];
     this.imgElimCount=1;
     this.imagenes=[];
-    this.pdf=null;
+    //this.pdf=null;
     this.loteNuevo={descripcion:''};
-    this.pdfFile=[];
-    this.pdfNuevo=null;
+    //this.pdfFile=[];
+    //this.pdfNuevo=null;
     this.imgs=[];
     this.sources=[];
     this.alertas=['','',''   ,'','','','','',''];
     this.inputImagen.nativeElement.value = "";
-    this.inputPDF.nativeElement.value = "";
+    //this.inputPDF.nativeElement.value = "";
     this.messageEvent.emit(false);
   }
 
-  cargarImagenes(imgs:Array<any>, pdf:any){
+  cargarImagenes(imgs:Array<any>/*, pdf:any*/){
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
       this.imagenes.push({link:'', id:i,name:''});
     }
-    this.pdf=null;
+    //this.pdf=null;
+    let contador=0
     for (let i = 0; i < imgs.length; i++) {      
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
+        contador++;
         if(resp!=false){
           this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden), name:imgs[i].img};
         }
+        if(contador==imgs.length) this.loteNuevo= Object.assign( { }, this.lote);
       })
     }    
-    this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{
-      this.loteNuevo= Object.assign( { }, this.lote);
-      if(resp!=false){
-        this.pdf=this.transform(resp.url);
-      }
-    })
+    // this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{
+    //   this.loteNuevo= Object.assign( { }, this.lote);
+    //   if(resp!=false){
+    //     this.pdf=this.transform(resp.url);
+    //   }
+    // })
   }
 
   verImagen(id:number){
@@ -144,15 +147,15 @@ export class EditarLoteComponent{
 		}
 	}
 
-  showPDF(event: Event){
-    this.pdfNuevo=null;
-    this.pdfFile=[]
-    const element = event.currentTarget as HTMLInputElement;    
-    if(element.files?.length!=undefined && element.files?.length>0){ 
-      this.pdfNuevo= this.transform(URL.createObjectURL(element.files[0]));
-      this.pdfFile=element.files;
-    }    
-	}
+  // showPDF(event: Event){
+  //   this.pdfNuevo=null;
+  //   this.pdfFile=[]
+  //   const element = event.currentTarget as HTMLInputElement;    
+  //   if(element.files?.length!=undefined && element.files?.length>0){ 
+  //     this.pdfNuevo= this.transform(URL.createObjectURL(element.files[0]));
+  //     this.pdfFile=element.files;
+  //   }    
+	// }
 
   actualizar(){    
     if(this.loteNuevo['titulo']=='' || this.loteNuevo['precio_base']=='null' /*|| this.loteNuevo['incremento']=='null'*/){
@@ -174,7 +177,7 @@ export class EditarLoteComponent{
       formData.append('lote', this.loteNuevo['uuid']);
       formData.append('token', localStorage.getItem('token')!);
       formData.append('tipo', '1');
-      if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined) formData.append('pdf', this.pdfFile[0]);
+      //if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined) formData.append('pdf', this.pdfFile[0]);
       if(this.imgs.length!=0 && this.imgs.length!=undefined && !this.flagElim) {
         for (let i = 0; i < this.imgs.length; i++) {
           formData.append('img', this.imgs[i]);		

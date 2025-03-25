@@ -85,6 +85,10 @@
         <div class="col-3" style="display: flex; flex-direction: row; margin-bottom: 2%; text-align: center;">
             <i class="fa-solid" [ngClass]="{'fa-circle-check verde':evento['mostrar_ofertas'], 'fa-circle-xmark rojo':!evento['mostrar_ofertas']}" style="font-size: larger; margin-right: 1%;"></i> Mostrar ofertas
         </div>
+        <label>Terminos y condiciones de la publicacion: </label>
+        <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
+            <embed *ngIf="pdf!=null" width="100%" height="600px" [src]="pdf" type='application/pdf'>
+        </div>
         <label>Imagen de portada: </label>
         <div style="margin-top: 2%; text-align: center;">
             <img src="{{sources}}" alt="" style="width: 100px;">

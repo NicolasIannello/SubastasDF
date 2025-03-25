@@ -21,18 +21,18 @@ export class CrearLoteComponent {
   datos:Array<any>=     ['','','ARS','','','','',[],[],true,''];
   alertas:Array<string>=['','',''   ,'','','','','','',''];
   sources: Array<any> = [];
-  pdf:SafeResourceUrl|null=null;
+  //pdf:SafeResourceUrl|null=null;
   @Output() messageEvent = new EventEmitter<boolean>();
   @ViewChild('imagen') inputImagen!: ElementRef;
-  @ViewChild('pdfTC') inputPDF!: ElementRef;
+  //@ViewChild('pdfTC') inputPDF!: ElementRef;
 
   cerrarModal() {
     this.datos=  ['','','ARS','','','','',[],[],true,''];
     this.alertas=['','',''   ,'','','','','',''];
     this.sources = [];
-    this.pdf=null;
+    //this.pdf=null;
     this.inputImagen.nativeElement.value = "";
-    this.inputPDF.nativeElement.value = "";
+    //this.inputPDF.nativeElement.value = "";
     this.messageEvent.emit(false);
   }
 
@@ -96,25 +96,25 @@ export class CrearLoteComponent {
 		return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 	}
 
-  showPDF(event: Event){
-    this.pdf=null;
-    this.datos[8]=[]
-    const element = event.currentTarget as HTMLInputElement;    
-    if(element.files?.length!=undefined && element.files?.length>0){ 
-      this.pdf= this.transform(URL.createObjectURL(element.files[0]));
-      this.datos[8]=element.files;
-    }    
-	}
+  // showPDF(event: Event){
+  //   this.pdf=null;
+  //   this.datos[8]=[]
+  //   const element = event.currentTarget as HTMLInputElement;    
+  //   if(element.files?.length!=undefined && element.files?.length>0){ 
+  //     this.pdf= this.transform(URL.createObjectURL(element.files[0]));
+  //     this.datos[8]=element.files;
+  //   }    
+	// }
 
   crearLote(){    
     let flag=true;
     for (let i = 0; i < this.datos.length; i++) {
-      if(i!=1 && i!=4 && i!=5 && i!=6 && i!=7 &&  i!=9 && i!=10 && this.datos[i]=='') flag=false;
+      if(i!=1 && i!=4 && i!=5 && i!=6 && i!=7 && i!=8 && i!=9 && i!=10 && this.datos[i]=='') flag=false;
       this.alertas[i]= (i!=1 && i!=5 && i!=6 && i!=9 && i!=10 && this.datos[i]=='') ? 'Campo obligatorio' : '';
     }
-    if(this.datos[8].length==0 || this.datos[7].length==0) flag=false;
+    if(/*this.datos[8].length==0 ||*/ this.datos[7].length==0) flag=false;
     this.alertas[7]= this.datos[7].length==0 ? 'Campo obligatorio' : '';
-    this.alertas[8]= this.pdf==null ? 'Campo obligatorio' : '';
+    //this.alertas[8]= this.pdf==null ? 'Campo obligatorio' : '';
 
     if(flag){
       const formData = new FormData();
@@ -133,7 +133,7 @@ export class CrearLoteComponent {
 				formData.append('img', this.datos[7][i]);  
         formData.append('imgOrden', this.sources[i].name);	
 			}
-      formData.append('pdf', this.datos[8][0]);
+      //formData.append('pdf', this.datos[8][0]);
 
       this.api.crearLote(formData).then(resp =>{
         if(resp.ok){

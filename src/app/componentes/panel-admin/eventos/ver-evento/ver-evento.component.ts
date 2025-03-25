@@ -4,6 +4,7 @@ import { AdminService } from '../../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { ServiciosService } from '../../../../servicios/servicios.service';
 import { jsPDF } from "jspdf";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ver-evento',
@@ -17,18 +18,25 @@ export class VerEventoComponent {
   evento:{[key: string]: any}={lotes:[]};
   lotes:Array<any>=[];
   sources:any='';
+  pdf:SafeResourceUrl|null=null;
 
-  constructor(public api:AdminService, public api2:ServiciosService) {}
+  constructor(public api:AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer){}
+
+  transform(url: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   cerrarModal() {
     this.evento={};
     this.lotes=[];
+    this.pdf=null;
     this.messageEvent.emit(false);
   }
 
   init(ev:any){    
     this.lotes=[]
     this.evento=ev;
+    this.pdf=null;
     for (let i = 0; i < ev.lotes.length; i++) {
       let datos={
         'uuid':ev.lotes[i].uuid_lote,
@@ -47,6 +55,11 @@ export class VerEventoComponent {
     this.api2.cargarArchivo(ev.img.img,'evento').then(resp=>{						
       if(resp!=false){
         this.sources=resp.url;
+      }
+    })
+    this.api2.cargarArchivo(ev.terminos_condiciones,'pdfs').then(resp=>{						
+      if(resp!=false){
+        this.pdf=this.transform(resp.url);
       }
     })
   }

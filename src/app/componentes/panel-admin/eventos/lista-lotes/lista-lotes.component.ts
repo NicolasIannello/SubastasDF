@@ -67,7 +67,7 @@ export class ListaLotesComponent{
     this.api.cargarLote(datos).subscribe({
       next:(value)=> {
         this.loteModal=value.lote[0];
-        this.verComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
+        this.verComp.cargarImagenes(value.lote[0].img/*, value.lote[0].pdf*/);
       },
       error:(err)=> {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});

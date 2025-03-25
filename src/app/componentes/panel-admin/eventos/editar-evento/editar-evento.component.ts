@@ -5,6 +5,7 @@ import { ListaLotesComponent } from "../lista-lotes/lista-lotes.component";
 import { AdminService } from '../../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { ServiciosService } from '../../../../servicios/servicios.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-editar-evento',
@@ -25,8 +26,12 @@ export class EditarEventoComponent {
   sources:any='';
   sources2:any='';
   @ViewChild('imagen') inputImagen!: ElementRef;
+  pdf:SafeResourceUrl|null=null;
+  pdfFile: any = [];
+  pdfNuevo:SafeResourceUrl|null=null;
+  @ViewChild('pdfTC') inputPDF!: ElementRef;
 
-  constructor(public api:AdminService, public api2:ServiciosService) {}
+  constructor(public api:AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer) {}
 
   handleMessage(obj: {message:boolean,lotes:Array<string>}) {    
     this.lotesLista=obj.message;
@@ -61,6 +66,10 @@ export class EditarEventoComponent {
     this.sources='';
     this.sources2='';
     this.inputImagen.nativeElement.value = "";
+    this.pdf=null;
+    this.pdfFile=[];
+    this.pdfNuevo=null;
+    this.inputPDF.nativeElement.value = "";
     this.messageEvent.emit(false);
   }
 
@@ -114,13 +123,32 @@ export class EditarEventoComponent {
         formData.append('tipo', '1');	
         this.api.imagenEvento(formData).then(resp =>{
           if(resp.ok){
-            Swal.fire({title:'Evento creado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+            Swal.fire({title:'Evento actualizado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
           }else{
             Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
           }
           this.cerrarModal();
         }, (err)=>{				
           Swal.fire({title:'Error en la carga de imagen',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          this.cerrarModal();   
+        });
+      }
+      if(this.pdfFile.length!=0 && this.pdfFile.length!=undefined){
+        const formData = new FormData();
+        formData.append('uuid', this.evento['uuid']);  
+        formData.append('pdf', this.pdfFile[0]);  
+        formData.append('caso', 'pdf');
+        formData.append('token', localStorage.getItem('token')!);  
+        formData.append('tipo', '1');	
+        this.api.imagenEvento(formData).then(resp =>{
+          if(resp.ok){
+            Swal.fire({title:'Evento actualizado con exito',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          }else{
+            Swal.fire({title:'Error en la carga de pdf',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
+          }
+          this.cerrarModal();
+        }, (err)=>{				
+          Swal.fire({title:'Error en la carga de pdf',confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'})
           this.cerrarModal();   
         });
       }
@@ -148,6 +176,11 @@ export class EditarEventoComponent {
     this.api2.cargarArchivo(ev.img.img,'evento').then(resp=>{						
       if(resp!=false){
         this.sources=resp.url;
+      }
+    })
+    this.api2.cargarArchivo(ev.terminos_condiciones,'pdfs').then(resp=>{
+      if(resp!=false){
+        this.pdf=this.transform(resp.url);
       }
     })
     if(flag) this.eventoNuevo= Object.assign( { }, this.evento);
@@ -218,5 +251,19 @@ export class EditarEventoComponent {
     reader.onloadend = ()=>{
       this.sources2=reader.result;
     }
+	}
+
+  transform(url: any) {
+		return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+	}
+
+  showPDF(event: Event){
+    this.pdfNuevo=null;
+    this.pdfFile=[]
+    const element = event.currentTarget as HTMLInputElement;    
+    if(element.files?.length!=undefined && element.files?.length>0){ 
+      this.pdfNuevo= this.transform(URL.createObjectURL(element.files[0]));
+      this.pdfFile=element.files;
+    }    
 	}
 }

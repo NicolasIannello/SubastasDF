@@ -17,7 +17,7 @@ export class VerLoteComponent{
   @Output() messageEvent = new EventEmitter<boolean>();
   @Input() lote:{[key: string]: any}=[];
   imagenes: Array<{link:SafeResourceUrl,id:number}> = [];
-  pdf:SafeResourceUrl|null=null;
+  //pdf:SafeResourceUrl|null=null;
   verImg:boolean=false;
   imgID:number=-1;
   Ofertas:Array<any>=[];
@@ -36,44 +36,63 @@ export class VerLoteComponent{
 
   cerrarModal() {
     this.imagenes=[];
-    this.pdf=null;
+    //this.pdf=null;
     this.Ofertas=[]
     this.messageEvent.emit(false);
   }
 
-  cargarImagenes(imgs:Array<any>, pdf:any){
+  cargarImagenes(imgs:Array<any>/*, pdf:any*/){
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
       this.imagenes.push({link:'', id:i});
     }
-    this.pdf=null;
+    //this.pdf=null;
+    let contador=0
     for (let i = 0; i < imgs.length; i++) {      
       this.api.cargarArchivo(imgs[i].img,'lotes').then(resp=>{						
+        contador++;
         if(resp!=false){
           this.imagenes[imgs[i].orden-1]={link:resp.url, id:(imgs[i].orden)};
         }
+        if(contador==imgs.length){
+          let dato={
+            'token':localStorage.getItem('token'),
+            'lote':this.lote['uuid'],
+            'evento':'null',
+            'tipo':1
+          }
+          this.api.ofertaDatos(dato).subscribe({
+            next:(value)=> {
+                this.flagReporte=false;
+                this.textReporte='Generar PDF';
+                this.Ofertas=value.ofertaDB
+            },
+            error(err) { 
+            },
+          })
+        }
       })
     }    
-    this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{						
-      if(resp!=false){
-        this.pdf=this.transform(resp.url);
-      }
-      let dato={
-        'token':localStorage.getItem('token'),
-        'lote':this.lote['uuid'],
-        'evento':'null',
-        'tipo':1
-      }
-      this.api.ofertaDatos(dato).subscribe({
-        next:(value)=> {
-            this.flagReporte=false;
-            this.textReporte='Generar PDF';
-            this.Ofertas=value.ofertaDB
-        },
-        error(err) { 
-        },
-      })
-    })
+    // this.api.cargarArchivo(pdf.pdf,'pdfs').then(resp=>{						
+    //   if(resp!=false){
+    //     this.pdf=this.transform(resp.url);
+    //   }
+      // // let dato={
+      // //   'token':localStorage.getItem('token'),
+      // //   'lote':this.lote['uuid'],
+      // //   'evento':'null',
+      // //   'tipo':1
+      // // }
+      // // this.api.ofertaDatos(dato).subscribe({
+      // //   next:(value)=> {
+      // //       this.flagReporte=false;
+      // //       this.textReporte='Generar PDF';
+      // //       this.Ofertas=value.ofertaDB
+      // //   },
+      // //   error(err) { 
+      // //   },
+      // // })
+    //})
   }
 
   verImagen(id:number){

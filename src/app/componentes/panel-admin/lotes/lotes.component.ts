@@ -90,8 +90,8 @@ export class LotesComponent implements OnInit{
     this.api.cargarLote(datos).subscribe({
       next:(value)=> {
         this.loteModal=value.lote[0];
-        if(tipo==1) this.verComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
-        if(tipo==2) this.editComp.cargarImagenes(value.lote[0].img, value.lote[0].pdf);
+        if(tipo==1) this.verComp.cargarImagenes(value.lote[0].img/*, value.lote[0].pdf*/);
+        if(tipo==2) this.editComp.cargarImagenes(value.lote[0].img/*, value.lote[0].pdf*/);
       },
       error:(err)=> {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
