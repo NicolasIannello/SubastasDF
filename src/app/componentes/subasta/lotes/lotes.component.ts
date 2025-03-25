@@ -4,13 +4,17 @@ import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { ServiciosService } from '../../../servicios/servicios.service';
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LoteComponent } from "../lote/lote.component";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import {Location} from '@angular/common'; 
 
 @Component({
   selector: 'app-lotes',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoteComponent],
+  imports: [CommonModule, RouterModule, LoteComponent, MatExpansionModule, MatCheckboxModule, FormsModule],
   templateUrl: './lotes.component.html',
   styleUrl: '../../panel-admin/usuarios/usuarios.component.css'
 })
@@ -32,8 +36,16 @@ export class LotesUserComponent implements OnInit{
   remHours:Array<number>=[];
   remMinutes:Array<number>=[];
   remSeconds:Array<number>=[];
+  pdf:SafeResourceUrl|null=null;
+  tyc:boolean=false;
+  panel:boolean=false;
+  flagLink:boolean=false;
 
-  constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService){ }
+  constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer, private location: Location){}
+  
+  transform(url: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   ngOnInit(): void {
     this.api2.setLastPage(window.location.href);
@@ -81,6 +93,7 @@ export class LotesUserComponent implements OnInit{
               if(this.lotes[i].estado==1) this.flagTimer[i]=true;
               if(int==value.evento[0].lotes.length) this.countDown();
               if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value2.lote[0].uuid){
+                this.flagLink=true;
                 this.verLote(value2.lote[0])
               }
             },
@@ -89,6 +102,11 @@ export class LotesUserComponent implements OnInit{
             },
           })      
         }   
+        this.api2.cargarArchivo(this.evento.terminos_condiciones,'pdfs').then(resp=>{						
+          if(resp!=false){
+            this.pdf=this.transform(resp.url+'#toolbar=0');
+          }
+        })    
       },
       error:(err)=> {
         Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
@@ -97,18 +115,26 @@ export class LotesUserComponent implements OnInit{
   }
 
   handleMessage(message: boolean) {    
-    if(this.ruta.snapshot.paramMap.get('id2')){
-      this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id')])
-    }
+    this.flagLink=false;
+    this.location.replaceState('evento/'+this.ruta.snapshot.paramMap.get('id'))
+    // if(this.ruta.snapshot.paramMap.get('id2')){
+    //   this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id')])
+    // }
     this.loteModal=[];
     this.ver=message; 
   }
 
   verLote(lote:any){
-    if(!this.ruta.snapshot.paramMap.get('id2')) this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id'),'lote',lote.uuid])
+    if(!this.tyc && !this.flagLink){
+      Swal.fire({title:'Acepte los Terminos y Condiciones de la publicacion', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      this.panel=true;
+      return
+    }
+    this.location.replaceState('evento/'+this.ruta.snapshot.paramMap.get('id')+'/lote/'+lote.uuid)
+    //if(!this.ruta.snapshot.paramMap.get('id2')) this.router.navigate(['evento',this.ruta.snapshot.paramMap.get('id'),'lote',lote.uuid])
     this.ver=true;
     this.loteModal=lote;    
-    this.loteComp.cargarImagenes(this.loteModal.img, this.loteModal.pdf);
+    this.loteComp.cargarImagenes(this.loteModal.img, this.evento.terminos_condiciones);
     let datos={
       'uuid_evento':this.ruta.snapshot.paramMap.get('id'),
       'uuid_lote':lote.uuid,
