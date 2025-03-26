@@ -47,6 +47,7 @@ export class LoteComponent{
   @Input() tyc:boolean=false;
   flagModalidad:boolean= this.evento['modalidad']=='Subasta' ? true : false; //window.location.href.includes(link) ? true : false;
   panel:boolean=false;
+  intImg:number=0;
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -313,5 +314,11 @@ export class LoteComponent{
       },
       error:(err)=> { },
     })
+  }
+
+  sigImg(i:number){
+    if(this.intImg+i<0 || this.intImg+i>=this.imagenes.length) return;
+    this.intImg = this.intImg+i;
+    this.imagen=this.imagenes[this.intImg];
   }
 }
