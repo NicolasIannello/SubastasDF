@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { ServiciosService } from '../../../../servicios/servicios.service';
 import { jsPDF } from "jspdf";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ExcelService } from '../../../../servicios/excel.service';
 
 @Component({
   selector: 'app-ver-evento',
@@ -19,8 +20,10 @@ export class VerEventoComponent {
   lotes:Array<any>=[];
   sources:any='';
   pdf:SafeResourceUrl|null=null;
+  flagReporte:boolean=true;
+  flagReporte2:boolean=true;
 
-  constructor(public api:AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer){}
+  constructor(public api:AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer, private excel:ExcelService){}
 
   transform(url: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -30,6 +33,8 @@ export class VerEventoComponent {
     this.evento={};
     this.lotes=[];
     this.pdf=null;
+    this.flagReporte=true;
+    this.flagReporte2=true;
     this.messageEvent.emit(false);
   }
 
@@ -37,6 +42,7 @@ export class VerEventoComponent {
     this.lotes=[]
     this.evento=ev;
     this.pdf=null;
+    let contador=0;
     for (let i = 0; i < ev.lotes.length; i++) {
       let datos={
         'uuid':ev.lotes[i].uuid_lote,
@@ -45,7 +51,9 @@ export class VerEventoComponent {
       }      
       this.api.cargarLote(datos).subscribe({
         next:(value)=> {
+          contador++;
           this.lotes.push(value.lote[0]);
+          if(contador==ev.lotes.length) this.flagReporte=false;
         },
         error:(err)=> {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
@@ -55,6 +63,7 @@ export class VerEventoComponent {
     this.api2.cargarArchivo(ev.img.img,'evento').then(resp=>{						
       if(resp!=false){
         this.sources=resp.url;
+        this.flagReporte2=false;
       }
     })
     this.api2.cargarArchivo(ev.terminos_condiciones,'pdfs').then(resp=>{						
@@ -64,7 +73,7 @@ export class VerEventoComponent {
     })
   }
 
-  async generarExcel(){
+  async generarPDF(){
     const doc = new jsPDF('p', 'pt', 'a4');
 
     let dato={
@@ -202,5 +211,36 @@ export class VerEventoComponent {
             })
           }
         });
+  }
+
+  generarExcel(){    
+    let loteExcel=this.lotes
+
+    let hoy=new Date();
+    let mes = hoy.getMonth()>8 ? (hoy.getMonth()+1) : "0"+(hoy.getMonth()+1);
+    let dia = hoy.getDate()>9 ? hoy.getDate() : "0"+hoy.getDate()
+    let fecha = dia+"-"+mes+"-"+hoy.getFullYear();
+
+    let flag=0
+    for (let i = 0; i < this.lotes.length; i++) {
+      let dato={
+        'token':localStorage.getItem('token'),
+        'lote':this.lotes[i]['uuid'],
+        'evento':'null',
+        'tipo':1
+      }
+      this.api2.ofertaDatos(dato).subscribe({
+        next:(value)=> {
+          loteExcel[i].cuit=value.ofertaDB[0].user.cuil_cuit
+          loteExcel[i].ofertas=value.ofertaDB.length
+          flag++;
+          if(flag==this.lotes.length){            
+            this.excel.generateExcelPublicacion(this.evento,loteExcel, this.evento['nombre']+' '+fecha);
+          }
+        },
+        error(err) { 
+        },
+      })
+    }
   }
 }
