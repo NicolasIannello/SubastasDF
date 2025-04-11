@@ -30,6 +30,7 @@ export class LotesComponent implements OnInit{
   datoBuscar:string="";
   tipoBuscar:string="titulo";
   pagU:number=0;
+  tabla:boolean=false;
 
   constructor(public api:AdminService) {}
 
@@ -61,11 +62,11 @@ export class LotesComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo':1
     }
-    this.api.cargarLotes(datos,this.pagina*20,this.ordenar,this.orden,false).subscribe({
+    this.api.cargarLotes(datos,this.pagina*20,this.ordenar,this.orden,false,this.tabla).subscribe({
       next:(value)=> {
           if(value.ok) {
             this.Lotes=value.lotes;
-            this.total=value.total;
+            this.total=value.lotes.length;
             this.pagU=Math.ceil(this.total/20)
           }else{
             this.error=true;
@@ -216,5 +217,34 @@ export class LotesComponent implements OnInit{
         })
       }
     });
+  }
+
+  cambiarTabla(flag:boolean){
+    console.log(this.tabla);
+    
+    this.tabla=flag;
+    this.total=-1;
+    this.error=false;
+    this.Lotes=[]
+    this.cargarLotes();
+  }
+
+  setStatus(id:string, status:string){
+    let dato={
+      "lote":id,
+      "token":localStorage.getItem('token'),
+      "tipo":1,
+      "status":status,
+    }
+    this.api.setStatus(dato).subscribe({
+      next:(value)=> {
+        if(value.ok) Swal.fire({title:'Estatus cambiado con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        this.cargarLotes();
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+    })
   }
 }
