@@ -135,4 +135,10 @@ export class ServiciosService {
   getLastPage(){
     return this.lastPage;
   }
+  getTC(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/gettc', dato, {'headers':this.header})
+  }
+  aceptarTC(dato:any):Observable<any>{
+    return this.http.post(base_url+'/usuarios/aceptartc', dato, {'headers':this.header})
+  }
 }
