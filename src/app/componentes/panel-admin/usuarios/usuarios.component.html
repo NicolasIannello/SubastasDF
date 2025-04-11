@@ -1,9 +1,11 @@
 <div class="borderAzul margin5 rounded datoLote" style="display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
         <div style="display: flex;">
-            <h1 [ngClass]="{'h1btn2' : tabla, 'h1btn' : !tabla}" (click)="cambiarTabla(true)">Usuarios</h1>
+            <h1 [ngClass]="{'h1btn2' : tabla==0, 'h1btn' : tabla!=0}" (click)="cambiarTabla(0)">Usuarios</h1>
             <h1 style="margin-left: 3%; margin-right: 3%;">/</h1>
-            <h1 [ngClass]="{'h1btn' : tabla, 'h1btn2' : !tabla}" (click)="cambiarTabla(false)">Admins</h1>
+            <h1 [ngClass]="{'h1btn2' : tabla==1, 'h1btn' : tabla!=1}" (click)="cambiarTabla(1)">Admins</h1>
+            <h1 style="margin-left: 3%; margin-right: 3%;">/</h1>
+            <h1 [ngClass]="{'h1btn2' : tabla==2, 'h1btn' : tabla!=2}" (click)="cambiarTabla(2)">T&C</h1>
         </div>
         <div>
             <button class="boton boton2 border rounded botones" (click)="reporte()" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">Generar reporte</button>
@@ -11,7 +13,7 @@
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;"></div>
-    <div *ngIf="tabla" style="width: 100%;">
+    <div *ngIf="tabla==0" style="width: 100%;">
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
             <div class="celda" style="border-right: none; display: flex; width: 100%;">
                 <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
@@ -102,7 +104,7 @@
             Usuarios totales: {{Total}}
         </div>
     </div>
-    <div *ngIf="!tabla" style="width: 100%;">
+    <div *ngIf="tabla==1" style="width: 100%;">
         <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
             <div class="celda username" style="width: 75%;">Usuario</div>
             <div class="celda username" style="width: 25%; border-right: none;"></div>
@@ -112,6 +114,48 @@
             <div class="celda" style="width: 25%; border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%;">
                 <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(u['_id'],u['usuario'],'admin')"></i>
             </div>
+        </div>
+    </div>
+    <div *ngIf="tabla==2" style="width: 100%;">
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center; border-right: none;">
+            <div class="celda" style="border-right: none; display: flex; width: 100%;">
+                <div class="col-3" style="width: 26.5%; border-right: 1px solid rgb(48, 131, 220, 0.2);">
+                    <input type="text" class="effect-1" [(ngModel)]="datoBuscarTC" placeholder="Ingrese un dato para buscar" style="height: 2rem; width: 100%;">
+                    <span class="focus-border2"></span>
+                </div>
+                <div class="col-3" style="width: 7rem;">
+                    <select class="effect-1" [(ngModel)]="tipoBuscarTC" style="width: 100%; height: 2rem;">
+                        <option value='mail'>E-mail</option>
+                        <option value='fecha'>Fecha</option>
+                        <option value='nombre'>Publicacion</option>
+                        <option value='uuid'>ID publicacion</option>
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="recargar()">Buscar</button>
+            </div>
+        </div>
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda username" style="width: 75%;">Usuario</div>
+            <div class="celda username" style="width: 75%;">Publicacion</div>
+            <div class="celda username" style="width: 75%;">ID Publicacion</div>
+            <div class="celda username" style="width: 75%;">Fecha</div>
+        </div>
+        <div *ngFor="let u of Usuarios; index as i" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda username" style="width: 75%;">{{u['mail']}}</div>
+            <div class="celda username" style="width: 75%;">{{u['evento'] ? u['evento']['nombre'] : '-'}}</div>
+            <div class="celda username" style="width: 75%;">{{u['evento'] ? u['evento']['uuid'] : '-'}}</div>
+            <div class="celda username" style="width: 75%;">{{u['fecha']}}</div>
+        </div>
+        <div *ngIf="Usuarios.length!=0" style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
+            Pagina {{paginaTC+1}} de {{pagU}}
+            <div style="margin-right: 2%; margin-left: 2%;">
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" (click)="principio()">Principio</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="atras()">Atras</button>
+                <button class="border rounded boton boton2 paginacion" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="siguiente()">Siguiente</button>    
+                <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="final()">Final</button>
+            </div>
+            Registros totales: {{Total}}
         </div>
     </div>
 </div>

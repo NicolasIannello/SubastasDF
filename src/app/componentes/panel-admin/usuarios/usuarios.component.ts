@@ -46,8 +46,13 @@ export class UsuariosComponent implements OnInit{
   mostrarReporte:boolean=false;
   passwordCambio:string="";
   passwordCambio2:string="";
-  tabla:boolean=true;
-  
+  tabla:number=0;
+  ordenarTC:string="_id";
+  ordenTC:string="1";
+  datoBuscarTC:string="";
+  tipoBuscarTC:string="mail";
+  paginaTC:number=0;
+
   constructor(public api: AdminService, public excel: ExcelService){ }
 
   ngOnInit(): void {
@@ -69,23 +74,31 @@ export class UsuariosComponent implements OnInit{
   }
 
   principio(){
-    this.pagina=0;
+    if(this.tabla==0) this.pagina=0;
+    if(this.tabla==2) this.paginaTC=0;
     this.recargar()
   }
   atras(){
-    if(this.pagina>0){
+    if(this.pagina>0 && this.tabla==0){
+      this.pagina--;
+      this.recargar()
+    }else if(this.paginaTC>0 && this.tabla==2){
       this.pagina--;
       this.recargar()
     }
   }
   siguiente(){    
-    if(this.pagina<this.pagU-1){
+    if(this.pagina<this.pagU-1 && this.tabla==0){
+      this.pagina++;
+      this.recargar()
+    }else if(this.paginaTC<this.pagU-1 && this.tabla==2){
       this.pagina++;
       this.recargar()
     }
   }
   final(){
-    this.pagina=this.pagU-1
+    if(this.tabla==0) this.pagina=this.pagU-1;
+    if(this.tabla==2) this.paginaTC=this.pagU-1;
     this.recargar()
   }
 
@@ -94,7 +107,7 @@ export class UsuariosComponent implements OnInit{
       'token':localStorage.getItem('token'),
       'tipo': 1
     }
-    if(this.tabla){
+    if(this.tabla==0){
       this.api.cargarUsersDesde(dato,this.pagina*20,this.ordenar,this.orden).subscribe({
         next: (value)=>{
           this.Usuarios = [...value.users];
@@ -105,10 +118,21 @@ export class UsuariosComponent implements OnInit{
           this.error=true;
         }
       })
-    }else{
+    }else if(this.tabla==1){
       this.api.cargarAdmins(dato).subscribe({
         next:(value)=> {
             this.Usuarios=value.admins
+        },
+        error:(err)=> {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});            
+        },
+      })
+    }else{
+      this.api.cargarTC(dato,this.paginaTC*20,this.ordenarTC,this.ordenTC,this.datoBuscarTC,this.tipoBuscarTC).subscribe({
+        next:(value)=> {
+          this.Usuarios = [...value.tcs];
+          this.Total=value.total;
+          this.pagU=Math.ceil(this.Total/20)
         },
         error:(err)=> {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});            
@@ -359,7 +383,7 @@ export class UsuariosComponent implements OnInit{
     })
   }
 
-  cambiarTabla(flag:boolean){
+  cambiarTabla(flag:number){
     this.tabla=flag;
     this.recargar();
   }
