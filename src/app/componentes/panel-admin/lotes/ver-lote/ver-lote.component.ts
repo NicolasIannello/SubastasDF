@@ -38,6 +38,7 @@ export class VerLoteComponent{
     this.imagenes=[];
     //this.pdf=null;
     this.Ofertas=[]
+    this.flagReporte=true;
     this.messageEvent.emit(false);
   }
 
