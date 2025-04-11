@@ -2,7 +2,8 @@
     <div class="modal-content" style="width: 50%;">
         <div style="display: flex; justify-content: space-between; font-size: x-large; margin-bottom: 2%;">
             <div>
-                <button class="boton boton2 border rounded" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" (click)="generarExcel()">Generar PDF</button>
+                <button class="boton boton2 border rounded" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" (click)="generarPDF()" [disabled]="(flagReporte && flagReporte2)">Generar PDF</button>
+                <button class="boton boton2 border rounded" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;" (click)="generarExcel()" [disabled]="(flagReporte && flagReporte2)">Generar Excel</button>
                 <button class="boton boton2 border rounded" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" (click)="comunicar()">Comunicar</button>
             </div>
             <i class="fa-solid fa-xmark icerrar" (click)="cerrarModal()"></i>
