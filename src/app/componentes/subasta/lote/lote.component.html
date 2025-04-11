@@ -91,9 +91,10 @@
             </mat-expansion-panel-header>
             <div class="col-3" style="display: flex; flex-direction: column;">
                 <embed *ngIf="pdf!=null" width="100%" height="600px" [src]="pdf" type='application/pdf'>
-                <mat-checkbox [(ngModel)]="tyc" (click)="panel=false">
+                <mat-checkbox [(ngModel)]="tyc" (click)="panel=false; aceptarTC()" [disabled]="tyc" [class.mat-checkbox-disabled]="tyc">
                     <span  class="colorWhite" style="font-size: large;">He leido y acepto los Terminos y condiciones del lote</span>
                 </mat-checkbox>
+                <span  class="colorWhite" style="font-size: small;">Terminos y condiciones aceptados el: {{tycFecha}}</span>
             </div>
         </mat-expansion-panel>
         <div *ngIf="lote['estado']==1" style="width: 100%; margin-bottom: 2%; margin-top: 2%; display: flex; align-items: center; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">

@@ -48,6 +48,7 @@ export class LoteComponent{
   flagModalidad:boolean= this.evento['modalidad']=='Subasta' ? true : false; //window.location.href.includes(link) ? true : false;
   panel:boolean=false;
   intImg:number=0;
+  tycFecha:string=''
 
   constructor(public api: ServiciosService, private sanitizer: DomSanitizer, public socketIo:SocketService){}
 
@@ -99,6 +100,22 @@ export class LoteComponent{
     });
     this.socketIo.sendMessage(this.evento['uuid']);
 
+    let datosTc={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'pdf': this.evento['terminos_condiciones']
+    }  
+    this.api.getTC(datosTc).subscribe({
+      next:(value)=> {
+          if(value.let.length!=0) {
+            this.tyc=true;
+            this.tycFecha=value.let[0].fecha
+          }
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+    })
     if(this.evento['estado']==1) this.flagTimer=true;
     this.imagenes=[];
     for (let i = 1; i < imgs.length+1; i++) {      
@@ -320,5 +337,20 @@ export class LoteComponent{
     if(this.intImg+i<0 || this.intImg+i>=this.imagenes.length) return;
     this.intImg = this.intImg+i;
     this.imagen=this.imagenes[this.intImg];
+  }
+
+  aceptarTC(){
+    let datosTc={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'pdf': this.evento['terminos_condiciones']
+    }  
+    this.api.aceptarTC(datosTc).subscribe({
+      next:(value)=> {
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+    })
   }
 }
