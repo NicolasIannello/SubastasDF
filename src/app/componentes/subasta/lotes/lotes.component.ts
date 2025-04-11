@@ -40,6 +40,7 @@ export class LotesUserComponent implements OnInit{
   tyc:boolean=false;
   panel:boolean=false;
   flagLink:boolean=false;
+  tycFecha:string=''
 
   constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer, private location: Location){}
   
@@ -64,6 +65,22 @@ export class LotesUserComponent implements OnInit{
         this.evento=value.evento[0]
         this.nlotes=this.evento['lotes'].length
         this.error=value.t;        
+        let datosTc={
+          'token':localStorage.getItem('token'),
+          'tipo':1,
+          'pdf': this.evento.terminos_condiciones
+        }  
+        this.api2.getTC(datosTc).subscribe({
+          next:(value)=> {
+              if(value.let.length!=0) {
+                this.tyc=true;
+                this.tycFecha=value.let[0].fecha
+              }
+          },
+          error:(err)=> {
+            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          },
+        })
         for (let i = 0; i < value.evento[0].lotes.length; i++) {          
           let datos={
             'uuid':value.evento[0].lotes[i].uuid_lote,
@@ -187,5 +204,20 @@ export class LotesUserComponent implements OnInit{
       if(this.flagTimer[id]) flagloop=true;
     }
     if(flagloop) setTimeout( ()=>this.timer(), 1000);
+  }
+
+  aceptarTC(){
+    let datosTc={
+      'token':localStorage.getItem('token'),
+      'tipo':1,
+      'pdf': this.evento.terminos_condiciones
+    }  
+    this.api2.aceptarTC(datosTc).subscribe({
+      next:(value)=> {
+      },
+      error:(err)=> {
+        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+      },
+    })
   }
 }
