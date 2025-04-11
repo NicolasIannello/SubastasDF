@@ -44,8 +44,42 @@ export class ExcelService {
     });
   }
 
-  generarLote(data: any[], fileName: string): void {
-    
+  generateExcelPublicacion(dataEv: any, dataLt: any[], fileName: string): void {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet 1');
+    let headers=["ID lote", "Nombre del lote", "Fecha cierre", "Visitas", "Modalidad", "Precio Base/Arranque", "Oferta ganadora", "Nro de ofertas", "Ganador", "CUIT"]
+    let lengths=[ 40      ,        50        ,       15      ,     15    ,      15   ,         30            ,       20         ,         20      ,    40    ,   30  ]
+    let letras= [...Array(26)].map((_, i) => String.fromCharCode(i + 65));
+
+    worksheet.addRow(headers);
+    for (let i = 0; i < dataLt.length; i++) {
+      let row:Array<any>=[];
+      row.push(dataLt[i].uuid)
+      row.push(dataLt[i].titulo)
+      row.push(dataLt[i].fecha_cierre)
+      row.push(dataLt[i].visitas)
+      row.push(dataEv['modalidad'])
+      row.push(dataLt[i].precio_base)
+      row.push(dataLt[i].precio_ganador)
+      row.push(dataLt[i].ofertas)
+      row.push(dataLt[i].ganador)
+      row.push(dataLt[i].cuit)
+
+      worksheet.addRow(row);
+    }
+
+    for (let i = 0; i < headers.length; i++) {
+      worksheet.getCell(letras[i]+"1").font = { bold: true, size: 12 };
+      worksheet.getCell(letras[i]+"1").fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '6FA8DC' } };
+      worksheet.getCell(letras[i]+"1").alignment = { vertical: 'middle', horizontal: 'center' };
+      worksheet.getCell(letras[i]+"1").border = { top: { style: 'thin' },left: { style: 'thin' },bottom: { style: 'thin' },right: { style: 'thin' } };;
+      worksheet.getColumn(i+1).width = lengths[i];
+    }
+
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      saveAs(blob, `${fileName}.xlsx`);
+    });
   }
 }
 
