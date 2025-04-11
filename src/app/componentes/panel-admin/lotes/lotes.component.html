@@ -1,7 +1,9 @@
 <div class="borderAzul margin5 rounded datoLote" style="display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
         <div style="display: flex;">
-            <h1 class="h1btn2">Lotes</h1>
+            <h1 [ngClass]="{'h1btn2' : !tabla, 'h1btn' : tabla}" (click)="cambiarTabla(false)">Lotes</h1>
+            <h1 style="margin-left: 3%; margin-right: 3%;">/</h1>
+            <h1 [ngClass]="{'h1btn' : !tabla, 'h1btn2' : tabla}" (click)="cambiarTabla(true)">Adjudicados</h1>
         </div>
         <div>
             <button class="boton boton2 border rounded botones" (click)="crear=!crear">Crear lote</button>
@@ -22,12 +24,14 @@
                     <option value='precio_base'>Monto arranque</option>
                     <!-- <option value='incremento'>Incremento</option>     -->
                     <option value='precio_salida'>Precio salida</option> 
+                    <option value='ganador'>Ganador</option>
                 </select>
                 <span class="focus-border2"></span>
             </div>
             <button class="border rounded boton boton2 paginacion" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" (click)="buscarDato()">Buscar</button>
         </div>
     </div>
+    <div *ngIf="!tabla" style="width: 100%;">
     <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
         <div class="celda" style="width: 17rem;">ID</div>
         <div class="celda" style="width: 20%;">Titulo</div>
@@ -84,6 +88,52 @@
             <i class="fa-solid fa-pen-to-square boton2 border rounded ibtn" (click)="verLote(lote['uuid'],2);"></i>
             <i class="fa-solid fa-copy boton2 border rounded ibtn" (click)="duplicar(lote['_id'],lote['titulo']);"></i>
             <i class="fa-solid fa-trash-can boton2 border rounded ibtn" (click)="eliminar(lote['uuid'],lote['titulo'],lote['disponible'])"></i>
+        </div>
+    </div>
+    </div>
+    <div *ngIf="tabla" style="width: 100%;">
+        <div style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%; align-items: center;">
+            <div class="celda" style="width: 17rem;">ID</div>
+            <div class="celda" style="width: 20%;">Titulo</div>
+            <div class="celda" style="width: 17rem;">ID Evento</div>
+            <div class="celda username" style="width: 25%;">Ganador</div>
+            <div class="celda username" style="width: 10%;">Oferta ganadora</div>
+            <div class="celda username" style="width: 5%;">Estado</div>
+            <div class="celda" style="border-right: none; display: flex; width: 20%; justify-content: flex-end;">
+                <div class="col-3" style="width: 60%;">
+                    <select class="effect-1" [(ngModel)]="ordenar" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
+                        <option value='_id' selected hidden>Ordenar</option>    
+                        <option value='titulo'>Titulo</option>
+                        <option value='visitas'>Visitas</option>    
+                        <option value='ofertas'>Ofertas</option>        
+                        <option value='_id'>Default</option>    
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+                <div class="col-3" style="width: 40%;">
+                    <select class="effect-1" [(ngModel)]="orden" (change)="cargarLotes()" style="width: 100%; height: 2rem;">
+                        <option value='1' selected>Asc.</option>    
+                        <option value='-1'>Desc.</option>  
+                    </select>
+                    <span class="focus-border2"></span>
+                </div>
+            </div>
+        </div>
+        <h2 *ngIf="!error && total==-1" class="load"><i class="fa-solid fa-spinner ispinner" style="font-size: 3rem;"></i> Cargando</h2>
+        <h2 *ngIf="error">Error al cargar lotes</h2>
+        <h2 *ngIf="total==0">No hay lotes para mostrar</h2>
+        <div *ngFor="let lote of Lotes" class="linea" style="display: flex; border-bottom: 1px solid rgb(48, 131, 220, 0.2); width: 100%;">
+            <div class="celda" style="width: 17rem;">{{lote['uuid']}}</div>
+            <div class="celda" style="width: 20%;"><i class="fa-solid fa-circle" [ngClass]="{ 'rojo':!lote['disponible'], 'verde':lote['disponible'] }"></i>{{lote['titulo']}}</div>
+            <div class="celda" style="width: 17rem;">{{lote['evento'] ? lote['evento'].uuid_evento : '-'}}</div>
+            <div class="celda username" style="width: 25%;">{{lote['ganador']}}</div>
+            <div class="celda username" style="width: 10%;">{{lote['precio_ganador'] ? lote['moneda']+' '+lote['precio_ganador'] : '-'}}</div>
+            <div class="celda username" style="width: 5%;">{{lote['estado']==1 ? 'Abierto' : lote['estado']==2 ? 'Finalizado' : '-'}}</div>
+            <div class="celda" style="border-right: none; display: flex; justify-content: flex-end; font-size: medium; padding-top: 0.5%; padding-bottom: 0.5%; width: 20%;">
+                <i class="fa-solid fa-gavel boton2 border rounded ibtn tooltip" [ngStyle]="{'background-color': lote['adjudicacion']=='Adjudicado' ? 'greenyellow' : 'none'}" (click)="setStatus(lote['uuid'],'Adjudicado');"><span class="tooltiptext glassTrue rounded border">Adjudicar</span></i>
+                <i class="fa-solid fa-ban boton2 border rounded ibtn tooltip" [ngStyle]="{'background-color': lote['adjudicacion']=='No adjudicado' ? 'greenyellow' : 'none'}" (click)="setStatus(lote['uuid'],'No adjudicado');"><span class="tooltiptext glassTrue rounded border">No adjudicar</span></i>
+                <i class="fa-solid fa-pause boton2 border rounded ibtn tooltip" [ngStyle]="{'background-color': lote['adjudicacion']=='En analisis' ? 'greenyellow' : 'none'}" (click)="setStatus(lote['uuid'],'En analisis');"><span class="tooltiptext glassTrue rounded border">En analisis</span></i>
+            </div>
         </div>
     </div>
     <div style="font-family: Avenir; margin-top: 2%; display: flex; justify-content: flex-end; width: 100%; align-items: center;">
