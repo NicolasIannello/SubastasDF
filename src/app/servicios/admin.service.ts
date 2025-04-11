@@ -56,8 +56,8 @@ export class AdminService {
       return false;
     }
   }
-  cargarLotes(dato:any, url:number,order:string,orden:string,disp:boolean):Observable<any>{
-    return this.http.post(base_url+'/lote/lotes?desde='+url+'&order='+order+'&orden='+orden+'&disp='+disp, dato, {'headers':this.header})
+  cargarLotes(dato:any, url:number,order:string,orden:string,disp:boolean,adj:boolean):Observable<any>{
+    return this.http.post(base_url+'/lote/lotes?desde='+url+'&order='+order+'&orden='+orden+'&disp='+disp+'&adj='+adj, dato, {'headers':this.header})
   }
   cargarLote(dato:any):Observable<any>{
     return this.http.post(base_url+'/lote/lote', dato, {'headers':this.header})
@@ -122,5 +122,11 @@ export class AdminService {
   }
   reComunicar(dato:any):Observable<any>{
     return this.http.post(base_url+'/admin/recomunicar', dato, {'headers':this.header})
+  }
+  setStatus(dato:any):Observable<any>{
+    return this.http.post(base_url+'/admin/setStatus', dato, {'headers':this.header})
+  }
+  cargarTC(dato:any, url:number,order:string,orden:string,datoBuscar:string,tipoBuscar:string):Observable<any>{
+    return this.http.post(base_url+'/admin/registroTC?desde='+url+'&order='+order+'&orden='+orden+'&dato='+datoBuscar+'&tipo='+tipoBuscar, dato, {'headers':this.header})
   }
 }
