@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiciosService } from '../../servicios/servicios.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ export class CambiarPassComponent{
   type:string="password";
   alertas:string="";
 
-  constructor(public ruta:ActivatedRoute, public api: ServiciosService){ }
+  constructor(public ruta:ActivatedRoute, public api: ServiciosService, private router: Router){ }
 
   mostrar(){
     this.type = this.type=="password" ? "text" : "password";
@@ -37,8 +37,32 @@ export class CambiarPassComponent{
       }
       this.api.cambiarPass(dato).subscribe({
         next: (value:any) => {
-          if(value.ok) Swal.fire({title:'Contraseña cambiada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          if(!value.ok) Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+          if(value.ok) {
+            //Swal.fire({title:'Contraseña cambiada con exito', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            Swal.fire({
+              title: "Contraseña cambiada con exito",
+              showCancelButton: false,
+              confirmButtonText: "Aceptar",
+              confirmButtonColor: "#3083dc",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/']);                
+              }
+            });
+          }
+          if(!value.ok) {
+            //Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+            Swal.fire({
+              title: "Ocurrio un error",
+              showCancelButton: false,
+              confirmButtonText: "Aceptar",
+              confirmButtonColor: "#3083dc",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/']);
+              }
+            });
+          }
         },
         error(err:any) {
           Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});       
