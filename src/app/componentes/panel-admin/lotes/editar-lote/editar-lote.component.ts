@@ -5,10 +5,10 @@ import { SanitizeHtmlPipe } from "../../../../servicios/html.pipe";
 import { CommonModule } from '@angular/common';
 import { VerImagenComponent } from '../../../ver-imagen/ver-imagen.component';
 import { FormsModule } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ClassicEditor, AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, 
-  Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo, type EditorConfig } from 'ckeditor5';
-import translations from 'ckeditor5/translations/es.js';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { ClassicEditor, AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, 
+//   Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo, type EditorConfig } from 'ckeditor5';
+// import translations from 'ckeditor5/translations/es.js';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../../servicios/admin.service';
 
@@ -16,7 +16,7 @@ import { AdminService } from '../../../../servicios/admin.service';
 @Component({
   selector: 'app-editar-lote',
   standalone: true,
-  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule, CKEditorModule],
+  imports: [SanitizeHtmlPipe, CommonModule, VerImagenComponent, FormsModule/*, CKEditorModule*/],
   templateUrl: './editar-lote.component.html',
   styleUrl: '../../usuarios/usuarios.component.css'
 })
@@ -41,30 +41,30 @@ export class EditarLoteComponent{
 
   constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:ServiciosService, public apiAdmin:AdminService) {}
 
-  public isLayoutReady = false;
-	public Editor = ClassicEditor;
-	public config: EditorConfig = {};
-	public ngAfterViewInit(): void {
-		this.config = {
-			toolbar: {
-				items: [ 'undo', 'redo',	'|', 'bold', 'italic', 'underline',	'|', 'specialCharacters', 'link', 'insertTable', '|', 'alignment', '|', 'outdent', 'indent' ],
-				shouldNotGroupWhenFull: false
-			},
-			plugins: [ AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo ],
-			initialData: '',
-			language: 'es',
-			link: {
-				addTargetToExternalLinks: true,
-				defaultProtocol: 'https://',
-				decorators: { toggleDownloadable: { mode: 'manual', label: 'Downloadable', attributes: { download: 'file' } } }
-			},
-			placeholder: 'Descripcion',
-			table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
-			translations: [translations]
-		};
-		this.isLayoutReady = true;
-		this.changeDetector.detectChanges();
-	}
+  // public isLayoutReady = false;
+	// public Editor = ClassicEditor;
+	// public config: EditorConfig = {};
+	// public ngAfterViewInit(): void {
+	// 	this.config = {
+	// 		toolbar: {
+	// 			items: [ 'undo', 'redo',	'|', 'bold', 'italic', 'underline',	'|', 'specialCharacters', 'link', 'insertTable', '|', 'alignment', '|', 'outdent', 'indent' ],
+	// 			shouldNotGroupWhenFull: false
+	// 		},
+	// 		plugins: [ AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo ],
+	// 		initialData: '',
+	// 		language: 'es',
+	// 		link: {
+	// 			addTargetToExternalLinks: true,
+	// 			defaultProtocol: 'https://',
+	// 			decorators: { toggleDownloadable: { mode: 'manual', label: 'Downloadable', attributes: { download: 'file' } } }
+	// 		},
+	// 		placeholder: 'Descripcion',
+	// 		table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
+	// 		translations: [translations]
+	// 	};
+	// 	this.isLayoutReady = true;
+	// 	this.changeDetector.detectChanges();
+	// }
 
   transform(url: any) {
 		return this.sanitizer.bypassSecurityTrustResourceUrl(url);

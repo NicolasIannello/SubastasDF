@@ -10,7 +10,7 @@
         </div>
         <label>Descripcion: </label><span class="msg">{{alertas[1]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">
-            <div>
+            <!-- <div>
                 <div class="main-container">
                     <div class="editor-container editor-container_classic-editor" #editorContainerElement>
                         <div class="editor-container__editor">
@@ -20,7 +20,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <textarea [(ngModel)]="datos[1]"></textarea>
         </div>
         <label>Informacion: </label><span class="msg">{{alertas[6]}}</span>
         <div class="col-3" style="display: flex; flex-direction: column; margin-bottom: 2%;">

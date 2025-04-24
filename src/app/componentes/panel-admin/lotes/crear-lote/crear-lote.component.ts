@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
-import { ClassicEditor, AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, 
-        Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo, type EditorConfig } from 'ckeditor5';
-import translations from 'ckeditor5/translations/es.js';
+// import { ClassicEditor, AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, 
+//         Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo, type EditorConfig } from 'ckeditor5';
+// import translations from 'ckeditor5/translations/es.js';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdminService } from '../../../../servicios/admin.service';
 import Swal from 'sweetalert2';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crear-lote',
   standalone: true,
-  imports: [FormsModule, CommonModule, CKEditorModule],
+  imports: [FormsModule, CommonModule/*, CKEditorModule*/],
   templateUrl: './crear-lote.component.html',
   styleUrl: '../../usuarios/usuarios.component.css',
   encapsulation: ViewEncapsulation.None
@@ -36,32 +36,74 @@ export class CrearLoteComponent {
     this.messageEvent.emit(false);
   }
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:AdminService) {}
+  constructor(private changeDetector: ChangeDetectorRef, private sanitizer: DomSanitizer, public api:AdminService) {
+    // afterNextRender(()=>{
+    //   this.initCkEditor()
+    // })
+  }
 
-  public isLayoutReady = false;
-	public Editor = ClassicEditor;
-	public config: EditorConfig = {};
-	public ngAfterViewInit(): void {
-		this.config = {
-			toolbar: {
-				items: [ 'undo', 'redo',	'|', 'bold', 'italic', 'underline',	'|', 'specialCharacters', 'link', 'insertTable', '|', 'alignment', '|', 'outdent', 'indent' ],
-				shouldNotGroupWhenFull: false
-			},
-			plugins: [ AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo ],
-			initialData: this.datos[1],
-			language: 'es',
-			link: {
-				addTargetToExternalLinks: true,
-				defaultProtocol: 'https://',
-				decorators: { toggleDownloadable: { mode: 'manual', label: 'Downloadable', attributes: { download: 'file' } } }
-			},
-			placeholder: 'Descripcion',
-			table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
-			translations: [translations]
-		};
-		this.isLayoutReady = true;
-		this.changeDetector.detectChanges();
-	}
+  // public isLayoutReady = false;
+  // public Editor:any = null;
+  // public config:any = {};
+	// async initCkEditor(){
+  //   if (typeof window !== 'undefined') {
+  //     const AccessibilityHelp = (await import('ckeditor5')); const Alignment = (await import('ckeditor5')); const Autosave = (await import('ckeditor5')); const Bold = (await import('ckeditor5')); 
+  //     const Essentials = (await import('ckeditor5')); const Indent = (await import('ckeditor5')); const IndentBlock = (await import('ckeditor5')); const Italic = (await import('ckeditor5')); 
+  //     const Link = (await import('ckeditor5')); const Paragraph = (await import('ckeditor5')); const SelectAll = (await import('ckeditor5')); const SpecialCharacters = (await import('ckeditor5')); 
+  //     const Table = (await import('ckeditor5')); const TableToolbar = (await import('ckeditor5')); const Underline = (await import('ckeditor5')); const Undo = (await import('ckeditor5'));
+  //     const ClassicEditor = (await import('ckeditor5'));
+  //     this.Editor=ClassicEditor;
+  //     this.config = {
+  //       toolbar: {
+  //         items: [ 'undo', 'redo',	'|', 'bold', 'italic', 'underline',	'|', 'specialCharacters', 'link', 'insertTable', '|', 'alignment', '|', 'outdent', 'indent' ],
+  //         shouldNotGroupWhenFull: false
+  //       },
+  //       plugins: [ AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo ],
+  //       initialData: this.datos[1],
+  //       language: 'es',
+  //       link: {
+  //         addTargetToExternalLinks: true,
+  //         defaultProtocol: 'https://',
+  //         decorators: { toggleDownloadable: { mode: 'manual', label: 'Downloadable', attributes: { download: 'file' } } }
+  //       },
+  //       placeholder: 'Descripcion',
+  //       table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
+  //       translations: [translations]
+  //     };
+  //     this.isLayoutReady = true;
+  //     this.changeDetector.detectChanges();
+  //     //------------------------------------------------------------
+  //     const jsElmCK = document.createElement('script');
+  //     jsElmCK.type = 'application/javascript';
+  //     jsElmCK.src = 'https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js';
+  //     document.body.appendChild(jsElmCK);
+  //     jsElmCK.onload = () => {
+  //       //this.Editor = ClassicEditor;//(window as any).ClassicEditor;
+  //       this.config = {
+  //         toolbar: {
+  //           items: [ 'undo', 'redo',	'|', 'bold', 'italic', 'underline',	'|', 'specialCharacters', 'link', 'insertTable', '|', 'alignment', '|', 'outdent', 'indent' ],
+  //           shouldNotGroupWhenFull: false
+  //         },
+  //         plugins: [ AccessibilityHelp, Alignment, Autosave, Bold, Essentials, Indent, IndentBlock, Italic, Link, Paragraph, SelectAll, SpecialCharacters, Table, TableToolbar, Underline, Undo ],
+  //         initialData: this.datos[1],
+  //         language: 'es',
+  //         link: {
+  //           addTargetToExternalLinks: true,
+  //           defaultProtocol: 'https://',
+  //           decorators: { toggleDownloadable: { mode: 'manual', label: 'Downloadable', attributes: { download: 'file' } } }
+  //         },
+  //         placeholder: 'Descripcion',
+  //         table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
+  //         translations: [translations]
+  //       };
+  //       this.isLayoutReady = true;
+  //       this.changeDetector.detectChanges();
+  //     };
+  //   }else{
+  //     this.isLayoutReady = false;
+  //     this.changeDetector.detectChanges();
+  //   }
+	// }
 
   showImg(event: Event){
 		this.sources=[];
