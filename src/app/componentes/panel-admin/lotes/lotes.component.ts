@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { CrearLoteComponent } from "./crear-lote/crear-lote.component";
 import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
@@ -32,10 +32,12 @@ export class LotesComponent implements OnInit{
   pagU:number=0;
   tabla:boolean=false;
 
-  constructor(public api:AdminService) {}
+  constructor(public api:AdminService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
-    this.cargarLotes();
+    if (isPlatformBrowser(this.platformId)) {
+      this.cargarLotes();
+    }
   }
 
   handleMessage(message: boolean, tipo:string) {    

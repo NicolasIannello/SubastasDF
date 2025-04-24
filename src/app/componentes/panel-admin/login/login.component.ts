@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ServiciosService } from '../../../servicios/servicios.service';
 
@@ -16,28 +16,30 @@ export class LoginComponent implements OnInit{
   type:string='password';
   User:string="";
 
-  constructor(public api:ServiciosService){}
+  constructor(public api:ServiciosService, @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')){
-      let dato={
-        'token': localStorage.getItem('token'),
-        'tipo': 1
-      }
-      this.api.checkTokenA(dato).subscribe({
-        next: (value:any) => {
-          if (value.ok) {
-            localStorage.setItem('token',value.token);
-            this.User=value.user;
-            this.api.setUserAdmin(this.User);
-          }else{
+    if (isPlatformBrowser(this.platformId)) {
+      if(localStorage.getItem('token')){
+        let dato={
+          'token': localStorage.getItem('token'),
+          'tipo': 1
+        }
+        this.api.checkTokenA(dato).subscribe({
+          next: (value:any) => {
+            if (value.ok) {
+              localStorage.setItem('token',value.token);
+              this.User=value.user;
+              this.api.setUserAdmin(this.User);
+            }else{
+              localStorage.removeItem('token')
+            }
+          },
+          error(err:any) {
             localStorage.removeItem('token')
-          }
-        },
-        error(err:any) {
-          localStorage.removeItem('token')
-        },		
-      });
+          },		
+        });
+      }
     }
   }
 

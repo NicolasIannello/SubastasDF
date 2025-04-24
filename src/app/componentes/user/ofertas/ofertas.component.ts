@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ServiciosService } from '../../../servicios/servicios.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AtrasComponent } from "../../atras/atras.component";
@@ -20,25 +20,27 @@ export class OfertasComponent implements OnInit{
   loteBuscar:string='';
   Lotes:Array<any>=[];
 
-  constructor(public api:ServiciosService, private router: Router){}
+  constructor(public api:ServiciosService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
-    let dato={
-      "token":localStorage.getItem('token'),
-      "tipo":1,
-      "lote":''
+    if (isPlatformBrowser(this.platformId)) {
+      let dato={
+        "token":localStorage.getItem('token'),
+        "tipo":1,
+        "lote":''
+      }
+      this.api.getOfertas(dato).subscribe({
+        next:(value)=> {
+          if(value.ok) {
+            this.Ofertas=value.ofertaDB;
+            this.Lotes=value.lotesDB
+            this.pagU=Math.ceil(this.Ofertas.length/20)
+          }
+        },
+        error:(err)=> {
+        },
+      })
     }
-    this.api.getOfertas(dato).subscribe({
-      next:(value)=> {
-        if(value.ok) {
-          this.Ofertas=value.ofertaDB;
-          this.Lotes=value.lotesDB
-          this.pagU=Math.ceil(this.Ofertas.length/20)
-        }
-      },
-      error:(err)=> {
-      },
-    })
   }
 
   principio(){

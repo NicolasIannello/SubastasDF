@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../servicios/admin.service';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ServiciosService } from '../../../servicios/servicios.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LoteComponent } from "../lote/lote.component";
@@ -42,93 +42,95 @@ export class LotesUserComponent implements OnInit{
   flagLink:boolean=false;
   tycFecha:string=''
 
-  constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer, private location: Location){}
+  constructor(public ruta:ActivatedRoute, private router: Router, public api: AdminService, public api2:ServiciosService, private sanitizer: DomSanitizer, private location: Location, @Inject(PLATFORM_ID) private platformId: Object){}
   
   transform(url: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   ngOnInit(): void {
-    this.api2.setLastPage(window.location.href);
-    this.dateHoy= new Date();
-    let datos={
-      'flag': false,
-      'dato': this.ruta.snapshot.paramMap.get('id'),
-      'token':localStorage.getItem('token'),
-      'modalidad': '',//window.location.href.includes(link) ? 'Subasta' : 'Licitacion',
-      'estado': '',
-      'tipo':1
-    }      
-    let int = 0;
-    this.api.cargarEvento(datos).subscribe({
-      next:(value)=> {
-        this.evento=value.evento[0]
-        this.nlotes=this.evento['lotes'].length
-        this.error=value.t;        
-        let datosTc={
-          'token':localStorage.getItem('token'),
-          'tipo':1,
-          'pdf': this.evento.terminos_condiciones
-        }  
-        this.api2.getTC(datosTc).subscribe({
-          next:(value)=> {
-              if(value.let.length!=0) {
-                this.tyc=true;
-                this.tycFecha=value.let[0].fecha
-              }
-          },
-          error:(err)=> {
-            Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-          },
-        })
-        for (let i = 0; i < value.evento[0].lotes.length; i++) {          
-          let datos={
-            'uuid':value.evento[0].lotes[i].uuid_lote,
+    if (isPlatformBrowser(this.platformId)) {
+      this.api2.setLastPage(window.location.href);
+      this.dateHoy= new Date();
+      let datos={
+        'flag': false,
+        'dato': this.ruta.snapshot.paramMap.get('id'),
+        'token':localStorage.getItem('token'),
+        'modalidad': '',//window.location.href.includes(link) ? 'Subasta' : 'Licitacion',
+        'estado': '',
+        'tipo':1
+      }      
+      let int = 0;
+      this.api.cargarEvento(datos).subscribe({
+        next:(value)=> {
+          this.evento=value.evento[0]
+          this.nlotes=this.evento['lotes'].length
+          this.error=value.t;        
+          let datosTc={
             'token':localStorage.getItem('token'),
-            'tipo':1
-          }      
-          this.api.cargarLote(datos).subscribe({
-            next:(value2)=> {              
-              this.lotes[i]=value2.lote[0]
-              //this.lotes.push(value2.lote[0]);
-              for (let j = 0; j < this.evento['vistas'].length; j++) {
-                if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Visto'
-              }
-              for (let j = 0; j < this.evento['ofertas'].length; j++) {
-                if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Ofertado'
-              }
-              this.api2.cargarArchivo(value2.lote[0].img[0].img,'lotes').then(resp=>{						
-                if(resp!=false){                  
-                  this.imagenes[i]={link:resp.url};
-                  //this.imagenes.push({link:resp.url});
+            'tipo':1,
+            'pdf': this.evento.terminos_condiciones
+          }  
+          this.api2.getTC(datosTc).subscribe({
+            next:(value)=> {
+                if(value.let.length!=0) {
+                  this.tyc=true;
+                  this.tycFecha=value.let[0].fecha
                 }
-              })
-              int++;              
-              this.dateFin[i]= new Date(Date.parse(value2.lote[0]['fecha_cierre']+' '+value2.lote[0]['hora_cierre']));
-              this.flag2[i]=true;
-              this.stringCierre[i]='';
-              if(this.lotes[i].estado==1) this.flagTimer[i]=true;
-              if(int==value.evento[0].lotes.length) this.countDown();
-              if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value2.lote[0].uuid){
-                this.flagLink=true;
-                this.verLote(value2.lote[0])
-              }
             },
             error:(err)=> {
               Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
             },
-          })      
-        }   
-        this.api2.cargarArchivo(this.evento.terminos_condiciones,'pdfs').then(resp=>{						
-          if(resp!=false){
-            this.pdf=this.transform(resp.url+'#toolbar=0');
-          }
-        })    
-      },
-      error:(err)=> {
-        Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
-      },
-    })  
+          })
+          for (let i = 0; i < value.evento[0].lotes.length; i++) {          
+            let datos={
+              'uuid':value.evento[0].lotes[i].uuid_lote,
+              'token':localStorage.getItem('token'),
+              'tipo':1
+            }      
+            this.api.cargarLote(datos).subscribe({
+              next:(value2)=> {              
+                this.lotes[i]=value2.lote[0]
+                //this.lotes.push(value2.lote[0]);
+                for (let j = 0; j < this.evento['vistas'].length; j++) {
+                  if(this.evento['vistas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Visto'
+                }
+                for (let j = 0; j < this.evento['ofertas'].length; j++) {
+                  if(this.evento['ofertas'][j].uuid_lote == this.lotes[i].uuid) this.lotes[i].estadoV='Ofertado'
+                }
+                this.api2.cargarArchivo(value2.lote[0].img[0].img,'lotes').then(resp=>{						
+                  if(resp!=false){                  
+                    this.imagenes[i]={link:resp.url};
+                    //this.imagenes.push({link:resp.url});
+                  }
+                })
+                int++;              
+                this.dateFin[i]= new Date(Date.parse(value2.lote[0]['fecha_cierre']+' '+value2.lote[0]['hora_cierre']));
+                this.flag2[i]=true;
+                this.stringCierre[i]='';
+                if(this.lotes[i].estado==1) this.flagTimer[i]=true;
+                if(int==value.evento[0].lotes.length) this.countDown();
+                if(this.ruta.snapshot.paramMap.get('id2') && this.ruta.snapshot.paramMap.get('id2')==value2.lote[0].uuid){
+                  this.flagLink=true;
+                  this.verLote(value2.lote[0])
+                }
+              },
+              error:(err)=> {
+                Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+              },
+            })      
+          }   
+          this.api2.cargarArchivo(this.evento.terminos_condiciones,'pdfs').then(resp=>{						
+            if(resp!=false){
+              this.pdf=this.transform(resp.url+'#toolbar=0');
+            }
+          })    
+        },
+        error:(err)=> {
+          Swal.fire({title:'Ocurrio un error', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        },
+      })  
+    }
   }
 
   handleMessage(message: boolean) {    

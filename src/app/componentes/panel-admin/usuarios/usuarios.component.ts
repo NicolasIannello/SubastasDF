@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AdminService } from '../../../servicios/admin.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { Countries } from '../../logreg/paises';
@@ -53,24 +53,25 @@ export class UsuariosComponent implements OnInit{
   tipoBuscarTC:string="mail";
   paginaTC:number=0;
 
-  constructor(public api: AdminService, public excel: ExcelService){ }
+  constructor(public api: AdminService, public excel: ExcelService, @Inject(PLATFORM_ID) private platformId: Object){ }
 
   ngOnInit(): void {
-    let dato={
-      'token':localStorage.getItem('token'),
-      'tipo': 1
-    }
-    this.api.cargarUsers(dato).subscribe({
-      next: (value)=>{
-        this.Usuarios = [...value.users];
-        this.Total=value.total;
-        this.pagU=Math.ceil(this.Total/20)
-      },
-      error: (err)=>{
-        this.error=true;
+    if (isPlatformBrowser(this.platformId)) {
+      let dato={
+        'token':localStorage.getItem('token'),
+        'tipo': 1
       }
-    })
-    
+      this.api.cargarUsers(dato).subscribe({
+        next: (value)=>{
+          this.Usuarios = [...value.users];
+          this.Total=value.total;
+          this.pagU=Math.ceil(this.Total/20)
+        },
+        error: (err)=>{
+          this.error=true;
+        }
+      })
+    }    
   }
 
   principio(){

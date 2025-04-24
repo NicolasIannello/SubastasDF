@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiciosService } from '../../servicios/servicios.service';
 
@@ -14,21 +14,23 @@ export class VerificacionComponent implements OnInit{
   verificado:boolean|null=null;
   token:string|null=null;
 
-  constructor(public ruta:ActivatedRoute, public api: ServiciosService){ }
+  constructor(public ruta:ActivatedRoute, public api: ServiciosService, @Inject(PLATFORM_ID) private platformId: Object){ }
 
   ngOnInit(): void {
-    this.token = this.ruta.snapshot.paramMap.get('token');    
-    let dato={
-      'token':this.token,
-      'tipo':2
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = this.ruta.snapshot.paramMap.get('token');    
+      let dato={
+        'token':this.token,
+        'tipo':2
+      }
+      this.api.validarCuenta(dato).subscribe({
+        next: (value:any) => {
+          this.verificado=value.ok
+        },
+        error(err:any) {
+          localStorage.removeItem('token')
+        },		
+      });
     }
-    this.api.validarCuenta(dato).subscribe({
-      next: (value:any) => {
-        this.verificado=value.ok
-      },
-      error(err:any) {
-        localStorage.removeItem('token')
-      },		
-    });
   }
 }

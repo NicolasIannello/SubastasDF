@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ServiciosService } from '../../servicios/servicios.service';
 import Swal from 'sweetalert2';
@@ -24,28 +24,31 @@ export class NavbarComponent implements OnInit{
   User:string="";
   mailcambio:string=""
 
-  constructor(private router: Router, public api: ServiciosService){ }
+  constructor(private router: Router, public api: ServiciosService, private changeDetector: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object){ }
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')){
-      let dato={
-        'token': localStorage.getItem('token'),
-        'tipo': 1
-      }
-      this.api.checkToken(dato).subscribe({
-        next: (value:any) => {
-          if (value.ok) {
-            localStorage.setItem('token',value.token);
-            this.User=value.nombre;
-            this.api.setUserId(value._id)
-          }else{
+    if (isPlatformBrowser(this.platformId)) {
+      if(localStorage.getItem('token')){
+        let dato={
+          'token': localStorage.getItem('token'),
+          'tipo': 1
+        }
+        this.api.checkToken(dato).subscribe({
+          next: (value:any) => {
+            if (value.ok) {
+              localStorage.setItem('token',value.token);
+              this.User=value.nombre;              
+              this.api.setUserId(value._id)
+            }else{
+              localStorage.removeItem('token')
+            }
+            this.changeDetector.detectChanges();
+          },
+          error(err:any) {
             localStorage.removeItem('token')
-          }
-        },
-        error(err:any) {
-          localStorage.removeItem('token')
-        },		
-      });
+          },		
+        });
+      }
     }
   }
 

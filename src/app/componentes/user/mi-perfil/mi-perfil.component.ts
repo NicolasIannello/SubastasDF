@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { countries } from '../../logreg/paises-data';
 import { Countries } from '../../logreg/paises';
@@ -23,28 +23,30 @@ export class MiPerfilComponent implements OnInit{
   Paises:Countries[]=countries;
   paisI:number=1;
 
-  constructor(public api:ServiciosService, public api2:AdminService){}
+  constructor(public api:ServiciosService, public api2:AdminService, @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
-    let dato={
-      "token":localStorage.getItem('token'),
-      "tipo":1,
-    }
-    this.api.getDatos(dato).subscribe({
-      next:(value)=> {
-        if(value.ok){
-          this.datoCambio=JSON.parse(JSON.stringify(value.userDatos[0]));
-          this.datoCambioCheck=JSON.parse(JSON.stringify(value.userDatos[0]));
-          if(value.userDatos[0].dato_empresa){
-            this.datoCambioEMP=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
-            this.datoCambioEMPCheck=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
+    if (isPlatformBrowser(this.platformId)) {
+      let dato={
+        "token":localStorage.getItem('token'),
+        "tipo":1,
+      }
+      this.api.getDatos(dato).subscribe({
+        next:(value)=> {
+          if(value.ok){
+            this.datoCambio=JSON.parse(JSON.stringify(value.userDatos[0]));
+            this.datoCambioCheck=JSON.parse(JSON.stringify(value.userDatos[0]));
+            if(value.userDatos[0].dato_empresa){
+              this.datoCambioEMP=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
+              this.datoCambioEMPCheck=JSON.parse(JSON.stringify(value.userDatos[0].dato_empresa));
+            }
+            this.getPais(false)
           }
-          this.getPais(false)
-        }
-      },
-      error:(err)=> {
-      },
-    })
+        },
+        error:(err)=> {
+        },
+      })
+    }
   }
 
   checkCambio(key:string){
