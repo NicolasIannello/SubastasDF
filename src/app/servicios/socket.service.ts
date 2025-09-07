@@ -17,7 +17,12 @@ export class SocketService {
       auth: {
         token: token,
       },
+      autoConnect: false
     });
+  }
+
+  public connect() {
+    this.socket.connect()
   }
 
   public sendMessage(message: string) {

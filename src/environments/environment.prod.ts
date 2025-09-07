@@ -9,5 +9,5 @@ export const environment = {
     siteKey: '6Let_k4qAAAAAIHQe6HtHzYwosJ58y4feuaKRmRu123',
   },
   //link:'http://localhost:4200',
-  link:'https://ventas.gruppodf.com.ar/',
+  link:'https://ventas.gruppodf.com.ar',
 };
