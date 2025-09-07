@@ -82,9 +82,10 @@ export class LoteComponent{
   cargarImagenes(imgs:Array<any>, pdf:any){
     this.api.setLastPage(window.location.href);
     this.flagModalidad=this.evento['modalidad']=='Subasta' ? true : false;
+    this.socketIo.connect();
     this.socketIo.onMessage().subscribe((message:any) => {      
       for (let i = 0; i < message.eventolotes.length; i++) {
-        if(this.lote['uuid']==message.eventolotes[i].lote.uuid){
+        if(this.lote['uuid']==message.uuid_lote){          
           this.cantidad_ofertas=message.nro;
           this.precio_actual=message.cantidad;
           this.ganador=message.user._id
