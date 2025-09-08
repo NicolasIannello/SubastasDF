@@ -239,7 +239,7 @@ export class LoteComponent{
         Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         this.panel=true;
       }else{
-        Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        Swal.fire({title:'Oferta invalida verifique el monto base/inicial del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       }
     }
   }
@@ -285,7 +285,7 @@ export class LoteComponent{
         Swal.fire({title:'Acepte los Terminos y Condiciones del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
         this.panel=true;
       }else{
-        Swal.fire({title:'Oferta invalida', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
+        Swal.fire({title:'Oferta invalida verifique el monto base/inicial del lote', confirmButtonText:'Aceptar',confirmButtonColor:'#3083dc'});
       }
     }
   }
