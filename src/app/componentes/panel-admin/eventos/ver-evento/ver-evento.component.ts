@@ -231,7 +231,7 @@ export class VerEventoComponent {
       }
       this.api2.ofertaDatos(dato).subscribe({
         next:(value)=> {
-          loteExcel[i].cuit=value.ofertaDB[0].user.cuil_cuit
+          loteExcel[i].cuit= value.ofertaDB[0] ? value.ofertaDB[0].user.cuil_cuit : '-'
           loteExcel[i].ofertas=value.ofertaDB.length
           flag++;
           if(flag==this.lotes.length){            
