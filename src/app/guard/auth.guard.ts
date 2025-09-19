@@ -11,7 +11,6 @@ export class authGuard implements CanActivate {
     if (isPlatformBrowser(this.platformId)) {
       if(!localStorage.getItem('token')) {
         this.router.navigate(['/']);    
-        console.log('rerurn');
         return false;
       }
       let datos={
@@ -21,12 +20,10 @@ export class authGuard implements CanActivate {
       this.api.checkTokenA(datos).subscribe({
         next: (value)=>{
           this.api.setUserAdmin(value.user);        
-          console.log('rerurn 1');
           return value.ok;
         },
         error: (err)=>{
           this.router.navigate(['/']);
-          console.log('rerurn 2');
           return false;
         }
       })
